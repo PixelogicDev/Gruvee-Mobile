@@ -2,8 +2,32 @@
  * @format
  */
 
-import {AppRegistry} from 'react-native';
-import App from './App';
-import {name as appName} from './app.json';
+import React from 'react';
+import { AppRegistry, StyleSheet, Text, View} from 'react-native';
 
-AppRegistry.registerComponent(appName, () => App);
+class HelloGruvee extends React.Component {
+    const styles = StyleSheet.create({
+        container: {
+            flex: 1,
+            justifyContent: 'center',
+            alignItems: 'center',
+            backgroundColor: '#FFFFFF',
+        },
+        title: {
+            fontSize: 20,
+            textAlign: 'center',
+            margin: 10,
+        },
+    });
+
+    render() {
+        return (
+            <View style={styles.container}>
+                <Text style={styles.title}>Hello, Grüvee!</Text>
+            </View>
+        );
+    }
+}
+
+// Module name
+AppRegistry.registerComponent('HelloGruvee');
