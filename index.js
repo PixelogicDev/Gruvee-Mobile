@@ -2,8 +2,18 @@
  * @format
  */
 
-import { AppRegistry } from 'react-native'
+import { Navigation } from 'react-native-navigation'
 import App from './App'
-import { name as appName } from './app.json'
+import * as NavigationConstants from './NavigationConstants'
 
-AppRegistry.registerComponent(appName, () => App)
+Navigation.registerComponent(NavigationConstants.ROOT_NAV_ID, () => App)
+
+Navigation.events().registerAppLaunchedListener(() => {
+    Navigation.setRoot({
+        root: {
+            component: {
+                name: NavigationConstants.ROOT_NAV_ID,
+            },
+        },
+    })
+})
