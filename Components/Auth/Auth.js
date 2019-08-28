@@ -4,9 +4,14 @@ import * as StyleConstants from '../../StyleConstants'
 import SocialAuthButton from './SocialAuthButton'
 import { SOCIAL_PLATFORMS } from '../../SocialConstants'
 
-const fontColor = '#E5DADA'
 const styles = StyleSheet.create({
-    container: {
+    ButtonContainer: {
+        display: 'flex',
+        justifyContent: 'space-around',
+        alignItems: 'center',
+        height: '20%',
+    },
+    Container: {
         display: 'flex',
         justifyContent: 'space-between',
         height: '100%',
@@ -16,30 +21,30 @@ const styles = StyleSheet.create({
         paddingLeft: 25,
         paddingRight: 25,
     },
-    sectionTitle: {
+    SectionTitle: {
         fontSize: StyleConstants.LARGE_TITLE_SIZE_iOS,
-        color: fontColor,
+        color: StyleConstants.BASE_FONT_COLOR,
     },
-    sectionDescription: {
+    SectionDetail: {
         marginTop: 25,
         fontSize: StyleConstants.HEADLINE_SIZE_iOS,
         fontWeight: StyleConstants.SEMIBOLD_WEIGHT,
-        color: fontColor,
+        color: StyleConstants.BASE_FONT_COLOR,
     },
 })
 
 export default class Auth extends Component {
     render() {
         return (
-            <View style={styles.container}>
+            <View style={styles.Container}>
                 <View>
-                    <Text style={styles.sectionTitle}>Let's Get Grüvee</Text>
-                    <Text style={styles.sectionDescription}>
+                    <Text style={styles.SectionTitle}>Let's Get Grüvee</Text>
+                    <Text style={styles.SectionDetail}>
                         Let all of your wildest memes come true. Just sell your
                         soul below.
                     </Text>
                 </View>
-                <View style={styles.buttons}>
+                <View style={styles.ButtonContainer}>
                     {SOCIAL_PLATFORMS.map((platform, index) => (
                         <SocialAuthButton key={index} platform={platform} />
                     ))}

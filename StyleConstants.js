@@ -1,3 +1,6 @@
+// Font Color
+export const BASE_FONT_COLOR = '#E5DADA'
+
 // Font Weight
 export const LIGHT_WEIGHT = '300'
 export const MEDIUM_WEIGHT = '500'

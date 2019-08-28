@@ -24,15 +24,8 @@ const SocialAuthButton = props => {
 
     //-- MAD PROPZ rawrsatbeards - CSS MASTER --//
     const styles = StyleSheet.create({
-        Container: {
-            width: '100%',
-            display: 'flex',
-            alignItems: 'center',
-            flexGrow: 1,
-            flexShrink: 0,
-            flexBasis: 44,
-        },
         Button: {
+            flexBasis: 44,
             height: '100%',
             display: 'flex',
             flexDirection: 'row',
@@ -40,7 +33,7 @@ const SocialAuthButton = props => {
             alignItems: 'center',
             minWidth: 280,
             width: '70%',
-            borderRadius: 15,
+            borderRadius: 10,
             backgroundColor: platform.color.primary,
         },
         ButtonText: {
@@ -48,10 +41,11 @@ const SocialAuthButton = props => {
             fontWeight: StyleConstants.SEMIBOLD_WEIGHT,
             fontSize: StyleConstants.BUTTON_TEXT_SIZE_iOS,
         },
-        Icon: {
-            width: 25,
-            height: 25,
+        ButtonIcon: {
+            width: platform.size.width,
+            height: platform.size.height,
             marginRight: 10,
+            resizeMode: 'contain',
         },
     })
 
@@ -60,20 +54,18 @@ const SocialAuthButton = props => {
     }
 
     return (
-        <View style={styles.Container}>
-            <TouchableOpacity onPress={sayHello} style={styles.Button}>
-                <Image
-                    style={styles.Icon}
-                    source={{ uri: `${platform.glyphPath}` }}
-                />
-                <Text
-                    accessibilityLabel={`${platform.friendlyName} auth button`}
-                    style={styles.ButtonText}
-                >
-                    Log In With {platform.friendlyName}
-                </Text>
-            </TouchableOpacity>
-        </View>
+        <TouchableOpacity onPress={sayHello} style={styles.Button}>
+            <Image
+                style={styles.ButtonIcon}
+                source={{ uri: `${platform.glyphPath}` }}
+            />
+            <Text
+                accessibilityLabel={`${platform.friendlyName} login button`}
+                style={styles.ButtonText}
+            >
+                Log In With {platform.friendlyName}
+            </Text>
+        </TouchableOpacity>
     )
 }
 
