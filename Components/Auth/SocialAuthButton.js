@@ -8,6 +8,8 @@ import {
     Image,
 } from 'react-native'
 import * as StyleConstants from '../../StyleConstants'
+import { Navigation } from 'react-native-navigation'
+import * as NavigationConstants from '../../NavigationConstants'
 
 /*
     ButtonID/Buttom ie: spotify, youtube, soundcloud
@@ -49,12 +51,21 @@ const SocialAuthButton = props => {
         },
     })
 
-    const sayHello = () => {
-        console.warn('Hello.')
+    const testDisplayOverlay = () => {
+        Navigation.showOverlay({
+            component: {
+                name: NavigationConstants.SOCIAL_OVERLAY_ID,
+                options: {
+                    overlay: {
+                        interceptTouchOutside: true,
+                    },
+                },
+            },
+        })
     }
 
     return (
-        <TouchableOpacity onPress={sayHello} style={styles.Button}>
+        <TouchableOpacity onPress={testDisplayOverlay} style={styles.Button}>
             <Image
                 style={styles.ButtonIcon}
                 source={{ uri: `${platform.glyphPath}` }}
