@@ -5,13 +5,15 @@
 import { Navigation } from 'react-native-navigation'
 import App from './App'
 import * as NavigationConstants from './NavigationConstants'
-import OverlayTest from './Components/OverlayTest'
+
+// Components
+import Playlist from './Components/Playlist/PlaylistListView'
 
 // Register navigation components
 Navigation.registerComponent(NavigationConstants.ROOT_NAV_ID, () => App)
 Navigation.registerComponent(
-    NavigationConstants.SOCIAL_OVERLAY_ID,
-    () => OverlayTest
+    NavigationConstants.PLAYLIST_NAV_ID,
+    () => Playlist
 )
 
 Navigation.events().registerAppLaunchedListener(() => {
@@ -27,7 +29,7 @@ Navigation.events().registerAppLaunchedListener(() => {
                 children: [
                     {
                         component: {
-                            name: NavigationConstants.SOCIAL_OVERLAY_ID,
+                            name: NavigationConstants.PLAYLIST_NAV_ID,
                         },
                     },
                     {

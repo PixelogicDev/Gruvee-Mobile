@@ -8,8 +8,8 @@ import {
     Image,
 } from 'react-native'
 import * as StyleConstants from '../../StyleConstants'
-import { Navigation } from 'react-native-navigation'
 import * as NavigationConstants from '../../NavigationConstants'
+import { Navigation } from 'react-native-navigation'
 
 /*
     ButtonID/Buttom ie: spotify, youtube, soundcloud
@@ -51,14 +51,14 @@ const SocialAuthButton = props => {
         },
     })
 
-    const pushTestView = () => {
+    const navigateToPlaylists = () => {
         Navigation.push(NavigationConstants.STACK_ID, {
             component: {
-                name: NavigationConstants.SOCIAL_OVERLAY_ID,
+                name: NavigationConstants.PLAYLIST_NAV_ID,
                 options: {
                     topBar: {
                         title: {
-                            text: 'Overlay BOI',
+                            text: 'Playlists',
                         },
                     },
                 },
@@ -67,7 +67,7 @@ const SocialAuthButton = props => {
     }
 
     return (
-        <TouchableOpacity onPress={pushTestView} style={styles.Button}>
+        <TouchableOpacity onPress={navigateToPlaylists} style={styles.Button}>
             <Image
                 style={styles.ButtonIcon}
                 source={{ uri: `${platform.glyphPath}` }}

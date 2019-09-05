@@ -17,11 +17,12 @@ import {
 } from 'react-native'
 import { Header, Colors } from 'react-native/Libraries/NewAppScreen'
 import Auth from './Components/Auth/Auth'
+import * as StyleConstants from './StyleConstants'
 
 const styles = StyleSheet.create({
     body: {
         height: '100%',
-        backgroundColor: '#2E282A',
+        backgroundColor: StyleConstants.BASE_BACKGROUND_COLOR,
     },
 })
 

@@ -1,3 +1,6 @@
+// Background Color
+export const BASE_BACKGROUND_COLOR = '#2E282A'
+
 // Font Color
 export const BASE_FONT_COLOR = '#E5DADA'
 
