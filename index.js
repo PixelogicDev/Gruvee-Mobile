@@ -17,8 +17,25 @@ Navigation.registerComponent(
 Navigation.events().registerAppLaunchedListener(() => {
     Navigation.setRoot({
         root: {
-            component: {
-                name: NavigationConstants.ROOT_NAV_ID,
+            stack: {
+                id: NavigationConstants.STACK_ID,
+                options: {
+                    topBar: {
+                        visible: false,
+                    },
+                },
+                children: [
+                    {
+                        component: {
+                            name: NavigationConstants.SOCIAL_OVERLAY_ID,
+                        },
+                    },
+                    {
+                        component: {
+                            name: NavigationConstants.ROOT_NAV_ID,
+                        },
+                    },
+                ],
             },
         },
     })

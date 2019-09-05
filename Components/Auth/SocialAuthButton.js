@@ -51,13 +51,15 @@ const SocialAuthButton = props => {
         },
     })
 
-    const testDisplayOverlay = () => {
-        Navigation.showOverlay({
+    const pushTestView = () => {
+        Navigation.push(NavigationConstants.STACK_ID, {
             component: {
                 name: NavigationConstants.SOCIAL_OVERLAY_ID,
                 options: {
-                    overlay: {
-                        interceptTouchOutside: true,
+                    topBar: {
+                        title: {
+                            text: 'Overlay BOI',
+                        },
                     },
                 },
             },
@@ -65,7 +67,7 @@ const SocialAuthButton = props => {
     }
 
     return (
-        <TouchableOpacity onPress={testDisplayOverlay} style={styles.Button}>
+        <TouchableOpacity onPress={pushTestView} style={styles.Button}>
             <Image
                 style={styles.ButtonIcon}
                 source={{ uri: `${platform.glyphPath}` }}
