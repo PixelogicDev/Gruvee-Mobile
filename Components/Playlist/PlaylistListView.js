@@ -42,7 +42,7 @@ const PlaylistListView = () => {
             backgroundColor: StyleConstants.BASE_BACKGROUND_COLOR,
         },
         ContentContainer: {
-            padding: 15,
+            padding: 25,
         },
     })
 

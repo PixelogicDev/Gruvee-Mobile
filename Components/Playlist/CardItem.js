@@ -5,6 +5,7 @@ import {
     FlatList,
     ImageBackground,
     TouchableOpacity,
+    StyleSheet,
 } from 'react-native'
 
 import CardItemDetail from './CardItemDetail'

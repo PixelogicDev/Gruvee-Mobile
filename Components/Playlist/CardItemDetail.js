@@ -1,5 +1,11 @@
 import React from 'react'
-import { Text, View, ImageBackground, TouchableOpacity } from 'react-native'
+import {
+    Text,
+    View,
+    ImageBackground,
+    TouchableOpacity,
+    StyleSheet,
+} from 'react-native'
 
 import * as StyleConstants from '../../StyleConstants'
 
