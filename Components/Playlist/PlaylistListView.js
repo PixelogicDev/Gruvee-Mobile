@@ -1,7 +1,9 @@
-import React from 'react'
-import { Text, View, StyleSheet, Button, FlatList } from 'react-native'
+import React, { Fragment } from 'react'
+import { View, StyleSheet, FlatList } from 'react-native'
+
 import * as StyleConstants from '../../StyleConstants'
 import CardItem from './CardItem'
+import AddButton from './AddButton'
 
 const mockData = [
     {
@@ -35,29 +37,46 @@ const mockData = [
             'http://cache.boston.com/resize/bonzai-fba/Globe_Photo/2011/04/14/1302796985_4480/539w.jpg',
     },
 ]
+const styles = StyleSheet.create({
+    Container: {
+        backgroundColor: StyleConstants.BASE_BACKGROUND_COLOR,
+    },
+    ContentContainer: {
+        padding: 25,
+        paddingBottom: 100,
+    },
+    ButtonContainer: {
+        width: '100%',
+        alignItems: 'center',
+        position: 'absolute',
+        bottom: 50,
+    },
+    Button: {
+        width: StyleConstants.ADD_BUTTON_SIZE,
+        height: StyleConstants.ADD_BUTTON_SIZE,
+    },
+})
 
 const PlaylistListView = () => {
-    const styles = StyleSheet.create({
-        Container: {
-            backgroundColor: StyleConstants.BASE_BACKGROUND_COLOR,
-        },
-        ContentContainer: {
-            padding: 25,
-        },
-    })
-
-    _keyExtractor = (item, index) => item.id
-    _renderItem = ({ item }) => <CardItem playlistData={item} />
+    const keyExtractor = (item, index) => item.id
+    const renderItem = ({ item }) => <CardItem playlistData={item} />
 
     return (
-        <FlatList
-            style={styles.Container}
-            contentContainerStyle={styles.ContentContainer}
-            showsVerticalScrollIndicator={false}
-            data={mockData}
-            keyExtractor={_keyExtractor}
-            renderItem={_renderItem}
-        ></FlatList>
+        <>
+            <FlatList
+                style={styles.Container}
+                contentContainerStyle={styles.ContentContainer}
+                showsVerticalScrollIndicator={false}
+                data={mockData}
+                keyExtractor={keyExtractor}
+                renderItem={renderItem}
+            ></FlatList>
+
+            {/* MADPROPZ poopuhchoo */}
+            <View style={styles.ButtonContainer}>
+                <AddButton style={styles.Button}></AddButton>
+            </View>
+        </>
     )
 }
 

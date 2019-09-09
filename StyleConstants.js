@@ -19,3 +19,6 @@ export const BUTTON_TEXT_SIZE_iOS = 17
 // Font Size | Card Item - iOS
 export const CARD_ITEM_TITLE_SIZE_iOS = 20
 export const CARD_ITEM_DETAIL_SIZE_iOS = 11
+
+// Add Playlist Button Size
+export const ADD_BUTTON_SIZE = 60
