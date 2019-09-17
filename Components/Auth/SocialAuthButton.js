@@ -35,7 +35,7 @@ const SocialAuthButton = props => {
             alignItems: 'center',
             minWidth: 280,
             width: '70%',
-            borderRadius: 10,
+            borderRadius: StyleConstants.BASE_BORDER_RADIUS,
             backgroundColor: platform.color.primary,
         },
         ButtonText: {
@@ -54,7 +54,7 @@ const SocialAuthButton = props => {
     const navigateToPlaylists = () => {
         Navigation.push(NavigationConstants.STACK_ID, {
             component: {
-                name: NavigationConstants.PLAYLIST_NAV_ID,
+                name: NavigationConstants.PLAYLIST_NAV_NAME,
                 options: {
                     topBar: {
                         title: {

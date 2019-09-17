@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
         marginLeft: 15,
         backgroundColor: StyleConstants.BASE_BACKGROUND_COLOR,
         opacity: 0.8,
-        borderRadius: 8,
+        borderRadius: StyleConstants.BASE_BORDER_RADIUS,
     },
     TextHeader: {
         fontSize: StyleConstants.CARD_ITEM_TITLE_SIZE_iOS,

@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
         height: 200,
         marginBottom: 20,
         backgroundColor: '#000',
-        borderRadius: 8,
+        borderRadius: StyleConstants.BASE_BORDER_RADIUS,
         overflow: 'hidden',
     },
     DetailContainer: {

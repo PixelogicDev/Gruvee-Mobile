@@ -8,12 +8,17 @@ import * as NavigationConstants from './NavigationConstants'
 
 // Components
 import Playlist from './Components/Playlist/PlaylistListView'
+import AddPlaylistModal from './Components/Playlist/AddPlaylistModal'
 
 // Register navigation components
-Navigation.registerComponent(NavigationConstants.ROOT_NAV_ID, () => App)
+Navigation.registerComponent(NavigationConstants.ROOT_NAV_NAME, () => App)
 Navigation.registerComponent(
-    NavigationConstants.PLAYLIST_NAV_ID,
+    NavigationConstants.PLAYLIST_NAV_NAME,
     () => Playlist
+)
+Navigation.registerComponent(
+    NavigationConstants.ADD_PLAYLIST_MODAL_NAV_NAME,
+    () => AddPlaylistModal
 )
 
 Navigation.events().registerAppLaunchedListener(() => {
@@ -29,12 +34,14 @@ Navigation.events().registerAppLaunchedListener(() => {
                 children: [
                     {
                         component: {
-                            name: NavigationConstants.PLAYLIST_NAV_ID,
+                            id: NavigationConstants.PLAYLIST_NAV_ID,
+                            name: NavigationConstants.PLAYLIST_NAV_NAME,
                         },
                     },
                     {
                         component: {
-                            name: NavigationConstants.ROOT_NAV_ID,
+                            id: NavigationConstants.ROOT_NAV_ID,
+                            name: NavigationConstants.ROOT_NAV_NAME,
                         },
                     },
                 ],

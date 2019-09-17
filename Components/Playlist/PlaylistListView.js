@@ -3,7 +3,11 @@ import { View, StyleSheet, FlatList } from 'react-native'
 
 import * as StyleConstants from '../../StyleConstants'
 import CardItem from './CardItem'
-import AddButton from './AddButton'
+import AddButton from './Buttons/AddButton'
+
+// Remove broken path warning
+console.disableYellowBox = true
+console.ignoredYellowBox = ['Could not find image']
 
 const mockData = [
     {

@@ -1,9 +1,15 @@
 // Background Color
 export const BASE_BACKGROUND_COLOR = '#2E282A'
+export const BASE_MODAL_BACKGROUND_COLOR = '#1D1D1D'
+
+// Border Radius
+export const BASE_BORDER_RADIUS = 11
+export const INPUT_BORDER_BOTTOM_COLOR = '#979797'
 
 // Font Color
 export const BASE_FONT_COLOR = '#E5DADA'
 export const CARD_ITEM_DETAIL_FONT_COLOR = '#FFFFFF'
+export const INPUT_PLACEHOLDER_FONT_COLOR = '#999999'
 
 // Font Weight
 export const LIGHT_WEIGHT = '300'
@@ -13,6 +19,7 @@ export const BOLD_WEIGHT = '700'
 
 // Font Size - iOS
 export const LARGE_TITLE_SIZE_iOS = 34
+export const MODAL_HEADER_SIZE_iOS = 24
 export const HEADLINE_SIZE_iOS = 17
 export const BUTTON_TEXT_SIZE_iOS = 17
 
