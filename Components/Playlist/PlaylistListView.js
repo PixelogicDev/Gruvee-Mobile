@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useState, useEffect } from 'react'
 import { View, StyleSheet, FlatList } from 'react-native'
 
 import * as StyleConstants from '../../StyleConstants'
@@ -25,21 +25,6 @@ const mockData = [
         albumArtworkUrl:
             'https://99designs-blog.imgix.net/blog/wp-content/uploads/2017/12/attachment_68585523.jpg?auto=format&q=60&fit=max&w=930',
     },
-    {
-        id: 'Playlist2',
-        name: 'Cool Cats',
-        numMembers: 80,
-        numSongs: 150,
-        albumArtworkUrl: 'SomeBrokenImagePath',
-    },
-    {
-        id: 'Playlist3',
-        name: 'Cool Cats',
-        numMembers: 80,
-        numSongs: 150,
-        albumArtworkUrl:
-            'http://cache.boston.com/resize/bonzai-fba/Globe_Photo/2011/04/14/1302796985_4480/539w.jpg',
-    },
 ]
 const styles = StyleSheet.create({
     Container: {
@@ -62,8 +47,20 @@ const styles = StyleSheet.create({
 })
 
 const PlaylistListView = () => {
+    const [playlists, setPlaylist] = useState([])
     const keyExtractor = (item, index) => item.id
     const renderItem = ({ item }) => <CardItem playlistData={item} />
+
+    // Similar to ComponentDidMount
+    useEffect(() => {
+        // Call API set to playlists
+        setPlaylist(mockData)
+    }, [])
+
+    const createPlaylistAction = playlist => {
+        // Set State
+        setPlaylist([...playlists, playlist])
+    }
 
     return (
         <>
@@ -71,14 +68,17 @@ const PlaylistListView = () => {
                 style={styles.Container}
                 contentContainerStyle={styles.ContentContainer}
                 showsVerticalScrollIndicator={false}
-                data={mockData}
+                data={playlists}
                 keyExtractor={keyExtractor}
                 renderItem={renderItem}
             ></FlatList>
 
             {/* MADPROPZ poopuhchoo */}
             <View style={styles.ButtonContainer}>
-                <AddButton style={styles.Button}></AddButton>
+                <AddButton
+                    style={styles.Button}
+                    createAction={createPlaylistAction}
+                ></AddButton>
             </View>
         </>
     )

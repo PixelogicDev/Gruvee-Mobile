@@ -5,7 +5,7 @@ import AddPlaylistModal from '../AddPlaylistModal'
 import { Navigation } from 'react-native-navigation'
 import * as NavigationConstants from '../../../NavigationConstants'
 
-const AddButton = ({ style }) => {
+const AddButton = ({ style, createAction }) => {
     const navigateToAddPlaylistModal = () => {
         // Navigate to add playlist modal
         Navigation.showOverlay({
@@ -16,6 +16,9 @@ const AddButton = ({ style }) => {
                     overlay: {
                         interceptTouchOutside: true,
                     },
+                },
+                passProps: {
+                    createAction: createAction,
                 },
             },
         })

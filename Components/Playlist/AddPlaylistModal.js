@@ -7,9 +7,12 @@ import {
     StyleSheet,
     TextInput,
 } from 'react-native'
+import { Navigation } from 'react-native-navigation'
 
 import * as StyleConstants from '../../StyleConstants'
+import * as NavigationConstants from '../../NavigationConstants'
 import AddPlaylistButton from './Buttons/AddPlaylistButton'
+import Playlist from '../../lib/Playlist'
 
 const styles = StyleSheet.create({
     Backdrop: {
@@ -20,9 +23,9 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     Modal: {
+        width: '90%',
+        height: 250,
         backgroundColor: StyleConstants.BASE_MODAL_BACKGROUND_COLOR,
-        width: '85%',
-        height: 200,
         borderRadius: StyleConstants.BASE_BORDER_RADIUS,
     },
     Header: {
@@ -35,7 +38,8 @@ const styles = StyleSheet.create({
     InputContainer: {
         display: 'flex',
         alignItems: 'center',
-        paddingTop: 20,
+        paddingTop: 30,
+        paddingBottom: 30,
     },
     Input: {
         width: '75%',
@@ -48,9 +52,19 @@ const styles = StyleSheet.create({
     },
 })
 
-const AddPlaylistModal = () => {
+const AddPlaylistModal = ({ createAction }) => {
     const [playlistNameValue, onChangePlaylistNameText] = React.useState('')
     const [membersNameValue, onChangeMembersNameText] = React.useState('')
+    const createPlaylistAction = () => {
+        // Create playlist object
+        const playlist = new Playlist(playlistNameValue, membersNameValue)
+
+        // Run action to create playlist
+        createAction(playlist)
+
+        // Dismiss
+        Navigation.dismissOverlay(NavigationConstants.ADD_PLAYLIST_MODAL_NAV_ID)
+    }
 
     return (
         // Backdrop view
@@ -78,7 +92,11 @@ const AddPlaylistModal = () => {
                         value={membersNameValue}
                     ></TextInput>
                 </View>
-                <AddPlaylistButton></AddPlaylistButton>
+                <AddPlaylistButton
+                    name={playlistNameValue}
+                    members={membersNameValue}
+                    createAction={createPlaylistAction}
+                ></AddPlaylistButton>
             </View>
         </View>
     )

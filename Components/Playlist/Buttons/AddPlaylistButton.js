@@ -1,9 +1,6 @@
 import React, { useState } from 'react'
 import { Text, TouchableOpacity, StyleSheet, View } from 'react-native'
-import { Navigation } from 'react-native-navigation'
-
 import * as StyleConstants from '../../../StyleConstants'
-import * as NavigationConstants from '../../../NavigationConstants'
 
 const styles = StyleSheet.create({
     Container: {
@@ -19,6 +16,7 @@ const styles = StyleSheet.create({
         width: '60%',
         borderRadius: StyleConstants.BASE_BORDER_RADIUS,
         borderWidth: 1,
+        borderColor: StyleConstants.ADD_PLAYLIST_BUTTON_BORDER_COLOR,
         backgroundColor: `${StyleConstants.BASE_BACKGROUND_COLOR}B3`,
     },
     ButtonText: {
@@ -30,18 +28,10 @@ const styles = StyleSheet.create({
     },
 })
 
-const AddPlaylistButton = props => {
-    const createPlaylistAction = () => {
-        // Dismiss and reload table
-        Navigation.dismissOverlay(NavigationConstants.ADD_PLAYLIST_MODAL_NAV_ID)
-    }
-
+const AddPlaylistButton = ({ createAction }) => {
     return (
         <View style={styles.Container}>
-            <TouchableOpacity
-                onPress={createPlaylistAction}
-                style={styles.Button}
-            >
+            <TouchableOpacity onPress={createAction} style={styles.Button}>
                 <Text
                     accessibilityLabel={'Add playlist create button'}
                     style={styles.ButtonText}

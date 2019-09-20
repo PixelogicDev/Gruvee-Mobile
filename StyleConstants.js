@@ -5,6 +5,7 @@ export const BASE_MODAL_BACKGROUND_COLOR = '#1D1D1D'
 // Border Radius
 export const BASE_BORDER_RADIUS = 11
 export const INPUT_BORDER_BOTTOM_COLOR = '#979797'
+export const ADD_PLAYLIST_BUTTON_BORDER_COLOR = '#FFA440'
 
 // Font Color
 export const BASE_FONT_COLOR = '#E5DADA'
