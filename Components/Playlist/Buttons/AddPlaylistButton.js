@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         width: '100%',
     },
-    Button: {
+    Button: disabled => ({
         flexBasis: 44,
         height: '100%',
         flexDirection: 'row',
@@ -16,25 +16,33 @@ const styles = StyleSheet.create({
         width: '60%',
         borderRadius: StyleConstants.BASE_BORDER_RADIUS,
         borderWidth: 1,
-        borderColor: StyleConstants.ADD_PLAYLIST_BUTTON_BORDER_COLOR,
+        borderColor: disabled
+            ? StyleConstants.ADD_PLAYLIST_BUTTON_DISABLED_BORDER_COLOR
+            : StyleConstants.ADD_PLAYLIST_BUTTON_BORDER_COLOR,
         backgroundColor: `${StyleConstants.BASE_BACKGROUND_COLOR}B3`,
-    },
-    ButtonText: {
+    }),
+    ButtonText: disabled => ({
         width: '100%',
         textAlign: 'center',
-        color: StyleConstants.BASE_FONT_COLOR,
+        color: disabled
+            ? StyleConstants.INPUT_BORDER_BOTTOM_COLOR
+            : StyleConstants.BASE_FONT_COLOR,
         fontWeight: StyleConstants.SEMIBOLD_WEIGHT,
         fontSize: StyleConstants.BUTTON_TEXT_SIZE_iOS,
-    },
+    }),
 })
 
-const AddPlaylistButton = ({ createAction }) => {
+const AddPlaylistButton = ({ createAction, disabled }) => {
     return (
         <View style={styles.Container}>
-            <TouchableOpacity onPress={createAction} style={styles.Button}>
+            <TouchableOpacity
+                onPress={createAction}
+                style={styles.Button(disabled)}
+                disabled={disabled}
+            >
                 <Text
                     accessibilityLabel={'Add playlist create button'}
-                    style={styles.ButtonText}
+                    style={styles.ButtonText(disabled)}
                 >
                     Create
                 </Text>

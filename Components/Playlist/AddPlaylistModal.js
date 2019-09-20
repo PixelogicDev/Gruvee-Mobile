@@ -59,6 +59,9 @@ const AddPlaylistModal = ({ createAction }) => {
         // Create playlist object
         const playlist = new Playlist(playlistNameValue, membersNameValue)
 
+        if (!playlistNameValue) {
+        }
+
         // Run action to create playlist
         createAction(playlist)
 
@@ -96,6 +99,7 @@ const AddPlaylistModal = ({ createAction }) => {
                     name={playlistNameValue}
                     members={membersNameValue}
                     createAction={createPlaylistAction}
+                    disabled={!playlistNameValue}
                 ></AddPlaylistButton>
             </View>
         </View>
