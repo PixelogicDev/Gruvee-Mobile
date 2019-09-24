@@ -1,5 +1,6 @@
 import React, { Fragment, useState, useEffect } from 'react'
 import { View, StyleSheet, FlatList } from 'react-native'
+import { SwipeListView } from 'react-native-swipe-list-view'
 
 import * as StyleConstants from '../../StyleConstants'
 import CardItem from './CardItem'
@@ -49,9 +50,15 @@ const styles = StyleSheet.create({
 const PlaylistListView = () => {
     const [playlists, setPlaylist] = useState([])
     const keyExtractor = (item, index) => item.id
-    const renderItem = ({ item }) => <CardItem playlistData={item} />
+    const renderHiddenItem = ({}) => <SwipeAction />
+    const renderItem = ({ item }) => (
+        <CardItem
+            playlistData={item}
+            deletePlaylistAction={deletePlaylistAction}
+            isLastItem={playlists.length === 1}
+        />
+    )
 
-    // Similar to ComponentDidMount
     useEffect(() => {
         // Call API set to playlists
         setPlaylist(mockData)
@@ -62,16 +69,22 @@ const PlaylistListView = () => {
         setPlaylist([...playlists, playlist])
     }
 
+    const deletePlaylistAction = playlistToDeleteId => {
+        setPlaylist(
+            playlists.filter(playlist => playlist.id !== playlistToDeleteId)
+        )
+    }
+
     return (
         <>
-            <FlatList
+            <SwipeListView
                 style={styles.Container}
                 contentContainerStyle={styles.ContentContainer}
                 showsVerticalScrollIndicator={false}
                 data={playlists}
                 keyExtractor={keyExtractor}
                 renderItem={renderItem}
-            ></FlatList>
+            ></SwipeListView>
 
             {/* MADPROPZ poopuhchoo */}
             <View style={styles.ButtonContainer}>
