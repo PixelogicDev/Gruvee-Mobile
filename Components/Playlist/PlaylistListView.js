@@ -26,6 +26,13 @@ const mockData = [
         albumArtworkUrl:
             'https://99designs-blog.imgix.net/blog/wp-content/uploads/2017/12/attachment_68585523.jpg?auto=format&q=60&fit=max&w=930',
     },
+    {
+        id: 'Playlist2',
+        name: 'Y A G',
+        numMembers: 667,
+        numSongs: 100,
+        albumArtworkUrl: 'https://i.imgur.com/uoMh2y3.png',
+    },
 ]
 const styles = StyleSheet.create({
     Container: {

@@ -6,6 +6,7 @@ import {
     Text,
     StyleSheet,
     TextInput,
+    Platform,
 } from 'react-native'
 import { Navigation } from 'react-native-navigation'
 
@@ -24,7 +25,7 @@ const styles = StyleSheet.create({
     },
     Modal: {
         width: '90%',
-        height: 250,
+        height: Platform.OS === 'android' ? 300 : 250,
         backgroundColor: StyleConstants.BASE_MODAL_BACKGROUND_COLOR,
         borderRadius: StyleConstants.BASE_BORDER_RADIUS,
     },
@@ -43,7 +44,8 @@ const styles = StyleSheet.create({
     },
     Input: {
         width: '75%',
-        marginBottom: 25,
+        // maxHeight: 20,
+        marginBottom: 15,
         color: StyleConstants.BASE_FONT_COLOR,
         fontSize: StyleConstants.CARD_ITEM_DETAIL_SIZE_iOS,
         fontWeight: StyleConstants.SEMIBOLD_WEIGHT,
