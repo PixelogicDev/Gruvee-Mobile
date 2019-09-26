@@ -62,6 +62,7 @@ const AddPlaylistModal = ({ createAction }) => {
         const playlist = new Playlist(playlistNameValue, membersNameValue)
 
         if (!playlistNameValue) {
+            // Why is this here?
         }
 
         // Run action to create playlist
