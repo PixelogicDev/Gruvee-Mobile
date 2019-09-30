@@ -34,3 +34,7 @@ export const ADD_BUTTON_SIZE = 60
 
 // Delete SwipeAction Color
 export const DELETE_SWIPE_ACTION_BG_COLOR = '#FF4747'
+
+// Modal Height
+export const MODAL_HEIGHT_ANDROID = 300
+export const MODAL_HEIGHT_iOS = 250

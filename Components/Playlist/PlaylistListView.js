@@ -71,7 +71,7 @@ const PlaylistListView = () => {
 
     useEffect(() => {
         // Call API set to playlists
-        setPlaylist(mockData)
+        setPlaylist([...playlists, ...mockData])
 
         // Only if on Android, let's setup for backhandler override
         if (Platform.OS === 'android') {
@@ -115,7 +115,7 @@ const PlaylistListView = () => {
                 compDidDisappearListener.remove()
             }
         }
-    })
+    }, [])
 
     const createPlaylistAction = playlist => {
         // Set State

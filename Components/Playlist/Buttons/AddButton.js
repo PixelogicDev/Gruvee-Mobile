@@ -14,7 +14,7 @@ const AddButton = ({ style, createAction }) => {
                 name: NavigationConstants.ADD_PLAYLIST_MODAL_NAV_NAME,
                 options: {
                     overlay: {
-                        interceptTouchOutside: true,
+                        interceptTouchOutside: false,
                     },
                 },
                 passProps: {

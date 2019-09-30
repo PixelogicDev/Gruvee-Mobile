@@ -1,7 +1,6 @@
 import React from 'react'
 import {
-    Image,
-    TouchableOpacity,
+    Dimensions,
     View,
     Text,
     StyleSheet,
@@ -15,6 +14,12 @@ import * as NavigationConstants from '../../NavigationConstants'
 import AddPlaylistButton from './Buttons/AddPlaylistButton'
 import Playlist from '../../lib/Playlist'
 
+const screenWidth = Dimensions.get('window').width
+const screenHeight = Dimensions.get('window').height
+const getModalHeight =
+    Platform.OS === 'android'
+        ? StyleConstants.MODAL_HEIGHT_ANDROID
+        : StyleConstants.MODAL_HEIGHT_iOS
 const styles = StyleSheet.create({
     Backdrop: {
         backgroundColor: `${StyleConstants.BASE_BACKGROUND_COLOR}B3`,
@@ -24,8 +29,20 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     Modal: {
+        position: 'absolute',
         width: '90%',
-        height: Platform.OS === 'android' ? 300 : 250,
+        height: getModalHeight,
+        // This is to center the modal absolutely in the background view
+        top: '50%',
+        left: '50%',
+        transform: [
+            {
+                translateX: -(screenWidth * 0.9) / 2,
+            },
+            {
+                translateY: -(screenHeight / 2 - getModalHeight / 2),
+            },
+        ],
         backgroundColor: StyleConstants.BASE_MODAL_BACKGROUND_COLOR,
         borderRadius: StyleConstants.BASE_BORDER_RADIUS,
     },
@@ -44,7 +61,6 @@ const styles = StyleSheet.create({
     },
     Input: {
         width: '75%',
-        // maxHeight: 20,
         marginBottom: 15,
         color: StyleConstants.BASE_FONT_COLOR,
         fontSize: StyleConstants.CARD_ITEM_DETAIL_SIZE_iOS,
@@ -57,6 +73,8 @@ const styles = StyleSheet.create({
 const AddPlaylistModal = ({ createAction }) => {
     const [playlistNameValue, onChangePlaylistNameText] = React.useState('')
     const [membersNameValue, onChangeMembersNameText] = React.useState('')
+
+    // Actions
     const createPlaylistAction = () => {
         // Create playlist object
         const playlist = new Playlist(playlistNameValue, membersNameValue)
@@ -72,40 +90,50 @@ const AddPlaylistModal = ({ createAction }) => {
         Navigation.dismissOverlay(NavigationConstants.ADD_PLAYLIST_MODAL_NAV_ID)
     }
 
-    return (
-        // Backdrop view
-        <View style={styles.Backdrop}>
-            {/* Modal View */}
-            <View style={styles.Modal}>
-                <Text style={styles.Header}>Let's Get Grüvee</Text>
-                <View style={styles.InputContainer}>
-                    <TextInput
-                        placeholder="Playlist Name"
-                        placeholderTextColor={
-                            StyleConstants.INPUT_PLACEHOLDER_FONT_COLOR
-                        }
-                        style={styles.Input}
-                        onChangeText={text => onChangePlaylistNameText(text)}
-                        value={playlistNameValue}
-                    ></TextInput>
-                    <TextInput
-                        placeholder="Members"
-                        placeholderTextColor={
-                            StyleConstants.INPUT_PLACEHOLDER_FONT_COLOR
-                        }
-                        style={styles.Input}
-                        onChangeText={text => onChangeMembersNameText(text)}
-                        value={membersNameValue}
-                    ></TextInput>
-                </View>
-                <AddPlaylistButton
-                    name={playlistNameValue}
-                    members={membersNameValue}
-                    createAction={createPlaylistAction}
-                    disabled={!playlistNameValue}
-                ></AddPlaylistButton>
+    const dismissOverlayAction = () => {
+        Navigation.dismissOverlay(NavigationConstants.ADD_PLAYLIST_MODAL_NAV_ID)
+    }
+
+    const modalView = (
+        <View style={styles.Modal}>
+            <Text style={styles.Header}>Let's Get Grüvee</Text>
+            <View style={styles.InputContainer}>
+                <TextInput
+                    placeholder="Playlist Name"
+                    placeholderTextColor={
+                        StyleConstants.INPUT_PLACEHOLDER_FONT_COLOR
+                    }
+                    style={styles.Input}
+                    onChangeText={text => onChangePlaylistNameText(text)}
+                    value={playlistNameValue}
+                ></TextInput>
+                <TextInput
+                    placeholder="Members"
+                    placeholderTextColor={
+                        StyleConstants.INPUT_PLACEHOLDER_FONT_COLOR
+                    }
+                    style={styles.Input}
+                    onChangeText={text => onChangeMembersNameText(text)}
+                    value={membersNameValue}
+                ></TextInput>
             </View>
+            <AddPlaylistButton
+                name={playlistNameValue}
+                members={membersNameValue}
+                createAction={createPlaylistAction}
+                disabled={!playlistNameValue}
+            ></AddPlaylistButton>
         </View>
+    )
+
+    return (
+        <>
+            <View
+                onStartShouldSetResponder={() => dismissOverlayAction()}
+                style={styles.Backdrop}
+            ></View>
+            {modalView}
+        </>
     )
 }
 
