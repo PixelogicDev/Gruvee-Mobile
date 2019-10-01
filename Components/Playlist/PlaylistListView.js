@@ -41,8 +41,8 @@ const styles = StyleSheet.create({
         backgroundColor: StyleConstants.BASE_BACKGROUND_COLOR,
     },
     ContentContainer: {
-        padding: 25,
-        paddingBottom: 100,
+        padding: StyleConstants.TABLE_CONTAINER_CONTENT_SPACING,
+        paddingBottom: StyleConstants.TABLE_CONTAINER_BOTTOM_PADDING,
     },
     ButtonContainer: {
         width: '100%',
@@ -60,7 +60,6 @@ const PlaylistListView = () => {
     const [playlists, setPlaylist] = useState([])
     const [addPlaylistModalShown, setAddPlaylistModalShown] = useState(false)
     const keyExtractor = (item, index) => item.id
-    const renderHiddenItem = ({}) => <SwipeAction />
     const renderItem = ({ item }) => (
         <CardItem
             playlistData={item}

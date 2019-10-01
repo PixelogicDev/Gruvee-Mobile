@@ -11,10 +11,12 @@ import {
     StyleSheet,
 } from 'react-native'
 import { SwipeRow } from 'react-native-swipe-list-view'
+import { Navigation } from 'react-native-navigation'
 
 import CardItemDetail from './CardItemDetail'
 import SwipeAction from './SwipeAction'
 import * as StyleConstants from '../../StyleConstants'
+import * as NavigationConstants from '../../NavigationConstants'
 
 const styles = StyleSheet.create({
     SwipeContainer: (isDeleting, height) => ({
@@ -45,11 +47,19 @@ const CardItem = ({ playlistData, deletePlaylistAction, isLastItem }) => {
     const [shrinkHeight, setShrinkHeight] = useState(new Animated.Value(200))
     const swipeRef = useRef(null)
 
-    // Test action for now
-    const printPlaylistData = () => {
-        alert(
-            `${playlistData.name} | ${playlistData.numMembers} | ${playlistData.numSongs}`
-        )
+    const showSongListAction = () => {
+        Navigation.push(NavigationConstants.PLAYLIST_NAV_ID, {
+            component: {
+                name: NavigationConstants.SONG_LIST_NAV_NAME,
+                options: {
+                    topBar: {
+                        title: {
+                            text: playlistData.name,
+                        },
+                    },
+                },
+            },
+        })
     }
 
     //-- MADPROPZ poopuhchoo --//
@@ -112,7 +122,7 @@ const CardItem = ({ playlistData, deletePlaylistAction, isLastItem }) => {
                 />
             </Animated.View>
             <Animated.View style={styles.AnimatedContainer(shrinkHeight)}>
-                <TouchableOpacity onPress={printPlaylistData}>
+                <TouchableOpacity onPress={showSongListAction}>
                     <ImageBackground
                         style={styles.Container}
                         source={{ uri: `${playlistData.albumArtworkUrl}` }}
