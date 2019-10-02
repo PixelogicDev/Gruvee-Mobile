@@ -11,28 +11,59 @@ import AddButton from './Buttons/AddButton'
 // Remove broken path warning
 console.disableYellowBox = true
 console.ignoredYellowBox = ['Could not find image']
-
+const mockSongs = [
+    {
+        id: 'song0',
+        addedBy: 'SomeOtherMember',
+        name: 'SomeCoolNewSong',
+        artist: 'YaBoiAlec',
+        album: 'Album of The Year',
+        albumArtwork: 'SomeBrokenString',
+        platformDeepLink: 'spotify://SomeDeepLink',
+        comments: [],
+    },
+    {
+        id: 'song1',
+        addedBy: 'SomeOtherMember',
+        name: 'SomeCoolNewSong',
+        artist: 'YaBoiAlec',
+        album: 'Album of The Year',
+        albumArtwork: 'SomeBrokenString',
+        platformDeepLink: 'spotify://SomeDeepLink',
+        comments: [],
+    },
+    {
+        id: 'song2',
+        addedBy: 'SomeOtherMember',
+        name: 'SomeCoolNewSong',
+        artist: 'YaBoiAlec',
+        album: 'Album of The Year',
+        albumArtwork: 'SomeBrokenString',
+        platformDeepLink: 'spotify://SomeDeepLink',
+        comments: [],
+    },
+]
 const mockData = [
     {
         id: 'Playlist0',
         name: 'Cool Kids Music',
-        numMembers: 1234,
-        numSongs: 7,
+        members: ['Ya Boi', 'Alec', 'Was Here'],
+        songs: mockSongs,
         albumArtworkUrl: 'SomeBrokenImagePath',
     },
     {
         id: 'Playlist1',
         name: "YaBoi Alec's Playlist",
-        numMembers: 1234,
-        numSongs: 8000,
+        members: ['Another', 'Name', 'Was Here'],
+        songs: mockSongs,
         albumArtworkUrl:
             'https://99designs-blog.imgix.net/blog/wp-content/uploads/2017/12/attachment_68585523.jpg?auto=format&q=60&fit=max&w=930',
     },
     {
         id: 'Playlist2',
         name: 'Y A G',
-        numMembers: 667,
-        numSongs: 100,
+        songs: mockSongs,
+        members: ['Hi', 'I am', 'a name'],
         albumArtworkUrl: 'https://i.imgur.com/uoMh2y3.png',
     },
 ]

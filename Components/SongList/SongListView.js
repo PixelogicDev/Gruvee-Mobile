@@ -26,47 +26,15 @@ const styles = StyleSheet.create({
         height: StyleConstants.ADD_BUTTON_SIZE,
     },
 })
-const mockSongs = [
-    {
-        id: 'song0',
-        addedBy: 'SomeOtherMember',
-        name: 'SomeCoolNewSong',
-        artist: 'YaBoiAlec',
-        album: 'Album of The Year',
-        albumArtwork: 'SomeBrokenString',
-        platformDeepLink: 'spotify://SomeDeepLink',
-        comments: [],
-    },
-    {
-        id: 'song1',
-        addedBy: 'SomeOtherMember',
-        name: 'SomeCoolNewSong',
-        artist: 'YaBoiAlec',
-        album: 'Album of The Year',
-        albumArtwork: 'SomeBrokenString',
-        platformDeepLink: 'spotify://SomeDeepLink',
-        comments: [],
-    },
-    {
-        id: 'song2',
-        addedBy: 'SomeOtherMember',
-        name: 'SomeCoolNewSong',
-        artist: 'YaBoiAlec',
-        album: 'Album of The Year',
-        albumArtwork: 'SomeBrokenString',
-        platformDeepLink: 'spotify://SomeDeepLink',
-        comments: [],
-    },
-]
 
-const SongListView = () => {
+const SongListView = ({ playlistId, songs }) => {
     const keyExtractor = (item, index) => item.id
     const renderItem = ({ item }) => <SongItem songData={item} />
 
-    const [songs, setSongs] = useState([])
+    const [songsList, setSongs] = useState([])
     useEffect(() => {
         // Call API set to songs
-        setSongs([...songs, ...mockSongs])
+        setSongs([...songsList, ...songs])
     }, [])
 
     return (
@@ -75,7 +43,7 @@ const SongListView = () => {
                 style={styles.Container}
                 contentContainerStyle={styles.ContentContainer}
                 showsVerticalScrollIndicator={true}
-                data={songs}
+                data={songsList}
                 keyExtractor={keyExtractor}
                 renderItem={renderItem}
             ></SwipeListView>

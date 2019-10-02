@@ -51,6 +51,10 @@ const CardItem = ({ playlistData, deletePlaylistAction, isLastItem }) => {
         Navigation.push(NavigationConstants.PLAYLIST_NAV_ID, {
             component: {
                 name: NavigationConstants.SONG_LIST_NAV_NAME,
+                passProps: {
+                    playlistId: playlistData.id,
+                    songs: playlistData.songs,
+                },
                 options: {
                     topBar: {
                         title: {
@@ -130,8 +134,8 @@ const CardItem = ({ playlistData, deletePlaylistAction, isLastItem }) => {
                     >
                         <CardItemDetail
                             name={playlistData.name}
-                            numMembers={playlistData.numMembers}
-                            numSongs={playlistData.numSongs}
+                            numMembers={playlistData.members.length}
+                            numSongs={playlistData.songs.length}
                         />
                     </ImageBackground>
                 </TouchableOpacity>
