@@ -42,3 +42,12 @@ export const MODAL_HEIGHT_iOS = 250
 // Table Container Content Spacing
 export const TABLE_CONTAINER_CONTENT_SPACING = 25
 export const TABLE_CONTAINER_BOTTOM_PADDING = 100
+
+// Song List Item
+export const SONG_LIST_ITEM_BACKGROUND_COLOR = '#00000066'
+export const SONG_LIST_ITEM_DETAIL_HEIGHT = 80
+export const SONG_LIST_ITEM_TITLE_SIZE_iOS = 22
+export const SONG_LIST_ITEM_DETAIL_SIZE_iOS = 14
+export const SONG_LIST_ITEM_DETAIL_COLOR = '#999999'
+export const SONG_LIST_ITEM_BORDER_RADIUS = 5
+export const SONG_LIST_ITEM_ALBUM_ARTWORK_SIZE = 60

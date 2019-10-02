@@ -18,7 +18,8 @@ const mockSongs = [
         name: 'SomeCoolNewSong',
         artist: 'YaBoiAlec',
         album: 'Album of The Year',
-        albumArtwork: 'SomeBrokenString',
+        albumArtwork:
+            'https://upload.wikimedia.org/wikipedia/en/thumb/f/f7/Messengers.jpg/220px-Messengers.jpg',
         platformDeepLink: 'spotify://SomeDeepLink',
         comments: [],
     },
@@ -28,7 +29,8 @@ const mockSongs = [
         name: 'SomeCoolNewSong',
         artist: 'YaBoiAlec',
         album: 'Album of The Year',
-        albumArtwork: 'SomeBrokenString',
+        albumArtwork:
+            'https://www.clashmusic.com/sites/default/files/styles/article_feature/public/field/image/arcgods.jpg?itok=quBBnjX3',
         platformDeepLink: 'spotify://SomeDeepLink',
         comments: [],
     },
@@ -38,7 +40,8 @@ const mockSongs = [
         name: 'SomeCoolNewSong',
         artist: 'YaBoiAlec',
         album: 'Album of The Year',
-        albumArtwork: 'SomeBrokenString',
+        albumArtwork:
+            'https://upload.wikimedia.org/wikipedia/en/thumb/3/31/Northlane_Mesmer_artwork.jpg/220px-Northlane_Mesmer_artwork.jpg',
         platformDeepLink: 'spotify://SomeDeepLink',
         comments: [],
     },

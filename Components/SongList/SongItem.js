@@ -18,17 +18,19 @@ import * as StyleConstants from '../../StyleConstants'
 import SongItemDetail from './SongItemDetail'
 import SongItemCommentBar from './SongItemCommentBar'
 
+const styles = StyleSheet.create({
+    Container: {
+        paddingBottom: 25,
+    },
+})
+
 const SongItem = ({ songData }) => {
     return (
-        <>
-            <View>
-                <Text>{songData.name}</Text>
-                <Text>{songData.artist}</Text>
-                <Text>{songData.album}</Text>
-            </View>
-            <SongItemDetail></SongItemDetail>
+        // TODO: SWIPE CELL
+        <View style={styles.Container}>
+            <SongItemDetail songData={songData}></SongItemDetail>
             <SongItemCommentBar></SongItemCommentBar>
-        </>
+        </View>
     )
 }
 
