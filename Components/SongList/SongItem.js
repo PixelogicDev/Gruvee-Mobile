@@ -29,7 +29,9 @@ const SongItem = ({ songData }) => {
         // TODO: SWIPE CELL
         <View style={styles.Container}>
             <SongItemDetail songData={songData}></SongItemDetail>
-            <SongItemCommentBar></SongItemCommentBar>
+            <SongItemCommentBar
+                comments={songData.comments}
+            ></SongItemCommentBar>
         </View>
     )
 }

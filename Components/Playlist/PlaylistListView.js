@@ -21,7 +21,11 @@ const mockSongs = [
         albumArtwork:
             'https://upload.wikimedia.org/wikipedia/en/thumb/f/f7/Messengers.jpg/220px-Messengers.jpg',
         platformDeepLink: 'spotify://SomeDeepLink',
-        comments: [],
+        comments: [
+            'WOW SO GOOD.',
+            'This could be better...',
+            'Whats with the album name...',
+        ],
     },
     {
         id: 'song1',
@@ -32,7 +36,7 @@ const mockSongs = [
         albumArtwork:
             'https://www.clashmusic.com/sites/default/files/styles/article_feature/public/field/image/arcgods.jpg?itok=quBBnjX3',
         platformDeepLink: 'spotify://SomeDeepLink',
-        comments: [],
+        comments: ['nice.'],
     },
     {
         id: 'song2',
@@ -43,7 +47,7 @@ const mockSongs = [
         albumArtwork:
             'https://upload.wikimedia.org/wikipedia/en/thumb/3/31/Northlane_Mesmer_artwork.jpg/220px-Northlane_Mesmer_artwork.jpg',
         platformDeepLink: 'spotify://SomeDeepLink',
-        comments: [],
+        comments: ['Anothe one.', 'Another two?'],
     },
 ]
 const mockData = [
