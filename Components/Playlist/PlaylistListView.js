@@ -103,6 +103,7 @@ const PlaylistListView = () => {
             playlistData={item}
             deletePlaylistAction={deletePlaylistAction}
             isLastItem={playlists.length === 1}
+            deleteSongFromPlaylistAction={deleteSongFromPlaylistAction}
         />
     )
 
@@ -154,6 +155,7 @@ const PlaylistListView = () => {
         }
     }, [])
 
+    // Playlist Actions
     const createPlaylistAction = playlist => {
         // Set State
         setPlaylist([...playlists, playlist])
@@ -163,6 +165,20 @@ const PlaylistListView = () => {
         setPlaylist(
             playlists.filter(playlist => playlist.id !== playlistToDeleteId)
         )
+    }
+
+    const deleteSongFromPlaylistAction = (playlistId, songId) => {
+        const updatedPlaylist = playlists.map(playlist => {
+            if (playlist.id === playlistId) {
+                playlist.songs = playlist.songs.filter(
+                    song => song.id !== songId
+                )
+            }
+
+            return playlist
+        })
+
+        setPlaylist(updatedPlaylist)
     }
 
     const handleBackPress = () => {

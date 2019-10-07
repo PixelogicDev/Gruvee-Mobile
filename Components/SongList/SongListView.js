@@ -1,10 +1,13 @@
 import React, { Fragment, useState, useEffect } from 'react'
-import { BackHandler, View, StyleSheet, Platform } from 'react-native'
+import { Alert, BackHandler, View, StyleSheet, Platform } from 'react-native'
 import { SwipeListView } from 'react-native-swipe-list-view'
 import { Navigation } from 'react-native-navigation'
 
 import SongItem from './SongItem'
 import AddButton from '../Playlist/Buttons/AddButton'
+import AnimatedSwipeRow from '../Common/AnimatedSwipeRow'
+// MOVE OUT SWIPE ACTION TO COMMON
+import SwipeAction from '../Playlist/SwipeAction'
 import * as StyleConstants from '../../StyleConstants'
 
 const styles = StyleSheet.create({
@@ -27,15 +30,69 @@ const styles = StyleSheet.create({
     },
 })
 
-const SongListView = ({ playlistId, songs }) => {
+const SongListView = ({ playlistId, songs, deleteSongFromPlaylistAction }) => {
+    const [songsToDisplay, setSongsToDisplay] = useState([])
     const keyExtractor = (item, index) => item.id
-    const renderItem = ({ item }) => <SongItem songData={item} />
+    const confirmDeleteSongAction = item => {
+        Alert.alert(
+            'Delete Song',
+            `Come on, are you sure you want to delete ${item.name}?`,
+            [
+                {
+                    text: 'Delete',
+                    onPress: () => {
+                        // TODO: Add some sort of promise
+                        // If the first filter fails, lets not do the next one
 
-    const [songsList, setSongs] = useState([])
+                        // Filter out from current state
+                        setSongsToDisplay(
+                            songsToDisplay.filter(song => song.id !== item.id)
+                        )
+
+                        // Filter out song from parent state
+                        deleteSongFromPlaylistAction(playlistId, item.id)
+                    },
+                    style: 'destructive',
+                },
+                {
+                    text: 'Cancel',
+                    style: 'cancel',
+                },
+            ],
+            { cancelable: true }
+        )
+    }
+
     useEffect(() => {
-        // Call API set to songs
-        setSongs([...songsList, ...songs])
+        setSongsToDisplay(songs)
     }, [])
+
+    const swipeActionComponent = item => (
+        <SwipeAction
+            name={'Delete Action Button'}
+            action={() => {
+                confirmDeleteSongAction(item)
+            }}
+            iconName={'trash_icon'}
+            actionColor={StyleConstants.DELETE_SWIPE_ACTION_BG_COLOR}
+            width={19}
+            height={25}
+        />
+    )
+
+    const songItemComponent = item => {
+        return <SongItem songData={item} />
+    }
+
+    const renderItem = ({ item }) => (
+        <AnimatedSwipeRow
+            openValue={-75}
+            isRightOpenValue={true}
+            itemHeight={120}
+            swipeActionComponent={swipeActionComponent(item)}
+            listItemComponent={songItemComponent(item)}
+        ></AnimatedSwipeRow>
+    )
 
     return (
         <>
@@ -43,7 +100,7 @@ const SongListView = ({ playlistId, songs }) => {
                 style={styles.Container}
                 contentContainerStyle={styles.ContentContainer}
                 showsVerticalScrollIndicator={true}
-                data={songsList}
+                data={songsToDisplay}
                 keyExtractor={keyExtractor}
                 renderItem={renderItem}
             ></SwipeListView>

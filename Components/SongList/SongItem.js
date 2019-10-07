@@ -26,7 +26,6 @@ const styles = StyleSheet.create({
 
 const SongItem = ({ songData }) => {
     return (
-        // TODO: SWIPE CELL
         <View style={styles.Container}>
             <SongItemDetail songData={songData}></SongItemDetail>
             <SongItemCommentBar

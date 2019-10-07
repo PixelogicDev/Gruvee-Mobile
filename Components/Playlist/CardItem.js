@@ -42,7 +42,12 @@ const styles = StyleSheet.create({
     },
 })
 
-const CardItem = ({ playlistData, deletePlaylistAction, isLastItem }) => {
+const CardItem = ({
+    playlistData,
+    deletePlaylistAction,
+    isLastItem,
+    deleteSongFromPlaylistAction,
+}) => {
     const [isDeleting, setIsDeleting] = useState(false)
     const [shrinkHeight, setShrinkHeight] = useState(new Animated.Value(200))
     const swipeRef = useRef(null)
@@ -54,6 +59,7 @@ const CardItem = ({ playlistData, deletePlaylistAction, isLastItem }) => {
                 passProps: {
                     playlistId: playlistData.id,
                     songs: playlistData.songs,
+                    deleteSongFromPlaylistAction: deleteSongFromPlaylistAction,
                 },
                 options: {
                     topBar: {
