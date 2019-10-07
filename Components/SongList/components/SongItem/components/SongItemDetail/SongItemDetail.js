@@ -1,16 +1,7 @@
-import React, { useRef, useState } from 'react'
-import {
-    Alert,
-    Animated,
-    Dimensions,
-    Text,
-    View,
-    Image,
-    TouchableOpacity,
-    StyleSheet,
-} from 'react-native'
+import React from 'react'
+import { Text, View, Image, StyleSheet } from 'react-native'
 
-import * as StyleConstants from '../../StyleConstants'
+import * as StyleConstants from '@StyleConstants'
 
 const styles = StyleSheet.create({
     Container: {

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, View, Image, TouchableOpacity, StyleSheet } from 'react-native'
+import { Image, TouchableOpacity, StyleSheet } from 'react-native'
 
 const styles = StyleSheet.create({
     Background: actionColor => ({
@@ -11,8 +11,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     }),
     Icon: (width, height) => ({
-        width: width,
-        height: height,
+        width,
+        height,
     }),
 })
 
@@ -34,7 +34,7 @@ const SwipeAction = ({
                 accessibilityLabel={name}
                 source={{ uri: `${iconName}` }}
                 style={styles.Icon(width, height)}
-            ></Image>
+            />
         </TouchableOpacity>
     )
 }

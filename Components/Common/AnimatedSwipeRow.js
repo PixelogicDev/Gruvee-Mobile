@@ -1,46 +1,41 @@
-import React, { useRef, useState } from 'react'
-import {
-    Animated,
-    Dimensions,
-    View,
-    TouchableOpacity,
-    StyleSheet,
-} from 'react-native'
+import React, { useRef, useState, useEffect } from 'react'
+import { Animated, Dimensions } from 'react-native'
 import { SwipeRow } from 'react-native-swipe-list-view'
-import { Navigation } from 'react-native-navigation'
+import styles from './AnimatedSwipeRow.styles'
 
-import * as StyleConstants from '../../StyleConstants'
-
-const styles = StyleSheet.create({
-    SwipeContainer: (isDeleting, height) => ({
-        justifyContent: 'center',
-        alignItems: 'flex-end',
-        height: height,
-        opacity: isDeleting ? 0 : 1,
-    }),
-    AnimatedContainer: height => ({
-        height: height,
-        marginBottom: 20,
-    }),
-})
-
-// openValue: Int - amount of open value for cell
-// isRightOpenValue: Bool - determine if open value should be for the left or right
-// itemHeight: Int - the height of the listItemComponent cell
-// swipeActionComponent: Object - component being rendered behind the main list item
-// listItemComponent: Object - component being rendered as the main item in the list
 const AnimatedSwipeRow = ({
-    openValue,
+    openValue = -75,
     isRightOpenValue,
     itemHeight,
     swipeActionComponent,
     listItemComponent,
+    isLastItem,
+    swipeActionCallback,
+    swipeTriggered,
 }) => {
     const swipeRef = useRef(null)
-    const [isDeleting, setIsDeleting] = useState(false)
-    const [shrinkHeight, setShrinkHeight] = useState(
-        new Animated.Value(itemHeight)
-    )
+    const [swipeActionRunning, setIsSwipeActionRunning] = useState(false)
+    const [shrinkHeight] = useState(new Animated.Value(itemHeight))
+
+    const runSwipeAction = () => {
+        if (swipeRef.current && swipeRef.current.manuallySwipeRow) {
+            setIsSwipeActionRunning(true)
+            swipeRef.current.manuallySwipeRow(
+                -Math.round(Dimensions.get('window').width),
+                () => isLastItem && swipeActionCallback()
+            )
+            if (!isLastItem) {
+                Animated.timing(shrinkHeight, {
+                    toValue: 0,
+                    duration: 250,
+                }).start(swipeActionCallback)
+            }
+        }
+    }
+
+    useEffect(() => {
+        if (swipeTriggered) runSwipeAction()
+    }, [swipeTriggered])
 
     return (
         <SwipeRow
@@ -49,7 +44,7 @@ const AnimatedSwipeRow = ({
             ref={swipeRef}
         >
             <Animated.View
-                style={styles.SwipeContainer(isDeleting, shrinkHeight)}
+                style={styles.SwipeContainer(swipeActionRunning, shrinkHeight)}
             >
                 {swipeActionComponent}
             </Animated.View>

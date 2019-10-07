@@ -6,6 +6,7 @@
         "start": "react-native start",
         "android": "cd ./android && ./gradlew app:assembleDebug && ./gradlew installDebug && npm run android-start",
         "android-start": "react-native run-android",
+        "ios-start": "react-native run-ios --simulator=\"iPhone XS\"",
         "test": "jest"
     },
     "dependencies": {
@@ -18,9 +19,21 @@
         "@babel/core": "^7.5.0",
         "@babel/runtime": "^7.5.0",
         "@react-native-community/eslint-config": "^0.0.3",
+        "babel-eslint": "^10.0.3",
         "babel-jest": "^24.1.0",
+        "babel-plugin-module-resolver": "^3.2.0",
+        "eslint": "^6.5.1",
+        "eslint-config-airbnb": "^18.0.1",
+        "eslint-config-airbnb-base": "^14.0.0",
+        "eslint-config-prettier": "^6.4.0",
+        "eslint-import-resolver-alias": "^1.1.2",
+        "eslint-plugin-import": "^2.18.2",
+        "eslint-plugin-jsx-a11y": "^6.2.3",
+        "eslint-plugin-module-resolver": "^0.15.0",
+        "eslint-plugin-prettier": "^3.1.1",
         "jest": "^24.1.0",
         "metro-react-native-babel-preset": "^0.54.1",
+        "prettier": "^1.18.2",
         "react-test-renderer": "16.8.6"
     },
     "jest": {
