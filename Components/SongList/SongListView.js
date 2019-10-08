@@ -25,7 +25,10 @@ const SongListView = ({ playlistId, songs, deleteSongFromPlaylistAction }) => {
     }
 
     const renderItem = ({ item }) => (
-        <SwipeableSongItem item={item} deleteItemById={deleteItemById} />
+        <SwipeableSongItem
+            song={item}
+            deleteItemById={() => deleteItemById(item.id)}
+        />
     )
 
     return (
@@ -51,6 +54,7 @@ const SongListView = ({ playlistId, songs, deleteSongFromPlaylistAction }) => {
 
 const keyExtractor = item => `${item.id}`
 
+// Styles
 const styles = StyleSheet.create({
     Container: {
         backgroundColor: StyleConstants.BASE_BACKGROUND_COLOR,

@@ -3,6 +3,18 @@ import { Text, View, Image, TouchableOpacity, StyleSheet } from 'react-native'
 
 import * as StyleConstants from '@StyleConstants'
 
+const SongItemCommentBar = ({ comments }) => {
+    return (
+        <View style={styles.Container}>
+            <Text style={styles.Text}>{comments.length} Comments</Text>
+            <TouchableOpacity>
+                <Image style={styles.Image} source={{ uri: 'plus_icon' }} />
+            </TouchableOpacity>
+        </View>
+    )
+}
+
+// Styles
 const styles = StyleSheet.create({
     Container: {
         height: 40,
@@ -24,15 +36,5 @@ const styles = StyleSheet.create({
         marginRight: 15,
     },
 })
-const SongItemCommentBar = ({ comments }) => {
-    return (
-        <View style={styles.Container}>
-            <Text style={styles.Text}>{comments.length} Comments</Text>
-            <TouchableOpacity>
-                <Image style={styles.Image} source={{ uri: 'plus_icon' }} />
-            </TouchableOpacity>
-        </View>
-    )
-}
 
 export default SongItemCommentBar

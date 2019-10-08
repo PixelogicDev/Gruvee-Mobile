@@ -7,35 +7,37 @@ import * as StyleConstants from '@StyleConstants'
 
 import SongItem from '../SongItem/SongItem'
 
-const SwipeableSongItem = ({ item, deleteItemById }) => {
+// deleteItemById === func
+const SwipeableSongItem = ({ song, deleteItemById }) => {
     const [isDeleting, setIsDeleting] = useState(false)
     const onConfirmDelete = () => setIsDeleting(true)
     const confirmDeleteSongAction = () =>
-        comfirmDeleteAlert(item, onConfirmDelete)
+        comfirmDeleteAlert(song, onConfirmDelete)
 
     return (
         <AnimatedSwipeRow
             swipeTriggered={isDeleting}
-            swipeActionCallback={() => deleteItemById(item.id)}
-            itemHeight={120}
+            swipeActionCallback={deleteItemById}
+            itemHeight={120} // TODO: Android vs iOS check
             isRightOpenValue
             swipeActionComponent={renderSwipeActionComponent(
-                item,
+                song,
                 confirmDeleteSongAction
             )}
-            listItemComponent={renderSongItem(item)}
+            listItemComponent={renderSongItem(song)}
         />
     )
 }
 
-const comfirmDeleteAlert = (item, onConfirmDelete) => {
+// Actions
+const comfirmDeleteAlert = (song, onConfirmDelete) => {
     Alert.alert(
         'Delete Song',
-        `Come on, are you sure you want to delete ${item.name}?`,
+        `Come on, are you sure you want to delete ${song.name}?`,
         [
             {
                 text: 'Delete',
-                onPress: () => onConfirmDelete(item.id),
+                onPress: onConfirmDelete,
                 style: 'destructive',
             },
             { text: 'Cancel', style: 'cancel' },
@@ -44,13 +46,14 @@ const comfirmDeleteAlert = (item, onConfirmDelete) => {
     )
 }
 
-const renderSongItem = item => <SongItem songData={item} />
+// Rendered Components
+const renderSongItem = song => <SongItem songData={song} />
 
-const renderSwipeActionComponent = (item, confirmDeleteSongAction) => (
+const renderSwipeActionComponent = (song, confirmDeleteSongAction) => (
     <SwipeAction
         name="Delete Action Button"
         action={() => {
-            confirmDeleteSongAction(item)
+            confirmDeleteSongAction(song)
         }}
         iconName="trash_icon"
         actionColor={StyleConstants.DELETE_SWIPE_ACTION_BG_COLOR}
