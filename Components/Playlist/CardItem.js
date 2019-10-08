@@ -3,9 +3,6 @@ import {
     Alert,
     Animated,
     Dimensions,
-    Text,
-    View,
-    FlatList,
     ImageBackground,
     TouchableOpacity,
     StyleSheet,
@@ -15,32 +12,8 @@ import { Navigation } from 'react-native-navigation'
 
 import CardItemDetail from './CardItemDetail'
 import SwipeAction from './SwipeAction'
-import * as StyleConstants from '../../StyleConstants'
+import * as StyleConstants from '@StyleConstants'
 import * as NavigationConstants from '../../NavigationConstants'
-
-const styles = StyleSheet.create({
-    SwipeContainer: (isDeleting, height) => ({
-        justifyContent: 'center',
-        alignItems: 'flex-end',
-        height: height,
-        opacity: isDeleting ? 0 : 1,
-    }),
-    AnimatedContainer: height => ({
-        height: height,
-        marginBottom: 20,
-    }),
-    Container: {
-        width: '100%',
-        height: '100%',
-        backgroundColor: '#000',
-        borderRadius: StyleConstants.BASE_BORDER_RADIUS,
-        overflow: 'hidden',
-    },
-    DetailContainer: {
-        marginTop: 15,
-        marginLeft: 15,
-    },
-})
 
 const CardItem = ({
     playlistData,
@@ -49,7 +22,7 @@ const CardItem = ({
     deleteSongFromPlaylistAction,
 }) => {
     const [isDeleting, setIsDeleting] = useState(false)
-    const [shrinkHeight, setShrinkHeight] = useState(new Animated.Value(200))
+    const [shrinkHeight] = useState(new Animated.Value(200))
     const swipeRef = useRef(null)
 
     const showSongListAction = () => {
@@ -59,7 +32,7 @@ const CardItem = ({
                 passProps: {
                     playlistId: playlistData.id,
                     songs: playlistData.songs,
-                    deleteSongFromPlaylistAction: deleteSongFromPlaylistAction,
+                    deleteSongFromPlaylistAction,
                 },
                 options: {
                     topBar: {
@@ -72,7 +45,7 @@ const CardItem = ({
         })
     }
 
-    //-- MADPROPZ poopuhchoo --//
+    // -- MADPROPZ poopuhchoo -- //
     const runDeleteAction = () => {
         if (swipeRef.current && swipeRef.current.manuallySwipeRow) {
             setIsDeleting(true)
@@ -121,11 +94,11 @@ const CardItem = ({
                 style={styles.SwipeContainer(isDeleting, shrinkHeight)}
             >
                 <SwipeAction
-                    name={'Delete Action Button'}
+                    name="Delete Action Button"
                     action={() => {
                         confirmDeletePlaylistAction()
                     }}
-                    iconName={'trash_icon'}
+                    iconName="trash_icon"
                     actionColor={StyleConstants.DELETE_SWIPE_ACTION_BG_COLOR}
                     width={19}
                     height={25}
@@ -149,5 +122,30 @@ const CardItem = ({
         </SwipeRow>
     )
 }
+
+// Styles
+const styles = StyleSheet.create({
+    SwipeContainer: (isDeleting, height) => ({
+        justifyContent: 'center',
+        alignItems: 'flex-end',
+        height,
+        opacity: isDeleting ? 0 : 1,
+    }),
+    AnimatedContainer: height => ({
+        height,
+        marginBottom: 20,
+    }),
+    Container: {
+        width: '100%',
+        height: '100%',
+        backgroundColor: '#000',
+        borderRadius: StyleConstants.BASE_BORDER_RADIUS,
+        overflow: 'hidden',
+    },
+    DetailContainer: {
+        marginTop: 15,
+        marginLeft: 15,
+    },
+})
 
 export default CardItem

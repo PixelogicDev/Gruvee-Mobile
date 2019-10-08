@@ -4,7 +4,7 @@ import { SwipeListView } from 'react-native-swipe-list-view'
 
 import AddButton from '../Playlist/Buttons/AddButton'
 import SwipeableSongItem from './components/SwipeableSongItem/SwipeableSongItem'
-import * as StyleConstants from '../../StyleConstants'
+import * as StyleConstants from '@StyleConstants'
 
 const SongListView = ({ playlistId, songs, deleteSongFromPlaylistAction }) => {
     const [songsToDisplay, setSongsToDisplay] = useState([])

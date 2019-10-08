@@ -1,14 +1,18 @@
-import React from 'react'
-import {
-    Text,
-    View,
-    ImageBackground,
-    TouchableOpacity,
-    StyleSheet,
-} from 'react-native'
+import React, { memo } from 'react'
+import { Text, View, StyleSheet } from 'react-native'
+import * as StyleConstants from '@StyleConstants'
 
-import * as StyleConstants from '../../StyleConstants'
+const CardItemDetail = ({ name, numMembers, numSongs }) => {
+    return (
+        <View style={styles.Container}>
+            <Text style={styles.TextHeader}>{name}</Text>
+            <Text style={styles.TextDetail}>{numMembers} Members</Text>
+            <Text style={styles.TextDetail}>{numSongs} Songs</Text>
+        </View>
+    )
+}
 
+// Styles
 const styles = StyleSheet.create({
     Container: {
         width: '60%',
@@ -34,16 +38,4 @@ const styles = StyleSheet.create({
     },
 })
 
-const CardItemDetail = props => {
-    const { name, numMembers, numSongs } = props
-
-    return (
-        <View style={styles.Container}>
-            <Text style={styles.TextHeader}>{name}</Text>
-            <Text style={styles.TextDetail}>{numMembers} Members</Text>
-            <Text style={styles.TextDetail}>{numSongs} Songs</Text>
-        </View>
-    )
-}
-
-export default CardItemDetail
+export default memo(CardItemDetail)

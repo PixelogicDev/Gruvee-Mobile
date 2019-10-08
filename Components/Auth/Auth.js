@@ -1,9 +1,29 @@
-import React, { Component } from 'react'
-import { Text, View, StyleSheet, Button } from 'react-native'
-import * as StyleConstants from '../../StyleConstants'
+import React from 'react'
+import { Text, View, StyleSheet } from 'react-native'
+import * as StyleConstants from '@StyleConstants'
 import SocialAuthButton from './SocialAuthButton'
 import { SOCIAL_PLATFORMS } from '../../SocialConstants'
 
+const Auth = () => {
+    return (
+        <View style={styles.Container}>
+            <View>
+                <Text style={styles.SectionTitle}>Lets Get Grüvee</Text>
+                <Text style={styles.SectionDetail}>
+                    Let all of your wildest memes come true. Just sell your soul
+                    below.
+                </Text>
+            </View>
+            <View style={styles.ButtonContainer}>
+                {SOCIAL_PLATFORMS.map((platform, index) => (
+                    <SocialAuthButton key={index} platform={platform} />
+                ))}
+            </View>
+        </View>
+    )
+}
+
+// Styles
 const styles = StyleSheet.create({
     ButtonContainer: {
         display: 'flex',
@@ -33,23 +53,4 @@ const styles = StyleSheet.create({
     },
 })
 
-export default class Auth extends Component {
-    render() {
-        return (
-            <View style={styles.Container}>
-                <View>
-                    <Text style={styles.SectionTitle}>Let's Get Grüvee</Text>
-                    <Text style={styles.SectionDetail}>
-                        Let all of your wildest memes come true. Just sell your
-                        soul below.
-                    </Text>
-                </View>
-                <View style={styles.ButtonContainer}>
-                    {SOCIAL_PLATFORMS.map((platform, index) => (
-                        <SocialAuthButton key={index} platform={platform} />
-                    ))}
-                </View>
-            </View>
-        )
-    }
-}
+export default Auth

@@ -4,7 +4,6 @@ import { Alert } from 'react-native'
 import AnimatedSwipeRow from 'Gruvee/Components/Common/AnimatedSwipeRow'
 import SwipeAction from 'Gruvee/Components/Playlist/SwipeAction'
 import * as StyleConstants from '@StyleConstants'
-
 import SongItem from '../SongItem/SongItem'
 
 // deleteItemById === func

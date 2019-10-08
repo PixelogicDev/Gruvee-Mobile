@@ -1,7 +1,27 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Text, TouchableOpacity, StyleSheet, View } from 'react-native'
-import * as StyleConstants from '../../../StyleConstants'
+import * as StyleConstants from '@StyleConstants'
 
+const AddPlaylistButton = ({ createAction, disabled }) => {
+    return (
+        <View style={styles.Container}>
+            <TouchableOpacity
+                onPress={createAction}
+                style={styles.Button(disabled)}
+                disabled={disabled}
+            >
+                <Text
+                    accessibilityLabel="Add playlist create button"
+                    style={styles.ButtonText(disabled)}
+                >
+                    Create
+                </Text>
+            </TouchableOpacity>
+        </View>
+    )
+}
+
+// Styles
 const styles = StyleSheet.create({
     Container: {
         display: 'flex',
@@ -31,24 +51,5 @@ const styles = StyleSheet.create({
         fontSize: StyleConstants.BUTTON_TEXT_SIZE_iOS,
     }),
 })
-
-const AddPlaylistButton = ({ createAction, disabled }) => {
-    return (
-        <View style={styles.Container}>
-            <TouchableOpacity
-                onPress={createAction}
-                style={styles.Button(disabled)}
-                disabled={disabled}
-            >
-                <Text
-                    accessibilityLabel={'Add playlist create button'}
-                    style={styles.ButtonText(disabled)}
-                >
-                    Create
-                </Text>
-            </TouchableOpacity>
-        </View>
-    )
-}
 
 export default AddPlaylistButton

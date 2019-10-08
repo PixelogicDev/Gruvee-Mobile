@@ -6,18 +6,10 @@
  * @flow
  */
 
-import React, { Fragment } from 'react'
-import {
-    SafeAreaView,
-    StyleSheet,
-    ScrollView,
-    View,
-    Text,
-    StatusBar,
-} from 'react-native'
-import { Header, Colors } from 'react-native/Libraries/NewAppScreen'
+import React from 'react'
+import { SafeAreaView, StyleSheet, View, StatusBar } from 'react-native'
 import Auth from './Components/Auth/Auth'
-import * as StyleConstants from './StyleConstants'
+import * as StyleConstants from '@StyleConstants'
 
 const styles = StyleSheet.create({
     body: {
@@ -26,7 +18,6 @@ const styles = StyleSheet.create({
     },
 })
 
-// Thinking this will just be our container
 const App = () => {
     return (
         <>

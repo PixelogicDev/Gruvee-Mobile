@@ -1,6 +1,5 @@
 import React from 'react'
 import { Text, View, Image, TouchableOpacity, StyleSheet } from 'react-native'
-
 import * as StyleConstants from '@StyleConstants'
 
 const SongItemCommentBar = ({ comments }) => {

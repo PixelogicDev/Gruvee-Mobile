@@ -1,9 +1,9 @@
-import React, { Fragment, useState, useEffect } from 'react'
-import { BackHandler, View, StyleSheet, FlatList, Platform } from 'react-native'
+import React, { useState, useEffect } from 'react'
+import { BackHandler, View, StyleSheet, Platform } from 'react-native'
 import { SwipeListView } from 'react-native-swipe-list-view'
 import { Navigation } from 'react-native-navigation'
 
-import * as StyleConstants from '../../StyleConstants'
+import * as StyleConstants from '@StyleConstants'
 import * as NavigationConstants from '../../NavigationConstants'
 import CardItem from './CardItem'
 import AddButton from './Buttons/AddButton'
@@ -11,6 +11,8 @@ import AddButton from './Buttons/AddButton'
 // Remove broken path warning
 console.disableYellowBox = true
 console.ignoredYellowBox = ['Could not find image']
+
+// Mock Data
 const mockSongs = [
     {
         id: 'song0',
@@ -74,30 +76,11 @@ const mockData = [
         albumArtworkUrl: 'https://i.imgur.com/uoMh2y3.png',
     },
 ]
-const styles = StyleSheet.create({
-    Container: {
-        backgroundColor: StyleConstants.BASE_BACKGROUND_COLOR,
-    },
-    ContentContainer: {
-        padding: StyleConstants.TABLE_CONTAINER_CONTENT_SPACING,
-        paddingBottom: StyleConstants.TABLE_CONTAINER_BOTTOM_PADDING,
-    },
-    ButtonContainer: {
-        width: '100%',
-        alignItems: 'center',
-        position: 'absolute',
-        bottom: 50,
-    },
-    Button: {
-        width: StyleConstants.ADD_BUTTON_SIZE,
-        height: StyleConstants.ADD_BUTTON_SIZE,
-    },
-})
 
 const PlaylistListView = () => {
     const [playlists, setPlaylist] = useState([])
     const [addPlaylistModalShown, setAddPlaylistModalShown] = useState(false)
-    const keyExtractor = (item, index) => item.id
+    const keyExtractor = item => `${item.id}`
     const renderItem = ({ item }) => (
         <CardItem
             playlistData={item}
@@ -122,7 +105,7 @@ const PlaylistListView = () => {
 
             // Setup event listener for overlay
             this.compDidAppearListener = Navigation.events().registerComponentDidAppearListener(
-                ({ componentId, componentName, passProps }) => {
+                ({ componentId }) => {
                     if (
                         componentId ===
                         NavigationConstants.ADD_PLAYLIST_MODAL_NAV_ID
@@ -133,8 +116,7 @@ const PlaylistListView = () => {
             )
 
             this.compDidDisappearListener = Navigation.events().registerComponentDidDisappearListener(
-                ({ componentId, componentName, passProps }) => {
-                    console.log(componentId)
+                ({ componentId }) => {
                     if (
                         componentId ===
                         NavigationConstants.ADD_PLAYLIST_MODAL_NAV_ID
@@ -148,9 +130,9 @@ const PlaylistListView = () => {
         return () => {
             // Again, if on android lets remove all our listeners
             if (Platform.OS === 'android') {
-                backHandler.remove()
-                compDidAppearListener.remove()
-                compDidDisappearListener.remove()
+                this.backHandler.remove()
+                this.compDidAppearListener.remove()
+                this.compDidDisappearListener.remove()
             }
         }
     }, [])
@@ -182,7 +164,6 @@ const PlaylistListView = () => {
     }
 
     const handleBackPress = () => {
-        console.log(addPlaylistModalShown)
         if (addPlaylistModalShown) {
             Navigation.dismissOverlay(
                 NavigationConstants.ADD_PLAYLIST_MODAL_NAV_ID
@@ -201,17 +182,38 @@ const PlaylistListView = () => {
                 data={playlists}
                 keyExtractor={keyExtractor}
                 renderItem={renderItem}
-            ></SwipeListView>
+            />
 
             {/* MADPROPZ poopuhchoo */}
             <View style={styles.ButtonContainer}>
                 <AddButton
                     style={styles.Button}
                     createAction={createPlaylistAction}
-                ></AddButton>
+                />
             </View>
         </>
     )
 }
+
+// Styles
+const styles = StyleSheet.create({
+    Container: {
+        backgroundColor: StyleConstants.BASE_BACKGROUND_COLOR,
+    },
+    ContentContainer: {
+        padding: StyleConstants.TABLE_CONTAINER_CONTENT_SPACING,
+        paddingBottom: StyleConstants.TABLE_CONTAINER_BOTTOM_PADDING,
+    },
+    ButtonContainer: {
+        width: '100%',
+        alignItems: 'center',
+        position: 'absolute',
+        bottom: 50,
+    },
+    Button: {
+        width: StyleConstants.ADD_BUTTON_SIZE,
+        height: StyleConstants.ADD_BUTTON_SIZE,
+    },
+})
 
 export default PlaylistListView
