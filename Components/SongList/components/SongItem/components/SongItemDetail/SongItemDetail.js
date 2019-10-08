@@ -1,17 +1,25 @@
-import React, { useRef, useState } from 'react'
-import {
-    Alert,
-    Animated,
-    Dimensions,
-    Text,
-    View,
-    Image,
-    TouchableOpacity,
-    StyleSheet,
-} from 'react-native'
+import React, { memo } from 'react'
+import { Text, View, Image, StyleSheet } from 'react-native'
 
-import * as StyleConstants from '../../StyleConstants'
+import * as StyleConstants from '@StyleConstants'
 
+const SongItemDetail = ({ songData }) => {
+    return (
+        <View style={styles.Container}>
+            <Image
+                style={styles.Image}
+                source={{ uri: songData.albumArtwork }}
+            />
+            <View style={styles.DetailContainer}>
+                <Text style={styles.SongTitleText}>{songData.name}</Text>
+                <Text style={styles.SongDetailText}>{songData.artist}</Text>
+                <Text style={styles.SongDetailText}>{songData.album}</Text>
+            </View>
+        </View>
+    )
+}
+
+// Styles
 const styles = StyleSheet.create({
     Container: {
         flexDirection: 'row',
@@ -43,20 +51,5 @@ const styles = StyleSheet.create({
         color: StyleConstants.SONG_LIST_ITEM_DETAIL_COLOR,
     },
 })
-const SongItemDetail = ({ songData }) => {
-    return (
-        <View style={styles.Container}>
-            <Image
-                style={styles.Image}
-                source={{ uri: songData.albumArtwork }}
-            ></Image>
-            <View style={styles.DetailContainer}>
-                <Text style={styles.SongTitleText}>{songData.name}</Text>
-                <Text style={styles.SongDetailText}>{songData.artist}</Text>
-                <Text style={styles.SongDetailText}>{songData.album}</Text>
-            </View>
-        </View>
-    )
-}
 
-export default SongItemDetail
+export default memo(SongItemDetail)
