@@ -1,7 +1,7 @@
 import React from 'react'
 import { Text, View, StyleSheet } from 'react-native'
+import SocialAuthButton from 'Gruvee/Components/Auth/SocialAuthButton'
 import * as StyleConstants from '@StyleConstants'
-import SocialAuthButton from './SocialAuthButton'
 import { SOCIAL_PLATFORMS } from '../../SocialConstants'
 
 const Auth = () => {
