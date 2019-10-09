@@ -3,10 +3,10 @@ import { BackHandler, View, StyleSheet, Platform } from 'react-native'
 import { SwipeListView } from 'react-native-swipe-list-view'
 import { Navigation } from 'react-native-navigation'
 
+import AddItemButton from 'Gruvee/Components/Common/AddItemButton'
 import * as StyleConstants from '@StyleConstants'
 import * as NavigationConstants from '@NavigationConstants'
 import CardItem from './CardItem'
-import AddButton from './Buttons/AddButton'
 
 // Remove broken path warning
 console.disableYellowBox = true
@@ -186,7 +186,7 @@ const PlaylistListView = () => {
 
             {/* MADPROPZ poopuhchoo */}
             <View style={styles.ButtonContainer}>
-                <AddButton
+                <AddItemButton
                     style={styles.Button}
                     createAction={createPlaylistAction}
                 />

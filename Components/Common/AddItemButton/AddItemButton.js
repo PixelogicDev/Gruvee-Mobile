@@ -3,7 +3,7 @@ import { Image, TouchableOpacity } from 'react-native'
 import { Navigation } from 'react-native-navigation'
 import * as NavigationConstants from '@NavigationConstants'
 
-const AddButton = ({ style, createAction }) => {
+const AddItemButton = ({ style, createAction }) => {
     const navigateToAddPlaylistModal = () => {
         // Navigate to add playlist modal
         Navigation.showOverlay({
@@ -32,4 +32,4 @@ const AddButton = ({ style, createAction }) => {
     )
 }
 
-export default AddButton
+export default AddItemButton

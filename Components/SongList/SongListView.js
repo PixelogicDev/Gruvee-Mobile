@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { View, StyleSheet } from 'react-native'
 import { SwipeListView } from 'react-native-swipe-list-view'
 
-import AddButton from '../Playlist/Buttons/AddButton'
+import AddItemButton from 'Gruvee/Components/Common/AddItemButton'
 import SwipeableSongItem from './components/SwipeableSongItem/SwipeableSongItem'
 import * as StyleConstants from '@StyleConstants'
 
@@ -43,7 +43,7 @@ const SongListView = ({ playlistId, songs, deleteSongFromPlaylistAction }) => {
             />
             {/* MADPROPZ poopuhchoo */}
             <View style={styles.ButtonContainer}>
-                <AddButton
+                <AddItemButton
                     style={styles.Button}
                     // createAction={createPlaylistAction}
                 />
