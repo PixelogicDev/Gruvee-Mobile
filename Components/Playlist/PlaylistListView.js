@@ -4,9 +4,9 @@ import { SwipeListView } from 'react-native-swipe-list-view'
 import { Navigation } from 'react-native-navigation'
 
 import AddItemButton from 'Gruvee/Components/Common/AddItemButton'
+import SwipeablePlaylistItem from './components/SwipeablePlaylistItem/SwipeablePlaylistItem'
 import * as StyleConstants from '@StyleConstants'
 import * as NavigationConstants from '@NavigationConstants'
-import CardItem from './CardItem'
 
 // Remove broken path warning
 console.disableYellowBox = true
@@ -82,10 +82,9 @@ const PlaylistListView = () => {
     const [addPlaylistModalShown, setAddPlaylistModalShown] = useState(false)
     const keyExtractor = item => `${item.id}`
     const renderItem = ({ item }) => (
-        <CardItem
+        <SwipeablePlaylistItem
             playlistData={item}
             deletePlaylistAction={deletePlaylistAction}
-            isLastItem={playlists.length === 1}
             deleteSongFromPlaylistAction={deleteSongFromPlaylistAction}
         />
     )

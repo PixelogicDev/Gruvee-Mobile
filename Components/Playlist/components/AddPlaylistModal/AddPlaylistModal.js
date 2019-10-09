@@ -9,7 +9,7 @@ import {
 } from 'react-native'
 import { Navigation } from 'react-native-navigation'
 import Playlist from 'Gruvee/lib/Playlist'
-import AddPlaylistButton from './Buttons/AddPlaylistButton'
+import AddPlaylistButton from '../CreatePlaylistButton/AddPlaylistButton'
 
 import * as StyleConstants from '@StyleConstants'
 import * as NavigationConstants from '@NavigationConstants'

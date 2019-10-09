@@ -3,13 +3,11 @@
  */
 
 import { Navigation } from 'react-native-navigation'
-import App from './App'
+import AddPlaylistModal from 'Gruvee/Components/Playlist/components/AddPlaylistModal/AddPlaylistModal'
+import Playlist from 'Gruvee/Components/Playlist/PlaylistListView'
+import SongList from 'Gruvee/Components/SongList/SongListView'
 import * as NavigationConstants from '@NavigationConstants'
-
-// Components
-import Playlist from './Components/Playlist/PlaylistListView'
-import AddPlaylistModal from './Components/Playlist/AddPlaylistModal'
-import SongList from './Components/SongList/SongListView'
+import App from './App'
 
 // Register navigation components
 Navigation.registerComponent(NavigationConstants.ROOT_NAV_NAME, () => App)
