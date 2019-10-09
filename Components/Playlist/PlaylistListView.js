@@ -4,7 +4,7 @@ import { SwipeListView } from 'react-native-swipe-list-view'
 import { Navigation } from 'react-native-navigation'
 
 import * as StyleConstants from '@StyleConstants'
-import * as NavigationConstants from '../../NavigationConstants'
+import * as NavigationConstants from '@NavigationConstants'
 import CardItem from './CardItem'
 import AddButton from './Buttons/AddButton'
 

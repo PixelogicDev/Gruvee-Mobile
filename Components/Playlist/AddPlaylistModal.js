@@ -8,11 +8,11 @@ import {
     Platform,
 } from 'react-native'
 import { Navigation } from 'react-native-navigation'
-
-import * as StyleConstants from '../../StyleConstants'
-import * as NavigationConstants from '../../NavigationConstants'
 import AddPlaylistButton from './Buttons/AddPlaylistButton'
 import Playlist from '../../lib/Playlist'
+
+import * as StyleConstants from '@StyleConstants'
+import * as NavigationConstants from '@NavigationConstants'
 
 const screenWidth = Dimensions.get('window').width
 const screenHeight = Dimensions.get('window').height
@@ -106,7 +106,7 @@ const AddPlaylistModal = ({ createAction }) => {
                     style={styles.Input}
                     onChangeText={text => onChangePlaylistNameText(text)}
                     value={playlistNameValue}
-                ></TextInput>
+                />
                 <TextInput
                     placeholder="Members"
                     placeholderTextColor={
@@ -115,14 +115,14 @@ const AddPlaylistModal = ({ createAction }) => {
                     style={styles.Input}
                     onChangeText={text => onChangeMembersNameText(text)}
                     value={membersNameValue}
-                ></TextInput>
+                />
             </View>
             <AddPlaylistButton
                 name={playlistNameValue}
                 members={membersNameValue}
                 createAction={createPlaylistAction}
                 disabled={!playlistNameValue}
-            ></AddPlaylistButton>
+            />
         </View>
     )
 
@@ -131,7 +131,7 @@ const AddPlaylistModal = ({ createAction }) => {
             <View
                 onStartShouldSetResponder={() => dismissOverlayAction()}
                 style={styles.Backdrop}
-            ></View>
+            />
             {modalView}
         </>
     )

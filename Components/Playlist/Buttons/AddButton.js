@@ -1,9 +1,7 @@
 import React from 'react'
 import { Image, TouchableOpacity } from 'react-native'
-import AddPlaylistModal from '../AddPlaylistModal'
-
 import { Navigation } from 'react-native-navigation'
-import * as NavigationConstants from '../../../NavigationConstants'
+import * as NavigationConstants from '@NavigationConstants'
 
 const AddButton = ({ style, createAction }) => {
     const navigateToAddPlaylistModal = () => {
@@ -18,7 +16,7 @@ const AddButton = ({ style, createAction }) => {
                     },
                 },
                 passProps: {
-                    createAction: createAction,
+                    createAction,
                 },
             },
         })

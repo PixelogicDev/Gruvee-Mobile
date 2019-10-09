@@ -13,7 +13,7 @@ import { Navigation } from 'react-native-navigation'
 import CardItemDetail from './CardItemDetail'
 import SwipeAction from './SwipeAction'
 import * as StyleConstants from '@StyleConstants'
-import * as NavigationConstants from '../../NavigationConstants'
+import * as NavigationConstants from '@NavigationConstants'
 
 const CardItem = ({
     playlistData,

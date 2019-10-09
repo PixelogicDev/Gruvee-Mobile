@@ -4,7 +4,7 @@
 
 import { Navigation } from 'react-native-navigation'
 import App from './App'
-import * as NavigationConstants from './NavigationConstants'
+import * as NavigationConstants from '@NavigationConstants'
 
 // Components
 import Playlist from './Components/Playlist/PlaylistListView'
