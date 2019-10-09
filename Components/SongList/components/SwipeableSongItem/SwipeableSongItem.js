@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Alert } from 'react-native'
 
 import AnimatedSwipeRow from 'Gruvee/Components/Common/AnimatedSwipeRow'
-import SwipeAction from 'Gruvee/Components/Playlist/SwipeAction'
+import SwipeAction from 'Gruvee/Components/Common/SwipeAction'
 import SongItem from '../SongItem/SongItem'
 import * as StyleConstants from '@StyleConstants'
 

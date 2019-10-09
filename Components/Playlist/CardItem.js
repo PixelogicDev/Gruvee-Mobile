@@ -10,8 +10,8 @@ import {
 import { SwipeRow } from 'react-native-swipe-list-view'
 import { Navigation } from 'react-native-navigation'
 
+import SwipeAction from 'Gruvee/Components/Common/SwipeAction'
 import CardItemDetail from './CardItemDetail'
-import SwipeAction from './SwipeAction'
 import * as StyleConstants from '@StyleConstants'
 import * as NavigationConstants from '@NavigationConstants'
 
