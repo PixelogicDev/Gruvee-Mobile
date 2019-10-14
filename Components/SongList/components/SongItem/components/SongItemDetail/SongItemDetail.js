@@ -1,6 +1,5 @@
 import React, { memo } from 'react'
 import { Text, View, Image, StyleSheet } from 'react-native'
-
 import * as StyleConstants from '@StyleConstants'
 
 const SongItemDetail = ({ songData }) => {
