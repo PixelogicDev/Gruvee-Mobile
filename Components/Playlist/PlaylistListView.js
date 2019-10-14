@@ -20,8 +20,7 @@ const mockSongs = [
         name: 'SomeCoolNewSong',
         artist: 'YaBoiAlec',
         album: 'Album of The Year',
-        albumArtwork:
-            'https://upload.wikimedia.org/wikipedia/en/thumb/f/f7/Messengers.jpg/220px-Messengers.jpg',
+        albumArtwork: 'SomeBadLink',
         platformDeepLink: 'spotify://SomeDeepLink',
         comments: [
             'WOW SO GOOD.',

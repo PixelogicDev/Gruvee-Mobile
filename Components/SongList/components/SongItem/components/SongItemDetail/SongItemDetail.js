@@ -8,6 +8,7 @@ const SongItemDetail = ({ songData }) => {
             <Image
                 style={styles.Image}
                 source={{ uri: songData.albumArtwork }}
+                defaultSource={{ uri: 'default_album_cover_bg_image' }}
             />
             <View style={styles.DetailContainer}>
                 <Text style={styles.SongTitleText}>{songData.name}</Text>
@@ -30,10 +31,8 @@ const styles = StyleSheet.create({
     Image: {
         width: StyleConstants.SONG_LIST_ITEM_ALBUM_ARTWORK_SIZE,
         height: StyleConstants.SONG_LIST_ITEM_ALBUM_ARTWORK_SIZE,
-        borderRadius: StyleConstants.SONG_LIST_ITEM_BORDER_RADIUS,
-        marginTop: 10,
+        borderTopLeftRadius: StyleConstants.SONG_LIST_ITEM_BORDER_RADIUS,
         marginRight: 15,
-        marginLeft: 15,
     },
     DetailContainer: {
         paddingTop: 5,
