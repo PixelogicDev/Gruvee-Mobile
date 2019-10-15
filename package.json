@@ -4,8 +4,8 @@
     "private": true,
     "scripts": {
         "start": "react-native start",
-        "android": "cd ./android && ./gradlew app:assembleDebug && ./gradlew installDebug && npm run android-start",
-        "android-start": "react-native run-android",
+        "android-start": "cd ./android && ./gradlew app:assembleDebug && ./gradlew installDebug && npm run android",
+        "android": "react-native run-android",
         "ios-start": "react-native run-ios --simulator=\"iPhone 11\"",
         "test": "jest"
     },
