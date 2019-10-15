@@ -48,17 +48,22 @@ const comfirmDeleteAlert = (song, onConfirmDelete) => {
 // Rendered Components
 const renderSongItem = song => <SongItem songData={song} />
 
-const renderSwipeActionComponent = (song, confirmDeleteSongAction) => (
-    <SwipeAction
-        name="Delete Action Button"
-        action={() => {
-            confirmDeleteSongAction(song)
-        }}
-        iconName="trash_icon"
-        actionColor={StyleConstants.DELETE_SWIPE_ACTION_BG_COLOR}
-        width={19}
-        height={25}
-    />
-)
+const renderSwipeActionComponent = (song, confirmDeleteSongAction) => {
+    // eslint-disable-next-line global-require
+    const trashIconAsset = require('Gruvee/Assets/Icons/Trash/trash_icon.png')
+
+    return (
+        <SwipeAction
+            name="Delete Action Button"
+            action={() => {
+                confirmDeleteSongAction(song)
+            }}
+            icon={trashIconAsset}
+            actionColor={StyleConstants.DELETE_SWIPE_ACTION_BG_COLOR}
+            width={19}
+            height={25}
+        />
+    )
+}
 
 export default SwipeableSongItem

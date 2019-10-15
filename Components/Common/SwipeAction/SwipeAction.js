@@ -2,14 +2,7 @@ import React from 'react'
 import { Image, TouchableOpacity } from 'react-native'
 import styles from './SwipeAction.styles'
 
-const SwipeAction = ({
-    action,
-    actionColor,
-    iconName,
-    name,
-    width,
-    height,
-}) => {
+const SwipeAction = ({ action, actionColor, icon, name, width, height }) => {
     return (
         <TouchableOpacity
             style={styles.Background(actionColor)}
@@ -18,7 +11,7 @@ const SwipeAction = ({
             <Image
                 accessibilityRole="image"
                 accessibilityLabel={name}
-                source={{ uri: `${iconName}` }}
+                source={icon}
                 style={styles.Icon(width, height)}
             />
         </TouchableOpacity>

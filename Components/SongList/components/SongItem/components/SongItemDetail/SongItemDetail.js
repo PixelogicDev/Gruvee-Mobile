@@ -2,13 +2,17 @@ import React, { memo } from 'react'
 import { Text, View, Image, StyleSheet } from 'react-native'
 import * as StyleConstants from '@StyleConstants'
 
+const defaultAlbumArtworkAsset = require('Gruvee/Assets/Defaults/AlbumArtwork/default_album_cover_bg_image.png')
+
 const SongItemDetail = ({ songData }) => {
     return (
         <View style={styles.Container}>
             <Image
                 style={styles.Image}
                 source={{ uri: songData.albumArtwork }}
-                defaultSource={{ uri: 'default_album_cover_bg_image' }}
+                // Anroid debug builds ignore default source cuz why not?
+                defaultSource={defaultAlbumArtworkAsset}
+                resizeMode="cover"
             />
             <View style={styles.DetailContainer}>
                 <Text style={styles.SongTitleText}>{songData.name}</Text>

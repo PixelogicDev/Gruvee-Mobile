@@ -5,6 +5,8 @@ import CardItemDetail from './components/PlaylistItemDetail/CardItemDetail'
 import * as StyleConstants from '@StyleConstants'
 import * as NavigationConstants from '@NavigationConstants'
 
+const defaultPlaylistBackgroundAsset = require('Gruvee/Assets/Defaults/PlaylistImage/default_item_bg_image.png')
+
 const PlaylistItem = ({ playlistData, deleteSongFromPlaylistAction }) => {
     return (
         <TouchableOpacity
@@ -15,7 +17,7 @@ const PlaylistItem = ({ playlistData, deleteSongFromPlaylistAction }) => {
             <ImageBackground
                 style={styles.Container}
                 source={{ uri: `${playlistData.albumArtworkUrl}` }}
-                defaultSource={{ uri: 'default_item_bg_image' }}
+                defaultSource={defaultPlaylistBackgroundAsset}
             >
                 <CardItemDetail
                     name={playlistData.name}

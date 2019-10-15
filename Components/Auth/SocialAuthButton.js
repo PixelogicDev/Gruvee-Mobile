@@ -36,7 +36,7 @@ const SocialAuthButton = ({ platform }) => {
         >
             <Image
                 style={styles.ButtonIcon(platform)}
-                source={{ uri: `${platform.glyphPath}` }}
+                source={platform.glyphPath}
             />
             <Text
                 accessibilityLabel={`${platform.friendlyName} login button`}

@@ -59,15 +59,20 @@ const renderPlaylistItem = (playlist, deleteSongFromPlaylistAction) => (
     />
 )
 
-const renderSwipeActionComponent = (playlist, confirmDeletePlaylistAction) => (
-    <SwipeAction
-        name="Delete Action Button"
-        action={confirmDeletePlaylistAction}
-        iconName="trash_icon"
-        actionColor={StyleConstants.DELETE_SWIPE_ACTION_BG_COLOR}
-        width={19}
-        height={25}
-    />
-)
+const renderSwipeActionComponent = (playlist, confirmDeletePlaylistAction) => {
+    // eslint-disable-next-line global-require
+    const trashIconAsset = require('Gruvee/Assets/Icons/Trash/trash_icon.png')
+
+    return (
+        <SwipeAction
+            name="Delete Action Button"
+            action={confirmDeletePlaylistAction}
+            icon={trashIconAsset}
+            actionColor={StyleConstants.DELETE_SWIPE_ACTION_BG_COLOR}
+            width={19}
+            height={25}
+        />
+    )
+}
 
 export default SwipeablePlaylistItem

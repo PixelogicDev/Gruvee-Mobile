@@ -3,6 +3,8 @@ import { Image, TouchableOpacity } from 'react-native'
 import { Navigation } from 'react-native-navigation'
 import * as NavigationConstants from '@NavigationConstants'
 
+const addButtonAsset = require('Gruvee/Assets/Buttons/AddButton/add_button.png')
+
 const AddItemButton = ({ style, createAction }) => {
     const navigateToAddPlaylistModal = () => {
         // Navigate to add playlist modal
@@ -25,7 +27,7 @@ const AddItemButton = ({ style, createAction }) => {
     return (
         <TouchableOpacity onPress={navigateToAddPlaylistModal} style={style}>
             <Image
-                source={{ uri: 'add_playlist_button' }}
+                source={addButtonAsset}
                 style={{ width: '100%', height: '100%' }}
             />
         </TouchableOpacity>

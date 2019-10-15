@@ -2,12 +2,14 @@ import React from 'react'
 import { Text, View, Image, TouchableOpacity, StyleSheet } from 'react-native'
 import * as StyleConstants from '@StyleConstants'
 
+const plusIconAsset = require('Gruvee/Assets/Icons/Plus/plus_icon.png')
+
 const SongItemCommentBar = ({ comments }) => {
     return (
         <View style={styles.Container}>
             <Text style={styles.Text}>{comments.length} Comments</Text>
             <TouchableOpacity>
-                <Image style={styles.Image} source={{ uri: 'plus_icon' }} />
+                <Image style={styles.Image} source={plusIconAsset} />
             </TouchableOpacity>
         </View>
     )
