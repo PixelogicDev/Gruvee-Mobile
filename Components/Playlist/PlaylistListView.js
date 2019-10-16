@@ -171,6 +171,24 @@ const PlaylistListView = () => {
         return false
     }
 
+    const navigateToAddPlaylistModalAction = () => {
+        // Navigate to add playlist modal
+        Navigation.showOverlay({
+            component: {
+                id: NavigationConstants.ADD_PLAYLIST_MODAL_NAV_ID,
+                name: NavigationConstants.ADD_PLAYLIST_MODAL_NAV_NAME,
+                options: {
+                    overlay: {
+                        interceptTouchOutside: false,
+                    },
+                },
+                passProps: {
+                    createAction: createPlaylistAction,
+                },
+            },
+        })
+    }
+
     return (
         <>
             <SwipeListView
@@ -187,6 +205,7 @@ const PlaylistListView = () => {
                 <AddItemButton
                     style={styles.Button}
                     createAction={createPlaylistAction}
+                    modalNavigateAction={navigateToAddPlaylistModalAction}
                 />
             </View>
         </>

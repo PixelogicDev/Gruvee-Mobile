@@ -31,7 +31,7 @@ const PlaylistItem = ({ playlistData, deleteSongFromPlaylistAction }) => {
 
 // Actions
 const showSongListAction = (playlistData, deleteSongFromPlaylistAction) => {
-    Navigation.push(NavigationConstants.PLAYLIST_NAV_ID, {
+    Navigation.push(NavigationConstants.STACK_ID, {
         component: {
             name: NavigationConstants.SONG_LIST_NAV_NAME,
             passProps: {

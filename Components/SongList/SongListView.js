@@ -1,18 +1,22 @@
 import React, { useState, useEffect } from 'react'
-import { View, StyleSheet } from 'react-native'
+import { View, StyleSheet, TextInput } from 'react-native'
 import { SwipeListView } from 'react-native-swipe-list-view'
+import { Navigation } from 'react-native-navigation'
 
 import AddItemButton from 'Gruvee/Components/Common/AddItemButton'
 import SwipeableSongItem from './components/SwipeableSongItem/SwipeableSongItem'
 import * as StyleConstants from '@StyleConstants'
+import * as NavigationConstants from '@NavigationConstants'
 
 const SongListView = ({ playlistId, songs, deleteSongFromPlaylistAction }) => {
     const [songsToDisplay, setSongsToDisplay] = useState([])
+    const [songLink, setSongLink] = useState([])
+    const [songComment, setSongComment] = useState([])
 
     useEffect(() => {
         setSongsToDisplay(songs)
     }, [])
-
+    // Actions
     const deleteItemById = id => {
         // TODO: Add some sort of promise
         // If the first filter fails, lets not do the next one
@@ -22,6 +26,52 @@ const SongListView = ({ playlistId, songs, deleteSongFromPlaylistAction }) => {
 
         // Filter out song from parent state
         deleteSongFromPlaylistAction(playlistId, id)
+    }
+
+    const generateInputModal = inputStyle => {
+        return (
+            <>
+                <TextInput
+                    placeholder="Song link"
+                    placeholderTextColor={
+                        StyleConstants.INPUT_PLACEHOLDER_FONT_COLOR
+                    }
+                    style={inputStyle}
+                    onChangeText={text => setSongLink(text)}
+                    value={songLink}
+                />
+                <TextInput
+                    placeholder="This song was p o p p i n...."
+                    placeholderTextColor={
+                        StyleConstants.INPUT_PLACEHOLDER_FONT_COLOR
+                    }
+                    editable
+                    style={inputStyle}
+                    maxLength={280}
+                    onChangeText={text => setSongComment(text)}
+                    value={songComment}
+                />
+            </>
+        )
+    }
+
+    const navigateToAddSongModalAction = () => {
+        // Navigate to add playlist modal
+        Navigation.showOverlay({
+            component: {
+                id: NavigationConstants.ADD_SONG_MODAL_NAV_ID,
+                name: NavigationConstants.ADD_SONG_MODAL_NAV_NAME,
+                options: {
+                    overlay: {
+                        interceptTouchOutside: false,
+                    },
+                },
+                passProps: {
+                    title: 'Add Song',
+                    // createAction,
+                },
+            },
+        })
     }
 
     const renderItem = ({ item }) => (
@@ -45,6 +95,7 @@ const SongListView = ({ playlistId, songs, deleteSongFromPlaylistAction }) => {
             <View style={styles.ButtonContainer}>
                 <AddItemButton
                     style={styles.Button}
+                    modalNavigateAction={navigateToAddSongModalAction}
                     // createAction={createPlaylistAction}
                 />
             </View>

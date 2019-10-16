@@ -6,6 +6,7 @@ import { Navigation } from 'react-native-navigation'
 import AddPlaylistModal from 'Gruvee/Components/Playlist/components/AddPlaylistModal/AddPlaylistModal'
 import Playlist from 'Gruvee/Components/Playlist/PlaylistListView'
 import SongList from 'Gruvee/Components/SongList/SongListView'
+import AddSongModal from 'Gruvee/Components/SongList/components/AddSongModal/AddSongModal'
 import * as NavigationConstants from '@NavigationConstants'
 import App from './App'
 
@@ -18,6 +19,10 @@ Navigation.registerComponent(
 Navigation.registerComponent(
     NavigationConstants.ADD_PLAYLIST_MODAL_NAV_NAME,
     () => AddPlaylistModal
+)
+Navigation.registerComponent(
+    NavigationConstants.ADD_SONG_MODAL_NAV_NAME,
+    () => AddSongModal
 )
 Navigation.registerComponent(
     NavigationConstants.SONG_LIST_NAV_NAME,
