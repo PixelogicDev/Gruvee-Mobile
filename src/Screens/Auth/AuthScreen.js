@@ -1,6 +1,6 @@
 import React from 'react'
 import { Text, View, StyleSheet } from 'react-native'
-import SocialAuthButton from 'Gruvee/src/screens/Auth/SocialAuthButton'
+import SocialAuthButton from 'Gruvee/src/Screens/Auth/SocialAuthButton'
 
 import { SOCIAL_PLATFORMS } from 'lib/Helpers/SocialConstants'
 import * as StyleConstants from 'lib/Helpers/StyleConstants'

@@ -4,7 +4,7 @@ import { Alert } from 'react-native'
 import images from 'res/images'
 import AnimatedSwipeRow from 'lib/Common/AnimatedSwipeRow'
 import SwipeAction from 'lib/Common/SwipeAction'
-import PlaylistItem from 'Gruvee/src/screens/PlaylistItem/'
+import PlaylistItem from 'Gruvee/src/Screens/PlaylistItem/'
 import * as StyleConstants from 'lib/Helpers/StyleConstants'
 
 const SwipeablePlaylistItem = ({

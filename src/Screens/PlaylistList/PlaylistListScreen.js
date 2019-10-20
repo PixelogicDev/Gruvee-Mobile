@@ -7,7 +7,7 @@ import AddItemButton from 'lib/Common/AddItemButton'
 import * as StyleConstants from 'lib/Helpers/StyleConstants'
 import * as NavigationConstants from 'lib/Helpers/NavigationConstants'
 
-import SwipeablePlaylistItem from 'Gruvee/src/screens/PlaylistList/SwipeablePlaylistItem'
+import SwipeablePlaylistItem from 'Gruvee/src/Screens/PlaylistList/SwipeablePlaylistItem'
 
 // Remove broken path warning
 console.disableYellowBox = true

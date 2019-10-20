@@ -4,7 +4,7 @@ import { SwipeListView } from 'react-native-swipe-list-view'
 import { Navigation } from 'react-native-navigation'
 
 import AddItemButton from 'lib/Common/AddItemButton'
-import SwipeableSongItem from 'Gruvee/src/screens/SongList/SwipeableSongItem'
+import SwipeableSongItem from 'Gruvee/src/Screens/SongList/SwipeableSongItem'
 import * as StyleConstants from 'lib/Helpers/StyleConstants'
 import * as NavigationConstants from 'lib/Helpers/NavigationConstants'
 

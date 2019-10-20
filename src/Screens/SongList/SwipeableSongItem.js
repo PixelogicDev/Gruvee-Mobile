@@ -6,7 +6,7 @@ import images from 'res/images'
 
 import AnimatedSwipeRow from 'lib/Common/AnimatedSwipeRow'
 import SwipeAction from 'lib/Common/SwipeAction'
-import SongItem from 'Gruvee/src/screens/SongItem/'
+import SongItem from 'Gruvee/src/Screens/SongItem/'
 
 // deleteItemById === func
 const SwipeableSongItem = ({ song, deleteItemById }) => {

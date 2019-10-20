@@ -11,7 +11,7 @@ import { SafeAreaView, StyleSheet, View, StatusBar } from 'react-native'
 
 import * as StyleConstants from 'lib/Helpers/StyleConstants'
 
-import AuthScreen from 'Gruvee/src/screens/Auth'
+import AuthScreen from 'Gruvee/src/Screens/Auth'
 
 const styles = StyleSheet.create({
     body: {
