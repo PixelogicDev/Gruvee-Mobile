@@ -1,0 +1,20 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "target": "es6",
+        "baseUrl": ".",
+        "paths": {
+            "lib/*": ["./src/lib"],
+            "res/*": ["./src/res.js"],
+            "Gruvee/*": ["./*"]
+        }
+    },
+    "exclude": [
+        ".vscode",
+        "android/.gradle",
+        "android/app/build",
+        "ios/build",
+        "ios/Pods",
+        "node_modules"
+    ]
+}
