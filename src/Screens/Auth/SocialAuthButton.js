@@ -1,7 +1,8 @@
 import React from 'react'
 import { Navigation } from 'react-native-navigation'
 import { Text, StyleSheet, TouchableOpacity, Image } from 'react-native'
-import * as NavigationConstants from 'lib/Helpers/NavigationConstants.js'
+
+import * as NavigationConstants from 'lib/Helpers/NavigationConstants'
 import * as StyleConstants from 'lib/Helpers/StyleConstants'
 
 /*

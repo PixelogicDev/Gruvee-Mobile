@@ -1,14 +1,16 @@
 import React, { memo } from 'react'
 import { ImageBackground, TouchableOpacity, StyleSheet } from 'react-native'
 import { Navigation } from 'react-native-navigation'
+
 import images from 'res/images'
-import CardItemDetail from './components/PlaylistItemDetail/CardItemDetail'
 import * as StyleConstants from 'lib/Helpers/StyleConstants'
 import * as NavigationConstants from 'lib/Helpers/NavigationConstants'
 
+import PlaylistItemCard from './PlaylistItemCard'
+
 const defaultPlaylistBackgroundAsset = images.defaults.playlistBackground
 
-const PlaylistItem = ({ playlistData, deleteSongFromPlaylistAction }) => {
+const PlaylistItemScreen = ({ playlistData, deleteSongFromPlaylistAction }) => {
     return (
         <TouchableOpacity
             onPress={() => {
@@ -20,7 +22,7 @@ const PlaylistItem = ({ playlistData, deleteSongFromPlaylistAction }) => {
                 source={{ uri: `${playlistData.albumArtworkUrl}` }}
                 defaultSource={defaultPlaylistBackgroundAsset}
             >
-                <CardItemDetail
+                <PlaylistItemCard
                     name={playlistData.name}
                     numMembers={playlistData.members.length}
                     numSongs={playlistData.songs.length}
@@ -66,4 +68,4 @@ const styles = StyleSheet.create({
     },
 })
 
-export default memo(PlaylistItem)
+export default memo(PlaylistItemScreen)

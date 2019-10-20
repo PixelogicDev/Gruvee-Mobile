@@ -8,8 +8,10 @@
 
 import React from 'react'
 import { SafeAreaView, StyleSheet, View, StatusBar } from 'react-native'
-import Auth from 'Gruvee/src/Screens/Auth/Auth'
+
 import * as StyleConstants from 'lib/Helpers/StyleConstants'
+
+import AuthScreen from 'Gruvee/src/screens/Auth'
 
 const styles = StyleSheet.create({
     body: {
@@ -24,7 +26,7 @@ const App = () => {
             <StatusBar barStyle="light-content" />
             <SafeAreaView style={styles.body}>
                 <View>
-                    <Auth />
+                    <AuthScreen />
                 </View>
             </SafeAreaView>
         </>

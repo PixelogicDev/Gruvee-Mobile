@@ -2,7 +2,7 @@ import React, { memo } from 'react'
 import { Text, View, StyleSheet } from 'react-native'
 import * as StyleConstants from 'lib/Helpers/StyleConstants'
 
-const CardItemDetail = ({ name, numMembers, numSongs }) => {
+const PlaylistItemCard = ({ name, numMembers, numSongs }) => {
     return (
         <View style={styles.Container}>
             <Text style={styles.TextHeader}>{name}</Text>
@@ -38,4 +38,4 @@ const styles = StyleSheet.create({
     },
 })
 
-export default memo(CardItemDetail)
+export default memo(PlaylistItemCard)

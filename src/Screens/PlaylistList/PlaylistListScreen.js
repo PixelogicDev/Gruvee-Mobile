@@ -3,10 +3,11 @@ import { BackHandler, View, StyleSheet, Platform } from 'react-native'
 import { SwipeListView } from 'react-native-swipe-list-view'
 import { Navigation } from 'react-native-navigation'
 
-import AddItemButton from 'Gruvee/src/Screens/Common/AddItemButton'
-import SwipeablePlaylistItem from './components/SwipeablePlaylistItem/SwipeablePlaylistItem'
+import AddItemButton from 'lib/Common/AddItemButton'
 import * as StyleConstants from 'lib/Helpers/StyleConstants'
 import * as NavigationConstants from 'lib/Helpers/NavigationConstants'
+
+import SwipeablePlaylistItem from 'Gruvee/src/screens/PlaylistList/SwipeablePlaylistItem'
 
 // Remove broken path warning
 console.disableYellowBox = true
@@ -76,7 +77,7 @@ const mockData = [
     },
 ]
 
-const PlaylistListView = () => {
+const PlaylistListScreen = () => {
     const [playlists, setPlaylist] = useState([])
     const [addPlaylistModalShown, setAddPlaylistModalShown] = useState(false)
     const keyExtractor = item => `${item.id}`
@@ -233,4 +234,4 @@ const styles = StyleSheet.create({
     },
 })
 
-export default PlaylistListView
+export default PlaylistListScreen

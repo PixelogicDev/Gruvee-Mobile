@@ -1,8 +1,8 @@
 import React, { memo } from 'react'
 import { View, StyleSheet } from 'react-native'
 
-import SongItemDetail from './components/SongItemDetail/SongItemDetail'
-import SongItemCommentBar from './components/SongItemCommentBar/SongItemCommentBar'
+import SongItemDetail from 'Gruvee/src/screens/SongItem/SongItemDetail'
+import SongItemCommentBar from 'Gruvee/src/screens/SongItem/SongItemCommentBar'
 
 const SongItem = ({ songData }) => {
     return (

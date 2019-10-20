@@ -4,9 +4,9 @@ import { Alert } from 'react-native'
 import * as StyleConstants from 'lib/Helpers/StyleConstants'
 import images from 'res/images'
 
-import AnimatedSwipeRow from 'Gruvee/src/Screens/Common/AnimatedSwipeRow'
-import SwipeAction from 'Gruvee/src/Screens/Common/SwipeAction'
-import SongItem from '../SongItem/SongItem'
+import AnimatedSwipeRow from 'lib/Common/AnimatedSwipeRow'
+import SwipeAction from 'lib/Common/SwipeAction'
+import SongItem from 'Gruvee/src/screens/SongItem/'
 
 // deleteItemById === func
 const SwipeableSongItem = ({ song, deleteItemById }) => {

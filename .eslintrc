@@ -30,7 +30,7 @@
             "alias": {
                 "map": [
                     ["lib", "./src/lib/"],
-                    ["src", "./src/src/"],
+                    ["res", "./src/res/"],
                     ["Gruvee", "./"]
                 ],
                 "extensions": [".ts", ".js", ".jsx", ".json"]

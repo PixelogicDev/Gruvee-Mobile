@@ -3,12 +3,16 @@ import { View, StyleSheet, TextInput } from 'react-native'
 import { SwipeListView } from 'react-native-swipe-list-view'
 import { Navigation } from 'react-native-navigation'
 
-import AddItemButton from 'Gruvee/src/Screens/Common/AddItemButton'
-import SwipeableSongItem from './components/SwipeableSongItem/SwipeableSongItem'
+import AddItemButton from 'lib/Common/AddItemButton'
+import SwipeableSongItem from 'Gruvee/src/screens/SongList/SwipeableSongItem'
 import * as StyleConstants from 'lib/Helpers/StyleConstants'
 import * as NavigationConstants from 'lib/Helpers/NavigationConstants'
 
-const SongListView = ({ playlistId, songs, deleteSongFromPlaylistAction }) => {
+const SongListScreen = ({
+    playlistId,
+    songs,
+    deleteSongFromPlaylistAction,
+}) => {
     const [songsToDisplay, setSongsToDisplay] = useState([])
     const [songLink, setSongLink] = useState([])
     const [songComment, setSongComment] = useState([])
@@ -126,4 +130,4 @@ const styles = StyleSheet.create({
     },
 })
 
-export default SongListView
+export default SongListScreen

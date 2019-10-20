@@ -13,7 +13,7 @@ import Playlist from 'lib/Models/Playlist'
 import * as NavigationConstants from 'lib/Helpers/NavigationConstants'
 import * as StyleConstants from 'lib/Helpers/StyleConstants'
 
-import AddPlaylistButton from '../CreatePlaylistButton/AddPlaylistButton'
+import AddPlaylistButton from './AddPlaylistButton'
 
 const screenWidth = Dimensions.get('screen').width
 const screenHeight = Dimensions.get('screen').height
