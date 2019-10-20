@@ -8,8 +8,8 @@
 
 import React from 'react'
 import { SafeAreaView, StyleSheet, View, StatusBar } from 'react-native'
-import Auth from './Components/Auth/Auth'
-import * as StyleConstants from '@StyleConstants'
+import Auth from 'Gruvee/src/Screens/Auth/Auth'
+import * as StyleConstants from 'lib/Helpers/StyleConstants'
 
 const styles = StyleSheet.create({
     body: {

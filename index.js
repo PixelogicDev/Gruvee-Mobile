@@ -3,11 +3,11 @@
  */
 
 import { Navigation } from 'react-native-navigation'
-import AddPlaylistModal from 'Gruvee/Components/Playlist/components/AddPlaylistModal/AddPlaylistModal'
-import Playlist from 'Gruvee/Components/Playlist/PlaylistListView'
-import SongList from 'Gruvee/Components/SongList/SongListView'
-import AddSongModal from 'Gruvee/Components/SongList/components/AddSongModal/AddSongModal'
-import * as NavigationConstants from '@NavigationConstants'
+import AddPlaylistModal from 'Gruvee/src/Screens/Playlist/components/AddPlaylistModal/AddPlaylistModal'
+import Playlist from 'Gruvee/src/Screens/Playlist/PlaylistListView'
+import SongList from 'Gruvee/src/Screens/SongList/SongListView'
+import AddSongModal from 'Gruvee/src/Screens/SongList/components/AddSongModal/AddSongModal'
+import * as NavigationConstants from 'lib/Helpers/NavigationConstants'
 import App from './App'
 
 // Register navigation components

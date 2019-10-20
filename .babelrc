@@ -6,8 +6,8 @@
             {
                 "root": ["./"],
                 "alias": {
-                    "@StyleConstants": "./StyleConstants.js",
-                    "@NavigationConstants": "./NavigationConstants.js",
+                    "lib/*": "./src/lib/*",
+                    "res/*": "./src/res/*",
                     "Gruvee/*": "./*"
                 }
             }
