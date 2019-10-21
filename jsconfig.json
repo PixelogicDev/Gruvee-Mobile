@@ -4,8 +4,8 @@
         "target": "es6",
         "baseUrl": ".",
         "paths": {
-            "lib/*": ["./src/lib"],
-            "res/*": ["./src/res.js"],
+            "lib/*": ["./src/lib/*"],
+            "res/*": ["./src/res/*"],
             "Gruvee/*": ["./*"]
         }
     },
