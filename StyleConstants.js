@@ -39,6 +39,7 @@ export const DELETE_SWIPE_ACTION_BG_COLOR = '#FF4747'
 // Modal Height
 export const MODAL_HEIGHT_ANDROID = 300
 export const MODAL_HEIGHT_iOS = 250
+export const ADD_MODAL_HEIGHT = 300
 
 // Table Container Content Spacing
 export const TABLE_CONTAINER_CONTENT_SPACING = 25

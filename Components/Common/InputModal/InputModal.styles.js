@@ -4,10 +4,7 @@ import * as StyleConstants from '@StyleConstants'
 
 const screenWidth = Dimensions.get('screen').width
 const screenHeight = Dimensions.get('screen').height
-const getModalHeight =
-    Platform.OS === 'android'
-        ? StyleConstants.MODAL_HEIGHT_ANDROID
-        : StyleConstants.MODAL_HEIGHT_iOS
+const getModalHeight = StyleConstants.ADD_MODAL_HEIGHT
 
 export default StyleSheet.create({
     Backdrop: {
@@ -32,7 +29,7 @@ export default StyleSheet.create({
             },
             {
                 // Need to remember to substract status bar / nav bar height as well
-                translateY: -(screenHeight / 2 - getModalHeight - 90),
+                translateY: -(screenHeight / 2 - getModalHeight),
             },
         ],
         backgroundColor: StyleConstants.BASE_MODAL_BACKGROUND_COLOR,

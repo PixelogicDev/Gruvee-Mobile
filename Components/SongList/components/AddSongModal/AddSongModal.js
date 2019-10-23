@@ -1,26 +1,28 @@
 import React, { useState, useEffect } from 'react'
-import {
-    BackHandler,
-    View,
-    StyleSheet,
-    Platform,
-    TextInput,
-} from 'react-native'
+import { StyleSheet, TextInput } from 'react-native'
 
 import InputModal from 'Gruvee/Components/Common/InputModal'
 import * as StyleConstants from '@StyleConstants'
 
-const AddSongModal = ({ title }) => {
+const AddSongModal = ({ title, addSongAction }) => {
+    const [songLink, setSongLink] = useState('')
+    const [songComment, setSongComment] = useState('')
+
     return (
-        <InputModal title={title}>
+        <InputModal
+            title={title}
+            buttonTitle="Add"
+            createAction={addSongAction}
+            buttonDisabled={!songLink}
+        >
             <TextInput
                 placeholder="Song link"
                 placeholderTextColor={
                     StyleConstants.INPUT_PLACEHOLDER_FONT_COLOR
                 }
                 style={styles.SongLinkInput}
-                // onChangeText={text => setSongLink(text)}
-                // value={songLink}
+                onChangeText={text => setSongLink(text)}
+                value={songLink}
             />
             <TextInput
                 placeholder="This song was p o p p i n...."
@@ -31,8 +33,8 @@ const AddSongModal = ({ title }) => {
                 editable
                 style={styles.SongCommentInput}
                 maxLength={280}
-                // onChangeText={text => setSongComment(text)}
-                // value={songComment}
+                onChangeText={text => setSongComment(text)}
+                value={songComment}
             />
         </InputModal>
     )

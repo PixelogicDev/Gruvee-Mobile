@@ -16,7 +16,15 @@ const SongListView = ({ playlistId, songs, deleteSongFromPlaylistAction }) => {
     useEffect(() => {
         setSongsToDisplay(songs)
     }, [])
+
     // Actions
+    const addSongAction = songLink => {
+        console.log('STARTING SONG ADD THINGS')
+        // Get some song data
+        // Create song object
+        // Add to the list
+    }
+
     const deleteItemById = id => {
         // TODO: Add some sort of promise
         // If the first filter fails, lets not do the next one
@@ -26,33 +34,6 @@ const SongListView = ({ playlistId, songs, deleteSongFromPlaylistAction }) => {
 
         // Filter out song from parent state
         deleteSongFromPlaylistAction(playlistId, id)
-    }
-
-    const generateInputModal = inputStyle => {
-        return (
-            <>
-                <TextInput
-                    placeholder="Song link"
-                    placeholderTextColor={
-                        StyleConstants.INPUT_PLACEHOLDER_FONT_COLOR
-                    }
-                    style={inputStyle}
-                    onChangeText={text => setSongLink(text)}
-                    value={songLink}
-                />
-                <TextInput
-                    placeholder="This song was p o p p i n...."
-                    placeholderTextColor={
-                        StyleConstants.INPUT_PLACEHOLDER_FONT_COLOR
-                    }
-                    editable
-                    style={inputStyle}
-                    maxLength={280}
-                    onChangeText={text => setSongComment(text)}
-                    value={songComment}
-                />
-            </>
-        )
     }
 
     const navigateToAddSongModalAction = () => {
@@ -68,7 +49,7 @@ const SongListView = ({ playlistId, songs, deleteSongFromPlaylistAction }) => {
                 },
                 passProps: {
                     title: 'Add Song',
-                    // createAction,
+                    addSongAction,
                 },
             },
         })
