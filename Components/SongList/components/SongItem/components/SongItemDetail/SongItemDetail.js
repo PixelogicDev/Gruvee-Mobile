@@ -15,7 +15,10 @@ const SongItemDetail = ({ songData }) => {
                 resizeMode="cover"
             />
             <View style={styles.DetailContainer}>
-                <Text style={styles.SongTitleText}>{songData.name}</Text>
+                {/* TODO: Implement some sort of scroll for long Text */}
+                <Text numberOfLines={1} style={styles.SongTitleText}>
+                    {songData.name}
+                </Text>
                 <Text style={styles.SongDetailText}>{songData.artist}</Text>
                 <Text style={styles.SongDetailText}>{songData.album}</Text>
             </View>
