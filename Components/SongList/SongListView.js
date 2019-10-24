@@ -92,7 +92,6 @@ const SongListView = ({
                 <AddItemButton
                     style={styles.Button}
                     modalNavigateAction={navigateToAddSongModalAction}
-                    // createAction={createPlaylistAction}
                 />
             </View>
         </>

@@ -137,7 +137,7 @@ const PlaylistListView = () => {
     }, [])
 
     // Playlist Actions
-    const createPlaylistAction = playlist => {
+    const addPlaylistAction = playlist => {
         // Set State
         setPlaylist([...playlists, playlist])
     }
@@ -148,6 +148,7 @@ const PlaylistListView = () => {
         )
     }
 
+    // Song Actions
     const addSongToPlaylistAction = (playlistId, song) => {
         const playlistsClone = playlists.slice()
         const playlist = playlistsClone.find(p => p.id === playlistId)
@@ -194,7 +195,8 @@ const PlaylistListView = () => {
                     },
                 },
                 passProps: {
-                    createAction: createPlaylistAction,
+                    title: 'Add Playlist',
+                    addPlaylistAction,
                 },
             },
         })
@@ -215,7 +217,6 @@ const PlaylistListView = () => {
             <View style={styles.ButtonContainer}>
                 <AddItemButton
                     style={styles.Button}
-                    createAction={createPlaylistAction}
                     modalNavigateAction={navigateToAddPlaylistModalAction}
                 />
             </View>

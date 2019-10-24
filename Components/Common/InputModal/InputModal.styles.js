@@ -1,10 +1,25 @@
 import { Dimensions, StyleSheet, Platform } from 'react-native'
 
 import * as StyleConstants from '@StyleConstants'
+import * as NavigationConstants from '@NavigationConstants'
 
 const screenWidth = Dimensions.get('screen').width
 const screenHeight = Dimensions.get('screen').height
-const getModalHeight = StyleConstants.ADD_MODAL_HEIGHT
+/* eslint-disable consistent-return */
+const getModalHeight = navigationId => {
+    switch (navigationId) {
+        case NavigationConstants.ADD_PLAYLIST_MODAL_NAV_ID:
+            return Platform.OS === 'ios'
+                ? StyleConstants.ADD_PLAYLIST_MODAL_HEIGHT_iOS
+                : StyleConstants.ADD_PLAYLIST_MODAL_HEIGHT_ANDROID
+
+        case NavigationConstants.ADD_SONG_MODAL_NAV_ID:
+            return StyleConstants.ADD_SONG_MODAL_HEIGHT
+
+        default:
+            return StyleConstants.ADD_MODAL_DEFAULT_HEIGHT
+    }
+}
 
 export default StyleSheet.create({
     Backdrop: {
@@ -16,10 +31,10 @@ export default StyleSheet.create({
         width: screenWidth,
         height: screenHeight,
     },
-    Modal: {
+    Modal: navigationId => ({
         position: 'absolute',
         width: '90%',
-        height: getModalHeight,
+        height: getModalHeight(navigationId),
         // This is to center the modal absolutely in the background view
         top: '50%',
         left: '50%',
@@ -28,13 +43,12 @@ export default StyleSheet.create({
                 translateX: -(screenWidth * 0.9) / 2,
             },
             {
-                // Need to remember to substract status bar / nav bar height as well
-                translateY: -(screenHeight / 2 - getModalHeight),
+                translateY: -(screenHeight / 2 - getModalHeight(navigationId)),
             },
         ],
         backgroundColor: StyleConstants.BASE_MODAL_BACKGROUND_COLOR,
         borderRadius: StyleConstants.BASE_BORDER_RADIUS,
-    },
+    }),
     Header: {
         fontSize: StyleConstants.MODAL_HEADER_SIZE_iOS,
         color: StyleConstants.BASE_FONT_COLOR,

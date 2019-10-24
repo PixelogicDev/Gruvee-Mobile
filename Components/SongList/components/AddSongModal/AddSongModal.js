@@ -3,6 +3,7 @@ import { StyleSheet, TextInput } from 'react-native'
 
 import InputModal from 'Gruvee/Components/Common/InputModal'
 import * as StyleConstants from '@StyleConstants'
+import * as NavigationConstants from '@NavigationConstants'
 
 const AddSongModal = ({ title, addSongAction }) => {
     const [songLink, setSongLink] = useState('')
@@ -16,6 +17,7 @@ const AddSongModal = ({ title, addSongAction }) => {
                 addSongAction(songLink, songComment)
             }}
             buttonDisabled={!songLink}
+            navigationId={NavigationConstants.ADD_SONG_MODAL_NAV_ID}
         >
             <TextInput
                 placeholder="Song link"
@@ -27,7 +29,7 @@ const AddSongModal = ({ title, addSongAction }) => {
                 value={songLink}
             />
             <TextInput
-                placeholder="This song was p o p p i n...."
+                placeholder="This song is..."
                 placeholderTextColor={
                     StyleConstants.INPUT_PLACEHOLDER_FONT_COLOR
                 }
