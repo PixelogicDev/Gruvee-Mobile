@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { StyleSheet, TextInput } from 'react-native'
 
 import InputModal from 'Gruvee/Components/Common/InputModal'
@@ -12,7 +12,9 @@ const AddSongModal = ({ title, addSongAction }) => {
         <InputModal
             title={title}
             buttonTitle="Add"
-            createAction={addSongAction}
+            createAction={() => {
+                addSongAction(songLink, songComment)
+            }}
             buttonDisabled={!songLink}
         >
             <TextInput

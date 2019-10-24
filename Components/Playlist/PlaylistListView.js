@@ -84,6 +84,7 @@ const PlaylistListView = () => {
         <SwipeablePlaylistItem
             playlistData={item}
             deletePlaylistAction={deletePlaylistAction}
+            addSongToPlaylistAction={addSongToPlaylistAction}
             deleteSongFromPlaylistAction={deleteSongFromPlaylistAction}
         />
     )
@@ -145,6 +146,16 @@ const PlaylistListView = () => {
         setPlaylist(
             playlists.filter(playlist => playlist.id !== playlistToDeleteId)
         )
+    }
+
+    const addSongToPlaylistAction = (playlistId, song) => {
+        const playlistsClone = playlists.slice()
+        const playlist = playlistsClone.find(p => p.id === playlistId)
+
+        if (playlist) {
+            playlist.songs = [...playlist.songs, song]
+            setPlaylist(playlistsClone)
+        }
     }
 
     const deleteSongFromPlaylistAction = (playlistId, songId) => {

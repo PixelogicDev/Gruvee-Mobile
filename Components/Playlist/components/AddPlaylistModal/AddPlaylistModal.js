@@ -38,7 +38,7 @@ const AddPlaylistModal = ({ createAction }) => {
         createAction(playlist)
 
         // Dismiss
-        Navigation.dismissOverlay(NavigationConstants.ADD_PLAYLIST_MODAL_NAV_ID)
+        dismissOverlayAction()
     }
 
     const dismissOverlayAction = () => {

@@ -1,28 +1,43 @@
 import React, { useState, useEffect } from 'react'
-import { View, StyleSheet, TextInput } from 'react-native'
+import { View, StyleSheet } from 'react-native'
 import { SwipeListView } from 'react-native-swipe-list-view'
 import { Navigation } from 'react-native-navigation'
 
+import spotifyMockFindResponse from 'Gruvee/Mock/spotifyMockFindResponse'
 import AddItemButton from 'Gruvee/Components/Common/AddItemButton'
 import SwipeableSongItem from './components/SwipeableSongItem/SwipeableSongItem'
 import * as StyleConstants from '@StyleConstants'
 import * as NavigationConstants from '@NavigationConstants'
+import Song from '../../lib/Song'
 
-const SongListView = ({ playlistId, songs, deleteSongFromPlaylistAction }) => {
+const SongListView = ({
+    playlistId,
+    songs,
+    addSongToPlaylistAction,
+    deleteSongFromPlaylistAction,
+}) => {
     const [songsToDisplay, setSongsToDisplay] = useState([])
-    const [songLink, setSongLink] = useState([])
-    const [songComment, setSongComment] = useState([])
 
     useEffect(() => {
         setSongsToDisplay(songs)
     }, [])
 
     // Actions
-    const addSongAction = songLink => {
-        console.log('STARTING SONG ADD THINGS')
-        // Get some song data
+    const addSongAction = (songLink, comment) => {
+        // TODO: Call service API to get song info from link
+        // Right not we are just going to mock it up until auth is setup
+
         // Create song object
-        // Add to the list
+        const newSong = new Song(spotifyMockFindResponse, songLink, comment)
+
+        // Set songs to display
+        setSongsToDisplay([...songsToDisplay, newSong])
+
+        // Add to playlist
+        addSongToPlaylistAction(playlistId, newSong)
+
+        // Dismiss song modal overlay
+        Navigation.dismissOverlay(NavigationConstants.ADD_SONG_MODAL_NAV_ID)
     }
 
     const deleteItemById = id => {
