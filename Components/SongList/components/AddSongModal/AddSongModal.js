@@ -64,6 +64,7 @@ const styles = StyleSheet.create({
         borderWidth: 0.5,
         borderRadius: StyleConstants.BASE_BORDER_RADIUS,
         padding: 8,
+        textAlignVertical: 'top',
     },
 })
 
