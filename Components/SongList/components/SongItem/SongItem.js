@@ -27,7 +27,7 @@ const SongItem = ({ songData }) => {
             }}
         >
             <SongItemDetail songData={songData} />
-            <SongItemCommentBar comments={songData.comments} />
+            <SongItemCommentBar songData={songData} />
         </TouchableOpacity>
     )
 }
