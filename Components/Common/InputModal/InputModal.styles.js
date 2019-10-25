@@ -14,8 +14,9 @@ const getModalHeight = navigationId => {
                 : StyleConstants.ADD_PLAYLIST_MODAL_HEIGHT_ANDROID
 
         case NavigationConstants.ADD_SONG_MODAL_NAV_ID:
-            return StyleConstants.ADD_SONG_MODAL_HEIGHT
-
+            return Platform.OS === 'ios'
+                ? StyleConstants.ADD_SONG_MODAL_HEIGHT_iOS
+                : StyleConstants.ADD_SONG_MODAL_HEIGHT_ANDROID
         default:
             return StyleConstants.ADD_MODAL_DEFAULT_HEIGHT
     }
@@ -43,7 +44,7 @@ export default StyleSheet.create({
                 translateX: -(screenWidth * 0.9) / 2,
             },
             {
-                translateY: -(screenHeight / 2 - getModalHeight(navigationId)),
+                translateY: -(getModalHeight(navigationId) / 2),
             },
         ],
         backgroundColor: StyleConstants.BASE_MODAL_BACKGROUND_COLOR,
