@@ -9,11 +9,14 @@ const SongItem = ({ songData }) => {
     const openSongDeepLink = platformDeepLink => {
         Linking.canOpenURL(platformDeepLink)
             .then(isSupported => {
-                if (isSupported) {
-                    Linking.openURL(platformDeepLink).catch(() => {
-                        Alert.alert('Unable to open song 👎')
-                    })
+                if (!isSupported) {
+                    Alert.alert('Song is not supported 😶')
+                    return
                 }
+
+                Linking.openURL(platformDeepLink).catch(() => {
+                    Alert.alert('Unable to open song 👎')
+                })
             })
             .catch(() => {
                 Alert.alert('Invalid song 😐')
