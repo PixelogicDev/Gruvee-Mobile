@@ -23,7 +23,7 @@ We are utilizing Sketch as a way to design all the views for this app and can be
 In order to develop for Grüvee you are going to need to have a few things installed on your machine:<br>
 
 #### General
-[Lastest Version of Node.js](LinkToNodeJs)<br>
+[Latest Version of Node.js](LinkToNodeJs)<br>
 
 #### iOS Development
 [Latest Version of Xcode](LinkToXcode)<br>
