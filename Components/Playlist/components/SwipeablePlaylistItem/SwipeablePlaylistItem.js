@@ -20,7 +20,9 @@ const SwipeablePlaylistItem = ({
     return (
         <AnimatedSwipeRow
             swipeTriggered={isDeleting}
-            swipeActionCallback={deletePlaylistAction}
+            swipeActionCallback={() => {
+                deletePlaylistAction(playlistData.id)
+            }}
             itemHeight={200} // TODO: Android vs iOS check
             isRightOpenValue
             swipeActionComponent={renderSwipeActionComponent(

@@ -10,6 +10,12 @@ import * as StyleConstants from '@StyleConstants'
 const SwipeableSongItem = ({ song, deleteItemById }) => {
     const [isDeleting, setIsDeleting] = useState(false)
     const onConfirmDelete = () => setIsDeleting(true)
+
+    const [toggleCommentsSection, setToggleCommentsSection] = useState(false)
+    const toggleCommentsSectionAction = () => {
+        setToggleCommentsSection(!toggleCommentsSection)
+    }
+
     const confirmDeleteSongAction = () =>
         comfirmDeleteAlert(song, onConfirmDelete)
 
@@ -17,13 +23,22 @@ const SwipeableSongItem = ({ song, deleteItemById }) => {
         <AnimatedSwipeRow
             swipeTriggered={isDeleting}
             swipeActionCallback={deleteItemById}
-            itemHeight={120} // TODO: Android vs iOS check
+            itemHeight={
+                toggleCommentsSection
+                    ? StyleConstants.SONG_LIST_COMMENT_SECTION_HEIGHT +
+                      StyleConstants.SONG_LIST_ITEM_HEIGHT_iOS
+                    : StyleConstants.SONG_LIST_ITEM_HEIGHT_iOS
+            } // TODO: Android vs iOS check
             isRightOpenValue
             swipeActionComponent={renderSwipeActionComponent(
                 song,
                 confirmDeleteSongAction
             )}
-            listItemComponent={renderSongItem(song)}
+            listItemComponent={renderSongItem(
+                song,
+                toggleCommentsSectionAction,
+                toggleCommentsSection
+            )}
         />
     )
 }
@@ -46,7 +61,17 @@ const comfirmDeleteAlert = (song, onConfirmDelete) => {
 }
 
 // Rendered Components
-const renderSongItem = song => <SongItem songData={song} />
+const renderSongItem = (
+    song,
+    toggleCommentsSectionAction,
+    toggleCommentsSection
+) => (
+    <SongItem
+        songData={song}
+        toggleCommentsSectionAction={toggleCommentsSectionAction}
+        toggleCommentsSection={toggleCommentsSection}
+    />
+)
 
 const renderSwipeActionComponent = (song, confirmDeleteSongAction) => {
     // eslint-disable-next-line global-require

@@ -42,6 +42,7 @@ const AnimatedSwipeRow = ({
             rightOpenValue={isRightOpenValue ? openValue : 0}
             leftOpenValue={isRightOpenValue ? 0 : openValue}
             ref={swipeRef}
+            style={styles.SwipeRow(itemHeight)}
         >
             <Animated.View
                 style={styles.SwipeContainer(swipeActionRunning, shrinkHeight)}

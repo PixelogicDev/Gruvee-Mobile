@@ -1,12 +1,23 @@
 import React, { memo } from 'react'
-import { Alert, Linking, StyleSheet, TouchableOpacity } from 'react-native'
+import {
+    Alert,
+    Linking,
+    StyleSheet,
+    TouchableOpacity,
+    View,
+} from 'react-native'
 
 import SongItemDetail from './components/SongItemDetail/SongItemDetail'
 import SongItemCommentBar from './components/SongItemCommentBar/SongItemCommentBar'
+import SongItemCommentSection from './components/SongItemCommentSection/SongItemCommentSection'
 
-const SongItem = ({ songData }) => {
+const SongItem = ({
+    songData,
+    toggleCommentsSectionAction,
+    toggleCommentsSection,
+}) => {
     // Actions
-    const openSongDeepLink = platformDeepLink => {
+    const openSongDeepLinkAction = platformDeepLink => {
         Linking.canOpenURL(platformDeepLink)
             .then(isSupported => {
                 if (!isSupported) {
@@ -22,15 +33,22 @@ const SongItem = ({ songData }) => {
                 Alert.alert('Invalid song 😐')
             })
     }
+
     return (
         <TouchableOpacity
             style={styles.Container}
             onPress={() => {
-                openSongDeepLink(songData.platformDeepLink)
+                openSongDeepLinkAction(songData.platformDeepLink)
             }}
         >
             <SongItemDetail songData={songData} />
-            <SongItemCommentBar songData={songData} />
+            {toggleCommentsSection && <SongItemCommentSection />}
+            <SongItemCommentBar
+                songData={songData}
+                toggleCommentsSection={() => {
+                    toggleCommentsSectionAction()
+                }}
+            />
         </TouchableOpacity>
     )
 }

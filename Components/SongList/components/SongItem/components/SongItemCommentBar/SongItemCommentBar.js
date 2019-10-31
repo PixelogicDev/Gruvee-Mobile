@@ -4,15 +4,13 @@ import * as StyleConstants from '@StyleConstants'
 
 const plusIconAsset = require('Gruvee/Assets/Icons/Plus/plus_icon.png')
 
-const SongItemCommentBar = ({ songData }) => {
+const SongItemCommentBar = ({ songData, toggleCommentsSection }) => {
     return (
         <View style={styles.Container}>
             <Text style={styles.Text}>{songData.comments.length} Comments</Text>
             <TouchableOpacity
                 onPress={() => {
-                    console.log(
-                        `Ready to open ${songData.comments.length} comments for ${songData.name}`
-                    )
+                    toggleCommentsSection()
                 }}
             >
                 <Image style={styles.Image} source={plusIconAsset} />
