@@ -1,15 +1,36 @@
 import React from 'react'
 import { Text, Image, TouchableOpacity, StyleSheet } from 'react-native'
+import { Navigation } from 'react-native-navigation'
 import * as StyleConstants from '@StyleConstants'
+import * as NavigationConstants from '@NavigationConstants'
 
 const rightChevronAsset = require('Gruvee/Assets/Icons/RightChevron/right_chevron.png')
+
+// Actions
+const navigateToCommentsListAction = songData => {
+    Navigation.push(NavigationConstants.STACK_ID, {
+        component: {
+            name: NavigationConstants.COMMENTS_LIST_NAV_NAME,
+            passProps: {
+                comments: songData.comments,
+            },
+            options: {
+                topBar: {
+                    title: {
+                        text: 'Comments',
+                    },
+                },
+            },
+        },
+    })
+}
 
 const SongItemCommentBar = ({ songData }) => {
     return (
         <TouchableOpacity
             style={styles.Container}
             onPress={() => {
-                // ADD NAVIGATION TO COMMENTS VIEW
+                navigateToCommentsListAction(songData)
             }}
         >
             <Text style={styles.Text}>{songData.comments.length} Comments</Text>

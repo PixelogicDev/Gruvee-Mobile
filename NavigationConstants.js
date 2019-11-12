@@ -13,3 +13,6 @@ export const ADD_SONG_MODAL_NAV_NAME = 'navigation.gruvee.addSongModal'
 
 export const SONG_LIST_NAV_ID = 'navigation.gruvee.songList.id'
 export const SONG_LIST_NAV_NAME = 'navigation.gruvee.songList'
+
+export const COMMENTS_LIST_NAV_ID = 'navigation.gruvee.commentsList.id'
+export const COMMENTS_LIST_NAV_NAME = 'navigation.gruvee.commentsList'
