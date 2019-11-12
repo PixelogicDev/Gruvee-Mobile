@@ -1,21 +1,20 @@
 import React from 'react'
-import { Text, View, Image, TouchableOpacity, StyleSheet } from 'react-native'
+import { Text, Image, TouchableOpacity, StyleSheet } from 'react-native'
 import * as StyleConstants from '@StyleConstants'
 
-const plusIconAsset = require('Gruvee/Assets/Icons/Plus/plus_icon.png')
+const rightChevronAsset = require('Gruvee/Assets/Icons/RightChevron/right_chevron.png')
 
-const SongItemCommentBar = ({ songData, toggleCommentsSection }) => {
+const SongItemCommentBar = ({ songData }) => {
     return (
-        <View style={styles.Container}>
+        <TouchableOpacity
+            style={styles.Container}
+            onPress={() => {
+                // ADD NAVIGATION TO COMMENTS VIEW
+            }}
+        >
             <Text style={styles.Text}>{songData.comments.length} Comments</Text>
-            <TouchableOpacity
-                onPress={() => {
-                    toggleCommentsSection()
-                }}
-            >
-                <Image style={styles.Image} source={plusIconAsset} />
-            </TouchableOpacity>
-        </View>
+            <Image style={styles.Image} source={rightChevronAsset} />
+        </TouchableOpacity>
     )
 }
 
@@ -36,8 +35,8 @@ const styles = StyleSheet.create({
         paddingLeft: 15,
     },
     Image: {
-        width: 18,
-        height: 18,
+        width: 16,
+        height: 16,
         marginRight: 15,
     },
 })

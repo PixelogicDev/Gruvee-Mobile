@@ -10,12 +10,6 @@ import * as StyleConstants from '@StyleConstants'
 const SwipeableSongItem = ({ song, deleteItemById }) => {
     const [isDeleting, setIsDeleting] = useState(false)
     const onConfirmDelete = () => setIsDeleting(true)
-
-    const [toggleCommentsSection, setToggleCommentsSection] = useState(false)
-    const toggleCommentsSectionAction = () => {
-        setToggleCommentsSection(!toggleCommentsSection)
-    }
-
     const confirmDeleteSongAction = () =>
         comfirmDeleteAlert(song, onConfirmDelete)
 
@@ -23,22 +17,13 @@ const SwipeableSongItem = ({ song, deleteItemById }) => {
         <AnimatedSwipeRow
             swipeTriggered={isDeleting}
             swipeActionCallback={deleteItemById}
-            itemHeight={
-                toggleCommentsSection
-                    ? StyleConstants.SONG_LIST_COMMENT_SECTION_HEIGHT +
-                      StyleConstants.SONG_LIST_ITEM_HEIGHT_iOS
-                    : StyleConstants.SONG_LIST_ITEM_HEIGHT_iOS
-            } // TODO: Android vs iOS check
+            itemHeight={StyleConstants.SONG_LIST_ITEM_HEIGHT_iOS} // TODO: Android vs iOS check
             isRightOpenValue
             swipeActionComponent={renderSwipeActionComponent(
                 song,
                 confirmDeleteSongAction
             )}
-            listItemComponent={renderSongItem(
-                song,
-                toggleCommentsSectionAction,
-                toggleCommentsSection
-            )}
+            listItemComponent={renderSongItem(song)}
         />
     )
 }
@@ -61,17 +46,7 @@ const comfirmDeleteAlert = (song, onConfirmDelete) => {
 }
 
 // Rendered Components
-const renderSongItem = (
-    song,
-    toggleCommentsSectionAction,
-    toggleCommentsSection
-) => (
-    <SongItem
-        songData={song}
-        toggleCommentsSectionAction={toggleCommentsSectionAction}
-        toggleCommentsSection={toggleCommentsSection}
-    />
-)
+const renderSongItem = song => <SongItem songData={song} />
 
 const renderSwipeActionComponent = (song, confirmDeleteSongAction) => {
     // eslint-disable-next-line global-require

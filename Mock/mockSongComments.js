@@ -19,4 +19,39 @@ export default [
             'Hi, my name is H3llo, and I thought this song was gooooooood.',
         sender: 'H3llo',
     },
+    {
+        id: 'Comment3',
+        timestamp: new Date(),
+        message:
+            'Hi, my name is H3llo, and I thought this song was gooooooood.',
+        sender: 'H3llo',
+    },
+    {
+        id: 'Comment3',
+        timestamp: new Date(),
+        message:
+            'Hi, my name is H3llo, and I thought this song was gooooooood.',
+        sender: 'H3llo',
+    },
+    {
+        id: 'Comment3',
+        timestamp: new Date(),
+        message:
+            'Hi, my name is H3llo, and I thought this song was gooooooood.',
+        sender: 'H3llo',
+    },
+    {
+        id: 'Comment3',
+        timestamp: new Date(),
+        message:
+            'Hi, my name is H3llo, and I thought this song was gooooooood.',
+        sender: 'H3llo',
+    },
+    {
+        id: 'Comment3',
+        timestamp: new Date(),
+        message:
+            'Hi, my name is H3llo, and I thought this song was gooooooood.',
+        sender: 'H3llo',
+    },
 ]
