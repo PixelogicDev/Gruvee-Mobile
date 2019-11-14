@@ -1,0 +1,16 @@
+{
+    "presets": ["module:metro-react-native-babel-preset"],
+    "plugins": [
+        [
+            "module-resolver",
+            {
+                "root": ["./"],
+                "alias": {
+                    "@StyleConstants": "./StyleConstants.js",
+                    "@NavigationConstants": "./NavigationConstants.js",
+                    "Gruvee/*": "./*"
+                }
+            }
+        ]
+    ]
+}
