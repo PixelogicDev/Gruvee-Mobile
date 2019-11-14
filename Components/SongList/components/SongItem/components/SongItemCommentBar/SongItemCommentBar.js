@@ -43,9 +43,9 @@ const SongItemCommentBar = ({ songData }) => {
 const styles = StyleSheet.create({
     Container: {
         height: 40,
-        backgroundColor: StyleConstants.SONG_LIST_COMMENT_BAR_BACKGROUND_COLOR,
-        borderBottomLeftRadius: StyleConstants.SONG_LIST_ITEM_BORDER_RADIUS,
-        borderBottomRightRadius: StyleConstants.SONG_LIST_ITEM_BORDER_RADIUS,
+        backgroundColor: StyleConstants.DARK_BACKGROUND_COLOR,
+        borderBottomLeftRadius: StyleConstants.LIST_ITEM_BORDER_RADIUS,
+        borderBottomRightRadius: StyleConstants.LIST_ITEM_BORDER_RADIUS,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',

@@ -1,10 +1,16 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { View, StyleSheet, Text } from 'react-native'
 import * as StyleConstants from '@StyleConstants'
 
-const CommentItem = ({ comment }) => {
+const CommentItem = ({ comment, setHeightAction }) => {
     return (
-        <View style={styles.Container}>
+        <View
+            style={styles.Container}
+            onLayout={event => {
+                const { height } = event.nativeEvent.layout
+                setHeightAction(height)
+            }}
+        >
             <Text style={styles.DisplayNameText}>{comment.sender}</Text>
             <Text style={styles.CommentText}>{comment.message}</Text>
         </View>
@@ -18,9 +24,13 @@ const styles = StyleSheet.create({
         color: StyleConstants.BASE_FONT_COLOR,
     },
     Container: {
+        backgroundColor: StyleConstants.DARK_BACKGROUND_COLOR,
+        borderRadius: StyleConstants.LIST_ITEM_BORDER_RADIUS,
         flexDirection: 'column',
-        marginLeft: 10,
+        marginHorizontal: 15,
+        marginBottom: 5,
         paddingVertical: 10,
+        paddingHorizontal: 10,
     },
     DisplayNameText: {
         fontSize: 18,

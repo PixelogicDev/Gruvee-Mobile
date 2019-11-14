@@ -55,12 +55,12 @@ export const SONG_LIST_ITEM_DETAIL_HEIGHT = 80
 export const SONG_LIST_ITEM_TITLE_SIZE_iOS = 18
 export const SONG_LIST_ITEM_DETAIL_SIZE_iOS = 14
 export const SONG_LIST_ITEM_DETAIL_COLOR = '#999999'
-export const SONG_LIST_ITEM_BORDER_RADIUS = 5
+export const LIST_ITEM_BORDER_RADIUS = 5
 export const SONG_LIST_ITEM_ALBUM_ARTWORK_SIZE = 80
 export const SONG_LIST_ITEM_HEIGHT_iOS = 120
 
 // Song List Item Comment Bar
-export const SONG_LIST_COMMENT_BAR_BACKGROUND_COLOR = '#0D0B0C'
+export const DARK_BACKGROUND_COLOR = '#0D0B0C'
 export const SONG_LIST_COMMENT_BAR_TEXT_SIZE_iOS = 16
 
 // Song List Comments Section
