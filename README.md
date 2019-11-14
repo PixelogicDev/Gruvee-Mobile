@@ -4,6 +4,9 @@
 </p>
 
 <p align="center">
+    <a href="https://discordapp.com/invite/ubgX6T8">
+        <img src="https://img.shields.io/discord/391635862959554561?label=Discord" alt="Discord members online" />
+    </a>
     <a href="https://github.com/pixelogicdev/gruvee">
         <img alt="GitHub issues" src="https://img.shields.io/github/issues/pixelogicdev/gruvee">
     </a>
