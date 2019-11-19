@@ -24,10 +24,6 @@ const CommentsList = ({ songId, comments, deleteCommentFromSongAction }) => {
 
         // Delete comment from song
         deleteCommentFromSongAction(songId, commentId)
-
-        // Will then need to set state for the updated comment
-        // Will also need to set state for the song that was just altered
-        // Will also need to set state for the playlist was just altered
     }
 
     useEffect(() => {
