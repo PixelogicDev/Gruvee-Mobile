@@ -11,6 +11,7 @@ const SwipeablePlaylistItem = ({
     deletePlaylistAction,
     addSongToPlaylistAction,
     deleteSongFromPlaylistAction,
+    updateSongsInPlaylistAction,
 }) => {
     const [isDeleting, setIsDeleting] = useState(false)
     const onConfirmDelete = () => setIsDeleting(true)
@@ -32,7 +33,8 @@ const SwipeablePlaylistItem = ({
             listItemComponent={renderPlaylistItem(
                 playlistData,
                 addSongToPlaylistAction,
-                deleteSongFromPlaylistAction
+                deleteSongFromPlaylistAction,
+                updateSongsInPlaylistAction
             )}
         />
     )
@@ -59,12 +61,14 @@ const comfirmDeleteAlert = (playlistData, onConfirmDelete) => {
 const renderPlaylistItem = (
     playlist,
     addSongToPlaylistAction,
-    deleteSongFromPlaylistAction
+    deleteSongFromPlaylistAction,
+    updateSongsInPlaylistAction
 ) => (
     <PlaylistItem
         playlistData={playlist}
         addSongToPlaylistAction={addSongToPlaylistAction}
         deleteSongFromPlaylistAction={deleteSongFromPlaylistAction}
+        updateSongsInPlaylistAction={updateSongsInPlaylistAction}
     />
 )
 

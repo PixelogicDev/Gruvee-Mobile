@@ -24,6 +24,7 @@ const PlaylistListView = () => {
             deletePlaylistAction={deletePlaylistAction}
             addSongToPlaylistAction={addSongToPlaylistAction}
             deleteSongFromPlaylistAction={deleteSongFromPlaylistAction}
+            updateSongsInPlaylistAction={updateSongsInPlaylistAction}
         />
     )
 
@@ -103,6 +104,19 @@ const PlaylistListView = () => {
                 playlist.songs = playlist.songs.filter(
                     song => song.id !== songId
                 )
+            }
+
+            return playlist
+        })
+
+        setPlaylist(updatedPlaylist)
+    }
+
+    // Comments Actions
+    const updateSongsInPlaylistAction = (playlistId, songs) => {
+        const updatedPlaylist = playlists.map(playlist => {
+            if (playlist.id === playlistId) {
+                playlist.songs = songs
             }
 
             return playlist

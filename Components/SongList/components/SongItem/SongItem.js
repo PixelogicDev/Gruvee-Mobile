@@ -4,7 +4,11 @@ import { Alert, Linking, StyleSheet, TouchableOpacity } from 'react-native'
 import SongItemDetail from './components/SongItemDetail/SongItemDetail'
 import SongItemCommentBar from './components/SongItemCommentBar/SongItemCommentBar'
 
-const SongItem = ({ songData, deleteCommentFromSongAction }) => {
+const SongItem = ({
+    songData,
+    deleteCommentFromSongAction,
+    updateSongsInPlaylistAction,
+}) => {
     // Actions
     const openSongDeepLinkAction = platformDeepLink => {
         Linking.canOpenURL(platformDeepLink)
@@ -36,6 +40,7 @@ const SongItem = ({ songData, deleteCommentFromSongAction }) => {
             <SongItemCommentBar
                 songData={songData}
                 deleteCommentFromSongAction={deleteCommentFromSongAction}
+                updateSongsInPlaylistAction={updateSongsInPlaylistAction}
             />
         </>
     )

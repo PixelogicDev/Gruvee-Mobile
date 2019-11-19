@@ -11,6 +11,7 @@ const SwipeableSongItem = ({
     song,
     deleteItemById,
     deleteCommentFromSongAction,
+    updateSongsInPlaylistAction,
 }) => {
     const [isDeleting, setIsDeleting] = useState(false)
     const onConfirmDelete = () => setIsDeleting(true)
@@ -29,7 +30,8 @@ const SwipeableSongItem = ({
             )}
             listItemComponent={renderSongItem(
                 song,
-                deleteCommentFromSongAction
+                deleteCommentFromSongAction,
+                updateSongsInPlaylistAction
             )}
         />
     )
@@ -53,11 +55,16 @@ const comfirmDeleteAlert = (song, onConfirmDelete) => {
 }
 
 // Rendered Components
-const renderSongItem = (song, deleteCommentFromSongAction) => {
+const renderSongItem = (
+    song,
+    deleteCommentFromSongAction,
+    updateSongsInPlaylistAction
+) => {
     return (
         <SongItem
             songData={song}
             deleteCommentFromSongAction={deleteCommentFromSongAction}
+            updateSongsInPlaylistAction={updateSongsInPlaylistAction}
         />
     )
 }

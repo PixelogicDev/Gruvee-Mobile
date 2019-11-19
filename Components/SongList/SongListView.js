@@ -15,6 +15,7 @@ const SongListView = ({
     songs,
     addSongToPlaylistAction,
     deleteSongFromPlaylistAction,
+    updateSongsInPlaylistAction,
 }) => {
     const [songsToDisplay, setSongsToDisplay] = useState([])
 
@@ -62,7 +63,11 @@ const SongListView = ({
             return song
         })
 
+        // Update songState
         setSongsToDisplay(updatedSongs)
+
+        // Update playlistState
+        updateSongsInPlaylistAction(playlistId, updatedSongs)
     }
 
     const navigateToAddSongModalAction = () => {
@@ -89,6 +94,7 @@ const SongListView = ({
             song={item}
             deleteItemById={() => deleteItemById(item.id)}
             deleteCommentFromSongAction={deleteCommentFromSongAction}
+            updateSongsInPlaylistAction={updateSongsInPlaylistAction}
         />
     )
 

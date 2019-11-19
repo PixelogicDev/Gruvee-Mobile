@@ -22,8 +22,6 @@ const CommentsList = ({ songId, comments, deleteCommentFromSongAction }) => {
             commentsState.filter(comment => comment.id !== commentId)
         )
 
-        console.log(deleteCommentFromSongAction)
-
         // Delete comment from song
         deleteCommentFromSongAction(songId, commentId)
 
