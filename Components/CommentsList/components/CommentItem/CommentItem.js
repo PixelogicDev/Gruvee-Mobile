@@ -27,7 +27,6 @@ const styles = StyleSheet.create({
         backgroundColor: StyleConstants.DARK_BACKGROUND_COLOR,
         borderRadius: StyleConstants.LIST_ITEM_BORDER_RADIUS,
         flexDirection: 'column',
-        marginHorizontal: 15,
         marginBottom: 5,
         paddingVertical: 10,
         paddingHorizontal: 10,

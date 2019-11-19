@@ -33,7 +33,7 @@ const CommentsList = ({ songId, comments, deleteCommentFromSongAction }) => {
     return (
         <SwipeListView
             style={styles.Container}
-            // contentContainerStyle={styles.ContentContainer}
+            contentContainerStyle={styles.ContentContainer}
             showsVerticalScrollIndicator
             data={commentsState}
             keyExtractor={keyExtractor}
@@ -46,6 +46,9 @@ const styles = StyleSheet.create({
     Container: {
         backgroundColor: StyleConstants.BASE_BACKGROUND_COLOR,
         height: '100%',
+    },
+    ContentContainer: {
+        padding: StyleConstants.TABLE_CONTAINER_CONTENT_SPACING,
     },
 })
 

@@ -46,7 +46,7 @@ export const ADD_SONG_MODAL_HEIGHT_iOS = 300
 export const ADD_SONG_MODAL_HEIGHT_ANDROID = 325
 
 // Table Container Content Spacing
-export const TABLE_CONTAINER_CONTENT_SPACING = 25
+export const TABLE_CONTAINER_CONTENT_SPACING = 20
 export const TABLE_CONTAINER_BOTTOM_PADDING = 100
 
 // Song List Item Detail
