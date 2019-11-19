@@ -1,57 +1,57 @@
 export default [
     {
-        id: 'Comment1',
+        id: 'comment0',
         timestamp: new Date(),
         message: 'Hi, my name is Alec, and I thought this song was gooooooood.',
         sender: 'adilanchian',
     },
     {
-        id: 'Comment2',
+        id: 'comment1',
         timestamp: new Date(),
         message:
             'Hi, my name is JOSMO, and I thought this song was gooooooood.',
         sender: 'JOSMO',
     },
     {
-        id: 'Comment3',
+        id: 'comment2',
         timestamp: new Date(),
         message:
             'Hi, my name is H3llo, and I thought this song was gooooooood.',
         sender: 'H3llo',
     },
     {
-        id: 'Comment3',
+        id: 'comment3',
         timestamp: new Date(),
         message:
             'Hi, my name is H3llo, and I thought this song was gooooooood.',
-        sender: 'H3llo',
+        sender: 'SomeOneElse',
     },
     {
-        id: 'Comment3',
+        id: 'comment4',
         timestamp: new Date(),
         message:
             'Hi, my name is H3llo, and I thought this song was gooooooood.',
-        sender: 'H3llo',
+        sender: 'SomeOtherPerson',
     },
     {
-        id: 'Comment3',
+        id: 'comment5',
         timestamp: new Date(),
         message:
             'Hi, my name is H3llo, and I thought this song was gooooooood.',
-        sender: 'H3llo',
+        sender: 'adilanchian',
     },
     {
-        id: 'Comment3',
+        id: 'comment6',
         timestamp: new Date(),
         message:
             'Hi, my name is H3llo, and I thought this song was gooooooood.',
-        sender: 'H3llo',
+        sender: 'Boom',
     },
     {
-        id: 'Comment3',
+        id: 'comment7',
         timestamp: new Date(),
         message:
             'Hi, my name is H3llo, and I thought this song was gooooooood.',
-        sender: 'H3llo',
+        sender: 'SomeOneElse',
     },
 ]

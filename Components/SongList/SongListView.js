@@ -51,6 +51,20 @@ const SongListView = ({
         deleteSongFromPlaylistAction(playlistId, id)
     }
 
+    const deleteCommentFromSongAction = (songId, commentId) => {
+        const updatedSongs = songsToDisplay.map(song => {
+            if (song.id === songId) {
+                song.comments = song.comments.filter(
+                    comment => comment.id !== commentId
+                )
+            }
+
+            return song
+        })
+
+        setSongsToDisplay(updatedSongs)
+    }
+
     const navigateToAddSongModalAction = () => {
         // Navigate to add playlist modal
         Navigation.showOverlay({
@@ -74,6 +88,7 @@ const SongListView = ({
         <SwipeableSongItem
             song={item}
             deleteItemById={() => deleteItemById(item.id)}
+            deleteCommentFromSongAction={deleteCommentFromSongAction}
         />
     )
 

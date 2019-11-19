@@ -7,7 +7,11 @@ import SongItem from '../SongItem/SongItem'
 import * as StyleConstants from '@StyleConstants'
 
 // deleteItemById === func
-const SwipeableSongItem = ({ song, deleteItemById }) => {
+const SwipeableSongItem = ({
+    song,
+    deleteItemById,
+    deleteCommentFromSongAction,
+}) => {
     const [isDeleting, setIsDeleting] = useState(false)
     const onConfirmDelete = () => setIsDeleting(true)
     const confirmDeleteSongAction = () =>
@@ -23,7 +27,10 @@ const SwipeableSongItem = ({ song, deleteItemById }) => {
                 song,
                 confirmDeleteSongAction
             )}
-            listItemComponent={renderSongItem(song)}
+            listItemComponent={renderSongItem(
+                song,
+                deleteCommentFromSongAction
+            )}
         />
     )
 }
@@ -46,7 +53,14 @@ const comfirmDeleteAlert = (song, onConfirmDelete) => {
 }
 
 // Rendered Components
-const renderSongItem = song => <SongItem songData={song} />
+const renderSongItem = (song, deleteCommentFromSongAction) => {
+    return (
+        <SongItem
+            songData={song}
+            deleteCommentFromSongAction={deleteCommentFromSongAction}
+        />
+    )
+}
 
 const renderSwipeActionComponent = (song, confirmDeleteSongAction) => {
     // eslint-disable-next-line global-require

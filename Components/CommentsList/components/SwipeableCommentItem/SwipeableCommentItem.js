@@ -20,7 +20,9 @@ const SwipeableCommentItem = ({ comment, deleteItemById }) => {
     return (
         <AnimatedSwipeRow
             swipeTriggered={isDeleting}
-            swipeActionCallback={deleteItemById}
+            swipeActionCallback={() => {
+                deleteItemById(comment.id)
+            }}
             itemHeight={itemHeight} // TODO: Android vs iOS check
             isRightOpenValue
             swipeActionComponent={renderSwipeActionComponent(

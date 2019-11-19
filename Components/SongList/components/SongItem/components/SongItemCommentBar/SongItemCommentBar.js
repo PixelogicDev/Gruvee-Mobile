@@ -7,12 +7,17 @@ import * as NavigationConstants from '@NavigationConstants'
 const rightChevronAsset = require('Gruvee/Assets/Icons/RightChevron/right_chevron.png')
 
 // Actions
-const navigateToCommentsListAction = songData => {
+const navigateToCommentsListAction = (
+    songData,
+    deleteCommentFromSongAction
+) => {
     Navigation.push(NavigationConstants.STACK_ID, {
         component: {
             name: NavigationConstants.COMMENTS_LIST_NAV_NAME,
             passProps: {
+                songId: songData.id,
                 comments: songData.comments,
+                deleteCommentFromSongAction,
             },
             options: {
                 topBar: {
@@ -25,12 +30,15 @@ const navigateToCommentsListAction = songData => {
     })
 }
 
-const SongItemCommentBar = ({ songData }) => {
+const SongItemCommentBar = ({ songData, deleteCommentFromSongAction }) => {
     return (
         <TouchableOpacity
             style={styles.Container}
             onPress={() => {
-                navigateToCommentsListAction(songData)
+                navigateToCommentsListAction(
+                    songData,
+                    deleteCommentFromSongAction
+                )
             }}
         >
             <Text style={styles.Text}>{songData.comments.length} Comments</Text>
