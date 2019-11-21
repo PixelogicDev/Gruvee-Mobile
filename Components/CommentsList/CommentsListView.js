@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import { StyleSheet } from 'react-native'
+import { SafeAreaView, StyleSheet } from 'react-native'
 import { SwipeListView } from 'react-native-swipe-list-view'
+import DynamicTextInput from 'Gruvee/Components/Common/DynamicTextInput'
 import SwipeableCommentItem from './components/SwipeableCommentItem/SwipeableCommentItem'
 import * as StyleConstants from '@StyleConstants'
 
@@ -31,14 +32,16 @@ const CommentsList = ({ songId, comments, deleteCommentFromSongAction }) => {
     }, [])
 
     return (
-        <SwipeListView
-            style={styles.Container}
-            contentContainerStyle={styles.ContentContainer}
-            showsVerticalScrollIndicator
-            data={commentsState}
-            keyExtractor={keyExtractor}
-            renderItem={renderItem}
-        />
+        <SafeAreaView style={styles.Container}>
+            <SwipeListView
+                contentContainerStyle={styles.ContentContainer}
+                showsVerticalScrollIndicator
+                data={commentsState}
+                keyExtractor={keyExtractor}
+                renderItem={renderItem}
+            />
+            <DynamicTextInput />
+        </SafeAreaView>
     )
 }
 

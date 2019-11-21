@@ -66,3 +66,7 @@ export const SONG_LIST_COMMENT_BAR_TEXT_SIZE_iOS = 16
 // Song List Comments Section
 export const SONG_LIST_COMMENT_SECTION_HEIGHT =
     Dimensions.get('window').height * 0.4
+
+// Text Input
+export const TEXT_INPUT_PADDING = 8
+export const TEXT_INPUT_BG_COLOR = '#151515'

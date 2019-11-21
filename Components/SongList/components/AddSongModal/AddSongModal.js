@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
         borderColor: StyleConstants.INPUT_BORDER_BOTTOM_COLOR,
         borderWidth: 0.5,
         borderRadius: StyleConstants.BASE_BORDER_RADIUS,
-        padding: 8,
+        padding: StyleConstants.TEXT_INPUT_PADDING,
         textAlignVertical: 'top',
     },
 })
