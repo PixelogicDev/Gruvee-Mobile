@@ -1,13 +1,31 @@
 import React, { useState } from 'react'
-import { View, StyleSheet } from 'react-native'
+import { Keyboard, View, StyleSheet } from 'react-native'
 
 import DynamicTextInput from 'Gruvee/Components/Common/DynamicTextInput'
 import AddItemButton from 'Gruvee/Components/Common/AddItemButton'
 
 import * as StyleConstants from '@StyleConstants'
 
-const AddCommentTextInput = ({ style, addCommentAction }) => {
+const AddCommentTextInput = ({
+    style,
+    addCommentAction,
+    scrollToBottomAction,
+}) => {
     const [comment, setComment] = useState('')
+
+    // Actions
+    const submitCommentAction = () => {
+        addCommentAction(comment)
+
+        // Update text input to be empty
+        setComment('')
+
+        // Dismiss keyboard
+        Keyboard.dismiss()
+
+        // Scroll to bottom of table
+        scrollToBottomAction()
+    }
 
     return (
         <View style={styles.Container(style.height)}>
@@ -20,7 +38,7 @@ const AddCommentTextInput = ({ style, addCommentAction }) => {
             <AddItemButton
                 style={styles.Button}
                 addItemAction={() => {
-                    addCommentAction(comment)
+                    submitCommentAction()
                 }}
             />
         </View>

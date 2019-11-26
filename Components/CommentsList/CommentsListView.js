@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { KeyboardAvoidingView, SafeAreaView, StyleSheet } from 'react-native'
 import { SwipeListView } from 'react-native-swipe-list-view'
 
@@ -13,6 +13,7 @@ const CommentsList = ({
     addCommentFromSongAction,
     deleteCommentFromSongAction,
 }) => {
+    const commentsListRef = useRef(null)
     const [commentsState, setCommentsState] = useState([])
 
     // Actions
@@ -22,6 +23,7 @@ const CommentsList = ({
             deleteItemById={deleteCommentAction}
         />
     )
+
     const keyExtractor = item => `${item.id}`
 
     const addCommentAction = comment => {
@@ -45,6 +47,12 @@ const CommentsList = ({
         deleteCommentFromSongAction(songId, commentId)
     }
 
+    const runScrollToEnd = () => {
+        if (commentsListRef && commentsListRef.current.scrollToEnd) {
+            commentsListRef.current.scrollToEnd()
+        }
+    }
+
     useEffect(() => {
         setCommentsState(comments)
     }, [])
@@ -56,6 +64,8 @@ const CommentsList = ({
                 keyboardVerticalOffset={50}
             >
                 <SwipeListView
+                    // eslint-disable-next-line no-return-assign
+                    listViewRef={ref => (commentsListRef.current = ref)}
                     style={{ height: '90%' }}
                     contentContainerStyle={styles.ContentContainer}
                     showsVerticalScrollIndicator
@@ -66,6 +76,7 @@ const CommentsList = ({
                 <AddCommentTextInput
                     style={{ height: '10%' }}
                     addCommentAction={addCommentAction}
+                    scrollToBottomAction={runScrollToEnd}
                 />
             </KeyboardAvoidingView>
         </SafeAreaView>
