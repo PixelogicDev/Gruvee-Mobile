@@ -6,7 +6,7 @@ import {
     TEXT_INPUT_PADDING,
 } from '@StyleConstants'
 
-const DynamicTextInput = () => {
+const DynamicTextInput = ({ style }) => {
     const [comment, setComment] = useState('')
     const [textInputHeight, setTextInputHeight] = useState(44)
 
@@ -22,7 +22,7 @@ const DynamicTextInput = () => {
                     event.nativeEvent.contentSize.height + TEXT_INPUT_PADDING
                 )
             }}
-            style={styles.Input(textInputHeight)}
+            style={styles.Input(textInputHeight, style.width)}
             value={comment}
         />
     )

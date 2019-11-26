@@ -34,6 +34,7 @@ export const CARD_ITEM_DETAIL_SIZE_iOS = 11
 
 // Add Playlist Button Size
 export const ADD_BUTTON_SIZE = 60
+export const ADD_BUTTON_COMMENT_SIZE = 40
 
 // Delete SwipeAction Color
 export const DELETE_SWIPE_ACTION_BG_COLOR = '#FF4747'

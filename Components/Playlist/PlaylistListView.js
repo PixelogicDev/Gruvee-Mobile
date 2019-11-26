@@ -169,7 +169,7 @@ const PlaylistListView = () => {
             <View style={styles.ButtonContainer}>
                 <AddItemButton
                     style={styles.Button}
-                    modalNavigateAction={navigateToAddPlaylistModalAction}
+                    addItemAction={navigateToAddPlaylistModalAction}
                 />
             </View>
         </>

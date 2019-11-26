@@ -112,7 +112,7 @@ const SongListView = ({
             <View style={styles.ButtonContainer}>
                 <AddItemButton
                     style={styles.Button}
-                    modalNavigateAction={navigateToAddSongModalAction}
+                    addItemAction={navigateToAddSongModalAction}
                 />
             </View>
         </>
