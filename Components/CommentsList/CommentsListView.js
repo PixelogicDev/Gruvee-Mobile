@@ -5,8 +5,14 @@ import { SwipeListView } from 'react-native-swipe-list-view'
 import SwipeableCommentItem from './components/SwipeableCommentItem/SwipeableCommentItem'
 import AddCommentTextInput from './components/AddCommentTextInput/AddCommentTextInput'
 import * as StyleConstants from '@StyleConstants'
+import SongComment from '../../lib/SongComment'
 
-const CommentsList = ({ songId, comments, deleteCommentFromSongAction }) => {
+const CommentsList = ({
+    songId,
+    comments,
+    addCommentFromSongAction,
+    deleteCommentFromSongAction,
+}) => {
     const [commentsState, setCommentsState] = useState([])
 
     // Actions
@@ -17,6 +23,17 @@ const CommentsList = ({ songId, comments, deleteCommentFromSongAction }) => {
         />
     )
     const keyExtractor = item => `${item.id}`
+
+    const addCommentAction = comment => {
+        // Set Comment List View State
+        const newComments = [
+            ...commentsState,
+            new SongComment(comment, 'YaBoiAlec'),
+        ]
+
+        setCommentsState(newComments)
+        addCommentFromSongAction(songId, newComments)
+    }
 
     const deleteCommentAction = commentId => {
         // Set comments state
@@ -46,7 +63,10 @@ const CommentsList = ({ songId, comments, deleteCommentFromSongAction }) => {
                     keyExtractor={keyExtractor}
                     renderItem={renderItem}
                 />
-                <AddCommentTextInput style={{ height: '10%' }} />
+                <AddCommentTextInput
+                    style={{ height: '10%' }}
+                    addCommentAction={addCommentAction}
+                />
             </KeyboardAvoidingView>
         </SafeAreaView>
     )

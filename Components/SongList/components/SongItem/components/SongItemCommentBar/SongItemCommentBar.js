@@ -9,6 +9,7 @@ const rightChevronAsset = require('Gruvee/Assets/Icons/RightChevron/right_chevro
 // Actions
 const navigateToCommentsListAction = (
     songData,
+    addCommentFromSongAction,
     deleteCommentFromSongAction
 ) => {
     Navigation.push(NavigationConstants.STACK_ID, {
@@ -17,6 +18,7 @@ const navigateToCommentsListAction = (
             passProps: {
                 songId: songData.id,
                 comments: songData.comments,
+                addCommentFromSongAction,
                 deleteCommentFromSongAction,
             },
             options: {
@@ -30,13 +32,18 @@ const navigateToCommentsListAction = (
     })
 }
 
-const SongItemCommentBar = ({ songData, deleteCommentFromSongAction }) => {
+const SongItemCommentBar = ({
+    songData,
+    addCommentFromSongAction,
+    deleteCommentFromSongAction,
+}) => {
     return (
         <TouchableOpacity
             style={styles.Container}
             onPress={() => {
                 navigateToCommentsListAction(
                     songData,
+                    addCommentFromSongAction,
                     deleteCommentFromSongAction
                 )
             }}

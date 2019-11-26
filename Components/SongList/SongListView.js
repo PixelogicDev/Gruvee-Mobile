@@ -52,6 +52,22 @@ const SongListView = ({
         deleteSongFromPlaylistAction(playlistId, id)
     }
 
+    const addCommentFromSongAction = (songId, comments) => {
+        const updatedSongs = songsToDisplay.map(song => {
+            if (song.id === songId) {
+                song.comments = comments
+            }
+
+            return song
+        })
+
+        // Update songState
+        setSongsToDisplay(updatedSongs)
+
+        // Update playlistState
+        updateSongsInPlaylistAction(playlistId, updatedSongs)
+    }
+
     const deleteCommentFromSongAction = (songId, commentId) => {
         const updatedSongs = songsToDisplay.map(song => {
             if (song.id === songId) {
@@ -93,6 +109,7 @@ const SongListView = ({
         <SwipeableSongItem
             song={item}
             deleteItemById={() => deleteItemById(item.id)}
+            addCommentFromSongAction={addCommentFromSongAction}
             deleteCommentFromSongAction={deleteCommentFromSongAction}
             updateSongsInPlaylistAction={updateSongsInPlaylistAction}
         />

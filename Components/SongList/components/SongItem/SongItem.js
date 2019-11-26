@@ -6,6 +6,7 @@ import SongItemCommentBar from './components/SongItemCommentBar/SongItemCommentB
 
 const SongItem = ({
     songData,
+    addCommentFromSongAction,
     deleteCommentFromSongAction,
     updateSongsInPlaylistAction,
 }) => {
@@ -39,6 +40,7 @@ const SongItem = ({
             </TouchableOpacity>
             <SongItemCommentBar
                 songData={songData}
+                addCommentFromSongAction={addCommentFromSongAction}
                 deleteCommentFromSongAction={deleteCommentFromSongAction}
                 updateSongsInPlaylistAction={updateSongsInPlaylistAction}
             />

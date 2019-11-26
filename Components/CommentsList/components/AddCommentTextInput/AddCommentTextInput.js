@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { View, StyleSheet } from 'react-native'
 
 import DynamicTextInput from 'Gruvee/Components/Common/DynamicTextInput'
@@ -6,18 +6,22 @@ import AddItemButton from 'Gruvee/Components/Common/AddItemButton'
 
 import * as StyleConstants from '@StyleConstants'
 
-const AddCommentTextInput = ({ style }) => {
-    // Actions
-    const addCommentAction = () => {
-        console.log('HI IM ADDING AN ACTION.')
-    }
+const AddCommentTextInput = ({ style, addCommentAction }) => {
+    const [comment, setComment] = useState('')
 
     return (
         <View style={styles.Container(style.height)}>
-            <DynamicTextInput style={{ width: '85%' }} />
+            <DynamicTextInput
+                placeholderText="Add comment..."
+                style={{ width: '85%' }}
+                value={comment}
+                onChangeText={setComment}
+            />
             <AddItemButton
                 style={styles.Button}
-                addItemAction={addCommentAction}
+                addItemAction={() => {
+                    addCommentAction(comment)
+                }}
             />
         </View>
     )

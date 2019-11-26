@@ -9,6 +9,7 @@ import * as StyleConstants from '@StyleConstants'
 // deleteItemById === func
 const SwipeableSongItem = ({
     song,
+    addCommentFromSongAction,
     deleteItemById,
     deleteCommentFromSongAction,
     updateSongsInPlaylistAction,
@@ -30,6 +31,7 @@ const SwipeableSongItem = ({
             )}
             listItemComponent={renderSongItem(
                 song,
+                addCommentFromSongAction,
                 deleteCommentFromSongAction,
                 updateSongsInPlaylistAction
             )}
@@ -57,12 +59,14 @@ const comfirmDeleteAlert = (song, onConfirmDelete) => {
 // Rendered Components
 const renderSongItem = (
     song,
+    addCommentFromSongAction,
     deleteCommentFromSongAction,
     updateSongsInPlaylistAction
 ) => {
     return (
         <SongItem
             songData={song}
+            addCommentFromSongAction={addCommentFromSongAction}
             deleteCommentFromSongAction={deleteCommentFromSongAction}
             updateSongsInPlaylistAction={updateSongsInPlaylistAction}
         />
