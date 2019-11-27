@@ -1,5 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { KeyboardAvoidingView, SafeAreaView, StyleSheet } from 'react-native'
+import {
+    KeyboardAvoidingView,
+    Platform,
+    SafeAreaView,
+    StyleSheet,
+    View,
+} from 'react-native'
 import { SwipeListView } from 'react-native-swipe-list-view'
 
 import SwipeableCommentItem from './components/SwipeableCommentItem/SwipeableCommentItem'
@@ -60,8 +66,8 @@ const CommentsList = ({
     return (
         <SafeAreaView style={styles.Container}>
             <KeyboardAvoidingView
-                behavior="padding"
-                keyboardVerticalOffset={50}
+                behavior={Platform.OS === 'iOS' ? 'padding' : 'height'}
+                keyboardVerticalOffset={Platform.OS === 'iOS' ? 50 : 80}
             >
                 <SwipeListView
                     // eslint-disable-next-line no-return-assign
@@ -73,6 +79,7 @@ const CommentsList = ({
                     keyExtractor={keyExtractor}
                     renderItem={renderItem}
                 />
+                <View style={styles.Separator} />
                 <AddCommentTextInput
                     style={{ height: '10%' }}
                     addCommentAction={addCommentAction}
@@ -90,6 +97,11 @@ const styles = StyleSheet.create({
     },
     ContentContainer: {
         padding: StyleConstants.TABLE_CONTAINER_CONTENT_SPACING,
+    },
+    Separator: {
+        width: '100%',
+        height: 1,
+        backgroundColor: StyleConstants.SEPERATOR_BACKGROUND_COLOR,
     },
 })
 

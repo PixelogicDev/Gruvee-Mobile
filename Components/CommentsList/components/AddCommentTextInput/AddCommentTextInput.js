@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Keyboard, View, StyleSheet } from 'react-native'
+import { Keyboard, StyleSheet, View } from 'react-native'
 
 import DynamicTextInput from 'Gruvee/Components/Common/DynamicTextInput'
 import AddItemButton from 'Gruvee/Components/Common/AddItemButton'
