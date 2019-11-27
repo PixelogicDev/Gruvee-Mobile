@@ -20,8 +20,23 @@ const SocialAuthButton = ({ platform }) => {
                 name: NavigationConstants.PLAYLIST_NAV_NAME,
                 options: {
                     topBar: {
+                        visible: true,
+                        barStyle: 'default',
+                        // Since this is the root view after auth, hide back button
+                        // What we should be doing is setting this as the root if signed in
+                        backButton: {
+                            visible: false,
+                        },
+                        background: {
+                            color: StyleConstants.TOP_BAR_BACKGROUND_COLOR,
+                            blur: false,
+                        },
                         title: {
                             text: 'Playlists',
+                            fontSize: 24,
+                            color: StyleConstants.TOP_BAR_TEXT_COLOR,
+                            // iOS Only
+                            fontWeight: 'medium',
                         },
                     },
                 },

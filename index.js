@@ -39,22 +39,16 @@ Navigation.events().registerAppLaunchedListener(() => {
         root: {
             stack: {
                 id: NavigationConstants.STACK_ID,
-                options: {
-                    topBar: {
-                        visible: false,
-                    },
-                },
                 children: [
-                    {
-                        component: {
-                            id: NavigationConstants.PLAYLIST_NAV_ID,
-                            name: NavigationConstants.PLAYLIST_NAV_NAME,
-                        },
-                    },
                     {
                         component: {
                             id: NavigationConstants.ROOT_NAV_ID,
                             name: NavigationConstants.ROOT_NAV_NAME,
+                            options: {
+                                topBar: {
+                                    visible: false,
+                                },
+                            },
                         },
                     },
                 ],
