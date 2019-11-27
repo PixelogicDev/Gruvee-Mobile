@@ -11,7 +11,9 @@ const SwipeableCommentItem = ({ comment, deleteItemById }) => {
     // TODO: This will be needed from user state
     const signedInUsername = 'adilanchian'
     const [isDeleting, setIsDeleting] = useState(false)
-    const [itemHeight, setItemHeight] = useState(75)
+    const [itemHeight, setItemHeight] = useState(
+        StyleConstants.COMMENT_ITEM_MIN_HEIGHT
+    )
     const onConfirmDelete = () => setIsDeleting(true)
     const confirmDeleteCommentAction = () =>
         comfirmDeleteAlert(comment, onConfirmDelete)

@@ -24,6 +24,7 @@ const styles = StyleSheet.create({
         color: StyleConstants.BASE_FONT_COLOR,
     },
     Container: {
+        minHeight: StyleConstants.COMMENT_ITEM_MIN_HEIGHT,
         backgroundColor: StyleConstants.DARK_BACKGROUND_COLOR,
         borderRadius: StyleConstants.LIST_ITEM_BORDER_RADIUS,
         flexDirection: 'column',

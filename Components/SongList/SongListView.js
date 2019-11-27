@@ -9,6 +9,7 @@ import SwipeableSongItem from './components/SwipeableSongItem/SwipeableSongItem'
 import * as StyleConstants from '@StyleConstants'
 import * as NavigationConstants from '@NavigationConstants'
 import Song from '../../lib/Song'
+import SongComment from '../../lib/SongComment'
 
 const SongListView = ({
     playlistId,
