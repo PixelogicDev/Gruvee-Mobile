@@ -58,8 +58,21 @@ const showSongListAction = (
             },
             options: {
                 topBar: {
+                    visible: true,
+                    barStyle: 'default',
+                    backButton: {
+                        color: StyleConstants.TOP_BAR_BACK_BUTTON_COLOR,
+                    },
+                    background: {
+                        color: StyleConstants.TOP_BAR_BACKGROUND_COLOR,
+                        blur: false,
+                    },
                     title: {
                         text: playlistData.name,
+                        fontSize: StyleConstants.TOP_BAR_TEXT_SIZE,
+                        color: StyleConstants.TOP_BAR_TEXT_COLOR,
+                        // iOS Only
+                        fontWeight: 'medium',
                     },
                 },
             },

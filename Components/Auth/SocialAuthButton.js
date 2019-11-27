@@ -33,7 +33,7 @@ const SocialAuthButton = ({ platform }) => {
                         },
                         title: {
                             text: 'Playlists',
-                            fontSize: 24,
+                            fontSize: StyleConstants.TOP_BAR_TEXT_SIZE,
                             color: StyleConstants.TOP_BAR_TEXT_COLOR,
                             // iOS Only
                             fontWeight: 'medium',

@@ -66,8 +66,8 @@ const CommentsList = ({
     return (
         <SafeAreaView style={styles.Container}>
             <KeyboardAvoidingView
-                behavior={Platform.OS === 'iOS' ? 'padding' : 'height'}
-                keyboardVerticalOffset={Platform.OS === 'iOS' ? 50 : 80}
+                behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+                keyboardVerticalOffset={Platform.OS === 'ios' ? 135 : 150}
             >
                 <SwipeListView
                     // eslint-disable-next-line no-return-assign
