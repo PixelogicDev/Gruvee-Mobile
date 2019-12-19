@@ -8,6 +8,8 @@ import Playlist from 'Gruvee/Components/Playlist/PlaylistListView'
 import SongList from 'Gruvee/Components/SongList/SongListView'
 import AddSongModal from 'Gruvee/Components/SongList/components/AddSongModal/AddSongModal'
 import CommentsList from 'Gruvee/Components/CommentsList/CommentsListView'
+import ShowMembersAction from 'Gruvee/Components/Common/TopBar/Actions/ShowMembersAction/ShowMembersAction'
+import MembersSideMenu from 'Gruvee/Components/MembersSideMenu/MembersSideMenu'
 import * as NavigationConstants from '@NavigationConstants'
 import App from './App'
 
@@ -34,24 +36,52 @@ Navigation.registerComponent(
     () => CommentsList
 )
 
+// TopBar components
+Navigation.registerComponent(
+    NavigationConstants.TOP_BAR_MEMBERS_ACTION_NAME,
+    () => ShowMembersAction
+)
+
+// SideMenu components
+Navigation.registerComponent(
+    NavigationConstants.SIDEMENU_ALL_MEMBERS_NAME,
+    () => MembersSideMenu
+)
+
 Navigation.events().registerAppLaunchedListener(() => {
     Navigation.setRoot({
         root: {
-            stack: {
-                id: NavigationConstants.STACK_ID,
-                children: [
-                    {
-                        component: {
-                            id: NavigationConstants.ROOT_NAV_ID,
-                            name: NavigationConstants.ROOT_NAV_NAME,
-                            options: {
-                                topBar: {
-                                    visible: false,
+            sideMenu: {
+                center: {
+                    stack: {
+                        id: NavigationConstants.STACK_ID,
+                        children: [
+                            {
+                                component: {
+                                    id: NavigationConstants.ROOT_NAV_ID,
+                                    name: NavigationConstants.ROOT_NAV_NAME,
+                                    options: {
+                                        topBar: {
+                                            visible: false,
+                                        },
+                                    },
                                 },
                             },
+                        ],
+                    },
+                },
+                right: {
+                    component: {
+                        name: NavigationConstants.SIDEMENU_ALL_MEMBERS_NAME,
+                    },
+                },
+                options: {
+                    sideMenu: {
+                        right: {
+                            width: 200,
                         },
                     },
-                ],
+                },
             },
         },
     })

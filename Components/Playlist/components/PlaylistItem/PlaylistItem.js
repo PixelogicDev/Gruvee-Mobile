@@ -40,6 +40,16 @@ const PlaylistItem = ({
 }
 
 // Actions
+const showMembersAction = () => {
+    Navigation.mergeOptions(NavigationConstants.STACK_ID, {
+        sideMenu: {
+            right: {
+                visible: true,
+            },
+        },
+    })
+}
+
 const showSongListAction = (
     playlistData,
     addSongToPlaylistAction,
@@ -63,6 +73,20 @@ const showSongListAction = (
                     backButton: {
                         color: StyleConstants.TOP_BAR_BACK_BUTTON_COLOR,
                     },
+                    rightButtons: [
+                        {
+                            id: NavigationConstants.TOP_BAR_MEMBERS_ACTION_ID,
+                            component: {
+                                name:
+                                    NavigationConstants.TOP_BAR_MEMBERS_ACTION_NAME,
+                                passProps: {
+                                    showMembersAction: () => {
+                                        showMembersAction()
+                                    },
+                                },
+                            },
+                        },
+                    ],
                     background: {
                         color: StyleConstants.TOP_BAR_BACKGROUND_COLOR,
                         blur: false,
