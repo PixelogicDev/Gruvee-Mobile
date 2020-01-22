@@ -51,7 +51,7 @@ In order to develop for Grüvee you are going to need to have a few things insta
 
 1. **Javascript**
 
-    - [Lastest Version of Node.js](https://nodejs.org/)
+    - [Node.js 12.9.1](https://nodejs.org/dist/v12.9.1/)
 
 2. **iOS Development**
 
@@ -63,6 +63,8 @@ In order to develop for Grüvee you are going to need to have a few things insta
     - [JDK 11 or Lower](https://www.oracle.com/technetwork/java/javase/downloads/index.html) (This is very important)
     - [Latest Version of Android Studio](https://developer.android.com/studio)
     - [Android Emulator](https://developer.android.com/studio/run/emulator)
+    - Android Build Tools 28.0.3 (Installable from Studio SDK Manager)
+    - Android 9 SDK (Installable from Studio SDK Manager)
 
 # Running Grüvee Locally
 
@@ -119,12 +121,14 @@ Once thats complete run the following commands:
 >
 > For this just open up Android Studio and build the project, with an emulator set.
 >
-> To note: we have been developing on a Pixel 2 emulator, but feel free to use any device you'd like! At the end of the day it will be better for testing anyways
+> To note: we have been developing on a Pixel 2 emulator and a Pixel 3 physical device, but feel free to use any device you'd like! At the end of the day it will be better for testing anyways.
 
-Once thats complete run the android emulator:
+Once thats complete run the android emulator or validate your device over ADB:
 
 ```console
-$ npm run android-start
+$ cd android/app
+$ keytool -genkey -v -keystore debug.keystore -alias androiddebugkey -keyalg RSA -keysize 2048 -validity 10000
+$ react-native 
 ```
 
 Congratulations! You should now see a beautiful Grüvee mobile app displayed and ready to go!
@@ -154,4 +158,5 @@ Don't be scared to join the [PixelogicDev discord](https://discord.gg/ubgX6T8) i
 ## ⭐Current Contributors
 
 [@isabellabrookes](https://github.com/isabellabrookes) aka rawrsatbeards - PixelogicDev Channel Moderator<br>
-[poopuhchoo](https://github.com/tjengland) - PixelogicDev Team Member
+[poopuhchoo](https://github.com/tjengland) - PixelogicDev Team Member<br>
+[DynamicDonkey](https://github.com/DynamicDonkey) - PixelogicDev Channel Member
