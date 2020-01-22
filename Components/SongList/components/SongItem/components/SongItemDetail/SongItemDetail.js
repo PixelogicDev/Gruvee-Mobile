@@ -32,13 +32,13 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         backgroundColor: StyleConstants.SONG_LIST_ITEM_BACKGROUND_COLOR,
         height: StyleConstants.SONG_LIST_ITEM_DETAIL_HEIGHT,
-        borderTopLeftRadius: StyleConstants.SONG_LIST_ITEM_BORDER_RADIUS,
-        borderTopRightRadius: StyleConstants.SONG_LIST_ITEM_BORDER_RADIUS,
+        borderTopLeftRadius: StyleConstants.LIST_ITEM_BORDER_RADIUS,
+        borderTopRightRadius: StyleConstants.LIST_ITEM_BORDER_RADIUS,
     },
     Image: {
         width: StyleConstants.SONG_LIST_ITEM_ALBUM_ARTWORK_SIZE,
         height: StyleConstants.SONG_LIST_ITEM_ALBUM_ARTWORK_SIZE,
-        borderTopLeftRadius: StyleConstants.SONG_LIST_ITEM_BORDER_RADIUS,
+        borderTopLeftRadius: StyleConstants.LIST_ITEM_BORDER_RADIUS,
         marginRight: 15,
     },
     DetailContainer: {

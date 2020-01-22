@@ -7,6 +7,7 @@ import AddPlaylistModal from 'Gruvee/Components/Playlist/components/AddPlaylistM
 import Playlist from 'Gruvee/Components/Playlist/PlaylistListView'
 import SongList from 'Gruvee/Components/SongList/SongListView'
 import AddSongModal from 'Gruvee/Components/SongList/components/AddSongModal/AddSongModal'
+import CommentsList from 'Gruvee/Components/CommentsList/CommentsListView'
 import * as NavigationConstants from '@NavigationConstants'
 import App from './App'
 
@@ -27,6 +28,10 @@ Navigation.registerComponent(
 Navigation.registerComponent(
     NavigationConstants.SONG_LIST_NAV_NAME,
     () => SongList
+)
+Navigation.registerComponent(
+    NavigationConstants.COMMENTS_LIST_NAV_NAME,
+    () => CommentsList
 )
 
 Navigation.events().registerAppLaunchedListener(() => {

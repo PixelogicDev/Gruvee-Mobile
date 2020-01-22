@@ -11,6 +11,7 @@ const SwipeablePlaylistItem = ({
     deletePlaylistAction,
     addSongToPlaylistAction,
     deleteSongFromPlaylistAction,
+    updateSongsInPlaylistAction,
 }) => {
     const [isDeleting, setIsDeleting] = useState(false)
     const onConfirmDelete = () => setIsDeleting(true)
@@ -20,7 +21,9 @@ const SwipeablePlaylistItem = ({
     return (
         <AnimatedSwipeRow
             swipeTriggered={isDeleting}
-            swipeActionCallback={deletePlaylistAction}
+            swipeActionCallback={() => {
+                deletePlaylistAction(playlistData.id)
+            }}
             itemHeight={200} // TODO: Android vs iOS check
             isRightOpenValue
             swipeActionComponent={renderSwipeActionComponent(
@@ -30,7 +33,8 @@ const SwipeablePlaylistItem = ({
             listItemComponent={renderPlaylistItem(
                 playlistData,
                 addSongToPlaylistAction,
-                deleteSongFromPlaylistAction
+                deleteSongFromPlaylistAction,
+                updateSongsInPlaylistAction
             )}
         />
     )
@@ -57,12 +61,14 @@ const comfirmDeleteAlert = (playlistData, onConfirmDelete) => {
 const renderPlaylistItem = (
     playlist,
     addSongToPlaylistAction,
-    deleteSongFromPlaylistAction
+    deleteSongFromPlaylistAction,
+    updateSongsInPlaylistAction
 ) => (
     <PlaylistItem
         playlistData={playlist}
         addSongToPlaylistAction={addSongToPlaylistAction}
         deleteSongFromPlaylistAction={deleteSongFromPlaylistAction}
+        updateSongsInPlaylistAction={updateSongsInPlaylistAction}
     />
 )
 

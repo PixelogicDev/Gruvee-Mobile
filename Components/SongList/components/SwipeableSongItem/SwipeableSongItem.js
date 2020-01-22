@@ -7,7 +7,13 @@ import SongItem from '../SongItem/SongItem'
 import * as StyleConstants from '@StyleConstants'
 
 // deleteItemById === func
-const SwipeableSongItem = ({ song, deleteItemById }) => {
+const SwipeableSongItem = ({
+    song,
+    addCommentFromSongAction,
+    deleteItemById,
+    deleteCommentFromSongAction,
+    updateSongsInPlaylistAction,
+}) => {
     const [isDeleting, setIsDeleting] = useState(false)
     const onConfirmDelete = () => setIsDeleting(true)
     const confirmDeleteSongAction = () =>
@@ -17,13 +23,18 @@ const SwipeableSongItem = ({ song, deleteItemById }) => {
         <AnimatedSwipeRow
             swipeTriggered={isDeleting}
             swipeActionCallback={deleteItemById}
-            itemHeight={120} // TODO: Android vs iOS check
+            itemHeight={StyleConstants.SONG_LIST_ITEM_HEIGHT_iOS} // TODO: Android vs iOS check
             isRightOpenValue
             swipeActionComponent={renderSwipeActionComponent(
                 song,
                 confirmDeleteSongAction
             )}
-            listItemComponent={renderSongItem(song)}
+            listItemComponent={renderSongItem(
+                song,
+                addCommentFromSongAction,
+                deleteCommentFromSongAction,
+                updateSongsInPlaylistAction
+            )}
         />
     )
 }
@@ -46,7 +57,21 @@ const comfirmDeleteAlert = (song, onConfirmDelete) => {
 }
 
 // Rendered Components
-const renderSongItem = song => <SongItem songData={song} />
+const renderSongItem = (
+    song,
+    addCommentFromSongAction,
+    deleteCommentFromSongAction,
+    updateSongsInPlaylistAction
+) => {
+    return (
+        <SongItem
+            songData={song}
+            addCommentFromSongAction={addCommentFromSongAction}
+            deleteCommentFromSongAction={deleteCommentFromSongAction}
+            updateSongsInPlaylistAction={updateSongsInPlaylistAction}
+        />
+    )
+}
 
 const renderSwipeActionComponent = (song, confirmDeleteSongAction) => {
     // eslint-disable-next-line global-require

@@ -1,23 +1,56 @@
 import React from 'react'
-import { Text, View, Image, TouchableOpacity, StyleSheet } from 'react-native'
+import { Text, Image, TouchableOpacity, StyleSheet } from 'react-native'
+import { Navigation } from 'react-native-navigation'
 import * as StyleConstants from '@StyleConstants'
+import * as NavigationConstants from '@NavigationConstants'
 
-const plusIconAsset = require('Gruvee/Assets/Icons/Plus/plus_icon.png')
+const rightChevronAsset = require('Gruvee/Assets/Icons/RightChevron/right_chevron.png')
 
-const SongItemCommentBar = ({ songData }) => {
+// Actions
+const navigateToCommentsListAction = (
+    songData,
+    addCommentFromSongAction,
+    deleteCommentFromSongAction
+) => {
+    Navigation.push(NavigationConstants.STACK_ID, {
+        component: {
+            name: NavigationConstants.COMMENTS_LIST_NAV_NAME,
+            passProps: {
+                songId: songData.id,
+                comments: songData.comments,
+                addCommentFromSongAction,
+                deleteCommentFromSongAction,
+            },
+            options: {
+                topBar: {
+                    title: {
+                        text: 'Comments',
+                    },
+                },
+            },
+        },
+    })
+}
+
+const SongItemCommentBar = ({
+    songData,
+    addCommentFromSongAction,
+    deleteCommentFromSongAction,
+}) => {
     return (
-        <View style={styles.Container}>
+        <TouchableOpacity
+            style={styles.Container}
+            onPress={() => {
+                navigateToCommentsListAction(
+                    songData,
+                    addCommentFromSongAction,
+                    deleteCommentFromSongAction
+                )
+            }}
+        >
             <Text style={styles.Text}>{songData.comments.length} Comments</Text>
-            <TouchableOpacity
-                onPress={() => {
-                    console.log(
-                        `Ready to open ${songData.comments.length} comments for ${songData.name}`
-                    )
-                }}
-            >
-                <Image style={styles.Image} source={plusIconAsset} />
-            </TouchableOpacity>
-        </View>
+            <Image style={styles.Image} source={rightChevronAsset} />
+        </TouchableOpacity>
     )
 }
 
@@ -25,9 +58,9 @@ const SongItemCommentBar = ({ songData }) => {
 const styles = StyleSheet.create({
     Container: {
         height: 40,
-        backgroundColor: StyleConstants.SONG_LIST_COMMENT_BAR_BACKGROUND_COLOR,
-        borderBottomLeftRadius: StyleConstants.SONG_LIST_ITEM_BORDER_RADIUS,
-        borderBottomRightRadius: StyleConstants.SONG_LIST_ITEM_BORDER_RADIUS,
+        backgroundColor: StyleConstants.DARK_BACKGROUND_COLOR,
+        borderBottomLeftRadius: StyleConstants.LIST_ITEM_BORDER_RADIUS,
+        borderBottomRightRadius: StyleConstants.LIST_ITEM_BORDER_RADIUS,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
@@ -38,8 +71,8 @@ const styles = StyleSheet.create({
         paddingLeft: 15,
     },
     Image: {
-        width: 18,
-        height: 18,
+        width: 16,
+        height: 16,
         marginRight: 15,
     },
 })

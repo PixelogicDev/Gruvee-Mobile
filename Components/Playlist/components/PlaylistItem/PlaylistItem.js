@@ -11,6 +11,7 @@ const PlaylistItem = ({
     playlistData,
     addSongToPlaylistAction,
     deleteSongFromPlaylistAction,
+    updateSongsInPlaylistAction,
 }) => {
     return (
         <TouchableOpacity
@@ -18,7 +19,8 @@ const PlaylistItem = ({
                 showSongListAction(
                     playlistData,
                     addSongToPlaylistAction,
-                    deleteSongFromPlaylistAction
+                    deleteSongFromPlaylistAction,
+                    updateSongsInPlaylistAction
                 )
             }}
         >
@@ -41,7 +43,8 @@ const PlaylistItem = ({
 const showSongListAction = (
     playlistData,
     addSongToPlaylistAction,
-    deleteSongFromPlaylistAction
+    deleteSongFromPlaylistAction,
+    updateSongsInPlaylistAction
 ) => {
     Navigation.push(NavigationConstants.STACK_ID, {
         component: {
@@ -51,6 +54,7 @@ const showSongListAction = (
                 songs: playlistData.songs,
                 addSongToPlaylistAction,
                 deleteSongFromPlaylistAction,
+                updateSongsInPlaylistAction,
             },
             options: {
                 topBar: {

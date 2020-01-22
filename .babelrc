@@ -8,6 +8,7 @@
                 "alias": {
                     "@StyleConstants": "./StyleConstants.js",
                     "@NavigationConstants": "./NavigationConstants.js",
+                    "@Mock": "./Mock",
                     "Gruvee/*": "./*"
                 }
             }

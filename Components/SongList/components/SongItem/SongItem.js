@@ -4,9 +4,14 @@ import { Alert, Linking, StyleSheet, TouchableOpacity } from 'react-native'
 import SongItemDetail from './components/SongItemDetail/SongItemDetail'
 import SongItemCommentBar from './components/SongItemCommentBar/SongItemCommentBar'
 
-const SongItem = ({ songData }) => {
+const SongItem = ({
+    songData,
+    addCommentFromSongAction,
+    deleteCommentFromSongAction,
+    updateSongsInPlaylistAction,
+}) => {
     // Actions
-    const openSongDeepLink = platformDeepLink => {
+    const openSongDeepLinkAction = platformDeepLink => {
         Linking.canOpenURL(platformDeepLink)
             .then(isSupported => {
                 if (!isSupported) {
@@ -22,16 +27,24 @@ const SongItem = ({ songData }) => {
                 Alert.alert('Invalid song 😐')
             })
     }
+
     return (
-        <TouchableOpacity
-            style={styles.Container}
-            onPress={() => {
-                openSongDeepLink(songData.platformDeepLink)
-            }}
-        >
-            <SongItemDetail songData={songData} />
-            <SongItemCommentBar songData={songData} />
-        </TouchableOpacity>
+        <>
+            <TouchableOpacity
+                style={styles.Container}
+                onPress={() => {
+                    openSongDeepLinkAction(songData.platformDeepLink)
+                }}
+            >
+                <SongItemDetail songData={songData} />
+            </TouchableOpacity>
+            <SongItemCommentBar
+                songData={songData}
+                addCommentFromSongAction={addCommentFromSongAction}
+                deleteCommentFromSongAction={deleteCommentFromSongAction}
+                updateSongsInPlaylistAction={updateSongsInPlaylistAction}
+            />
+        </>
     )
 }
 
@@ -39,6 +52,7 @@ const SongItem = ({ songData }) => {
 const styles = StyleSheet.create({
     Container: {
         paddingBottom: 25,
+        flex: 1,
     },
 })
 

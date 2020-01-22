@@ -8,75 +8,11 @@ import SwipeablePlaylistItem from './components/SwipeablePlaylistItem/SwipeableP
 import * as StyleConstants from '@StyleConstants'
 import * as NavigationConstants from '@NavigationConstants'
 
+import mockPlaylists from '@Mock/mockPlaylists'
+
 // Remove broken path warning
 console.disableYellowBox = true
 console.ignoredYellowBox = ['Could not find image']
-
-// Mock Data
-const mockSongs = [
-    {
-        id: 'song0',
-        addedBy: 'SomeOtherMember',
-        name: 'SomeCoolNewSong',
-        artist: 'YaBoiAlec',
-        album: 'Album of The Year',
-        albumArtwork: 'SomeBadLink',
-        platformDeepLink:
-            'https://open.spotify.com/track/4lnmdAWAhVdmbDBEC4gy0d?si=U0nL2FaYR3Ch41m8MgtS1w',
-        comments: [
-            'WOW SO GOOD.',
-            'This could be better...',
-            'Whats with the album name...',
-        ],
-    },
-    {
-        id: 'song1',
-        addedBy: 'SomeOtherMember',
-        name: 'SomeCoolNewSong',
-        artist: 'YaBoiAlec',
-        album: 'Album of The Year',
-        albumArtwork:
-            'https://www.clashmusic.com/sites/default/files/styles/article_feature/public/field/image/arcgods.jpg?itok=quBBnjX3',
-        platformDeepLink: 'spotify://SomeDeepLink',
-        comments: ['nice.'],
-    },
-    {
-        id: 'song2',
-        addedBy: 'SomeOtherMember',
-        name: 'SomeCoolNewSong',
-        artist: 'YaBoiAlec',
-        album: 'Album of The Year',
-        albumArtwork:
-            'https://upload.wikimedia.org/wikipedia/en/thumb/3/31/Northlane_Mesmer_artwork.jpg/220px-Northlane_Mesmer_artwork.jpg',
-        platformDeepLink:
-            'https://open.spotify.com/track/0jqBo5RYn008f4ZY8kPewW?si=4iZ8e7BGQoqKP1A2nxZ1tA',
-        comments: ['Anothe one.', 'Another two?'],
-    },
-]
-const mockData = [
-    {
-        id: 'Playlist0',
-        name: 'Cool Kids Music',
-        members: ['Ya Boi', 'Alec', 'Was Here'],
-        songs: mockSongs,
-        albumArtworkUrl: 'SomeBrokenImagePath',
-    },
-    {
-        id: 'Playlist1',
-        name: "YaBoi Alec's Playlist",
-        members: ['Another', 'Name', 'Was Here'],
-        songs: mockSongs,
-        albumArtworkUrl:
-            'https://99designs-blog.imgix.net/blog/wp-content/uploads/2017/12/attachment_68585523.jpg?auto=format&q=60&fit=max&w=930',
-    },
-    {
-        id: 'Playlist2',
-        name: 'Y A G',
-        songs: mockSongs,
-        members: ['Hi', 'I am', 'a name'],
-        albumArtworkUrl: 'https://i.imgur.com/uoMh2y3.png',
-    },
-]
 
 const PlaylistListView = () => {
     const [playlists, setPlaylist] = useState([])
@@ -88,12 +24,13 @@ const PlaylistListView = () => {
             deletePlaylistAction={deletePlaylistAction}
             addSongToPlaylistAction={addSongToPlaylistAction}
             deleteSongFromPlaylistAction={deleteSongFromPlaylistAction}
+            updateSongsInPlaylistAction={updateSongsInPlaylistAction}
         />
     )
 
     useEffect(() => {
         // Call API set to playlists
-        setPlaylist([...playlists, ...mockData])
+        setPlaylist([...playlists, ...mockPlaylists])
 
         // Only if on Android, let's setup for backhandler override
         if (Platform.OS === 'android') {
@@ -175,6 +112,19 @@ const PlaylistListView = () => {
         setPlaylist(updatedPlaylist)
     }
 
+    // Comments Actions
+    const updateSongsInPlaylistAction = (playlistId, songs) => {
+        const updatedPlaylist = playlists.map(playlist => {
+            if (playlist.id === playlistId) {
+                playlist.songs = songs
+            }
+
+            return playlist
+        })
+
+        setPlaylist(updatedPlaylist)
+    }
+
     const handleBackPress = () => {
         if (addPlaylistModalShown) {
             Navigation.dismissOverlay(
@@ -219,7 +169,7 @@ const PlaylistListView = () => {
             <View style={styles.ButtonContainer}>
                 <AddItemButton
                     style={styles.Button}
-                    modalNavigateAction={navigateToAddPlaylistModalAction}
+                    addItemAction={navigateToAddPlaylistModalAction}
                 />
             </View>
         </>
