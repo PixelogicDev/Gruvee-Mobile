@@ -1,8 +1,11 @@
 /**
  * @format
+ TheDkbay - "Gib name" (1/22/2020)
+ Stacking - "He had no arms or legs. He couldn't see, hear, or speak. This is how he led a nation." (01/27/20)
  */
 
 import { Navigation } from 'react-native-navigation'
+import ReduxProvider from 'Gruvee/Redux/Components/ReduxProvider'
 import AddPlaylistModal from 'Gruvee/Components/Playlist/components/AddPlaylistModal/AddPlaylistModal'
 import Playlist from 'Gruvee/Components/Playlist/PlaylistListView'
 import SongList from 'Gruvee/Components/SongList/SongListView'
@@ -14,38 +17,36 @@ import * as NavigationConstants from '@NavigationConstants'
 import App from './App'
 
 // Register navigation components
-Navigation.registerComponent(NavigationConstants.ROOT_NAV_NAME, () => App)
-Navigation.registerComponent(
-    NavigationConstants.PLAYLIST_NAV_NAME,
-    () => Playlist
+Navigation.registerComponent(NavigationConstants.ROOT_NAV_NAME, () =>
+    ReduxProvider(App)
+)
+Navigation.registerComponent(NavigationConstants.PLAYLIST_NAV_NAME, () =>
+    ReduxProvider(Playlist)
 )
 Navigation.registerComponent(
     NavigationConstants.ADD_PLAYLIST_MODAL_NAV_NAME,
-    () => AddPlaylistModal
+    () => ReduxProvider(AddPlaylistModal)
 )
-Navigation.registerComponent(
-    NavigationConstants.ADD_SONG_MODAL_NAV_NAME,
-    () => AddSongModal
+Navigation.registerComponent(NavigationConstants.ADD_SONG_MODAL_NAV_NAME, () =>
+    ReduxProvider(AddSongModal)
 )
-Navigation.registerComponent(
-    NavigationConstants.SONG_LIST_NAV_NAME,
-    () => SongList
+Navigation.registerComponent(NavigationConstants.SONG_LIST_NAV_NAME, () =>
+    ReduxProvider(SongList)
 )
-Navigation.registerComponent(
-    NavigationConstants.COMMENTS_LIST_NAV_NAME,
-    () => CommentsList
+Navigation.registerComponent(NavigationConstants.COMMENTS_LIST_NAV_NAME, () =>
+    ReduxProvider(CommentsList)
 )
 
 // TopBar components
 Navigation.registerComponent(
     NavigationConstants.TOP_BAR_MEMBERS_ACTION_NAME,
-    () => ShowMembersAction
+    () => ReduxProvider(ShowMembersAction)
 )
 
 // SideMenu components
 Navigation.registerComponent(
     NavigationConstants.SIDEMENU_ALL_MEMBERS_NAME,
-    () => MembersSideMenu
+    () => ReduxProvider(MembersSideMenu)
 )
 
 Navigation.events().registerAppLaunchedListener(() => {

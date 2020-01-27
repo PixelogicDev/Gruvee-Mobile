@@ -1,20 +1,21 @@
 import React, { useState, useEffect } from 'react'
+import { connect } from 'react-redux'
 import { BackHandler, View, StyleSheet, Platform } from 'react-native'
 import { SwipeListView } from 'react-native-swipe-list-view'
 import { Navigation } from 'react-native-navigation'
 
+import * as ActionTypes from 'Gruvee/Redux/Actions/ActionsType'
 import AddItemButton from 'Gruvee/Components/Common/AddItemButton'
-import SwipeablePlaylistItem from './components/SwipeablePlaylistItem/SwipeablePlaylistItem'
+import mockPlaylists from '@Mock/mockPlaylists'
 import * as StyleConstants from '@StyleConstants'
 import * as NavigationConstants from '@NavigationConstants'
-
-import mockPlaylists from '@Mock/mockPlaylists'
+import SwipeablePlaylistItem from './components/SwipeablePlaylistItem/SwipeablePlaylistItem'
 
 // Remove broken path warning
 console.disableYellowBox = true
 console.ignoredYellowBox = ['Could not find image']
 
-const PlaylistListView = () => {
+const PlaylistListView = props => {
     const [playlists, setPlaylist] = useState([])
     const [addPlaylistModalShown, setAddPlaylistModalShown] = useState(false)
     const keyExtractor = item => `${item.id}`
@@ -29,6 +30,9 @@ const PlaylistListView = () => {
     )
 
     useEffect(() => {
+        // REDUX STUFF
+        props.fetchPlaylists()
+
         // Call API set to playlists
         setPlaylist([...playlists, ...mockPlaylists])
 
@@ -176,6 +180,14 @@ const PlaylistListView = () => {
     )
 }
 
+// Redux
+const mapStateToProps = state => {
+    return { playlists: state.MockDataReducer.playlists }
+}
+const mapDispatchToProps = dispatch => ({
+    fetchPlaylists: () => dispatch({ type: ActionTypes.ADD_MOCK_DATA }),
+})
+
 // Styles
 const styles = StyleSheet.create({
     Container: {
@@ -197,4 +209,7 @@ const styles = StyleSheet.create({
     },
 })
 
-export default PlaylistListView
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(PlaylistListView)
