@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux'
-import MockDataReducer from './MockDataReducer'
+import PlaylistDataReducer from './PlaylistDataReducer'
 
 export default combineReducers({
-    MockDataReducer,
+    PlaylistDataReducer,
 })

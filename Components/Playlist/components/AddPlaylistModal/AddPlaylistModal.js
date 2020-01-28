@@ -4,10 +4,14 @@ import { Navigation } from 'react-native-navigation'
 import Playlist from 'Gruvee/lib/Playlist'
 import InputModal from 'Gruvee/Components/Common/InputModal'
 
+// Redux
+import { connect } from 'react-redux'
+import { ADD_PLAYLIST } from 'Gruvee/Redux/Actions/ActionsType'
+
 import * as StyleConstants from '@StyleConstants'
 import * as NavigationConstants from '@NavigationConstants'
 
-const AddPlaylistModal = ({ title, addPlaylistAction }) => {
+const AddPlaylistModal = ({ title, addPlaylist }) => {
     const [playlistNameValue, onChangePlaylistNameText] = React.useState('')
     const [membersNameValue, onChangeMembersNameText] = React.useState('')
 
@@ -17,11 +21,11 @@ const AddPlaylistModal = ({ title, addPlaylistAction }) => {
         const playlist = new Playlist(playlistNameValue, membersNameValue)
 
         if (!playlistNameValue) {
-            // Why is this here?
+            // Stop this and show error?
         }
 
         // Run action to create playlist
-        addPlaylistAction(playlist)
+        addPlaylist(playlist)
 
         // Dismiss
         Navigation.dismissOverlay(NavigationConstants.ADD_PLAYLIST_MODAL_NAV_ID)
@@ -72,4 +76,20 @@ const styles = StyleSheet.create({
     },
 })
 
-export default AddPlaylistModal
+// Redux Action Creators
+const addPlaylist = playlist => {
+    return {
+        type: ADD_PLAYLIST,
+        data: playlist,
+    }
+}
+
+// Redux Mappers
+const mapDispatchToProps = dispatch => ({
+    addPlaylist: playlist => dispatch(addPlaylist(playlist)),
+})
+
+export default connect(
+    null,
+    mapDispatchToProps
+)(AddPlaylistModal)

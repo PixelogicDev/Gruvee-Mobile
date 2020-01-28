@@ -4,7 +4,7 @@ import { BackHandler, View, StyleSheet, Platform } from 'react-native'
 import { SwipeListView } from 'react-native-swipe-list-view'
 import { Navigation } from 'react-native-navigation'
 
-import * as ActionTypes from 'Gruvee/Redux/Actions/ActionsType'
+import { ADD_MOCK_DATA } from 'Gruvee/Redux/Actions/ActionsType'
 import AddItemButton from 'Gruvee/Components/Common/AddItemButton'
 import mockPlaylists from '@Mock/mockPlaylists'
 import * as StyleConstants from '@StyleConstants'
@@ -16,7 +16,7 @@ console.disableYellowBox = true
 console.ignoredYellowBox = ['Could not find image']
 
 const PlaylistListView = props => {
-    const [playlists, setPlaylist] = useState([])
+    const [somePlaylist, setPlaylist] = useState([])
     const [addPlaylistModalShown, setAddPlaylistModalShown] = useState(false)
     const keyExtractor = item => `${item.id}`
     const renderItem = ({ item }) => (
@@ -30,11 +30,8 @@ const PlaylistListView = props => {
     )
 
     useEffect(() => {
-        // REDUX STUFF
+        // Get playlists and set to props.playlists
         props.fetchPlaylists()
-
-        // Call API set to playlists
-        setPlaylist([...playlists, ...mockPlaylists])
 
         // Only if on Android, let's setup for backhandler override
         if (Platform.OS === 'android') {
@@ -79,11 +76,8 @@ const PlaylistListView = props => {
         }
     }, [])
 
-    // Playlist Actions
-    const addPlaylistAction = playlist => {
-        // Set State
-        setPlaylist([...playlists, playlist])
-    }
+    // Redux props
+    const { playlists } = props
 
     const deletePlaylistAction = playlistToDeleteId => {
         setPlaylist(
@@ -152,7 +146,6 @@ const PlaylistListView = props => {
                 },
                 passProps: {
                     title: 'Add Playlist',
-                    addPlaylistAction,
                 },
             },
         })
@@ -180,12 +173,17 @@ const PlaylistListView = props => {
     )
 }
 
-// Redux
+// Action Creators
+const fetchPlaylists = () => {
+    return { type: ADD_MOCK_DATA }
+}
+
+// Redux Mappers
 const mapStateToProps = state => {
-    return { playlists: state.MockDataReducer.playlists }
+    return { playlists: state.PlaylistDataReducer.playlists }
 }
 const mapDispatchToProps = dispatch => ({
-    fetchPlaylists: () => dispatch({ type: ActionTypes.ADD_MOCK_DATA }),
+    fetchPlaylists: () => dispatch(fetchPlaylists()),
 })
 
 // Styles
