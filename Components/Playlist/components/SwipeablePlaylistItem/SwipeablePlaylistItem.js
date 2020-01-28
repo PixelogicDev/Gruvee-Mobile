@@ -1,6 +1,10 @@
 import React, { useState } from 'react'
 import { Alert } from 'react-native'
 
+// Redux
+import { connect } from 'react-redux'
+import { DELETE_PLAYLIST } from 'Gruvee/Redux/Actions/ActionsType'
+
 import AnimatedSwipeRow from 'Gruvee/Components/Common/AnimatedSwipeRow'
 import SwipeAction from 'Gruvee/Components/Common/SwipeAction'
 import PlaylistItem from '../PlaylistItem/PlaylistItem'
@@ -8,7 +12,7 @@ import * as StyleConstants from '@StyleConstants'
 
 const SwipeablePlaylistItem = ({
     playlistData,
-    deletePlaylistAction,
+    deletePlaylist,
     addSongToPlaylistAction,
     deleteSongFromPlaylistAction,
     updateSongsInPlaylistAction,
@@ -22,7 +26,7 @@ const SwipeablePlaylistItem = ({
         <AnimatedSwipeRow
             swipeTriggered={isDeleting}
             swipeActionCallback={() => {
-                deletePlaylistAction(playlistData.id)
+                deletePlaylist(playlistData.id)
             }}
             itemHeight={200} // TODO: Android vs iOS check
             isRightOpenValue
@@ -88,4 +92,20 @@ const renderSwipeActionComponent = (playlist, confirmDeletePlaylistAction) => {
     )
 }
 
-export default SwipeablePlaylistItem
+// Redux Action Creators
+const deletePlaylist = playlistId => {
+    return {
+        type: DELETE_PLAYLIST,
+        data: playlistId,
+    }
+}
+
+// Redux Mappers
+const mapDispatchToProps = dispatch => ({
+    deletePlaylist: playlistId => dispatch(deletePlaylist(playlistId)),
+})
+
+export default connect(
+    null,
+    mapDispatchToProps
+)(SwipeablePlaylistItem)

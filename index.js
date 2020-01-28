@@ -52,38 +52,42 @@ Navigation.registerComponent(
 Navigation.events().registerAppLaunchedListener(() => {
     Navigation.setRoot({
         root: {
-            sideMenu: {
-                center: {
-                    stack: {
-                        id: NavigationConstants.STACK_ID,
-                        children: [
-                            {
-                                component: {
-                                    id: NavigationConstants.ROOT_NAV_ID,
-                                    name: NavigationConstants.ROOT_NAV_NAME,
-                                    options: {
-                                        topBar: {
-                                            visible: false,
-                                        },
-                                    },
+            stack: {
+                id: NavigationConstants.STACK_ID,
+                children: [
+                    {
+                        component: {
+                            id: NavigationConstants.ROOT_NAV_ID,
+                            name: NavigationConstants.ROOT_NAV_NAME,
+                            options: {
+                                topBar: {
+                                    visible: false,
                                 },
                             },
-                        ],
-                    },
-                },
-                right: {
-                    component: {
-                        name: NavigationConstants.SIDEMENU_ALL_MEMBERS_NAME,
-                    },
-                },
-                options: {
-                    sideMenu: {
-                        right: {
-                            width: 200,
                         },
                     },
-                },
+                ],
             },
         },
     })
 })
+
+/*
+Until I figure out how to do this
+stack: {
+    id: NavigationConstants.STACK_ID,
+    children: [
+        {
+            component: {
+                id: NavigationConstants.ROOT_NAV_ID,
+                name: NavigationConstants.ROOT_NAV_NAME,
+                options: {
+                    topBar: {
+                        visible: false,
+                    },
+                },
+            },
+        },
+    ],
+}, 
+*/
