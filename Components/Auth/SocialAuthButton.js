@@ -28,7 +28,12 @@ const SocialAuthButton = ({ platform }) => {
             },
         })
     }
-
+    
+    var loginText = "Log In With " + platform.friendlyName
+    if (platform.friendlyName == 'Apple') {
+        loginText = "Sign In With " + platform.friendlyName
+    }
+    
     return (
         <TouchableOpacity
             onPress={navigateToPlaylists}
@@ -42,7 +47,7 @@ const SocialAuthButton = ({ platform }) => {
                 accessibilityLabel={`${platform.friendlyName} login button`}
                 style={styles.ButtonText(platform)}
             >
-                Log In With {platform.friendlyName}
+                {loginText}
             </Text>
         </TouchableOpacity>
     )
