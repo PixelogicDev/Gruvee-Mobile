@@ -1,3 +1,8 @@
+// sillyonly - "I have tooooo many of these" (01/30/20)
+// estrangedHD - "Can I also have one?" (01/30/20)
+// estrangedHD - "And another one Kappa" (01/30/20)
+// estrangedHD - "And another one Kappa" (01/30/20)
+
 import React, { useState, useEffect } from 'react'
 import { View, StyleSheet } from 'react-native'
 import { SwipeListView } from 'react-native-swipe-list-view'
@@ -7,6 +12,7 @@ import { Navigation } from 'react-native-navigation'
 import { connect } from 'react-redux'
 import {
     ADD_SONG_TO_PLAYLIST,
+    DELETE_SONG_FROM_PLAYLIST,
     FETCH_SONGS,
 } from 'Gruvee/Redux/Actions/ActionsType'
 
@@ -22,7 +28,7 @@ const SongListView = ({
     songs,
     fetchSongs,
     addSongToPlaylist,
-    deleteSongFromPlaylistAction,
+    deleteSongFromPlaylist,
     updateSongsInPlaylistAction,
 }) => {
     const [songsToDisplay, setSongsToDisplay] = useState([])
@@ -48,15 +54,14 @@ const SongListView = ({
         Navigation.dismissOverlay(NavigationConstants.ADD_SONG_MODAL_NAV_ID)
     }
 
-    const deleteItemById = id => {
+    const deleteSong = songId => {
         // TODO: Add some sort of promise
-        // If the first filter fails, lets not do the next one
-
-        // Filter out from current state
-        setSongsToDisplay(songsToDisplay.filter(song => song.id !== id))
 
         // Filter out song from parent state
-        deleteSongFromPlaylistAction(playlistId, id)
+        deleteSongFromPlaylist(playlistId, songId)
+
+        // Set songs to display
+        fetchSongs(playlistId)
     }
 
     const addCommentFromSongAction = (songId, comments) => {
@@ -115,7 +120,7 @@ const SongListView = ({
     const renderItem = ({ item }) => (
         <SwipeableSongItem
             song={item}
-            deleteItemById={() => deleteItemById(item.id)}
+            deleteSongById={() => deleteSong(item.id)}
             addCommentFromSongAction={addCommentFromSongAction}
             deleteCommentFromSongAction={deleteCommentFromSongAction}
             updateSongsInPlaylistAction={updateSongsInPlaylistAction}
@@ -173,6 +178,12 @@ const addSongToPlaylist = (playlistId, song) => {
         data: { playlistId, song },
     }
 }
+const deleteSongFromPlaylist = (playlistId, songId) => {
+    return {
+        type: DELETE_SONG_FROM_PLAYLIST,
+        data: { playlistId, songId },
+    }
+}
 const fetchSongs = playlistId => {
     return {
         type: FETCH_SONGS,
@@ -187,6 +198,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => ({
     addSongToPlaylist: (playlistId, song) =>
         dispatch(addSongToPlaylist(playlistId, song)),
+    deleteSongFromPlaylist: (playlistId, songId) =>
+        dispatch(deleteSongFromPlaylist(playlistId, songId)),
     fetchSongs: playlistId => dispatch(fetchSongs(playlistId)),
 })
 

@@ -4,11 +4,13 @@
 export const AddPlaylistAction = (currentPlaylists, newPlaylist) => {
     return [...currentPlaylists, newPlaylist]
 }
+
 export const DeletePlaylistAction = (currentPlaylists, playlistIdToRemove) => {
     return currentPlaylists.filter(
         playlist => playlist.id !== playlistIdToRemove
     )
 }
+
 export const AddSongToPlaylistAction = (
     currentPlaylists,
     playlistId,
@@ -25,6 +27,30 @@ export const AddSongToPlaylistAction = (
         return playlist
     })
 }
+
 export const FetchSongsFromPlaylist = (currentPlaylists, playlistId) => {
     return currentPlaylists.find(p => p.id === playlistId).songs
+}
+
+export const DeleteSongFromPlaylist = (
+    currentPlaylists,
+    playlistId,
+    songId
+) => {
+    const newPlaylists = currentPlaylists.map(playlist => {
+        if (playlist.id === playlistId) {
+            const filteredSongs = playlist.songs.filter(
+                song => song.id !== songId
+            )
+
+            return {
+                ...playlist,
+                songs: filteredSongs,
+            }
+        }
+
+        return playlist
+    })
+
+    return newPlaylists
 }

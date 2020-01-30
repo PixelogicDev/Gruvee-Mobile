@@ -6,12 +6,14 @@ import {
     ADD_SONG_TO_PLAYLIST,
     DELETE_PLAYLIST,
     FETCH_SONGS,
+    DELETE_SONG_FROM_PLAYLIST,
 } from '../Actions/ActionsType'
 import {
     AddPlaylistAction,
     AddSongToPlaylistAction,
     DeletePlaylistAction,
     FetchSongsFromPlaylist,
+    DeleteSongFromPlaylist,
 } from '../Actions/PlaylistActions'
 // InukApp - "Hello World" (01/27/20)
 // LilCazza - "PixelogicDev's code is just like monkaS when I use this bug (*feature)" (01/28/20)
@@ -47,6 +49,15 @@ export default (state = initialState, action) => {
                     state.playlists,
                     action.data.playlistId,
                     action.data.song
+                ),
+            }
+        case DELETE_SONG_FROM_PLAYLIST:
+            return {
+                ...state,
+                playlists: DeleteSongFromPlaylist(
+                    state.playlists,
+                    action.data.playlistId,
+                    action.data.songId
                 ),
             }
         default:

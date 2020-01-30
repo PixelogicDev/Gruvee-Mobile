@@ -21,7 +21,6 @@ const PlaylistListView = props => {
     const renderItem = ({ item }) => (
         <SwipeablePlaylistItem
             playlistData={item}
-            deleteSongFromPlaylistAction={deleteSongFromPlaylistAction}
             updateSongsInPlaylistAction={updateSongsInPlaylistAction}
         />
     )
@@ -75,21 +74,6 @@ const PlaylistListView = props => {
 
     // Redux props
     const { playlists } = props
-
-    // Song Actions
-    const deleteSongFromPlaylistAction = (playlistId, songId) => {
-        const updatedPlaylist = playlists.map(playlist => {
-            if (playlist.id === playlistId) {
-                playlist.songs = playlist.songs.filter(
-                    song => song.id !== songId
-                )
-            }
-
-            return playlist
-        })
-
-        setPlaylist(updatedPlaylist)
-    }
 
     // Comments Actions
     const updateSongsInPlaylistAction = (playlistId, songs) => {

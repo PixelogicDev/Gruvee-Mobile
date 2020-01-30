@@ -7,19 +7,11 @@ import * as NavigationConstants from '@NavigationConstants'
 
 const defaultPlaylistBackgroundAsset = require('Gruvee/Assets/Defaults/PlaylistImage/default_item_bg_image.png')
 
-const PlaylistItem = ({
-    playlistData,
-    deleteSongFromPlaylistAction,
-    updateSongsInPlaylistAction,
-}) => {
+const PlaylistItem = ({ playlistData, updateSongsInPlaylistAction }) => {
     return (
         <TouchableOpacity
             onPress={() => {
-                showSongListAction(
-                    playlistData,
-                    deleteSongFromPlaylistAction,
-                    updateSongsInPlaylistAction
-                )
+                showSongListAction(playlistData, updateSongsInPlaylistAction)
             }}
         >
             <ImageBackground
@@ -48,17 +40,12 @@ const showMembersAction = () => {
     })
 }
 
-const showSongListAction = (
-    playlistData,
-    deleteSongFromPlaylistAction,
-    updateSongsInPlaylistAction
-) => {
+const showSongListAction = (playlistData, updateSongsInPlaylistAction) => {
     Navigation.push(NavigationConstants.STACK_ID, {
         component: {
             name: NavigationConstants.SONG_LIST_NAV_NAME,
             passProps: {
                 playlistId: playlistData.id,
-                deleteSongFromPlaylistAction,
                 updateSongsInPlaylistAction,
             },
             options: {

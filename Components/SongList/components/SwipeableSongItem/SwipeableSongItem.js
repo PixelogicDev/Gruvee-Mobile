@@ -10,7 +10,7 @@ import * as StyleConstants from '@StyleConstants'
 const SwipeableSongItem = ({
     song,
     addCommentFromSongAction,
-    deleteItemById,
+    deleteSongById,
     deleteCommentFromSongAction,
     updateSongsInPlaylistAction,
 }) => {
@@ -22,7 +22,7 @@ const SwipeableSongItem = ({
     return (
         <AnimatedSwipeRow
             swipeTriggered={isDeleting}
-            swipeActionCallback={deleteItemById}
+            swipeActionCallback={deleteSongById}
             itemHeight={StyleConstants.SONG_LIST_ITEM_HEIGHT_iOS} // TODO: Android vs iOS check
             isRightOpenValue
             swipeActionComponent={renderSwipeActionComponent(
