@@ -9,7 +9,6 @@ const defaultPlaylistBackgroundAsset = require('Gruvee/Assets/Defaults/PlaylistI
 
 const PlaylistItem = ({
     playlistData,
-    addSongToPlaylistAction,
     deleteSongFromPlaylistAction,
     updateSongsInPlaylistAction,
 }) => {
@@ -18,7 +17,6 @@ const PlaylistItem = ({
             onPress={() => {
                 showSongListAction(
                     playlistData,
-                    addSongToPlaylistAction,
                     deleteSongFromPlaylistAction,
                     updateSongsInPlaylistAction
                 )
@@ -52,7 +50,6 @@ const showMembersAction = () => {
 
 const showSongListAction = (
     playlistData,
-    addSongToPlaylistAction,
     deleteSongFromPlaylistAction,
     updateSongsInPlaylistAction
 ) => {
@@ -61,8 +58,6 @@ const showSongListAction = (
             name: NavigationConstants.SONG_LIST_NAV_NAME,
             passProps: {
                 playlistId: playlistData.id,
-                songs: playlistData.songs,
-                addSongToPlaylistAction,
                 deleteSongFromPlaylistAction,
                 updateSongsInPlaylistAction,
             },

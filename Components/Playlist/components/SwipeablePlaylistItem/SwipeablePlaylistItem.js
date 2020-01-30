@@ -13,7 +13,6 @@ import * as StyleConstants from '@StyleConstants'
 const SwipeablePlaylistItem = ({
     playlistData,
     deletePlaylist,
-    addSongToPlaylistAction,
     deleteSongFromPlaylistAction,
     updateSongsInPlaylistAction,
 }) => {
@@ -36,7 +35,6 @@ const SwipeablePlaylistItem = ({
             )}
             listItemComponent={renderPlaylistItem(
                 playlistData,
-                addSongToPlaylistAction,
                 deleteSongFromPlaylistAction,
                 updateSongsInPlaylistAction
             )}
@@ -64,13 +62,11 @@ const comfirmDeleteAlert = (playlistData, onConfirmDelete) => {
 // Rendered Components
 const renderPlaylistItem = (
     playlist,
-    addSongToPlaylistAction,
     deleteSongFromPlaylistAction,
     updateSongsInPlaylistAction
 ) => (
     <PlaylistItem
         playlistData={playlist}
-        addSongToPlaylistAction={addSongToPlaylistAction}
         deleteSongFromPlaylistAction={deleteSongFromPlaylistAction}
         updateSongsInPlaylistAction={updateSongsInPlaylistAction}
     />

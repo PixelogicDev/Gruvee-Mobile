@@ -1,13 +1,17 @@
 // InukApp "Swift > JS" (01/27/20)
 import mockPlaylists from 'Gruvee/Mock/mockPlaylists'
 import {
-    ADD_MOCK_DATA,
+    FETCH_MOCK_DATA,
     ADD_PLAYLIST,
+    ADD_SONG_TO_PLAYLIST,
     DELETE_PLAYLIST,
+    FETCH_SONGS,
 } from '../Actions/ActionsType'
 import {
     AddPlaylistAction,
+    AddSongToPlaylistAction,
     DeletePlaylistAction,
+    FetchSongsFromPlaylist,
 } from '../Actions/PlaylistActions'
 // InukApp - "Hello World" (01/27/20)
 // LilCazza - "PixelogicDev's code is just like monkaS when I use this bug (*feature)" (01/28/20)
@@ -16,7 +20,7 @@ const initialState = { playlists: [] }
 
 export default (state = initialState, action) => {
     switch (action.type) {
-        case ADD_MOCK_DATA:
+        case FETCH_MOCK_DATA:
             return {
                 ...state,
                 playlists: [...state.playlists, ...mockPlaylists],
@@ -30,6 +34,20 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 playlists: DeletePlaylistAction(state.playlists, action.data),
+            }
+        case FETCH_SONGS:
+            return {
+                ...state,
+                songs: FetchSongsFromPlaylist(state.playlists, action.data),
+            }
+        case ADD_SONG_TO_PLAYLIST:
+            return {
+                ...state,
+                playlists: AddSongToPlaylistAction(
+                    state.playlists,
+                    action.data.playlistId,
+                    action.data.song
+                ),
             }
         default:
             return state

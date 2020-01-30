@@ -4,9 +4,8 @@ import { BackHandler, View, StyleSheet, Platform } from 'react-native'
 import { SwipeListView } from 'react-native-swipe-list-view'
 import { Navigation } from 'react-native-navigation'
 
-import { ADD_MOCK_DATA } from 'Gruvee/Redux/Actions/ActionsType'
+import { FETCH_MOCK_DATA } from 'Gruvee/Redux/Actions/ActionsType'
 import AddItemButton from 'Gruvee/Components/Common/AddItemButton'
-import mockPlaylists from '@Mock/mockPlaylists'
 import * as StyleConstants from '@StyleConstants'
 import * as NavigationConstants from '@NavigationConstants'
 import SwipeablePlaylistItem from './components/SwipeablePlaylistItem/SwipeablePlaylistItem'
@@ -22,7 +21,6 @@ const PlaylistListView = props => {
     const renderItem = ({ item }) => (
         <SwipeablePlaylistItem
             playlistData={item}
-            addSongToPlaylistAction={addSongToPlaylistAction}
             deleteSongFromPlaylistAction={deleteSongFromPlaylistAction}
             updateSongsInPlaylistAction={updateSongsInPlaylistAction}
         />
@@ -79,16 +77,6 @@ const PlaylistListView = props => {
     const { playlists } = props
 
     // Song Actions
-    const addSongToPlaylistAction = (playlistId, song) => {
-        const playlistsClone = playlists.slice()
-        const playlist = playlistsClone.find(p => p.id === playlistId)
-
-        if (playlist) {
-            playlist.songs = [...playlist.songs, song]
-            setPlaylist(playlistsClone)
-        }
-    }
-
     const deleteSongFromPlaylistAction = (playlistId, songId) => {
         const updatedPlaylist = playlists.map(playlist => {
             if (playlist.id === playlistId) {
@@ -168,7 +156,7 @@ const PlaylistListView = props => {
 
 // Action Creators
 const fetchPlaylists = () => {
-    return { type: ADD_MOCK_DATA }
+    return { type: FETCH_MOCK_DATA }
 }
 
 // Redux Mappers

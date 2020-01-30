@@ -3,40 +3,46 @@ import { View, StyleSheet } from 'react-native'
 import { SwipeListView } from 'react-native-swipe-list-view'
 import { Navigation } from 'react-native-navigation'
 
+// Redux
+import { connect } from 'react-redux'
+import {
+    ADD_SONG_TO_PLAYLIST,
+    FETCH_SONGS,
+} from 'Gruvee/Redux/Actions/ActionsType'
+
 import spotifyMockFindResponse from 'Gruvee/Mock/spotifyMockFindResponse'
 import AddItemButton from 'Gruvee/Components/Common/AddItemButton'
 import SwipeableSongItem from './components/SwipeableSongItem/SwipeableSongItem'
 import * as StyleConstants from '@StyleConstants'
 import * as NavigationConstants from '@NavigationConstants'
 import Song from '../../lib/Song'
-import SongComment from '../../lib/SongComment'
 
 const SongListView = ({
     playlistId,
     songs,
-    addSongToPlaylistAction,
+    fetchSongs,
+    addSongToPlaylist,
     deleteSongFromPlaylistAction,
     updateSongsInPlaylistAction,
 }) => {
     const [songsToDisplay, setSongsToDisplay] = useState([])
 
     useEffect(() => {
-        setSongsToDisplay(songs)
+        fetchSongs(playlistId)
     }, [])
 
     // Actions
     const addSongAction = (songLink, comment) => {
         // TODO: Call service API to get song info from link
-        // Right not we are just going to mock it up until auth is setup
 
         // Create song object
         const newSong = new Song(spotifyMockFindResponse, songLink, comment)
 
-        // Set songs to display
-        setSongsToDisplay([...songsToDisplay, newSong])
+        // Right not we are just going to mock it up until auth is setup
+        addSongToPlaylist(playlistId, newSong)
 
-        // Add to playlist
-        addSongToPlaylistAction(playlistId, newSong)
+        // Set songs to display
+        fetchSongs(playlistId)
 
         // Dismiss song modal overlay
         Navigation.dismissOverlay(NavigationConstants.ADD_SONG_MODAL_NAV_ID)
@@ -122,7 +128,7 @@ const SongListView = ({
                 style={styles.Container}
                 contentContainerStyle={styles.ContentContainer}
                 showsVerticalScrollIndicator
-                data={songsToDisplay}
+                data={songs}
                 keyExtractor={keyExtractor}
                 renderItem={renderItem}
             />
@@ -160,4 +166,31 @@ const styles = StyleSheet.create({
     },
 })
 
-export default SongListView
+// Redux Action Creators
+const addSongToPlaylist = (playlistId, song) => {
+    return {
+        type: ADD_SONG_TO_PLAYLIST,
+        data: { playlistId, song },
+    }
+}
+const fetchSongs = playlistId => {
+    return {
+        type: FETCH_SONGS,
+        data: playlistId,
+    }
+}
+
+// Redux Mappers
+const mapStateToProps = state => {
+    return { songs: state.PlaylistDataReducer.songs }
+}
+const mapDispatchToProps = dispatch => ({
+    addSongToPlaylist: (playlistId, song) =>
+        dispatch(addSongToPlaylist(playlistId, song)),
+    fetchSongs: playlistId => dispatch(fetchSongs(playlistId)),
+})
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(SongListView)
