@@ -2,10 +2,14 @@
 import React from 'react'
 import { applyMiddleware, createStore } from 'redux'
 import { Provider } from 'react-redux'
+
+// Middleware
+import ReduxThunk from 'redux-thunk'
 import Logger from '../Helpers/Logger'
+
 import reducer from '../Reducers/index'
 
-const middlewares = [Logger]
+const middlewares = [Logger, ReduxThunk]
 let store
 
 const ReduxProvider = Component => {

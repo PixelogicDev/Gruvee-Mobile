@@ -4,6 +4,7 @@ import { BackHandler, View, StyleSheet, Platform } from 'react-native'
 import { SwipeListView } from 'react-native-swipe-list-view'
 import { Navigation } from 'react-native-navigation'
 
+import { MapPlaylistsFromUser } from 'Gruvee/Redux/Actions/Playlists/PlaylistActions'
 import { FETCH_MOCK_DATA } from 'Gruvee/Redux/Actions/ActionsType'
 import AddItemButton from 'Gruvee/Components/Common/AddItemButton'
 import * as StyleConstants from '@StyleConstants'
@@ -140,12 +141,18 @@ const PlaylistListView = props => {
 
 // Action Creators
 const fetchPlaylists = () => {
+    // Simulates call to get all playlists for current user
+    // We are assuming we have a user signed in
     return { type: FETCH_MOCK_DATA }
 }
 
 // Redux Mappers
 const mapStateToProps = state => {
-    return { playlists: state.PlaylistDataReducer.playlists }
+    return {
+        // At this point we should already have the user data in our state
+        // Grab the proper reducer, and pull in all playlist ids
+        playlists: MapPlaylistsFromUser(state),
+    }
 }
 const mapDispatchToProps = dispatch => ({
     fetchPlaylists: () => dispatch(fetchPlaylists()),

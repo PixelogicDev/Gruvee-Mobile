@@ -11,10 +11,11 @@ import { Navigation } from 'react-native-navigation'
 // Redux
 import { connect } from 'react-redux'
 import {
-    ADD_SONG_TO_PLAYLIST,
-    DELETE_SONG_FROM_PLAYLIST,
-    FETCH_SONGS,
-} from 'Gruvee/Redux/Actions/ActionsType'
+    DeleteSongFromPlaylist,
+    FetchSongs,
+    MapSongsFromPlaylist,
+} from 'Gruvee/Redux/Actions/Songs/SongsActions'
+import { ADD_SONG_TO_PLAYLIST } from 'Gruvee/Redux/Actions/ActionsType'
 
 import spotifyMockFindResponse from 'Gruvee/Mock/spotifyMockFindResponse'
 import AddItemButton from 'Gruvee/Components/Common/AddItemButton'
@@ -117,6 +118,7 @@ const SongListView = ({
         })
     }
 
+    // dra031cko - "WUBBA LUBBA DUB DUB" (02/01/20)
     const renderItem = ({ item }) => (
         <SwipeableSongItem
             song={item}
@@ -178,29 +180,18 @@ const addSongToPlaylist = (playlistId, song) => {
         data: { playlistId, song },
     }
 }
-const deleteSongFromPlaylist = (playlistId, songId) => {
-    return {
-        type: DELETE_SONG_FROM_PLAYLIST,
-        data: { playlistId, songId },
-    }
-}
-const fetchSongs = playlistId => {
-    return {
-        type: FETCH_SONGS,
-        data: playlistId,
-    }
-}
 
 // Redux Mappers
-const mapStateToProps = state => {
-    return { songs: state.PlaylistDataReducer.songs }
+const mapStateToProps = (state, props) => {
+    // Should get songIds from playlist and map accordingly
+    return { songs: MapSongsFromPlaylist(state, props.playlistId) }
 }
 const mapDispatchToProps = dispatch => ({
     addSongToPlaylist: (playlistId, song) =>
         dispatch(addSongToPlaylist(playlistId, song)),
     deleteSongFromPlaylist: (playlistId, songId) =>
-        dispatch(deleteSongFromPlaylist(playlistId, songId)),
-    fetchSongs: playlistId => dispatch(fetchSongs(playlistId)),
+        dispatch(DeleteSongFromPlaylist(playlistId, songId)),
+    fetchSongs: playlistId => dispatch(FetchSongs(playlistId)),
 })
 
 export default connect(

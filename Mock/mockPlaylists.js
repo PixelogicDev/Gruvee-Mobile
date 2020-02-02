@@ -1,26 +1,33 @@
-import mockSongs from './mockSongs'
+/*
+    - Make request to db based on user id to get playlists
+    User
+    {
+        id: "1234",
+        playlists: ["playlist1", "playlist2", "playlist3"]
+    }
+*/
 
 export default [
     {
-        id: 'Playlist0',
+        id: 'playlist1',
         name: 'Cool Kids Music',
-        members: ['Ya Boi', 'Alec', 'Was Here'],
-        songs: mockSongs,
+        members: ['memberYaBoi', 'memberAlec', 'memberWasHere'], // MemberIds
+        songs: ['song1', 'song2', 'song3'],
         albumArtworkUrl: 'SomeBrokenImagePath',
     },
     {
-        id: 'Playlist1',
+        id: 'playlist2',
         name: "YaBoi Alec's Playlist",
-        members: ['Another', 'Name', 'Was Here'],
-        songs: mockSongs,
+        members: ['memberYaBoi', 'memberAlec', 'memberWasHere'], // MemberIds
+        songs: ['song3'],
         albumArtworkUrl:
             'https://99designs-blog.imgix.net/blog/wp-content/uploads/2017/12/attachment_68585523.jpg?auto=format&q=60&fit=max&w=930',
     },
     {
-        id: 'Playlist2',
+        id: 'playlist3',
         name: 'Y A G',
-        songs: mockSongs,
-        members: ['Hi', 'I am', 'a name'],
+        members: ['memberYaBoi', 'memberAlec', 'memberWasHere'], // MemberIds
+        songs: ['song1', 'song3'],
         albumArtworkUrl: 'https://i.imgur.com/uoMh2y3.png',
     },
 ]

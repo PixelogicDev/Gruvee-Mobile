@@ -1,6 +1,8 @@
 import { combineReducers } from 'redux'
-import PlaylistDataReducer from './PlaylistDataReducer'
+import PlaylistsDataReducer from './PlaylistsDataReducer'
+import SongsDataReducer from './SongsDataReducer'
 
 export default combineReducers({
-    PlaylistDataReducer,
+    PlaylistsDataReducer,
+    SongsDataReducer,
 })
