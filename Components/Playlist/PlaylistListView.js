@@ -4,8 +4,10 @@ import { BackHandler, View, StyleSheet, Platform } from 'react-native'
 import { SwipeListView } from 'react-native-swipe-list-view'
 import { Navigation } from 'react-native-navigation'
 
-import { MapPlaylistsFromUser } from 'Gruvee/Redux/Actions/Playlists/PlaylistActions'
-import { FETCH_MOCK_DATA } from 'Gruvee/Redux/Actions/ActionsType'
+import {
+    FetchPlaylists,
+    MapPlaylistsFromUser,
+} from 'Gruvee/Redux/Actions/Playlists/PlaylistActions'
 import AddItemButton from 'Gruvee/Components/Common/AddItemButton'
 import * as StyleConstants from '@StyleConstants'
 import * as NavigationConstants from '@NavigationConstants'
@@ -15,7 +17,7 @@ import SwipeablePlaylistItem from './components/SwipeablePlaylistItem/SwipeableP
 console.disableYellowBox = true
 console.ignoredYellowBox = ['Could not find image']
 
-const PlaylistListView = props => {
+const PlaylistListView = ({ fetchPlaylists, playlists }) => {
     const [somePlaylist, setPlaylist] = useState([])
     const [addPlaylistModalShown, setAddPlaylistModalShown] = useState(false)
     const keyExtractor = item => `${item.id}`
@@ -27,8 +29,7 @@ const PlaylistListView = props => {
     )
 
     useEffect(() => {
-        // Get playlists and set to props.playlists
-        props.fetchPlaylists()
+        fetchPlaylists()
 
         // Only if on Android, let's setup for backhandler override
         if (Platform.OS === 'android') {
@@ -72,9 +73,6 @@ const PlaylistListView = props => {
             }
         }
     }, [])
-
-    // Redux props
-    const { playlists } = props
 
     // Comments Actions
     const updateSongsInPlaylistAction = (playlistId, songs) => {
@@ -139,13 +137,6 @@ const PlaylistListView = props => {
     )
 }
 
-// Action Creators
-const fetchPlaylists = () => {
-    // Simulates call to get all playlists for current user
-    // We are assuming we have a user signed in
-    return { type: FETCH_MOCK_DATA }
-}
-
 // Redux Mappers
 const mapStateToProps = state => {
     return {
@@ -155,7 +146,7 @@ const mapStateToProps = state => {
     }
 }
 const mapDispatchToProps = dispatch => ({
-    fetchPlaylists: () => dispatch(fetchPlaylists()),
+    fetchPlaylists: () => dispatch(FetchPlaylists()),
 })
 
 // Styles

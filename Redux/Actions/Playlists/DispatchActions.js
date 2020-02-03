@@ -1,5 +1,5 @@
 // eslint-disable-next-line import/prefer-default-export
-export const FetchPlaylists = playlists => {
+export const FetchPlaylists = (playlistsState, playlists) => {
     // Setup the flat state
     /*
         playlists: {
@@ -15,7 +15,7 @@ export const FetchPlaylists = playlists => {
     */
 
     // TODO: Think if we want to use reduce vs forEach (O(n^2) vs O(n))
-    return playlists.reduce(
+    const reducedPlaylists = playlists.reduce(
         (state, currentPlaylist) => {
             return {
                 byId: {
@@ -27,4 +27,22 @@ export const FetchPlaylists = playlists => {
         },
         { byId: {}, allIds: [] }
     )
+
+    reducedPlaylists.byId = { ...reducedPlaylists.byId, ...playlistsState.byId }
+    reducedPlaylists.allIds = [
+        ...reducedPlaylists.allIds,
+        ...playlistsState.allIds,
+    ]
+
+    return reducedPlaylists
+}
+
+export const DeletePlaylist = (playlistId, playlists) => {
+    // LiquoriceLion - "Add some logic here." (02/03/20)
+    // Filter out allIds to remove playlistId
+    const allIds = playlists.allIds.filter(id => id !== playlistId)
+    const byId = { ...playlists.byId }
+    delete byId[playlistId]
+
+    return { byId, allIds }
 }
