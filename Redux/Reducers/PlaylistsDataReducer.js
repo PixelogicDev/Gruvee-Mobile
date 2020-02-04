@@ -5,11 +5,13 @@ import {
     FETCH_MOCK_DATA,
     ADD_PLAYLIST,
     DELETE_PLAYLIST,
+    UPDATE_PLAYLIST_SONGS,
 } from '../Actions/ActionsType'
 import {
     AddPlaylist,
     DeletePlaylist,
     FetchPlaylists,
+    UpdatePlaylistSongs,
 } from '../Actions/Playlists/DispatchActions'
 // InukApp - "Hello World" (01/27/20)
 // LilCazza - "PixelogicDev's code is just like monkaS when I use this bug (*feature)" (01/28/20)
@@ -38,6 +40,15 @@ export default (state = initialState, action) => {
                 // At this point if we have playlists in our state
                 // Lets go ahead and map them in with our mock playlists
                 playlists: FetchPlaylists(state.playlists, MockPlaylists),
+            }
+        case UPDATE_PLAYLIST_SONGS:
+            return {
+                ...state,
+                playlists: UpdatePlaylistSongs(
+                    action.data.songId,
+                    action.data.playlistId,
+                    state.playlists
+                ),
             }
         default:
             return state

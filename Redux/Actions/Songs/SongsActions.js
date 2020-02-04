@@ -2,12 +2,21 @@
 import MockSongs from 'Gruvee/Mock/mockSongs'
 
 import {
-    ADD_SONG_TO_PLAYLIST,
-    DELETE_SONG_FROM_PLAYLIST,
+    ADD_SONG,
+    DELETE_SONG,
     FETCH_SONGS,
 } from 'Gruvee/Redux/Actions/ActionsType'
 
+import { UpdatePlaylistSongs } from 'Gruvee/Redux/Actions/Playlists/PlaylistActions'
+
 // Actions
+const addSong = song => {
+    return {
+        type: ADD_SONG,
+        data: { song },
+    }
+}
+
 const fetchSongs = songs => {
     return {
         type: FETCH_SONGS,
@@ -17,22 +26,19 @@ const fetchSongs = songs => {
 
 const deleteSongFromPlaylist = (playlists, playlistId, songId) => {
     return {
-        type: DELETE_SONG_FROM_PLAYLIST,
+        type: DELETE_SONG,
         data: { playlists, playlistId, songId },
     }
 }
 
 // Thunks
-export const FetchSongs = playlistId => {
-    // At this point make async call to get songs for playlist
-    // Will be searching through array of songs for the ones we need for this playlist
-    // Then set in Redux State
+export const AddSong = (playlistId, song) => {
     return (dispatch, getState) => {
-        // poopuhchoo - "YASSSS" (01/30/20)
-        // firebase.com/getSongsForPlaylist(playlistId)
-        // Go DB, get playlist, get songs data byId
-        // Returns array of songs (Right now imported MockSongs for this)
-        dispatch(fetchSongs(MockSongs))
+        // Add songs to SongsDataReducer
+        dispatch(addSong(song))
+
+        // Update playlist in PlaylistsDataReducer
+        dispatch(UpdatePlaylistSongs(song.id, playlistId))
     }
 }
 
@@ -46,6 +52,19 @@ export const DeleteSongFromPlaylist = (playlistId, songId) => {
         } = getState()
 
         dispatch(deleteSongFromPlaylist(playlists, playlistId, songId))
+    }
+}
+
+export const FetchSongs = playlistId => {
+    // At this point make async call to get songs for playlist
+    // Will be searching through array of songs for the ones we need for this playlist
+    // Then set in Redux State
+    return (dispatch, getState) => {
+        // poopuhchoo - "YASSSS" (01/30/20)
+        // firebase.com/getSongsForPlaylist(playlistId)
+        // Go DB, get playlist, get songs data byId
+        // Returns array of songs (Right now imported MockSongs for this)
+        dispatch(fetchSongs(MockSongs))
     }
 }
 

@@ -2,6 +2,7 @@
 // estrangedHD - "Can I also have one?" (01/30/20)
 // estrangedHD - "And another one Kappa" (01/30/20)
 // estrangedHD - "And another one Kappa" (01/30/20)
+// dra031cko - "Spread everything, spread often." (02/04/20)
 
 import React, { useState, useEffect } from 'react'
 import { View, StyleSheet } from 'react-native'
@@ -11,11 +12,11 @@ import { Navigation } from 'react-native-navigation'
 // Redux
 import { connect } from 'react-redux'
 import {
+    AddSong,
     DeleteSongFromPlaylist,
     FetchSongs,
     MapSongsFromPlaylist,
 } from 'Gruvee/Redux/Actions/Songs/SongsActions'
-import { ADD_SONG_TO_PLAYLIST } from 'Gruvee/Redux/Actions/ActionsType'
 
 import spotifyMockFindResponse from 'Gruvee/Mock/spotifyMockFindResponse'
 import AddItemButton from 'Gruvee/Components/Common/AddItemButton'
@@ -28,7 +29,7 @@ const SongListView = ({
     playlistId,
     songs,
     fetchSongs,
-    addSongToPlaylist,
+    addSong,
     deleteSongFromPlaylist,
     updateSongsInPlaylistAction,
 }) => {
@@ -46,10 +47,7 @@ const SongListView = ({
         const newSong = new Song(spotifyMockFindResponse, songLink, comment)
 
         // Right not we are just going to mock it up until auth is setup
-        addSongToPlaylist(playlistId, newSong)
-
-        // Set songs to display
-        fetchSongs(playlistId)
+        addSong(playlistId, newSong)
 
         // Dismiss song modal overlay
         Navigation.dismissOverlay(NavigationConstants.ADD_SONG_MODAL_NAV_ID)
@@ -173,22 +171,13 @@ const styles = StyleSheet.create({
     },
 })
 
-// Redux Action Creators
-const addSongToPlaylist = (playlistId, song) => {
-    return {
-        type: ADD_SONG_TO_PLAYLIST,
-        data: { playlistId, song },
-    }
-}
-
 // Redux Mappers
 const mapStateToProps = (state, props) => {
     // Should get songIds from playlist and map accordingly
     return { songs: MapSongsFromPlaylist(state, props.playlistId) }
 }
 const mapDispatchToProps = dispatch => ({
-    addSongToPlaylist: (playlistId, song) =>
-        dispatch(addSongToPlaylist(playlistId, song)),
+    addSong: (playlistId, song) => dispatch(AddSong(playlistId, song)),
     deleteSongFromPlaylist: (playlistId, songId) =>
         dispatch(DeleteSongFromPlaylist(playlistId, songId)),
     fetchSongs: playlistId => dispatch(FetchSongs(playlistId)),

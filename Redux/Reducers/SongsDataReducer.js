@@ -1,35 +1,21 @@
+import { ADD_SONG, DELETE_SONG, FETCH_SONGS } from '../Actions/ActionsType'
 import {
-    ADD_SONG_TO_PLAYLIST,
-    FETCH_SONGS,
-    DELETE_SONG_FROM_PLAYLIST,
-} from '../Actions/ActionsType'
-import {
-    AddSongToPlaylistAction,
-    FetchSongs,
-    FetchSongsFromPlaylist,
+    AddSong,
     DeleteSongFromPlaylist,
+    FetchSongs,
 } from '../Actions/Songs/DispatchActions'
 
-const initialState = { songs: {} }
+const initialState = { songs: { byId: {}, allIds: [] } }
 
 // TODO: Should this reducer ALWAYS include a songs prop when returning
 export default (state = initialState, action) => {
     switch (action.type) {
-        case FETCH_SONGS:
+        case ADD_SONG:
             return {
                 ...state,
-                songs: FetchSongs(action.data),
+                songs: AddSong(action.data.song, state.songs),
             }
-        case ADD_SONG_TO_PLAYLIST:
-            return {
-                ...state,
-                playlists: AddSongToPlaylistAction(
-                    state.playlists,
-                    action.data.playlistId,
-                    action.data.song
-                ),
-            }
-        case DELETE_SONG_FROM_PLAYLIST:
+        case DELETE_SONG:
             return {
                 ...state,
                 playlists: DeleteSongFromPlaylist(
@@ -38,23 +24,12 @@ export default (state = initialState, action) => {
                     action.data.songId
                 ),
             }
+        case FETCH_SONGS:
+            return {
+                ...state,
+                songs: FetchSongs(action.data),
+            }
         default:
             return state
     }
 }
-
-/*
-    PlaylistReducer
-        Playlists -> [{..., [song, song song]}]
-    
-        SongsReducer
-            Songs -> []
-                FetchSongs = PlaylistReducer.Playlists.Songs
-                DeleteSongs = PlaylistReducer.Playlists.Playlist > REMOVE SONG > 
-                    {playlists: [WITH EDITED PL], songs: [...]}
-        
-
-
-
-
-*/

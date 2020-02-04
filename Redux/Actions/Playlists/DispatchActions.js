@@ -54,3 +54,16 @@ export const FetchPlaylists = (playlistsState, playlists) => {
 
     return reducedPlaylists
 }
+
+export const UpdatePlaylistSongs = (songId, playlistId, statePlaylists) => {
+    return {
+        ...statePlaylists,
+        byId: {
+            ...statePlaylists.byId,
+            [playlistId]: {
+                ...statePlaylists.byId[playlistId],
+                songs: [...statePlaylists.byId[playlistId].songs, songId],
+            },
+        },
+    }
+}

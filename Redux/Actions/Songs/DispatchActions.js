@@ -1,5 +1,28 @@
-export const FetchSongsFromPlaylist = playlist => {
-    return playlist.songs
+export const AddSong = (newSong, stateSongs) => {
+    return {
+        ...stateSongs,
+        byId: { ...stateSongs.byId, [newSong.id]: newSong },
+        allIds: [...stateSongs.allIds, newSong.id],
+    }
+}
+
+export const DeleteSongFromPlaylist = (playlists, playlistId, songId) => {
+    const newPlaylists = playlists.map(playlist => {
+        if (playlist.id === playlistId) {
+            const filteredSongs = playlist.songs.filter(
+                song => song.id !== songId
+            )
+
+            return {
+                ...playlist,
+                songs: filteredSongs,
+            }
+        }
+
+        return playlist
+    })
+
+    return newPlaylists
 }
 
 export const FetchSongs = songs => {
@@ -33,40 +56,4 @@ export const FetchSongs = songs => {
         },
         { byId: {}, allIds: [] }
     )
-}
-
-export const DeleteSongFromPlaylist = (playlists, playlistId, songId) => {
-    const newPlaylists = playlists.map(playlist => {
-        if (playlist.id === playlistId) {
-            const filteredSongs = playlist.songs.filter(
-                song => song.id !== songId
-            )
-
-            return {
-                ...playlist,
-                songs: filteredSongs,
-            }
-        }
-
-        return playlist
-    })
-
-    return newPlaylists
-}
-
-export const AddSongToPlaylistAction = (
-    currentPlaylists,
-    playlistId,
-    newSong
-) => {
-    return currentPlaylists.map(playlist => {
-        if (playlist.id === playlistId) {
-            return {
-                ...playlist,
-                songs: [...playlist.songs, newSong],
-            }
-        }
-
-        return playlist
-    })
 }

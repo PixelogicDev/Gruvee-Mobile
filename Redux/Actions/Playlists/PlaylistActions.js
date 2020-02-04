@@ -6,6 +6,7 @@ import {
     ADD_PLAYLIST,
     DELETE_PLAYLIST,
     FETCH_MOCK_DATA,
+    UPDATE_PLAYLIST_SONGS,
 } from 'Gruvee/Redux/Actions/ActionsType'
 
 // Action Creators
@@ -27,6 +28,13 @@ const fetchPlaylists = () => {
     // Simulates call to get all playlists for current user
     // We are assuming we have a user signed in
     return { type: FETCH_MOCK_DATA }
+}
+
+const updatePlaylistSongs = (songId, playlistId) => {
+    return {
+        type: UPDATE_PLAYLIST_SONGS,
+        data: { songId, playlistId },
+    }
 }
 
 // Thunks
@@ -53,6 +61,12 @@ export const DeletePlaylistAction = playlistId => {
 export const FetchPlaylists = () => {
     return (dispatch, getState) => {
         dispatch(fetchPlaylists())
+    }
+}
+
+export const UpdatePlaylistSongs = (songId, playlistId) => {
+    return (dispatch, getState) => {
+        dispatch(updatePlaylistSongs(songId, playlistId))
     }
 }
 
