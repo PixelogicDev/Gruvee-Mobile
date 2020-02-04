@@ -19,7 +19,7 @@ const SwipeablePlaylistItem = ({
     const onConfirmDelete = () => setIsDeleting(true)
     const confirmDeletePlaylistAction = () =>
         comfirmDeleteAlert(playlistData, onConfirmDelete)
-
+    // Chocofoxy - "this comment for microsoft to find" (02/03/20)
     return (
         <AnimatedSwipeRow
             swipeTriggered={isDeleting}

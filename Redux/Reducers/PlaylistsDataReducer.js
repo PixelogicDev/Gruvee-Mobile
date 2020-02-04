@@ -6,8 +6,8 @@ import {
     ADD_PLAYLIST,
     DELETE_PLAYLIST,
 } from '../Actions/ActionsType'
-import { AddPlaylistAction } from '../Actions/Playlists/PlaylistActions'
 import {
+    AddPlaylist,
     DeletePlaylist,
     FetchPlaylists,
 } from '../Actions/Playlists/DispatchActions'
@@ -18,18 +18,10 @@ const initialState = { playlists: { byId: {}, allIds: [] } }
 
 export default (state = initialState, action) => {
     switch (action.type) {
-        case FETCH_MOCK_DATA:
-            return {
-                // At this point I should already have my playlists or setup a thunk to get them based on user
-                ...state,
-                // At this point if we have playlists in our state
-                // Lets go ahead and map them in with our mock playlists
-                playlists: FetchPlaylists(state.playlists, MockPlaylists),
-            }
         case ADD_PLAYLIST:
             return {
                 ...state,
-                playlists: AddPlaylistAction(state.playlists, action.data),
+                playlists: AddPlaylist(action.data, state.playlists),
             }
         case DELETE_PLAYLIST:
             return {
@@ -38,6 +30,14 @@ export default (state = initialState, action) => {
                     action.data.playlistId,
                     action.data.playlists
                 ),
+            }
+        case FETCH_MOCK_DATA:
+            return {
+                // At this point I should already have my playlists or setup a thunk to get them based on user
+                ...state,
+                // At this point if we have playlists in our state
+                // Lets go ahead and map them in with our mock playlists
+                playlists: FetchPlaylists(state.playlists, MockPlaylists),
             }
         default:
             return state

@@ -1,4 +1,22 @@
-// eslint-disable-next-line import/prefer-default-export
+export const AddPlaylist = (playlist, statePlaylists) => {
+    const byId = { ...statePlaylists.byId }
+    byId[playlist.id] = playlist
+
+    const allIds = [...statePlaylists.allIds, playlist.id]
+
+    return { byId, allIds }
+}
+
+export const DeletePlaylist = (playlistId, playlists) => {
+    // LiquoriceLion - "Add some logic here." (02/03/20)
+    // Filter out allIds to remove playlistId
+    const allIds = playlists.allIds.filter(id => id !== playlistId)
+    const byId = { ...playlists.byId }
+    delete byId[playlistId]
+
+    return { byId, allIds }
+}
+
 export const FetchPlaylists = (playlistsState, playlists) => {
     // Setup the flat state
     /*
@@ -35,14 +53,4 @@ export const FetchPlaylists = (playlistsState, playlists) => {
     ]
 
     return reducedPlaylists
-}
-
-export const DeletePlaylist = (playlistId, playlists) => {
-    // LiquoriceLion - "Add some logic here." (02/03/20)
-    // Filter out allIds to remove playlistId
-    const allIds = playlists.allIds.filter(id => id !== playlistId)
-    const byId = { ...playlists.byId }
-    delete byId[playlistId]
-
-    return { byId, allIds }
 }

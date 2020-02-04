@@ -3,15 +3,17 @@
 // JMSWRNR - "````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````" - (01/28/20)
 // ywknlme - "TODO DODODODODO DODODODODODODODO DODODODODO... *plays Darude – Sandstorm*" (01/29/20)
 import {
+    ADD_PLAYLIST,
     DELETE_PLAYLIST,
     FETCH_MOCK_DATA,
 } from 'Gruvee/Redux/Actions/ActionsType'
 
 // Action Creators
-const fetchPlaylists = () => {
-    // Simulates call to get all playlists for current user
-    // We are assuming we have a user signed in
-    return { type: FETCH_MOCK_DATA }
+const addPlaylist = playlist => {
+    return {
+        type: ADD_PLAYLIST,
+        data: playlist,
+    }
 }
 
 const deletePlaylist = (playlistId, playlists) => {
@@ -21,11 +23,20 @@ const deletePlaylist = (playlistId, playlists) => {
     }
 }
 
+const fetchPlaylists = () => {
+    // Simulates call to get all playlists for current user
+    // We are assuming we have a user signed in
+    return { type: FETCH_MOCK_DATA }
+}
+
 // Thunks
-export const FetchPlaylists = () => {
-    // Creating a thunk for this currently because you never know
+export const AddPlaylistAction = newPlaylist => {
     return (dispatch, getState) => {
-        dispatch(fetchPlaylists())
+        const {
+            PlaylistsDataReducer: { statePlaylists },
+        } = getState()
+
+        dispatch(addPlaylist(newPlaylist, statePlaylists))
     }
 }
 
@@ -39,8 +50,10 @@ export const DeletePlaylistAction = playlistId => {
     }
 }
 
-export const AddPlaylistAction = (currentPlaylists, newPlaylist) => {
-    return [...currentPlaylists, newPlaylist]
+export const FetchPlaylists = () => {
+    return (dispatch, getState) => {
+        dispatch(fetchPlaylists())
+    }
 }
 
 // Helpers
