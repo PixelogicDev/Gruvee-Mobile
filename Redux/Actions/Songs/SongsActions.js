@@ -1,6 +1,4 @@
-// JMSWRNR - " I'm gonna try to actually write code now ™"(01/31/20)
-import MockSongs from 'Gruvee/Mock/mockSongs'
-
+// JMSWRNR - "I'm gonna try to actually write code now ™"(01/31/20)
 import {
     ADD_SONG,
     DELETE_SONG,
@@ -27,8 +25,13 @@ const fetchSongs = songs => {
 const deleteSongFromPlaylist = (playlists, playlistId, songId) => {
     return {
         type: DELETE_SONG,
-        data: { playlists, playlistId, songId },
+        data: {
+            playlists,
+            playlistId,
+            songId,
+        },
     }
+    // Remaiten - "Just dont mess it up right here, if you mess this up you're doomed" (02/05/20)
 }
 
 // Thunks
@@ -57,32 +60,10 @@ export const DeleteSongFromPlaylist = (playlistId, songId) => {
 
 export const FetchSongs = playlistId => {
     // At this point make async call to get songs for playlist
-    // Will be searching through array of songs for the ones we need for this playlist
-    // Then set in Redux State
     return (dispatch, getState) => {
         // poopuhchoo - "YASSSS" (01/30/20)
-        // firebase.com/getSongsForPlaylist(playlistId)
-        // Go DB, get playlist, get songs data byId
-        // Returns array of songs (Right now imported MockSongs for this)
-        dispatch(fetchSongs(MockSongs))
+        // Map ids to songs state
+        const songs = []
+        dispatch(fetchSongs(songs))
     }
-}
-
-// Helpers
-export const MapSongsFromPlaylist = (state, playlistId) => {
-    const songs = []
-
-    if (state.SongsDataReducer.songs.byId === undefined) return songs
-
-    // Get list of songIds from playlist
-    const songIds = state.PlaylistsDataReducer.playlists.byId[playlistId].songs
-
-    songIds.forEach(songId => {
-        const song = state.SongsDataReducer.songs.byId[songId]
-        if (song !== undefined) {
-            songs.push(song)
-        }
-    })
-
-    return songs
 }

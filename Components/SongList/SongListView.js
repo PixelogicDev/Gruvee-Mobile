@@ -15,8 +15,8 @@ import {
     AddSong,
     DeleteSongFromPlaylist,
     FetchSongs,
-    MapSongsFromPlaylist,
 } from 'Gruvee/Redux/Actions/Songs/SongsActions'
+import { MapSongsFromPlaylist } from 'Gruvee/Redux/Actions/Songs/Selectors'
 
 import spotifyMockFindResponse from 'Gruvee/Mock/spotifyMockFindResponse'
 import AddItemButton from 'Gruvee/Components/Common/AddItemButton'
@@ -36,6 +36,7 @@ const SongListView = ({
     const [songsToDisplay, setSongsToDisplay] = useState([])
 
     useEffect(() => {
+        // We should fetch the newest data on component load here.
         fetchSongs(playlistId)
     }, [])
 

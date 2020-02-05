@@ -25,26 +25,11 @@ export const DeleteSongFromPlaylist = (playlists, playlistId, songId) => {
     return newPlaylists
 }
 
-export const FetchSongs = songs => {
-    // At this point we will have our list of songs
-    // Setup the flat state
-
-    /*
-        songs : {
-		    byId: {
-			    “songId”: {
-				    songId: “songId”,
-				    addedBy: “MemberId”, 
-				    comments: [“123”, “456”]
-				    …
-			    }
-		    },
-		    allIds: [“1”, “2”, “3”]
-	    },
-    */
+export const FetchSongs = (songsState, songs) => {
+    if (songs.length === 0) return songsState
 
     // TODO: Think if we want to use reduce vs forEach (O(n^2) vs O(n))
-    return songs.reduce(
+    const reducedSongs = songs.reduce(
         (state, currentSongs) => {
             return {
                 byId: {
@@ -54,6 +39,19 @@ export const FetchSongs = songs => {
                 allIds: [...state.allIds, currentSongs.id],
             }
         },
-        { byId: {}, allIds: [] }
+        {
+            byId: {},
+            allIds: [],
+        }
     )
+
+    // sillyonly - "SWIFT IS THE LANGUAGE OF THE GODS!" (02/05/20)
+    // estrangedHD - "Well what a same, I still need another one Kappa" (02/05/20)
+    reducedSongs.byId = {
+        ...reducedSongs.byId,
+        ...songsState.byId,
+    }
+    reducedSongs.allIds = [...reducedSongs.allIds, ...songsState.allIds]
+
+    return reducedSongs
 }

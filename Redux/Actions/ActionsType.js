@@ -1,5 +1,5 @@
 // General
-export const FETCH_MOCK_DATA = 'FETCH_MOCK_DATA'
+export const FETCH_PLAYLISTS = 'FETCH_PLAYLISTS'
 
 // Playlist Actions
 export const ADD_PLAYLIST = 'ADD_PLAYLIST'

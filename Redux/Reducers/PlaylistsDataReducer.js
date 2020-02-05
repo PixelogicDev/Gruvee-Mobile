@@ -2,7 +2,7 @@
 // InukApp "Swift > JS" (01/27/20)
 import MockPlaylists from 'Gruvee/Mock/mockPlaylists'
 import {
-    FETCH_MOCK_DATA,
+    FETCH_PLAYLISTS,
     ADD_PLAYLIST,
     DELETE_PLAYLIST,
     UPDATE_PLAYLIST_SONGS,
@@ -16,7 +16,27 @@ import {
 // InukApp - "Hello World" (01/27/20)
 // LilCazza - "PixelogicDev's code is just like monkaS when I use this bug (*feature)" (01/28/20)
 // ywnklme - "\_(ツ)_/¯" (01/27/20)
-const initialState = { playlists: { byId: {}, allIds: [] } }
+
+// Mock Data Mapper
+const mapMockPlaylists = () => {
+    const byId = {}
+    const allIds = []
+
+    MockPlaylists.forEach(playlist => {
+        byId[playlist.id] = playlist
+        allIds.push(playlist.id)
+    })
+
+    return {
+        playlists: {
+            byId,
+            allIds,
+        },
+    }
+}
+
+// Map mock data for initial state using FetchPlaylists
+const initialState = mapMockPlaylists()
 
 export default (state = initialState, action) => {
     switch (action.type) {
@@ -33,13 +53,10 @@ export default (state = initialState, action) => {
                     action.data.playlists
                 ),
             }
-        case FETCH_MOCK_DATA:
+        case FETCH_PLAYLISTS:
             return {
-                // At this point I should already have my playlists or setup a thunk to get them based on user
                 ...state,
-                // At this point if we have playlists in our state
-                // Lets go ahead and map them in with our mock playlists
-                playlists: FetchPlaylists(state.playlists, MockPlaylists),
+                playlists: FetchPlaylists(state.playlists, action.data),
             }
         case UPDATE_PLAYLIST_SONGS:
             return {

@@ -18,19 +18,7 @@ export const DeletePlaylist = (playlistId, playlists) => {
 }
 
 export const FetchPlaylists = (playlistsState, playlists) => {
-    // Setup the flat state
-    /*
-        playlists: {
-            byId: {
-                “playlistId”: {
-                    playlistId: “bla”,
-                    members: [“456”, “789”], // MemberIds
-                    songs: [“123”, “456”] // SongIds
-                }
-            },
-		    allIds: [“1”, “2”, “3”]
-	    }
-    */
+    if (playlists.length === 0) return playlistsState
 
     // TODO: Think if we want to use reduce vs forEach (O(n^2) vs O(n))
     const reducedPlaylists = playlists.reduce(
