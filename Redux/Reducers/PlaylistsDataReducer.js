@@ -5,11 +5,13 @@ import {
     FETCH_PLAYLISTS,
     ADD_PLAYLIST,
     DELETE_PLAYLIST,
+    DELETE_PLAYLIST_SONG,
     UPDATE_PLAYLIST_SONGS,
 } from '../Actions/ActionsType'
 import {
     AddPlaylist,
     DeletePlaylist,
+    DeletePlaylistSong,
     FetchPlaylists,
     UpdatePlaylistSongs,
 } from '../Actions/Playlists/DispatchActions'
@@ -51,6 +53,15 @@ export default (state = initialState, action) => {
                 playlists: DeletePlaylist(
                     action.data.playlistId,
                     action.data.playlists
+                ),
+            }
+        case DELETE_PLAYLIST_SONG:
+            return {
+                ...state,
+                playlists: DeletePlaylistSong(
+                    action.data.songId,
+                    action.data.playlistId,
+                    state.playlists
                 ),
             }
         case FETCH_PLAYLISTS:

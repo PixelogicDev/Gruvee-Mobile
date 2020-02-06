@@ -2,7 +2,7 @@ import MockSongs from 'Gruvee/Mock/mockSongs'
 import { ADD_SONG, DELETE_SONG, FETCH_SONGS } from '../Actions/ActionsType'
 import {
     AddSong,
-    DeleteSongFromPlaylist,
+    DeleteSong,
     FetchSongs,
 } from '../Actions/Songs/DispatchActions'
 
@@ -33,16 +33,12 @@ export default (state = initialState, action) => {
         case ADD_SONG:
             return {
                 ...state,
-                songs: AddSong(action.data.song, state.songs),
+                songs: AddSong(action.data, state.songs),
             }
         case DELETE_SONG:
             return {
                 ...state,
-                playlists: DeleteSongFromPlaylist(
-                    action.data.playlists,
-                    action.data.playlistId,
-                    action.data.songId
-                ),
+                songs: DeleteSong(action.data, state.songs),
             }
         case FETCH_SONGS:
             return {

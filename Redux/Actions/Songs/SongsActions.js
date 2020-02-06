@@ -5,13 +5,16 @@ import {
     FETCH_SONGS,
 } from 'Gruvee/Redux/Actions/ActionsType'
 
-import { UpdatePlaylistSongs } from 'Gruvee/Redux/Actions/Playlists/PlaylistActions'
+import {
+    DeletePlaylistSong,
+    UpdatePlaylistSongs,
+} from 'Gruvee/Redux/Actions/Playlists/PlaylistActions'
 
 // Actions
 const addSong = song => {
     return {
         type: ADD_SONG,
-        data: { song },
+        data: song,
     }
 }
 
@@ -22,14 +25,10 @@ const fetchSongs = songs => {
     }
 }
 
-const deleteSongFromPlaylist = (playlists, playlistId, songId) => {
+const deleteSong = songId => {
     return {
         type: DELETE_SONG,
-        data: {
-            playlists,
-            playlistId,
-            songId,
-        },
+        data: songId,
     }
     // Remaiten - "Just dont mess it up right here, if you mess this up you're doomed" (02/05/20)
 }
@@ -45,16 +44,13 @@ export const AddSong = (playlistId, song) => {
     }
 }
 
-export const DeleteSongFromPlaylist = (playlistId, songId) => {
-    // Pass back playlists array to map over
-    // TODO: Should probably make this a bit more optimal...
-
+export const DeleteSong = (playlistId, songId) => {
     return (dispatch, getState) => {
-        const {
-            PlaylistsDataReducer: { playlists },
-        } = getState()
+        // Remove song from current songs list
+        dispatch(deleteSong(songId))
 
-        dispatch(deleteSongFromPlaylist(playlists, playlistId, songId))
+        // Update playlist in PlaylistsDataReducer
+        dispatch(DeletePlaylistSong(songId, playlistId))
     }
 }
 

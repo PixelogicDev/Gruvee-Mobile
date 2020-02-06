@@ -13,7 +13,7 @@ import { Navigation } from 'react-native-navigation'
 import { connect } from 'react-redux'
 import {
     AddSong,
-    DeleteSongFromPlaylist,
+    DeleteSong,
     FetchSongs,
 } from 'Gruvee/Redux/Actions/Songs/SongsActions'
 import { MapSongsFromPlaylist } from 'Gruvee/Redux/Actions/Songs/Selectors'
@@ -30,7 +30,7 @@ const SongListView = ({
     songs,
     fetchSongs,
     addSong,
-    deleteSongFromPlaylist,
+    deleteSong,
     updateSongsInPlaylistAction,
 }) => {
     const [songsToDisplay, setSongsToDisplay] = useState([])
@@ -52,16 +52,6 @@ const SongListView = ({
 
         // Dismiss song modal overlay
         Navigation.dismissOverlay(NavigationConstants.ADD_SONG_MODAL_NAV_ID)
-    }
-
-    const deleteSong = songId => {
-        // TODO: Add some sort of promise
-
-        // Filter out song from parent state
-        deleteSongFromPlaylist(playlistId, songId)
-
-        // Set songs to display
-        fetchSongs(playlistId)
     }
 
     const addCommentFromSongAction = (songId, comments) => {
@@ -121,7 +111,7 @@ const SongListView = ({
     const renderItem = ({ item }) => (
         <SwipeableSongItem
             song={item}
-            deleteSongById={() => deleteSong(item.id)}
+            deleteSongById={() => deleteSong(playlistId, item.id)}
             addCommentFromSongAction={addCommentFromSongAction}
             deleteCommentFromSongAction={deleteCommentFromSongAction}
             updateSongsInPlaylistAction={updateSongsInPlaylistAction}
@@ -179,8 +169,8 @@ const mapStateToProps = (state, props) => {
 }
 const mapDispatchToProps = dispatch => ({
     addSong: (playlistId, song) => dispatch(AddSong(playlistId, song)),
-    deleteSongFromPlaylist: (playlistId, songId) =>
-        dispatch(DeleteSongFromPlaylist(playlistId, songId)),
+    deleteSong: (playlistId, songId) =>
+        dispatch(DeleteSong(playlistId, songId)),
     fetchSongs: playlistId => dispatch(FetchSongs(playlistId)),
 })
 

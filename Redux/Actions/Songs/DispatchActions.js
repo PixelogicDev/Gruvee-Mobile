@@ -6,23 +6,24 @@ export const AddSong = (newSong, stateSongs) => {
     }
 }
 
-export const DeleteSongFromPlaylist = (playlists, playlistId, songId) => {
-    const newPlaylists = playlists.map(playlist => {
-        if (playlist.id === playlistId) {
-            const filteredSongs = playlist.songs.filter(
-                song => song.id !== songId
-            )
+export const DeleteSong = (songId, stateSongs) => {
+    const byId = Object.entries(stateSongs.byId)
+        .filter(([key]) => {
+            return key !== songId
+        })
+        .reduce(
+            (obj, [key, value]) => {
+                return { ...obj, [key]: value }
+            },
+            // Will reduce the byId {}
+            {}
+        )
 
-            return {
-                ...playlist,
-                songs: filteredSongs,
-            }
-        }
-
-        return playlist
-    })
-
-    return newPlaylists
+    return {
+        ...stateSongs,
+        byId,
+        allIds: stateSongs.allIds.filter(stateSongId => stateSongId !== songId),
+    }
 }
 
 export const FetchSongs = (songsState, songs) => {

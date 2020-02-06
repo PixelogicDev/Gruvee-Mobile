@@ -5,6 +5,7 @@
 import {
     ADD_PLAYLIST,
     DELETE_PLAYLIST,
+    DELETE_PLAYLIST_SONG,
     FETCH_PLAYLISTS,
     UPDATE_PLAYLIST_SONGS,
 } from 'Gruvee/Redux/Actions/ActionsType'
@@ -28,6 +29,13 @@ const fetchPlaylists = playlists => {
     // Simulates call to get all playlists for current user
     // We are assuming we have a user signed in
     return { type: FETCH_PLAYLISTS, data: playlists }
+}
+
+const deletePlaylistSong = (songId, playlistId) => {
+    return {
+        type: DELETE_PLAYLIST_SONG,
+        data: { songId, playlistId },
+    }
 }
 
 const updatePlaylistSongs = (songId, playlistId) => {
@@ -63,6 +71,12 @@ export const FetchPlaylists = () => {
     return (dispatch, getState) => {
         const playlists = [] // Will be an array of playlist objects
         dispatch(fetchPlaylists(playlists))
+    }
+}
+
+export const DeletePlaylistSong = (songId, playlistId) => {
+    return (dispatch, getState) => {
+        dispatch(deletePlaylistSong(songId, playlistId))
     }
 }
 

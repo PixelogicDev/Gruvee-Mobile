@@ -4,6 +4,7 @@ export const FETCH_PLAYLISTS = 'FETCH_PLAYLISTS'
 // Playlist Actions
 export const ADD_PLAYLIST = 'ADD_PLAYLIST'
 export const DELETE_PLAYLIST = 'DELETE_PLAYLIST'
+export const DELETE_PLAYLIST_SONG = 'DELETE_PLAYLIST_SONG'
 export const UPDATE_PLAYLIST_SONGS = 'UPDATE_PLAYLIST_SONGS'
 
 // Song Actions
