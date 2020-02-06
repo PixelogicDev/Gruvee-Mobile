@@ -5,10 +5,10 @@ import { BackHandler, View, StyleSheet, Platform } from 'react-native'
 import { SwipeListView } from 'react-native-swipe-list-view'
 import { Navigation } from 'react-native-navigation'
 
-import {
-    FetchPlaylists,
-    MapPlaylistsFromUser,
-} from 'Gruvee/Redux/Actions/Playlists/PlaylistActions'
+// Redux
+import { FetchPlaylists } from 'Gruvee/Redux/Actions/Playlists/PlaylistActions'
+import { MapPlaylistsFromUser } from 'Gruvee/Redux/Selectors/PlaylistsSelector'
+
 import AddItemButton from 'Gruvee/Components/Common/AddItemButton'
 import * as StyleConstants from '@StyleConstants'
 import * as NavigationConstants from '@NavigationConstants'
@@ -139,18 +139,6 @@ const PlaylistListView = ({ fetchPlaylists, playlists }) => {
     )
 }
 
-// Redux Mappers
-const mapStateToProps = state => {
-    return {
-        // At this point we should already have the user data in our state
-        // Grab the proper reducer, and pull in all playlist ids
-        playlists: MapPlaylistsFromUser(state),
-    }
-}
-const mapDispatchToProps = dispatch => ({
-    fetchPlaylists: () => dispatch(FetchPlaylists()),
-})
-
 // Styles
 const styles = StyleSheet.create({
     Container: {
@@ -170,6 +158,18 @@ const styles = StyleSheet.create({
         width: StyleConstants.ADD_BUTTON_SIZE,
         height: StyleConstants.ADD_BUTTON_SIZE,
     },
+})
+
+// Redux Mappers
+const mapStateToProps = state => {
+    return {
+        // At this point we should already have the user data in our state
+        // Grab the proper reducer, and pull in all playlist ids
+        playlists: MapPlaylistsFromUser(state),
+    }
+}
+const mapDispatchToProps = dispatch => ({
+    fetchPlaylists: () => dispatch(FetchPlaylists()),
 })
 
 export default connect(

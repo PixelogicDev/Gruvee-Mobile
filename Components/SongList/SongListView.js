@@ -16,7 +16,7 @@ import {
     DeleteSong,
     FetchSongs,
 } from 'Gruvee/Redux/Actions/Songs/SongsActions'
-import { MapSongsFromPlaylist } from 'Gruvee/Redux/Actions/Songs/Selectors'
+import { MapSongsFromPlaylist } from 'Gruvee/Redux/Selectors/SongsSelector'
 
 import spotifyMockFindResponse from 'Gruvee/Mock/spotifyMockFindResponse'
 import AddItemButton from 'Gruvee/Components/Common/AddItemButton'

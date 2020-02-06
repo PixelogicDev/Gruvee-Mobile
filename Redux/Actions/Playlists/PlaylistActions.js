@@ -85,23 +85,3 @@ export const UpdatePlaylistSongs = (songId, playlistId) => {
         dispatch(updatePlaylistSongs(songId, playlistId))
     }
 }
-
-// Helpers
-export const MapPlaylistsFromUser = state => {
-    const playlists = []
-    const statePlaylists = state.PlaylistsDataReducer.playlists
-
-    if (statePlaylists.allIds.length === 0) {
-        return playlists
-    }
-
-    // Get all playlists for signed in user, but at this point we should already have the playlistIds
-    statePlaylists.allIds.forEach(playlistId => {
-        const playlist = statePlaylists.byId[playlistId]
-        if (playlist !== undefined) {
-            playlists.push(playlist)
-        }
-    })
-
-    return playlists
-}

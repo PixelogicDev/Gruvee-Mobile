@@ -4,6 +4,7 @@ export const MapSongsFromPlaylist = (state, playlistId) => {
     const songs = []
 
     if (state.SongsDataReducer.songs.byId === undefined) return songs
+    if (state.PlaylistsDataReducer.playlists.byId === undefined) return songs
 
     // Get list of songIds from playlist
     const songIds = state.PlaylistsDataReducer.playlists.byId[playlistId].songs

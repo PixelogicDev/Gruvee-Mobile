@@ -11,3 +11,6 @@ export const UPDATE_PLAYLIST_SONGS = 'UPDATE_PLAYLIST_SONGS'
 export const ADD_SONG = 'ADD_SONG'
 export const DELETE_SONG = 'DELETE_SONG'
 export const FETCH_SONGS = 'FETCH_SONGS'
+
+// Comment Actions
+export const FETCH_COMMENTS = 'FETCH_COMMENTS'
