@@ -7,7 +7,7 @@ import { Navigation } from 'react-native-navigation'
 
 // Redux
 import { FetchPlaylists } from 'Gruvee/Redux/Actions/Playlists/PlaylistActions'
-import { MapPlaylistsFromUser } from 'Gruvee/Redux/Selectors/PlaylistsSelector'
+import { MapPlaylistsFromUserSelector } from 'Gruvee/Redux/Selectors/PlaylistsSelector'
 
 import AddItemButton from 'Gruvee/Components/Common/AddItemButton'
 import * as StyleConstants from '@StyleConstants'
@@ -165,7 +165,7 @@ const mapStateToProps = state => {
     return {
         // At this point we should already have the user data in our state
         // Grab the proper reducer, and pull in all playlist ids
-        playlists: MapPlaylistsFromUser(state),
+        playlists: MapPlaylistsFromUserSelector(state),
     }
 }
 const mapDispatchToProps = dispatch => ({

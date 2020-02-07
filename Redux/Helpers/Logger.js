@@ -1,9 +1,13 @@
+/* eslint-disable no-console */
 export default store => next => action => {
-    console.info(
-        '%cRECEIVED ACTION',
-        'color: #7BD389; background: #484D6D',
-        action
-    )
+    if (typeof action !== 'function') {
+        console.info(
+            '%cRECEIVED ACTION',
+            'color: #7BD389; background: #484D6D',
+            action
+        )
+    }
+
     const nextResult = next(action)
     console.info(
         '%cNEXT',

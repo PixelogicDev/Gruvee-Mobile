@@ -16,7 +16,7 @@ import {
     DeleteSong,
     FetchSongs,
 } from 'Gruvee/Redux/Actions/Songs/SongsActions'
-import { MapSongsFromPlaylist } from 'Gruvee/Redux/Selectors/SongsSelector'
+import { MapSongsFromPlaylistSelector } from 'Gruvee/Redux/Selectors/SongsSelector'
 
 import spotifyMockFindResponse from 'Gruvee/Mock/spotifyMockFindResponse'
 import AddItemButton from 'Gruvee/Components/Common/AddItemButton'
@@ -165,7 +165,7 @@ const styles = StyleSheet.create({
 // Redux Mappers
 const mapStateToProps = (state, props) => {
     // Should get songIds from playlist and map accordingly
-    return { songs: MapSongsFromPlaylist(state, props.playlistId) }
+    return { songs: MapSongsFromPlaylistSelector(state, props) }
 }
 const mapDispatchToProps = dispatch => ({
     addSong: (playlistId, song) => dispatch(AddSong(playlistId, song)),

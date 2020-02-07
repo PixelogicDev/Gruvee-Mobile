@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import React from 'react'
 import { Text, View, StyleSheet } from 'react-native'
 import SocialAuthButton from 'Gruvee/Components/Auth/SocialAuthButton'
@@ -8,7 +9,7 @@ const Auth = () => {
     return (
         <View style={styles.Container}>
             <View>
-                <Text style={styles.SectionTitle}>Lets Get Grüvee</Text>
+                <Text style={styles.SectionTitle}>Let's Get Grüvee</Text>
                 <Text style={styles.SectionDetail}>
                     Let all of your wildest memes come true. Just sell your soul
                     below.

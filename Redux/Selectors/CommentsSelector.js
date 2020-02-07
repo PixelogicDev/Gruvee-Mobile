@@ -1,16 +1,26 @@
+import { createSelector } from 'reselect'
+
 // This should take our state and return an array of comments to display in our list
 // eslint-disable-next-line import/prefer-default-export
-export const MapCommentsFromSong = (state, songId) => {
+export const MapCommentsFromSongSelector = createSelector(
+    state => state.SongsDataReducer.songs,
+    state => state.CommentsDataReducer.comments,
+    (_, props) => props.songId,
+    (songs, comments, songId) => mapCommentsFromSong(songs, comments, songId)
+)
+
+// Helpers
+const mapCommentsFromSong = (stateSongs, stateComments, songId) => {
     const comments = []
 
-    if (state.CommentsDataReducer.comments.byId === undefined) return comments
-    if (state.SongsDataReducer.songs.byId === undefined) return comments
+    if (stateComments.byId === undefined) return comments
+    if (stateSongs.byId === undefined) return comments
 
     // Get list of commentIds from song
-    const commentIds = state.SongsDataReducer.songs.byId[songId].comments
+    const commentIds = stateSongs.byId[songId].comments
 
     commentIds.forEach(commentId => {
-        const comment = state.CommentsDataReducer.comments.byId[commentId]
+        const comment = stateComments.byId[commentId]
         if (comment !== undefined) {
             comments.push(comment)
         }

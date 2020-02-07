@@ -11,7 +11,7 @@ import { SwipeListView } from 'react-native-swipe-list-view'
 
 // Redux
 import { FetchComments } from 'Gruvee/Redux/Actions/Comments/CommentsActions'
-import { MapCommentsFromSong } from 'Gruvee/Redux/Selectors/CommentsSelector'
+import { MapCommentsFromSongSelector } from 'Gruvee/Redux/Selectors/CommentsSelector'
 
 import SwipeableCommentItem from './components/SwipeableCommentItem/SwipeableCommentItem'
 import AddCommentTextInput from './components/AddCommentTextInput/AddCommentTextInput'
@@ -114,7 +114,7 @@ const styles = StyleSheet.create({
 // Redux Mappers
 const mapStateToProps = (state, props) => {
     // Should get songIds from playlist and map accordingly
-    return { comments: MapCommentsFromSong(state, props.songId) }
+    return { comments: MapCommentsFromSongSelector(state, props) }
 }
 const mapDispatchToProps = dispatch => ({
     fetchComments: songId => dispatch(FetchComments(songId)),
