@@ -46,8 +46,14 @@ export const AddSong = (playlistId, song) => {
 
 export const DeleteSong = (playlistId, songId) => {
     return (dispatch, getState) => {
-        // Remove song from current songs list
-        dispatch(deleteSong(songId))
+        const {
+            PlaylistsDataReducer: { playlists },
+        } = getState()
+
+        // Check to see if we should delete the song from our state
+        if (!isSharedSong(playlists, playlistId, songId)) {
+            dispatch(deleteSong(songId))
+        }
 
         // Update playlist in PlaylistsDataReducer
         dispatch(DeletePlaylistSong(songId, playlistId))
@@ -62,4 +68,16 @@ export const FetchSongs = playlistId => {
         const songs = []
         dispatch(fetchSongs(songs))
     }
+}
+
+// Helpers
+const isSharedSong = (playlists, playlistId, songId) => {
+    // Check to see if songId is part of another playlist
+    // If it is do not run the deleteSong from state
+
+    const val = Object.entries(playlists.byId).find(([key, playlistObj]) => {
+        return key !== playlistId && playlistObj.songs.includes(songId)
+    })
+
+    return val
 }
