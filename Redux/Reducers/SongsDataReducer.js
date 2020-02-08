@@ -1,15 +1,17 @@
 import MockSongs from 'Gruvee/Mock/mockSongs'
 import {
     ADD_SONG,
+    ADD_SONG_COMMENT,
     DELETE_SONG,
+    DELETE_SONG_COMMENT,
     FETCH_SONGS,
-    UPDATE_SONG_COMMENTS,
 } from '../Actions/ActionsType'
 import {
     AddSong,
+    AddSongComment,
     DeleteSong,
+    DeleteSongComment,
     FetchSongs,
-    UpdateSongComments,
 } from '../Actions/Songs/DispatchActions'
 
 // Mock Data Mapper
@@ -41,24 +43,33 @@ export default (state = initialState, action) => {
                 ...state,
                 songs: AddSong(action.data, state.songs),
             }
+        case ADD_SONG_COMMENT:
+            return {
+                ...state,
+                songs: AddSongComment(
+                    action.data.commentId,
+                    action.data.songId,
+                    state.songs
+                ),
+            }
         case DELETE_SONG:
             return {
                 ...state,
                 songs: DeleteSong(action.data, state.songs),
             }
-        case FETCH_SONGS:
+        case DELETE_SONG_COMMENT:
             return {
                 ...state,
-                songs: FetchSongs(state.songs, action.data),
-            }
-        case UPDATE_SONG_COMMENTS:
-            return {
-                ...state,
-                songs: UpdateSongComments(
+                songs: DeleteSongComment(
                     action.data.commentId,
                     action.data.songId,
                     state.songs
                 ),
+            }
+        case FETCH_SONGS:
+            return {
+                ...state,
+                songs: FetchSongs(action.data, state.songs),
             }
         default:
             return state

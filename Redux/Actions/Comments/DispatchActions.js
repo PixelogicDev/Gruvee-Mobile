@@ -6,6 +6,28 @@ export const AddComment = (stateComments, newComment) => {
     }
 }
 
+export const DeleteComment = (commentsState, commentId) => {
+    const byId = Object.entries(commentsState.byId)
+        .filter(([key]) => {
+            return key !== commentId
+        })
+        .reduce(
+            (obj, [key, value]) => {
+                return { ...obj, [key]: value }
+            },
+            // Will reduce the byId {}
+            {}
+        )
+
+    return {
+        ...commentsState,
+        byId,
+        allIds: commentsState.allIds.filter(
+            stateCommentId => stateCommentId !== commentId
+        ),
+    }
+}
+
 export const FetchComments = (commentsState, comments) => {
     if (commentsState.length === 0) return commentsState
 
@@ -37,23 +59,3 @@ export const FetchComments = (commentsState, comments) => {
 
     return reducedComments
 }
-
-// export const DeleteSong = (songId, stateSongs) => {
-//     const byId = Object.entries(stateSongs.byId)
-//         .filter(([key]) => {
-//             return key !== songId
-//         })
-//         .reduce(
-//             (obj, [key, value]) => {
-//                 return { ...obj, [key]: value }
-//             },
-//             // Will reduce the byId {}
-//             {}
-//         )
-
-//     return {
-//         ...stateSongs,
-//         byId,
-//         allIds: stateSongs.allIds.filter(stateSongId => stateSongId !== songId),
-//     }
-// }

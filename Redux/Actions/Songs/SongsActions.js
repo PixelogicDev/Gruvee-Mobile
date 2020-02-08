@@ -1,20 +1,28 @@
 // JMSWRNR - "I'm gonna try to actually write code now ™"(01/31/20)
 import {
     ADD_SONG,
+    ADD_SONG_COMMENT,
     DELETE_SONG,
+    DELETE_SONG_COMMENT,
     FETCH_SONGS,
-    UPDATE_SONG_COMMENTS,
 } from 'Gruvee/Redux/Actions/ActionsType'
 import {
     DeletePlaylistSong,
     AddPlaylistSong,
 } from 'Gruvee/Redux/Actions/Playlists/PlaylistActions'
 
-// Actions
+// Action Creators
 const addSong = song => {
     return {
         type: ADD_SONG,
         data: song,
+    }
+}
+
+const addSongComment = (commentId, songId) => {
+    return {
+        type: ADD_SONG_COMMENT,
+        data: { commentId, songId },
     }
 }
 
@@ -26,17 +34,17 @@ const deleteSong = songId => {
     // Remaiten - "Just dont mess it up right here, if you mess this up you're doomed" (02/05/20)
 }
 
+const deleteSongComment = (commentId, songId) => {
+    return {
+        type: DELETE_SONG_COMMENT,
+        data: { commentId, songId },
+    }
+}
+
 const fetchSongs = songs => {
     return {
         type: FETCH_SONGS,
         data: songs,
-    }
-}
-
-const updateSongComments = (commentId, songId) => {
-    return {
-        type: UPDATE_SONG_COMMENTS,
-        data: { commentId, songId },
     }
 }
 
@@ -48,6 +56,12 @@ export const AddSong = (playlistId, song) => {
 
         // Update playlist in PlaylistsDataReducer
         dispatch(AddPlaylistSong(song.id, playlistId))
+    }
+}
+
+export const AddSongComment = (commentId, songId) => {
+    return (dispatch, getState) => {
+        dispatch(addSongComment(commentId, songId))
     }
 }
 
@@ -67,6 +81,12 @@ export const DeleteSong = (playlistId, songId) => {
     }
 }
 
+export const DeleteSongComment = (commentId, songId) => {
+    return (dispatch, getState) => {
+        dispatch(deleteSongComment(commentId, songId))
+    }
+}
+
 export const FetchSongs = playlistId => {
     // At this point make async call to get songs for playlist
     return (dispatch, getState) => {
@@ -74,14 +94,6 @@ export const FetchSongs = playlistId => {
         // Map ids to songs state
         const songs = []
         dispatch(fetchSongs(songs))
-    }
-}
-
-export const UpdateSongComments = (commentId, songId) => {
-    return (dispatch, getState) => {
-        // UPDATE OUR PLAYLIST
-
-        dispatch(updateSongComments(commentId, songId))
     }
 }
 

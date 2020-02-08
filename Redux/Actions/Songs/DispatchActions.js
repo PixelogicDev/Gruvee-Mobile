@@ -6,6 +6,20 @@ export const AddSong = (newSong, stateSongs) => {
     }
 }
 
+// EmberCM - "How many comments have you got now?" (02/07/20)
+export const AddSongComment = (commentId, songId, stateSongs) => {
+    return {
+        ...stateSongs,
+        byId: {
+            ...stateSongs.byId,
+            [songId]: {
+                ...stateSongs.byId[songId],
+                comments: [...stateSongs.byId[songId].comments, commentId],
+            },
+        },
+    }
+}
+
 export const DeleteSong = (songId, stateSongs) => {
     const byId = Object.entries(stateSongs.byId)
         .filter(([key]) => {
@@ -26,7 +40,22 @@ export const DeleteSong = (songId, stateSongs) => {
     }
 }
 
-export const FetchSongs = (songsState, songs) => {
+export const DeleteSongComment = (commentId, songId, stateSongs) => {
+    return {
+        ...stateSongs,
+        byId: {
+            ...stateSongs.byId,
+            [songId]: {
+                ...stateSongs.byId[songId],
+                comments: stateSongs.byId[songId].comments.filter(
+                    stateCommentId => stateCommentId !== commentId
+                ),
+            },
+        },
+    }
+}
+
+export const FetchSongs = (songs, songsState) => {
     if (songs.length === 0) return songsState
 
     // TODO: Think if we want to use reduce vs forEach (O(n^2) vs O(n))
@@ -55,18 +84,4 @@ export const FetchSongs = (songsState, songs) => {
     reducedSongs.allIds = [...reducedSongs.allIds, ...songsState.allIds]
 
     return reducedSongs
-}
-
-// EmberCM - "How many comments have you got now?" (02/07/20)
-export const UpdateSongComments = (commentId, songId, stateSongs) => {
-    return {
-        ...stateSongs,
-        byId: {
-            ...stateSongs.byId,
-            [songId]: {
-                ...stateSongs.byId[songId],
-                comments: [...stateSongs.byId[songId].comments, commentId],
-            },
-        },
-    }
 }

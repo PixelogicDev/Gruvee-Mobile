@@ -1,5 +1,12 @@
-import { ADD_COMMENT, FETCH_COMMENTS } from 'Gruvee/Redux/Actions/ActionsType'
-import { UpdateSongComments } from 'Gruvee/Redux/Actions/Songs/SongsActions'
+import {
+    ADD_COMMENT,
+    DELETE_COMMENT,
+    FETCH_COMMENTS,
+} from 'Gruvee/Redux/Actions/ActionsType'
+import {
+    AddSongComment,
+    DeleteSongComment,
+} from 'Gruvee/Redux/Actions/Songs/SongsActions'
 
 // Action Creators
 const addComment = comment => {
@@ -7,6 +14,13 @@ const addComment = comment => {
         // evjand - "This app will never be finished" (02/07/20)
         type: ADD_COMMENT,
         data: comment,
+    }
+}
+
+const deleteComment = commentId => {
+    return {
+        type: DELETE_COMMENT,
+        data: commentId,
     }
 }
 
@@ -23,9 +37,19 @@ export const AddComment = (comment, songId) => {
     // We also will need to update our respected song given the songId
     return (dispatch, getState) => {
         // Update song with new comment
-        dispatch(UpdateSongComments(comment.id, songId))
+        dispatch(AddSongComment(comment.id, songId))
 
         dispatch(addComment(comment))
+    }
+}
+
+export const DeleteComment = (commentId, songId) => {
+    // Make async call to update our db with removing comment
+    // We also will need to update our respected song given the songId
+
+    return (dispatch, getState) => {
+        dispatch(DeleteSongComment(commentId, songId))
+        dispatch(deleteComment(commentId))
     }
 }
 
@@ -36,31 +60,3 @@ export const FetchComments = songId => {
         dispatch(fetchComments(comments))
     }
 }
-
-// const deletePlaylist = (playlistId, playlists) => {
-//     return {
-//         type: DELETE_PLAYLIST,
-//         data: { playlistId, playlists },
-//     }
-// }
-
-// Thunks
-// export const AddPlaylistAction = newPlaylist => {
-//     return (dispatch, getState) => {
-//         const {
-//             PlaylistsDataReducer: { statePlaylists },
-//         } = getState()
-
-//         dispatch(addPlaylist(newPlaylist, statePlaylists))
-//     }
-// }
-
-// export const DeletePlaylistAction = playlistId => {
-//     return (dispatch, getState) => {
-//         const {
-//             PlaylistsDataReducer: { playlists },
-//         } = getState()
-
-//         dispatch(deletePlaylist(playlistId, playlists))
-//     }
-// }
