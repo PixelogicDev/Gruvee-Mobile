@@ -3,11 +3,11 @@ import {
     ADD_SONG,
     DELETE_SONG,
     FETCH_SONGS,
+    UPDATE_SONG_COMMENTS,
 } from 'Gruvee/Redux/Actions/ActionsType'
-
 import {
     DeletePlaylistSong,
-    UpdatePlaylistSongs,
+    AddPlaylistSong,
 } from 'Gruvee/Redux/Actions/Playlists/PlaylistActions'
 
 // Actions
@@ -15,13 +15,6 @@ const addSong = song => {
     return {
         type: ADD_SONG,
         data: song,
-    }
-}
-
-const fetchSongs = songs => {
-    return {
-        type: FETCH_SONGS,
-        data: songs,
     }
 }
 
@@ -33,6 +26,20 @@ const deleteSong = songId => {
     // Remaiten - "Just dont mess it up right here, if you mess this up you're doomed" (02/05/20)
 }
 
+const fetchSongs = songs => {
+    return {
+        type: FETCH_SONGS,
+        data: songs,
+    }
+}
+
+const updateSongComments = (commentId, songId) => {
+    return {
+        type: UPDATE_SONG_COMMENTS,
+        data: { commentId, songId },
+    }
+}
+
 // Thunks
 export const AddSong = (playlistId, song) => {
     return (dispatch, getState) => {
@@ -40,7 +47,7 @@ export const AddSong = (playlistId, song) => {
         dispatch(addSong(song))
 
         // Update playlist in PlaylistsDataReducer
-        dispatch(UpdatePlaylistSongs(song.id, playlistId))
+        dispatch(AddPlaylistSong(song.id, playlistId))
     }
 }
 
@@ -67,6 +74,14 @@ export const FetchSongs = playlistId => {
         // Map ids to songs state
         const songs = []
         dispatch(fetchSongs(songs))
+    }
+}
+
+export const UpdateSongComments = (commentId, songId) => {
+    return (dispatch, getState) => {
+        // UPDATE OUR PLAYLIST
+
+        dispatch(updateSongComments(commentId, songId))
     }
 }
 

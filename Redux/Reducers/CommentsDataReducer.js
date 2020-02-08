@@ -1,6 +1,6 @@
 import MockComments from 'Gruvee/Mock/mockSongComments'
-import { FETCH_COMMENTS } from '../Actions/ActionsType'
-import { FetchComments } from '../Actions/Comments/DispatchActions'
+import { FETCH_COMMENTS, ADD_COMMENT } from '../Actions/ActionsType'
+import { AddComment, FetchComments } from '../Actions/Comments/DispatchActions'
 
 // Mock Data Mapper
 const mapMockComments = () => {
@@ -25,6 +25,11 @@ const initialState = mapMockComments()
 
 export default (state = initialState, action) => {
     switch (action.type) {
+        case ADD_COMMENT:
+            return {
+                ...state,
+                comments: AddComment(state.comments, action.data),
+            }
         case FETCH_COMMENTS:
             return {
                 ...state,

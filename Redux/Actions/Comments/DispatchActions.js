@@ -1,32 +1,11 @@
-// export const AddSong = (newSong, stateSongs) => {
-//     return {
-//         ...stateSongs,
-//         byId: { ...stateSongs.byId, [newSong.id]: newSong },
-//         allIds: [...stateSongs.allIds, newSong.id],
-//     }
-// }
+export const AddComment = (stateComments, newComment) => {
+    return {
+        ...stateComments,
+        byId: { ...stateComments.byId, [newComment.id]: newComment },
+        allIds: [...stateComments.allIds, newComment.id],
+    }
+}
 
-// export const DeleteSong = (songId, stateSongs) => {
-//     const byId = Object.entries(stateSongs.byId)
-//         .filter(([key]) => {
-//             return key !== songId
-//         })
-//         .reduce(
-//             (obj, [key, value]) => {
-//                 return { ...obj, [key]: value }
-//             },
-//             // Will reduce the byId {}
-//             {}
-//         )
-
-//     return {
-//         ...stateSongs,
-//         byId,
-//         allIds: stateSongs.allIds.filter(stateSongId => stateSongId !== songId),
-//     }
-// }
-
-// eslint-disable-next-line import/prefer-default-export
 export const FetchComments = (commentsState, comments) => {
     if (commentsState.length === 0) return commentsState
 
@@ -58,3 +37,23 @@ export const FetchComments = (commentsState, comments) => {
 
     return reducedComments
 }
+
+// export const DeleteSong = (songId, stateSongs) => {
+//     const byId = Object.entries(stateSongs.byId)
+//         .filter(([key]) => {
+//             return key !== songId
+//         })
+//         .reduce(
+//             (obj, [key, value]) => {
+//                 return { ...obj, [key]: value }
+//             },
+//             // Will reduce the byId {}
+//             {}
+//         )
+
+//     return {
+//         ...stateSongs,
+//         byId,
+//         allIds: stateSongs.allIds.filter(stateSongId => stateSongId !== songId),
+//     }
+// }

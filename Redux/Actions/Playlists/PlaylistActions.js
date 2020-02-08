@@ -7,7 +7,7 @@ import {
     DELETE_PLAYLIST,
     DELETE_PLAYLIST_SONG,
     FETCH_PLAYLISTS,
-    UPDATE_PLAYLIST_SONGS,
+    ADD_PLAYLIST_SONG,
 } from 'Gruvee/Redux/Actions/ActionsType'
 
 // Action Creators
@@ -15,6 +15,13 @@ const addPlaylist = playlist => {
     return {
         type: ADD_PLAYLIST,
         data: playlist,
+    }
+}
+
+const addPlaylistSong = (songId, playlistId) => {
+    return {
+        type: ADD_PLAYLIST_SONG,
+        data: { songId, playlistId },
     }
 }
 
@@ -38,13 +45,6 @@ const deletePlaylistSong = (songId, playlistId) => {
     }
 }
 
-const updatePlaylistSongs = (songId, playlistId) => {
-    return {
-        type: UPDATE_PLAYLIST_SONGS,
-        data: { songId, playlistId },
-    }
-}
-
 // Thunks
 export const AddPlaylistAction = newPlaylist => {
     return (dispatch, getState) => {
@@ -53,6 +53,12 @@ export const AddPlaylistAction = newPlaylist => {
         } = getState()
 
         dispatch(addPlaylist(newPlaylist, statePlaylists))
+    }
+}
+
+export const AddPlaylistSong = (songId, playlistId) => {
+    return (dispatch, getState) => {
+        dispatch(addPlaylistSong(songId, playlistId))
     }
 }
 
@@ -77,11 +83,5 @@ export const FetchPlaylists = () => {
 export const DeletePlaylistSong = (songId, playlistId) => {
     return (dispatch, getState) => {
         dispatch(deletePlaylistSong(songId, playlistId))
-    }
-}
-
-export const UpdatePlaylistSongs = (songId, playlistId) => {
-    return (dispatch, getState) => {
-        dispatch(updatePlaylistSongs(songId, playlistId))
     }
 }

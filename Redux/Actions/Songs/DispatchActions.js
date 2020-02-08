@@ -56,3 +56,17 @@ export const FetchSongs = (songsState, songs) => {
 
     return reducedSongs
 }
+
+// EmberCM - "How many comments have you got now?" (02/07/20)
+export const UpdateSongComments = (commentId, songId, stateSongs) => {
+    return {
+        ...stateSongs,
+        byId: {
+            ...stateSongs.byId,
+            [songId]: {
+                ...stateSongs.byId[songId],
+                comments: [...stateSongs.byId[songId].comments, commentId],
+            },
+        },
+    }
+}

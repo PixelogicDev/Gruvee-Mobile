@@ -1,9 +1,15 @@
 import MockSongs from 'Gruvee/Mock/mockSongs'
-import { ADD_SONG, DELETE_SONG, FETCH_SONGS } from '../Actions/ActionsType'
+import {
+    ADD_SONG,
+    DELETE_SONG,
+    FETCH_SONGS,
+    UPDATE_SONG_COMMENTS,
+} from '../Actions/ActionsType'
 import {
     AddSong,
     DeleteSong,
     FetchSongs,
+    UpdateSongComments,
 } from '../Actions/Songs/DispatchActions'
 
 // Mock Data Mapper
@@ -44,6 +50,15 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 songs: FetchSongs(state.songs, action.data),
+            }
+        case UPDATE_SONG_COMMENTS:
+            return {
+                ...state,
+                songs: UpdateSongComments(
+                    action.data.commentId,
+                    action.data.songId,
+                    state.songs
+                ),
             }
         default:
             return state

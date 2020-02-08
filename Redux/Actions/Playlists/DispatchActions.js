@@ -7,6 +7,19 @@ export const AddPlaylist = (playlist, statePlaylists) => {
     return { byId, allIds }
 }
 
+export const AddPlaylistSong = (songId, playlistId, statePlaylists) => {
+    return {
+        ...statePlaylists,
+        byId: {
+            ...statePlaylists.byId,
+            [playlistId]: {
+                ...statePlaylists.byId[playlistId],
+                songs: [...statePlaylists.byId[playlistId].songs, songId],
+            },
+        },
+    }
+}
+
 export const DeletePlaylist = (playlistId, playlists) => {
     // LiquoriceLion - "Add some logic here." (02/03/20)
     // Filter out allIds to remove playlistId
@@ -64,17 +77,4 @@ export const FetchPlaylists = (playlistsState, playlists) => {
     ]
 
     return reducedPlaylists
-}
-
-export const UpdatePlaylistSongs = (songId, playlistId, statePlaylists) => {
-    return {
-        ...statePlaylists,
-        byId: {
-            ...statePlaylists.byId,
-            [playlistId]: {
-                ...statePlaylists.byId[playlistId],
-                songs: [...statePlaylists.byId[playlistId].songs, songId],
-            },
-        },
-    }
 }

@@ -10,7 +10,10 @@ import {
 import { SwipeListView } from 'react-native-swipe-list-view'
 
 // Redux
-import { FetchComments } from 'Gruvee/Redux/Actions/Comments/CommentsActions'
+import {
+    AddComment,
+    FetchComments,
+} from 'Gruvee/Redux/Actions/Comments/CommentsActions'
 import { MapCommentsFromSongSelector } from 'Gruvee/Redux/Selectors/CommentsSelector'
 
 import SwipeableCommentItem from './components/SwipeableCommentItem/SwipeableCommentItem'
@@ -21,6 +24,7 @@ import SongComment from '../../lib/SongComment'
 const CommentsList = ({
     songId,
     comments,
+    addComment,
     fetchComments,
     addCommentFromSongAction,
     deleteCommentFromSongAction,
@@ -39,14 +43,8 @@ const CommentsList = ({
     const keyExtractor = item => `${item.id}`
 
     const addCommentAction = comment => {
-        // Set Comment List View State
-        const newComments = [
-            ...commentsState,
-            new SongComment(comment, 'YaBoiAlec'),
-        ]
-
-        setCommentsState(newComments)
-        addCommentFromSongAction(songId, newComments)
+        const newComment = new SongComment(comment, 'memberAlec')
+        addComment(newComment, songId)
     }
 
     const deleteCommentAction = commentId => {
@@ -113,10 +111,10 @@ const styles = StyleSheet.create({
 
 // Redux Mappers
 const mapStateToProps = (state, props) => {
-    // Should get songIds from playlist and map accordingly
     return { comments: MapCommentsFromSongSelector(state, props) }
 }
 const mapDispatchToProps = dispatch => ({
+    addComment: (comment, songId) => dispatch(AddComment(comment, songId)),
     fetchComments: songId => dispatch(FetchComments(songId)),
 })
 
