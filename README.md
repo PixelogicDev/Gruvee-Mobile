@@ -1,6 +1,6 @@
 <h1 align="center">Grüvee</h1>
 <p align="center">
-  <strong>Get Grüvee with a new social, collaborative playlist for iPhone and Android</strong>
+  <strong>Let's get Grüvee with a new social, collaborative playlist for iPhone and Android</strong>
 </p>
 
 <p align="center">
