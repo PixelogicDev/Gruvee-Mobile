@@ -16,5 +16,6 @@ export const FETCH_SONGS = 'FETCH_SONGS'
 
 // Comment Actions
 export const ADD_COMMENT = 'ADD_COMMENT'
+export const BULK_COMMENTS_DELETE = 'BULK_COMMENTS_DELETE'
 export const DELETE_COMMENT = 'DELETE_COMMENT'
 export const FETCH_COMMENTS = 'FETCH_COMMENTS'

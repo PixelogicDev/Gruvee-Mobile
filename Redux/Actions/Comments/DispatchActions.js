@@ -1,9 +1,27 @@
-export const AddComment = (stateComments, newComment) => {
+export const AddComment = (commentsState, newComment) => {
     return {
-        ...stateComments,
-        byId: { ...stateComments.byId, [newComment.id]: newComment },
-        allIds: [...stateComments.allIds, newComment.id],
+        ...commentsState,
+        byId: { ...commentsState.byId, [newComment.id]: newComment },
+        allIds: [...commentsState.allIds, newComment.id],
     }
+}
+
+export const BulkCommentsDelete = (commentsState, commentIds) => {
+    // Go through our state and remove comments from byId and allIds
+    const newState = { ...commentsState }
+    commentIds.forEach(id => {
+        if (newState.byId[id]) {
+            // Delete from byId
+            delete newState.byId[id]
+        }
+
+        const index = newState.allIds.indexOf(id)
+        if (index !== -1) {
+            newState.allIds.splice(index, 1)
+        }
+    })
+
+    return newState
 }
 
 export const DeleteComment = (commentsState, commentId) => {

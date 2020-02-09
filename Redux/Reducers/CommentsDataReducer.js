@@ -1,11 +1,13 @@
 import MockComments from 'Gruvee/Mock/mockSongComments'
 import {
     ADD_COMMENT,
+    BULK_COMMENTS_DELETE,
     DELETE_COMMENT,
     FETCH_COMMENTS,
 } from '../Actions/ActionsType'
 import {
     AddComment,
+    BulkCommentsDelete,
     DeleteComment,
     FetchComments,
 } from '../Actions/Comments/DispatchActions'
@@ -37,6 +39,11 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 comments: AddComment(state.comments, action.data),
+            }
+        case BULK_COMMENTS_DELETE:
+            return {
+                ...state,
+                comments: BulkCommentsDelete(state.comments, action.data),
             }
         case DELETE_COMMENT:
             return {

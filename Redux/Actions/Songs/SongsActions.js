@@ -2,6 +2,7 @@
 import {
     ADD_SONG,
     ADD_SONG_COMMENT,
+    BULK_COMMENTS_DELETE,
     DELETE_SONG,
     DELETE_SONG_COMMENT,
     FETCH_SONGS,
@@ -23,6 +24,13 @@ const addSongComment = (commentId, songId) => {
     return {
         type: ADD_SONG_COMMENT,
         data: { commentId, songId },
+    }
+}
+
+const bulkCommentsDelete = commentIds => {
+    return {
+        type: BULK_COMMENTS_DELETE,
+        data: commentIds,
     }
 }
 
@@ -69,15 +77,19 @@ export const DeleteSong = (playlistId, songId) => {
     return (dispatch, getState) => {
         const {
             PlaylistsDataReducer: { playlists },
+            SongsDataReducer: { songs },
         } = getState()
+
+        // Update playlist in PlaylistsDataReducer
+        dispatch(DeletePlaylistSong(songId, playlistId))
 
         // Check to see if we should delete the song from our state
         if (!isSharedSong(playlists, playlistId, songId)) {
             dispatch(deleteSong(songId))
         }
 
-        // Update playlist in PlaylistsDataReducer
-        dispatch(DeletePlaylistSong(songId, playlistId))
+        // If we are deleting our song, we should dispatch a comment delete as well
+        dispatch(bulkCommentsDelete(songs.byId[songId].comments))
     }
 }
 
