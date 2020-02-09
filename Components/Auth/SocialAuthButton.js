@@ -29,9 +29,9 @@ const SocialAuthButton = ({ platform }) => {
         })
     }
     
-    let loginText = "Log In With " + platform.friendlyName
-    if (platform.friendlyName == 'Apple') {
-        loginText = "Sign In With " + platform.friendlyName
+    let loginText = "Log In With ${platform.friendlyName}"
+    if (platform.friendlyName.toLowerCase() === 'apple') {
+        loginText = "Sign In With ${platform.friendlyName}"
     }
     
     return (
