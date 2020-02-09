@@ -4,13 +4,16 @@ import MockPlaylists from 'Gruvee/Mock/mockPlaylists'
 import {
     ADD_PLAYLIST,
     ADD_PLAYLIST_SONG,
+    ADD_SONG_COMMENT,
     DELETE_PLAYLIST,
     DELETE_PLAYLIST_SONG,
     FETCH_PLAYLISTS,
+    SET_CURRENT_PLAYLIST_ID,
 } from '../Actions/ActionsType'
 import {
     AddPlaylist,
     AddPlaylistSong,
+    AddSongComment,
     DeletePlaylist,
     DeletePlaylistSong,
     FetchPlaylists,
@@ -30,6 +33,7 @@ const mapMockPlaylists = () => {
     })
 
     return {
+        currentPlaylistId: '',
         playlists: {
             byId,
             allIds,
@@ -46,6 +50,25 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 playlists: AddPlaylist(action.data, state.playlists),
+            }
+        case ADD_PLAYLIST_SONG:
+            return {
+                ...state,
+                playlists: AddPlaylistSong(
+                    action.data.songId,
+                    action.data.playlistId,
+                    state.playlists
+                ),
+            }
+        case ADD_SONG_COMMENT:
+            return {
+                ...state,
+                playlists: AddSongComment(
+                    action.data.commentId,
+                    action.data.songId,
+                    action.data.playlistId,
+                    state.playlists
+                ),
             }
         case DELETE_PLAYLIST:
             return {
@@ -69,14 +92,10 @@ export default (state = initialState, action) => {
                 ...state,
                 playlists: FetchPlaylists(state.playlists, action.data),
             }
-        case ADD_PLAYLIST_SONG:
+        case SET_CURRENT_PLAYLIST_ID:
             return {
                 ...state,
-                playlists: AddPlaylistSong(
-                    action.data.songId,
-                    action.data.playlistId,
-                    state.playlists
-                ),
+                currentPlaylistId: action.data,
             }
         default:
             return state

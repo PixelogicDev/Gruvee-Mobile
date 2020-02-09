@@ -3,10 +3,8 @@ import {
     DELETE_COMMENT,
     FETCH_COMMENTS,
 } from 'Gruvee/Redux/Actions/ActionsType'
-import {
-    AddSongComment,
-    DeleteSongComment,
-} from 'Gruvee/Redux/Actions/Songs/SongsActions'
+import { AddSongComment } from 'Gruvee/Redux/Actions/Playlists/PlaylistActions'
+import { DeleteSongComment } from 'Gruvee/Redux/Actions/Songs/SongsActions'
 
 // Action Creators
 const addComment = comment => {
@@ -32,13 +30,13 @@ const fetchComments = comments => {
 }
 
 // Thunks
-export const AddComment = (comment, songId) => {
+export const AddComment = (comment, songId, playlistId) => {
+    // syszen - "it broke na na's, i had hope" (02/09/20)
     // Make async call to update our db with new comment
     // We also will need to update our respected song given the songId
     return (dispatch, getState) => {
         // Update song with new comment
-        dispatch(AddSongComment(comment.id, songId))
-
+        dispatch(AddSongComment(comment.id, songId, playlistId))
         dispatch(addComment(comment))
     }
 }

@@ -23,6 +23,7 @@ import * as StyleConstants from '@StyleConstants'
 import SongComment from '../../lib/SongComment'
 
 const CommentsList = ({
+    currentPlaylistId,
     songId,
     comments,
     addComment,
@@ -45,7 +46,7 @@ const CommentsList = ({
 
     const addCommentAction = comment => {
         const newComment = new SongComment(comment, 'memberAlec')
-        addComment(newComment, songId)
+        addComment(newComment, songId, currentPlaylistId)
     }
 
     const runScrollToEnd = () => {
@@ -102,10 +103,14 @@ const styles = StyleSheet.create({
 
 // Redux Mappers
 const mapStateToProps = (state, props) => {
-    return { comments: MapCommentsFromSongSelector(state, props) }
+    return {
+        currentPlaylistId: state.PlaylistsDataReducer.currentPlaylistId,
+        comments: MapCommentsFromSongSelector(state, props),
+    }
 }
 const mapDispatchToProps = dispatch => ({
-    addComment: (comment, songId) => dispatch(AddComment(comment, songId)),
+    addComment: (comment, songId, playlistId) =>
+        dispatch(AddComment(comment, songId, playlistId)),
     deleteComment: (commentId, songId) =>
         dispatch(DeleteComment(commentId, songId)),
     fetchComments: songId => dispatch(FetchComments(songId)),

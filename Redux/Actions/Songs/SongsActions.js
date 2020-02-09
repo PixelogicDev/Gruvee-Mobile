@@ -20,13 +20,6 @@ const addSong = song => {
     }
 }
 
-const addSongComment = (commentId, songId) => {
-    return {
-        type: ADD_SONG_COMMENT,
-        data: { commentId, songId },
-    }
-}
-
 const bulkCommentsDelete = commentIds => {
     return {
         type: BULK_COMMENTS_DELETE,
@@ -67,12 +60,7 @@ export const AddSong = (playlistId, song) => {
     }
 }
 
-export const AddSongComment = (commentId, songId) => {
-    return (dispatch, getState) => {
-        dispatch(addSongComment(commentId, songId))
-    }
-}
-
+// InukApp - "I bet if Swift had better Android support, Alec would've chosen to code in Swift." (02/09/20)
 export const DeleteSong = (playlistId, songId) => {
     return (dispatch, getState) => {
         const {

@@ -1,4 +1,9 @@
 import React, { memo } from 'react'
+
+// Redux
+import { connect } from 'react-redux'
+import { SetCurrentPlaylistId } from 'Gruvee/Redux/Actions/Playlists/PlaylistActions'
+
 import { ImageBackground, TouchableOpacity, StyleSheet } from 'react-native'
 import { Navigation } from 'react-native-navigation'
 import CardItemDetail from './components/PlaylistItemDetail/CardItemDetail'
@@ -7,11 +12,19 @@ import * as NavigationConstants from '@NavigationConstants'
 
 const defaultPlaylistBackgroundAsset = require('Gruvee/Assets/Defaults/PlaylistImage/default_item_bg_image.png')
 
-const PlaylistItem = ({ playlistData, updateSongsInPlaylistAction }) => {
+const PlaylistItem = ({
+    playlistData,
+    setCurrentPlaylistId,
+    updateSongsInPlaylistAction,
+}) => {
     return (
         <TouchableOpacity
             onPress={() => {
-                showSongListAction(playlistData, updateSongsInPlaylistAction)
+                showSongListAction(
+                    playlistData,
+                    setCurrentPlaylistId,
+                    updateSongsInPlaylistAction
+                )
             }}
         >
             <ImageBackground
@@ -40,7 +53,14 @@ const showMembersAction = () => {
     })
 }
 
-const showSongListAction = (playlistData, updateSongsInPlaylistAction) => {
+const showSongListAction = (
+    playlistData,
+    setCurrentPlaylistId,
+    updateSongsInPlaylistAction
+) => {
+    // Call redux action to set playlistId in our state
+    setCurrentPlaylistId(playlistData.id)
+
     Navigation.push(NavigationConstants.STACK_ID, {
         component: {
             name: NavigationConstants.SONG_LIST_NAV_NAME,
@@ -101,4 +121,13 @@ const styles = StyleSheet.create({
     },
 })
 
-export default memo(PlaylistItem)
+// Redux Mappers
+const mapDispatchToProps = dispatch => ({
+    setCurrentPlaylistId: playlistId =>
+        dispatch(SetCurrentPlaylistId(playlistId)),
+})
+
+export default connect(
+    null,
+    mapDispatchToProps
+)(memo(PlaylistItem))

@@ -15,6 +15,34 @@ export const AddPlaylistSong = (songId, playlistId, statePlaylists) => {
             [playlistId]: {
                 ...statePlaylists.byId[playlistId],
                 songs: [...statePlaylists.byId[playlistId].songs, songId],
+                comments: {
+                    ...statePlaylists.byId[playlistId].comments,
+                    [songId]: [],
+                },
+            },
+        },
+    }
+}
+
+export const AddSongComment = (
+    commentId,
+    songId,
+    playlistId,
+    statePlaylists
+) => {
+    return {
+        ...statePlaylists,
+        byId: {
+            ...statePlaylists.byId,
+            [playlistId]: {
+                ...statePlaylists.byId[playlistId],
+                comments: {
+                    ...statePlaylists.byId[playlistId].comments,
+                    [songId]: [
+                        ...statePlaylists.byId[playlistId].comments[songId],
+                        commentId,
+                    ],
+                },
             },
         },
     }

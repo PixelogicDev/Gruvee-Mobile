@@ -1,4 +1,8 @@
 import React from 'react'
+
+// Redux
+import { connect } from 'react-redux'
+
 import { Text, Image, TouchableOpacity, StyleSheet } from 'react-native'
 import { Navigation } from 'react-native-navigation'
 import * as StyleConstants from '@StyleConstants'
@@ -47,6 +51,7 @@ const navigateToCommentsListAction = (
 }
 
 const SongItemCommentBar = ({
+    songCommentCount,
     songData,
     addCommentFromSongAction,
     deleteCommentFromSongAction,
@@ -62,10 +67,19 @@ const SongItemCommentBar = ({
                 )
             }}
         >
-            <Text style={styles.Text}>{songData.comments.length} Comments</Text>
+            <Text style={styles.Text}>{songCommentCount} Comments</Text>
             <Image style={styles.Image} source={rightChevronAsset} />
         </TouchableOpacity>
     )
+}
+
+// Helpers
+const mapStateToSongCommentsCount = (state, songId) => {
+    const { currentPlaylistId } = state.PlaylistsDataReducer
+    const playlist =
+        state.PlaylistsDataReducer.playlists.byId[currentPlaylistId]
+
+    return playlist.comments[songId].length
 }
 
 // Styles
@@ -91,4 +105,15 @@ const styles = StyleSheet.create({
     },
 })
 
-export default SongItemCommentBar
+// Redux Mappers
+const mapStateToProps = (state, props) => {
+    // Should get songIds from playlist and map accordingly
+    return {
+        songCommentCount: mapStateToSongCommentsCount(state, props.songData.id),
+    }
+}
+
+export default connect(
+    mapStateToProps,
+    null
+)(SongItemCommentBar)

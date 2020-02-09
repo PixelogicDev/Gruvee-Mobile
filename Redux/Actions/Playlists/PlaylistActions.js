@@ -5,9 +5,11 @@
 import {
     ADD_PLAYLIST,
     ADD_PLAYLIST_SONG,
+    ADD_SONG_COMMENT,
     DELETE_PLAYLIST,
     DELETE_PLAYLIST_SONG,
     FETCH_PLAYLISTS,
+    SET_CURRENT_PLAYLIST_ID,
 } from 'Gruvee/Redux/Actions/ActionsType'
 
 // Action Creators
@@ -25,6 +27,13 @@ const addPlaylistSong = (songId, playlistId) => {
     }
 }
 
+const addSongComment = (commentId, songId, playlistId) => {
+    return {
+        type: ADD_SONG_COMMENT,
+        data: { commentId, songId, playlistId },
+    }
+}
+
 const deletePlaylist = (playlistId, playlists) => {
     return {
         type: DELETE_PLAYLIST,
@@ -32,17 +41,17 @@ const deletePlaylist = (playlistId, playlists) => {
     }
 }
 
-const fetchPlaylists = playlists => {
-    // Simulates call to get all playlists for current user
-    // We are assuming we have a user signed in
-    return { type: FETCH_PLAYLISTS, data: playlists }
-}
-
 const deletePlaylistSong = (songId, playlistId) => {
     return {
         type: DELETE_PLAYLIST_SONG,
         data: { songId, playlistId },
     }
+}
+
+const fetchPlaylists = playlists => {
+    // Simulates call to get all playlists for current user
+    // We are assuming we have a user signed in
+    return { type: FETCH_PLAYLISTS, data: playlists }
 }
 
 // Thunks
@@ -59,6 +68,13 @@ export const AddPlaylistAction = newPlaylist => {
 export const AddPlaylistSong = (songId, playlistId) => {
     return (dispatch, getState) => {
         dispatch(addPlaylistSong(songId, playlistId))
+    }
+}
+
+export const AddSongComment = (commentId, songId, playlistId) => {
+    // We need to pass in playlistId && we need to map this in our playlost state
+    return (dispatch, getState) => {
+        dispatch(addSongComment(commentId, songId, playlistId))
     }
 }
 
@@ -83,5 +99,13 @@ export const FetchPlaylists = () => {
     return (dispatch, getState) => {
         const playlists = [] // Will be an array of playlist objects
         dispatch(fetchPlaylists(playlists))
+    }
+}
+
+// Local State Settings
+export const SetCurrentPlaylistId = playlistId => {
+    return {
+        type: SET_CURRENT_PLAYLIST_ID,
+        data: playlistId,
     }
 }

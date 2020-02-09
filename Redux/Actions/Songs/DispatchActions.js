@@ -7,19 +7,6 @@ export const AddSong = (newSong, stateSongs) => {
 }
 
 // EmberCM - "How many comments have you got now?" (02/07/20)
-export const AddSongComment = (commentId, songId, stateSongs) => {
-    return {
-        ...stateSongs,
-        byId: {
-            ...stateSongs.byId,
-            [songId]: {
-                ...stateSongs.byId[songId],
-                comments: [...stateSongs.byId[songId].comments, commentId],
-            },
-        },
-    }
-}
-
 export const DeleteSong = (songId, stateSongs) => {
     const byId = Object.entries(stateSongs.byId)
         .filter(([key]) => {
