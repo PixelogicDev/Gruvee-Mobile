@@ -67,6 +67,9 @@ export const DeletePlaylist = (playlistId, playlists) => {
 
 // sillyonly - "Here we go again!" (02/06/20)
 export const DeletePlaylistSong = (songId, playlistId, statePlaylists) => {
+    const comments = { ...statePlaylists.byId[playlistId].comments }
+    delete comments[songId]
+
     return {
         ...statePlaylists,
         byId: {
@@ -76,6 +79,7 @@ export const DeletePlaylistSong = (songId, playlistId, statePlaylists) => {
                 songs: statePlaylists.byId[playlistId].songs.filter(
                     stateSongId => stateSongId !== songId
                 ),
+                comments,
             },
         },
     }

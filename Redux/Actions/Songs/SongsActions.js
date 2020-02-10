@@ -1,10 +1,13 @@
 // JMSWRNR - "I'm gonna try to actually write code now ™"(01/31/20)
 import {
     ADD_SONG,
-    BULK_COMMENTS_DELETE,
+    DELETE_SONG,
     FETCH_SONGS,
 } from 'Gruvee/Redux/Actions/ActionsType'
-import { AddComment } from 'Gruvee/Redux/Actions/Comments/CommentsActions'
+import {
+    AddComment,
+    BulkCommentsDelete,
+} from 'Gruvee/Redux/Actions/Comments/CommentsActions'
 import {
     DeletePlaylistSong,
     AddPlaylistSong,
@@ -18,10 +21,10 @@ const addSong = song => {
     }
 }
 
-const bulkCommentsDelete = commentIds => {
+const deleteSong = songId => {
     return {
-        type: BULK_COMMENTS_DELETE,
-        data: commentIds,
+        type: DELETE_SONG,
+        data: songId,
     }
 }
 
@@ -51,19 +54,20 @@ export const DeleteSong = (playlistId, songId) => {
     return (dispatch, getState) => {
         const {
             PlaylistsDataReducer: { playlists },
-            SongsDataReducer: { songs },
         } = getState()
 
-        // Update playlist in PlaylistsDataReducer
+        // If we are deleting our song, we should dispatch a comment delete as well (in CommentsDataReducer)
+        dispatch(
+            BulkCommentsDelete(playlists.byId[playlistId].comments[songId])
+        )
+
+        // Here we will need to also remove all the comments associated with it (in playlist)
         dispatch(DeletePlaylistSong(songId, playlistId))
 
         // Check to see if we should delete the song from our state
         if (!isSharedSong(playlists, playlistId, songId)) {
             dispatch(deleteSong(songId))
         }
-
-        // If we are deleting our song, we should dispatch a comment delete as well
-        dispatch(bulkCommentsDelete(songs.byId[songId].comments))
     }
 }
 

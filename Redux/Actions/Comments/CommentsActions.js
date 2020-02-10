@@ -1,5 +1,6 @@
 import {
     ADD_COMMENT,
+    BULK_COMMENTS_DELETE,
     DELETE_COMMENT,
     FETCH_COMMENTS,
 } from 'Gruvee/Redux/Actions/ActionsType'
@@ -66,5 +67,13 @@ export const FetchComments = songId => {
     return (dispatch, getState) => {
         const comments = [] // Will be an array of comments objects
         dispatch(fetchComments(comments))
+    }
+}
+
+// Local State Settings
+export const BulkCommentsDelete = commentIds => {
+    return {
+        type: BULK_COMMENTS_DELETE,
+        data: commentIds,
     }
 }
