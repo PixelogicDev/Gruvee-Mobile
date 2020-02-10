@@ -8,6 +8,7 @@ import {
     ADD_SONG_COMMENT,
     DELETE_PLAYLIST,
     DELETE_PLAYLIST_SONG,
+    DELETE_SONG_COMMENT,
     FETCH_PLAYLISTS,
     SET_CURRENT_PLAYLIST_ID,
 } from 'Gruvee/Redux/Actions/ActionsType'
@@ -45,6 +46,13 @@ const deletePlaylistSong = (songId, playlistId) => {
     return {
         type: DELETE_PLAYLIST_SONG,
         data: { songId, playlistId },
+    }
+}
+
+const deleteSongComment = (commentId, songId, playlistId) => {
+    return {
+        type: DELETE_SONG_COMMENT,
+        data: { commentId, songId, playlistId },
     }
 }
 
@@ -92,6 +100,12 @@ export const DeletePlaylistAction = playlistId => {
 export const DeletePlaylistSong = (songId, playlistId) => {
     return (dispatch, getState) => {
         dispatch(deletePlaylistSong(songId, playlistId))
+    }
+}
+
+export const DeleteSongComment = (commentId, songId, playlistId) => {
+    return (dispatch, getState) => {
+        dispatch(deleteSongComment(commentId, songId, playlistId))
     }
 }
 

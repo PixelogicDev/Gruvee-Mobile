@@ -7,6 +7,7 @@ import {
     ADD_SONG_COMMENT,
     DELETE_PLAYLIST,
     DELETE_PLAYLIST_SONG,
+    DELETE_SONG_COMMENT,
     FETCH_PLAYLISTS,
     SET_CURRENT_PLAYLIST_ID,
 } from '../Actions/ActionsType'
@@ -16,6 +17,7 @@ import {
     AddSongComment,
     DeletePlaylist,
     DeletePlaylistSong,
+    DeleteSongComment,
     FetchPlaylists,
 } from '../Actions/Playlists/DispatchActions'
 // InukApp - "Hello World" (01/27/20)
@@ -82,6 +84,16 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 playlists: DeletePlaylistSong(
+                    action.data.songId,
+                    action.data.playlistId,
+                    state.playlists
+                ),
+            }
+        case DELETE_SONG_COMMENT:
+            return {
+                ...state,
+                playlists: DeleteSongComment(
+                    action.data.commentId,
                     action.data.songId,
                     action.data.playlistId,
                     state.playlists

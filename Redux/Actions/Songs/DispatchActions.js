@@ -27,21 +27,6 @@ export const DeleteSong = (songId, stateSongs) => {
     }
 }
 
-export const DeleteSongComment = (commentId, songId, stateSongs) => {
-    return {
-        ...stateSongs,
-        byId: {
-            ...stateSongs.byId,
-            [songId]: {
-                ...stateSongs.byId[songId],
-                comments: stateSongs.byId[songId].comments.filter(
-                    stateCommentId => stateCommentId !== commentId
-                ),
-            },
-        },
-    }
-}
-
 export const FetchSongs = (songs, songsState) => {
     if (songs.length === 0) return songsState
 

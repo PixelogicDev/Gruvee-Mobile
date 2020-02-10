@@ -2,8 +2,6 @@
 import {
     ADD_SONG,
     BULK_COMMENTS_DELETE,
-    DELETE_SONG,
-    DELETE_SONG_COMMENT,
     FETCH_SONGS,
 } from 'Gruvee/Redux/Actions/ActionsType'
 import { AddComment } from 'Gruvee/Redux/Actions/Comments/CommentsActions'
@@ -24,21 +22,6 @@ const bulkCommentsDelete = commentIds => {
     return {
         type: BULK_COMMENTS_DELETE,
         data: commentIds,
-    }
-}
-
-const deleteSong = songId => {
-    return {
-        type: DELETE_SONG,
-        data: songId,
-    }
-    // Remaiten - "Just dont mess it up right here, if you mess this up you're doomed" (02/05/20)
-}
-
-const deleteSongComment = (commentId, songId) => {
-    return {
-        type: DELETE_SONG_COMMENT,
-        data: { commentId, songId },
     }
 }
 
@@ -81,12 +64,6 @@ export const DeleteSong = (playlistId, songId) => {
 
         // If we are deleting our song, we should dispatch a comment delete as well
         dispatch(bulkCommentsDelete(songs.byId[songId].comments))
-    }
-}
-
-export const DeleteSongComment = (commentId, songId) => {
-    return (dispatch, getState) => {
-        dispatch(deleteSongComment(commentId, songId))
     }
 }
 

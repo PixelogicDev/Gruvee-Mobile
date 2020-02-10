@@ -3,8 +3,10 @@ import {
     DELETE_COMMENT,
     FETCH_COMMENTS,
 } from 'Gruvee/Redux/Actions/ActionsType'
-import { AddSongComment } from 'Gruvee/Redux/Actions/Playlists/PlaylistActions'
-// import { DeleteSongComment } from 'Gruvee/Redux/Actions/Songs/SongsActions'
+import {
+    AddSongComment,
+    DeleteSongComment,
+} from 'Gruvee/Redux/Actions/Playlists/PlaylistActions'
 
 // Action Creators
 const addComment = comment => {
@@ -46,12 +48,15 @@ export const AddComment = (comment, songId, playlistId) => {
     }
 }
 
-export const DeleteComment = (commentId, songId) => {
+export const DeleteComment = (commentId, songId, playlistId) => {
     // Make async call to update our db with removing comment
     // We also will need to update our respected song given the songId
 
     return (dispatch, getState) => {
-        // dispatch(DeleteSongComment(commentId, songId))
+        // Remove comment from PlaylistsDataReducer
+        dispatch(DeleteSongComment(commentId, songId, playlistId))
+
+        // Remove comment from CommentsDataReducer
         dispatch(deleteComment(commentId))
     }
 }

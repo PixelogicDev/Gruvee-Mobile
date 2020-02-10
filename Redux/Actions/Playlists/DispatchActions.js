@@ -81,6 +81,29 @@ export const DeletePlaylistSong = (songId, playlistId, statePlaylists) => {
     }
 }
 
+export const DeleteSongComment = (
+    commentId,
+    songId,
+    playlistId,
+    statePlaylists
+) => {
+    return {
+        ...statePlaylists,
+        byId: {
+            ...statePlaylists.byId,
+            [playlistId]: {
+                ...statePlaylists.byId[playlistId],
+                comments: {
+                    ...statePlaylists.byId[playlistId].comments,
+                    [songId]: statePlaylists.byId[playlistId].comments[
+                        songId
+                    ].filter(stateCommentId => stateCommentId !== commentId),
+                },
+            },
+        },
+    }
+}
+
 export const FetchPlaylists = (playlistsState, playlists) => {
     if (playlists.length === 0) return playlistsState
 

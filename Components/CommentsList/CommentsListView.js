@@ -36,7 +36,9 @@ const CommentsList = ({
     const renderItem = ({ item }) => (
         <SwipeableCommentItem
             comment={item}
-            deleteItemById={() => deleteComment(item.id, songId)}
+            deleteItemById={() =>
+                deleteComment(item.id, songId, currentPlaylistId)
+            }
         />
     )
 
@@ -111,8 +113,8 @@ const mapStateToProps = (state, props) => {
 const mapDispatchToProps = dispatch => ({
     addComment: (comment, songId, playlistId) =>
         dispatch(AddComment(comment, songId, playlistId)),
-    deleteComment: (commentId, songId) =>
-        dispatch(DeleteComment(commentId, songId)),
+    deleteComment: (commentId, songId, currentPlaylistId) =>
+        dispatch(DeleteComment(commentId, songId, currentPlaylistId)),
     fetchComments: songId => dispatch(FetchComments(songId)),
 })
 
