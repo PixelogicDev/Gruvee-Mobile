@@ -29,8 +29,6 @@ const CommentsList = ({
     addComment,
     deleteComment,
     fetchComments,
-    addCommentFromSongAction,
-    deleteCommentFromSongAction,
 }) => {
     const commentsListRef = useRef(null)
 
@@ -45,7 +43,9 @@ const CommentsList = ({
     const keyExtractor = item => `${item.id}`
 
     const addCommentAction = comment => {
-        const newComment = new SongComment(comment, 'memberAlec')
+        const newComment = comment.length
+            ? new SongComment(comment, 'memberAlec')
+            : null
         addComment(newComment, songId, currentPlaylistId)
     }
 

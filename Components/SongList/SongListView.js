@@ -24,6 +24,7 @@ import SwipeableSongItem from './components/SwipeableSongItem/SwipeableSongItem'
 import * as StyleConstants from '@StyleConstants'
 import * as NavigationConstants from '@NavigationConstants'
 import Song from '../../lib/Song'
+import SongComment from '../../lib/SongComment'
 
 const SongListView = ({
     playlistId,
@@ -42,13 +43,17 @@ const SongListView = ({
 
     // Actions
     const addSongAction = (songLink, comment) => {
-        // TODO: Call service API to get song info from link
-
         // Create song object
-        const newSong = new Song(spotifyMockFindResponse, songLink, comment)
+        const newSong = new Song(spotifyMockFindResponse, songLink)
 
-        // Right not we are just going to mock it up until auth is setup
-        addSong(playlistId, newSong)
+        // We will be using a mock string for signed in user until we mock the proper state
+        const newComment = comment.length
+            ? new SongComment(comment, 'memberAlec')
+            : null
+
+        // If we have a comment associated with this thing
+        // We will need to also dispatch addCommentToPlaylist
+        addSong(playlistId, newSong, newComment)
 
         // Dismiss song modal overlay
         Navigation.dismissOverlay(NavigationConstants.ADD_SONG_MODAL_NAV_ID)
@@ -168,7 +173,8 @@ const mapStateToProps = (state, props) => {
     return { songs: MapSongsFromPlaylistSelector(state, props) }
 }
 const mapDispatchToProps = dispatch => ({
-    addSong: (playlistId, song) => dispatch(AddSong(playlistId, song)),
+    addSong: (playlistId, song, comment) =>
+        dispatch(AddSong(playlistId, song, comment)),
     deleteSong: (playlistId, songId) =>
         dispatch(DeleteSong(playlistId, songId)),
     fetchSongs: playlistId => dispatch(FetchSongs(playlistId)),

@@ -1,12 +1,12 @@
 // JMSWRNR - "I'm gonna try to actually write code now ™"(01/31/20)
 import {
     ADD_SONG,
-    ADD_SONG_COMMENT,
     BULK_COMMENTS_DELETE,
     DELETE_SONG,
     DELETE_SONG_COMMENT,
     FETCH_SONGS,
 } from 'Gruvee/Redux/Actions/ActionsType'
+import { AddComment } from 'Gruvee/Redux/Actions/Comments/CommentsActions'
 import {
     DeletePlaylistSong,
     AddPlaylistSong,
@@ -50,13 +50,16 @@ const fetchSongs = songs => {
 }
 
 // Thunks
-export const AddSong = (playlistId, song) => {
+export const AddSong = (playlistId, song, comment) => {
     return (dispatch, getState) => {
         // Add songs to SongsDataReducer
         dispatch(addSong(song))
 
         // Update playlist in PlaylistsDataReducer
         dispatch(AddPlaylistSong(song.id, playlistId))
+
+        // Check for comment and if not null update PlaylistsDataReducer with comment
+        dispatch(AddComment(comment, song.id, playlistId))
     }
 }
 

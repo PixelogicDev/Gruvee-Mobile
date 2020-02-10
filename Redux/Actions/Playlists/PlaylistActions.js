@@ -65,9 +65,10 @@ export const AddPlaylistAction = newPlaylist => {
     }
 }
 
-export const AddPlaylistSong = (songId, playlistId) => {
+export const AddPlaylistSong = (songId, playlistId, comment) => {
     return (dispatch, getState) => {
-        dispatch(addPlaylistSong(songId, playlistId))
+        // This is updating PlaylistsDataReducer
+        dispatch(addPlaylistSong(songId, playlistId, comment))
     }
 }
 
