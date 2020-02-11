@@ -3,7 +3,7 @@ import { Alert } from 'react-native'
 
 // Redux
 import { connect } from 'react-redux'
-import { DeletePlaylistAction } from 'Gruvee/Redux/Actions/Playlists/PlaylistActions'
+import { DeletePlaylist } from 'Gruvee/Redux/Actions/Playlists/PlaylistActions'
 
 import AnimatedSwipeRow from 'Gruvee/Components/Common/AnimatedSwipeRow'
 import SwipeAction from 'Gruvee/Components/Common/SwipeAction'
@@ -83,7 +83,7 @@ const renderSwipeActionComponent = (playlist, confirmDeletePlaylistAction) => {
 
 // Redux Mappers
 const mapDispatchToProps = dispatch => ({
-    deletePlaylist: playlistId => dispatch(DeletePlaylistAction(playlistId)),
+    deletePlaylist: playlistId => dispatch(DeletePlaylist(playlistId)),
 })
 
 export default connect(

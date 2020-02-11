@@ -7,19 +7,6 @@
     }
 */
 
-/*
-    - Playlists
-        - New Playlist: 
-            - Create a comments object that has a key/value pair of songId: [CommentIds]
-        - Delete Playlist:
-            - Remove comments in our state based on the comments object
-    - Songs
-        - Add new song
-            - In our playlists, we need to add our key/value pair of songId: []
-        - Delete a song
-            - In our playlist, we need to go and remove the song comments from our comments object && from state
-*/
-
 export default [
     {
         id: 'playlist1',

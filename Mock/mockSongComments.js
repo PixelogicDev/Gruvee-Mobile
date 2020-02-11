@@ -1,11 +1,5 @@
 export default [
     {
-        id: 'comment0-memberYaBoi',
-        timestamp: new Date(),
-        message: 'Hi, my name is Alec, and I thought this song was gooooooood.',
-        sender: 'memberYaBoi', // MemberId
-    },
-    {
         id: 'comment1-memberAlec',
         timestamp: new Date(),
         message:
@@ -39,13 +33,6 @@ export default [
         message:
             'Hi, my name is H3llo, and I thought this song was gooooooood.',
         sender: 'memberAlec', // MemberId
-    },
-    {
-        id: 'comment6-memberYaBoi',
-        timestamp: new Date(),
-        message:
-            'Hi, my name is H3llo, and I thought this song was gooooooood.',
-        sender: 'memberYaBoi', // MemberId
     },
     {
         id: 'comment7-memberAlec',

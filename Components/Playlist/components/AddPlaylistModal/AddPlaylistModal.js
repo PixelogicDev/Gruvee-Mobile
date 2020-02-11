@@ -6,7 +6,7 @@ import InputModal from 'Gruvee/Components/Common/InputModal'
 
 // Redux
 import { connect } from 'react-redux'
-import { AddPlaylistAction } from 'Gruvee/Redux/Actions/Playlists/PlaylistActions'
+import { AddPlaylist } from 'Gruvee/Redux/Actions/Playlists/PlaylistActions'
 
 import * as StyleConstants from '@StyleConstants'
 import * as NavigationConstants from '@NavigationConstants'
@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
 
 // Redux Mappers
 const mapDispatchToProps = dispatch => ({
-    addPlaylist: playlist => dispatch(AddPlaylistAction(playlist)),
+    addPlaylist: playlist => dispatch(AddPlaylist(playlist)),
 })
 
 export default connect(

@@ -11,11 +11,8 @@ import { Navigation } from 'react-native-navigation'
 
 // Redux
 import { connect } from 'react-redux'
-import {
-    AddSong,
-    DeleteSong,
-    FetchSongs,
-} from 'Gruvee/Redux/Actions/Songs/SongsActions'
+import { AddSong, FetchSongs } from 'Gruvee/Redux/Actions/Songs/SongsActions'
+import { DeleteSong } from 'Gruvee/Redux/Actions/Songs/SharedSongActions'
 import { MapSongsFromPlaylistSelector } from 'Gruvee/Redux/Selectors/SongsSelector'
 
 import spotifyMockFindResponse from 'Gruvee/Mock/spotifyMockFindResponse'

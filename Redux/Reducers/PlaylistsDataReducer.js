@@ -77,7 +77,7 @@ export default (state = initialState, action) => {
                 ...state,
                 playlists: DeletePlaylist(
                     action.data.playlistId,
-                    action.data.playlists
+                    state.playlists
                 ),
             }
         case DELETE_PLAYLIST_SONG:

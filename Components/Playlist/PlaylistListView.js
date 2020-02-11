@@ -144,6 +144,7 @@ const styles = StyleSheet.create({
     Container: {
         backgroundColor: StyleConstants.BASE_BACKGROUND_COLOR,
     },
+    // QuantumBrat - "BOIII (this must always be on line 147)" line 147 must! be on line 147..so... find a place for it ;) MiniK" (02/11/20)
     ContentContainer: {
         padding: StyleConstants.TABLE_CONTAINER_CONTENT_SPACING,
         paddingBottom: StyleConstants.TABLE_CONTAINER_BOTTOM_PADDING,

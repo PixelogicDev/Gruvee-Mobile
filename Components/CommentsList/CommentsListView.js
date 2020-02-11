@@ -11,10 +11,10 @@ import { SwipeListView } from 'react-native-swipe-list-view'
 
 // Redux
 import {
-    AddComment,
     DeleteComment,
     FetchComments,
 } from 'Gruvee/Redux/Actions/Comments/CommentsActions'
+import { AddComment } from 'Gruvee/Redux/Actions/Comments/SharedCommentActions'
 import { MapCommentsFromSongSelector } from 'Gruvee/Redux/Selectors/CommentsSelector'
 
 import SwipeableCommentItem from './components/SwipeableCommentItem/SwipeableCommentItem'
