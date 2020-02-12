@@ -10,11 +10,7 @@ import SwipeAction from 'Gruvee/Components/Common/SwipeAction'
 import PlaylistItem from '../PlaylistItem/PlaylistItem'
 import * as StyleConstants from '@StyleConstants'
 
-const SwipeablePlaylistItem = ({
-    playlistData,
-    deletePlaylist,
-    updateSongsInPlaylistAction,
-}) => {
+const SwipeablePlaylistItem = ({ playlistData, deletePlaylist }) => {
     const [isDeleting, setIsDeleting] = useState(false)
     const onConfirmDelete = () => setIsDeleting(true)
     const confirmDeletePlaylistAction = () =>
@@ -32,10 +28,7 @@ const SwipeablePlaylistItem = ({
                 playlistData,
                 confirmDeletePlaylistAction
             )}
-            listItemComponent={renderPlaylistItem(
-                playlistData,
-                updateSongsInPlaylistAction
-            )}
+            listItemComponent={renderPlaylistItem(playlistData)}
         />
     )
 }
@@ -58,12 +51,7 @@ const comfirmDeleteAlert = (playlistData, onConfirmDelete) => {
 }
 
 // Rendered Components
-const renderPlaylistItem = (playlist, updateSongsInPlaylistAction) => (
-    <PlaylistItem
-        playlistData={playlist}
-        updateSongsInPlaylistAction={updateSongsInPlaylistAction}
-    />
-)
+const renderPlaylistItem = playlist => <PlaylistItem playlistData={playlist} />
 
 const renderSwipeActionComponent = (playlist, confirmDeletePlaylistAction) => {
     // eslint-disable-next-line global-require

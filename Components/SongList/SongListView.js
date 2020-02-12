@@ -3,8 +3,9 @@
 // estrangedHD - "And another one Kappa" (01/30/20)
 // estrangedHD - "And another one Kappa" (01/30/20)
 // dra031cko - "Spread everything, spread often." (02/04/20)
+// ohmyshell - "kyle graduated code camp 2/12/2020" (02/12/20)
 
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { View, StyleSheet } from 'react-native'
 import { SwipeListView } from 'react-native-swipe-list-view'
 import { Navigation } from 'react-native-navigation'
@@ -29,10 +30,7 @@ const SongListView = ({
     fetchSongs,
     addSong,
     deleteSong,
-    updateSongsInPlaylistAction,
 }) => {
-    const [songsToDisplay, setSongsToDisplay] = useState([])
-
     useEffect(() => {
         // We should fetch the newest data on component load here.
         fetchSongs(playlistId)
@@ -54,40 +52,6 @@ const SongListView = ({
 
         // Dismiss song modal overlay
         Navigation.dismissOverlay(NavigationConstants.ADD_SONG_MODAL_NAV_ID)
-    }
-
-    const addCommentFromSongAction = (songId, comments) => {
-        const updatedSongs = songsToDisplay.map(song => {
-            if (song.id === songId) {
-                song.comments = comments
-            }
-
-            return song
-        })
-
-        // Update songState
-        setSongsToDisplay(updatedSongs)
-
-        // Update playlistState
-        updateSongsInPlaylistAction(playlistId, updatedSongs)
-    }
-
-    const deleteCommentFromSongAction = (songId, commentId) => {
-        const updatedSongs = songsToDisplay.map(song => {
-            if (song.id === songId) {
-                song.comments = song.comments.filter(
-                    comment => comment.id !== commentId
-                )
-            }
-
-            return song
-        })
-
-        // Update songState
-        setSongsToDisplay(updatedSongs)
-
-        // Update playlistState
-        updateSongsInPlaylistAction(playlistId, updatedSongs)
     }
 
     const navigateToAddSongModalAction = () => {
@@ -114,9 +78,6 @@ const SongListView = ({
         <SwipeableSongItem
             song={item}
             deleteSongById={() => deleteSong(playlistId, item.id)}
-            addCommentFromSongAction={addCommentFromSongAction}
-            deleteCommentFromSongAction={deleteCommentFromSongAction}
-            updateSongsInPlaylistAction={updateSongsInPlaylistAction}
         />
     )
 

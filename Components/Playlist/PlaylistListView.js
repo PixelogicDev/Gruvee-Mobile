@@ -19,14 +19,10 @@ console.disableYellowBox = true
 console.ignoredYellowBox = ['Could not find image']
 
 const PlaylistListView = ({ fetchPlaylists, playlists }) => {
-    const [somePlaylist, setPlaylist] = useState([])
     const [addPlaylistModalShown, setAddPlaylistModalShown] = useState(false)
     const keyExtractor = item => `${item.id}`
     const renderItem = ({ item }) => (
-        <SwipeablePlaylistItem
-            playlistData={item}
-            updateSongsInPlaylistAction={updateSongsInPlaylistAction}
-        />
+        <SwipeablePlaylistItem playlistData={item} />
     )
 
     useEffect(() => {
@@ -75,19 +71,6 @@ const PlaylistListView = ({ fetchPlaylists, playlists }) => {
             }
         }
     }, [])
-
-    // Comments Actions
-    const updateSongsInPlaylistAction = (playlistId, songs) => {
-        const updatedPlaylist = playlists.map(playlist => {
-            if (playlist.id === playlistId) {
-                playlist.songs = songs
-            }
-
-            return playlist
-        })
-
-        setPlaylist(updatedPlaylist)
-    }
 
     const handleBackPress = () => {
         if (addPlaylistModalShown) {

@@ -7,13 +7,7 @@ import SongItem from '../SongItem/SongItem'
 import * as StyleConstants from '@StyleConstants'
 
 // deleteItemById === func
-const SwipeableSongItem = ({
-    song,
-    addCommentFromSongAction,
-    deleteSongById,
-    deleteCommentFromSongAction,
-    updateSongsInPlaylistAction,
-}) => {
+const SwipeableSongItem = ({ song, deleteSongById }) => {
     const [isDeleting, setIsDeleting] = useState(false)
     const onConfirmDelete = () => setIsDeleting(true)
     const confirmDeleteSongAction = () =>
@@ -29,12 +23,7 @@ const SwipeableSongItem = ({
                 song,
                 confirmDeleteSongAction
             )}
-            listItemComponent={renderSongItem(
-                song,
-                addCommentFromSongAction,
-                deleteCommentFromSongAction,
-                updateSongsInPlaylistAction
-            )}
+            listItemComponent={renderSongItem(song)}
         />
     )
 }
