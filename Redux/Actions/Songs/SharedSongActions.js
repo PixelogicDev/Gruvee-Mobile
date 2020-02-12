@@ -39,7 +39,6 @@ export const DeleteSong = (playlistId, songId) => {
 const isSharedSong = (playlists, playlistId, songId) => {
     // Check to see if songId is part of another playlist
     // If it is do not run the deleteSong from state
-
     const val = Object.entries(playlists.byId).find(([key, playlistObj]) => {
         return key !== playlistId && playlistObj.songs.includes(songId)
     })

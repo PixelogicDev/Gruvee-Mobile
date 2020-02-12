@@ -1,4 +1,9 @@
 import React from 'react'
+
+// Redux
+import { connect } from 'react-redux'
+import { SignInUser } from 'Gruvee/Redux/Actions/User/UserActions'
+
 import { Navigation } from 'react-native-navigation'
 import { Text, StyleSheet, TouchableOpacity, Image } from 'react-native'
 import * as NavigationConstants from '@NavigationConstants'
@@ -13,8 +18,11 @@ import * as StyleConstants from '@StyleConstants'
     id: string (social name) ie: 'spotify'
     centerButton: bool
 */
-const SocialAuthButton = ({ platform }) => {
+const SocialAuthButton = ({ platform, signInUser }) => {
     const navigateToPlaylists = () => {
+        // Sign In user - Currently just mock user...
+        signInUser()
+
         Navigation.push(NavigationConstants.STACK_ID, {
             component: {
                 name: NavigationConstants.PLAYLIST_NAV_NAME,
@@ -91,4 +99,12 @@ const styles = StyleSheet.create({
     }),
 })
 
-export default SocialAuthButton
+// Redux Mappers
+const mapDispatchToProps = dispatch => ({
+    signInUser: () => dispatch(SignInUser()),
+})
+
+export default connect(
+    null,
+    mapDispatchToProps
+)(SocialAuthButton)

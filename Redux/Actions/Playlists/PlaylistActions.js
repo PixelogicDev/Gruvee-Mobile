@@ -1,4 +1,5 @@
 // QuantumBrat - "Remember this comment." (02/03/20)
+// sillyonly - "One more comment to go!!" (02/13/20)
 // ywnklme - "I gotta change the amount of points for this stuff. It is too much” – Alec, January 2020" (01/28/20)
 // JMSWRNR - "````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````" - (01/28/20)
 // ywknlme - "TODO DODODODODO DODODODODODODODO DODODODODO... *plays Darude – Sandstorm*" (01/29/20)
@@ -9,6 +10,10 @@ import {
     SET_CURRENT_PLAYLIST_ID,
 } from '../ActionsType'
 import { DeleteSong } from '../Songs/SharedSongActions'
+import {
+    AddPlaylistToUser,
+    DeletePlaylistFromUser,
+} from '../User/SharedUserActions'
 
 // Action Creators
 const addPlaylist = playlist => {
@@ -32,12 +37,17 @@ const fetchPlaylists = playlists => {
 }
 
 // Thunks
+// evjand - "SMOrc ME CODE THUNK SMOrc" (02/13/20)
 export const AddPlaylist = newPlaylist => {
     return (dispatch, getState) => {
         const {
             PlaylistsDataReducer: { statePlaylists },
         } = getState()
 
+        // Set playlist in user state
+        dispatch(AddPlaylistToUser(newPlaylist.id))
+
+        // Set playlist in state
         dispatch(addPlaylist(newPlaylist, statePlaylists))
     }
 }
@@ -56,13 +66,16 @@ export const DeletePlaylist = playlistId => {
 
         // Delete playlist from PlaylistsDataReducer
         dispatch(deletePlaylist(playlistId))
+
+        // Delete playlist from User
+        dispatch(DeletePlaylistFromUser(playlistId))
     }
 }
 
 export const FetchPlaylists = () => {
     // Make async call to service to get latest playlist data for user
     return (dispatch, getState) => {
-        const playlists = [] // Will be an array of playlist objects
+        const playlists = []
         dispatch(fetchPlaylists(playlists))
     }
 }
