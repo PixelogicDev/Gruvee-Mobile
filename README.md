@@ -1,6 +1,6 @@
 <h1 align="center">Grüvee</h1>
 <p align="center">
-  <strong>Get Grüvee with a new social, collabortive playlist for iPhone and Android</strong>
+  <strong>Let's get Grüvee with a new social, collaborative playlist for iPhone and Android</strong>
 </p>
 
 <p align="center">
@@ -157,6 +157,8 @@ Don't be scared to join the [PixelogicDev discord](https://discord.gg/ubgX6T8) i
 
 ## ⭐Current Contributors
 
-[@isabellabrookes](https://github.com/isabellabrookes) aka rawrsatbeards - PixelogicDev Channel Moderator<br>
-[poopuhchoo](https://github.com/tjengland) - PixelogicDev Team Member<br>
-[DynamicDonkey](https://github.com/DynamicDonkey) - PixelogicDev Channel Member
++ [@isabellabrookes](https://github.com/isabellabrookes) aka rawrsatbeards - PixelogicDev Channel Moderator
++ [poopuhchoo](https://github.com/tjengland) - PixelogicDev Team Member
++ [DynamicDonkey](https://github.com/DynamicDonkey) - PixelogicDev Channel Member
++ [miugel](https://github.com/miugel) - PixelogicDev Channel Member
++ [creativenobu](https://github.com/creativenobu) - PixelogicDev Channel Member
