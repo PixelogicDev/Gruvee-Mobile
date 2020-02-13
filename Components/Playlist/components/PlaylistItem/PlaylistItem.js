@@ -88,6 +88,11 @@ const showSongListAction = (playlistData, setCurrentPlaylistId) => {
                         fontWeight: 'medium',
                     },
                 },
+                sideMenu: {
+                    right: {
+                        enabled: true,
+                    },
+                },
             },
         },
     })
