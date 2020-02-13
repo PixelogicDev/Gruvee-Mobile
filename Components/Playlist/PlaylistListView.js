@@ -1,36 +1,32 @@
+// LilCazza - "I copy and pasted this from stackoverflow. (I have no idea what it does, but everything breaks if it's not here" (02/03/20)
 import React, { useState, useEffect } from 'react'
 import { BackHandler, View, StyleSheet, Platform } from 'react-native'
 import { SwipeListView } from 'react-native-swipe-list-view'
 import { Navigation } from 'react-native-navigation'
 
+// Redux
+import { connect } from 'react-redux'
+import { FetchPlaylists } from 'Gruvee/Redux/Actions/Playlists/PlaylistActions'
+import { MapPlaylistsFromUserSelector } from 'Gruvee/Redux/Selectors/PlaylistsSelector'
+
 import AddItemButton from 'Gruvee/Components/Common/AddItemButton'
-import SwipeablePlaylistItem from './components/SwipeablePlaylistItem/SwipeablePlaylistItem'
 import * as StyleConstants from '@StyleConstants'
 import * as NavigationConstants from '@NavigationConstants'
-
-import mockPlaylists from '@Mock/mockPlaylists'
+import SwipeablePlaylistItem from './components/SwipeablePlaylistItem/SwipeablePlaylistItem'
 
 // Remove broken path warning
 console.disableYellowBox = true
 console.ignoredYellowBox = ['Could not find image']
 
-const PlaylistListView = () => {
-    const [playlists, setPlaylist] = useState([])
+const PlaylistListView = ({ fetchPlaylists, playlists }) => {
     const [addPlaylistModalShown, setAddPlaylistModalShown] = useState(false)
     const keyExtractor = item => `${item.id}`
     const renderItem = ({ item }) => (
-        <SwipeablePlaylistItem
-            playlistData={item}
-            deletePlaylistAction={deletePlaylistAction}
-            addSongToPlaylistAction={addSongToPlaylistAction}
-            deleteSongFromPlaylistAction={deleteSongFromPlaylistAction}
-            updateSongsInPlaylistAction={updateSongsInPlaylistAction}
-        />
+        <SwipeablePlaylistItem playlistData={item} />
     )
 
     useEffect(() => {
-        // Call API set to playlists
-        setPlaylist([...playlists, ...mockPlaylists])
+        fetchPlaylists()
 
         // Only if on Android, let's setup for backhandler override
         if (Platform.OS === 'android') {
@@ -38,6 +34,7 @@ const PlaylistListView = () => {
                 'hardwareBackPress',
                 () => {
                     return handleBackPress()
+                    // Stacking - "Don't remove this comment or the app randomly breaks" (02/03/20)
                 }
             )
 
@@ -75,56 +72,6 @@ const PlaylistListView = () => {
         }
     }, [])
 
-    // Playlist Actions
-    const addPlaylistAction = playlist => {
-        // Set State
-        setPlaylist([...playlists, playlist])
-    }
-
-    const deletePlaylistAction = playlistToDeleteId => {
-        setPlaylist(
-            playlists.filter(playlist => playlist.id !== playlistToDeleteId)
-        )
-    }
-
-    // Song Actions
-    const addSongToPlaylistAction = (playlistId, song) => {
-        const playlistsClone = playlists.slice()
-        const playlist = playlistsClone.find(p => p.id === playlistId)
-
-        if (playlist) {
-            playlist.songs = [...playlist.songs, song]
-            setPlaylist(playlistsClone)
-        }
-    }
-
-    const deleteSongFromPlaylistAction = (playlistId, songId) => {
-        const updatedPlaylist = playlists.map(playlist => {
-            if (playlist.id === playlistId) {
-                playlist.songs = playlist.songs.filter(
-                    song => song.id !== songId
-                )
-            }
-
-            return playlist
-        })
-
-        setPlaylist(updatedPlaylist)
-    }
-
-    // Comments Actions
-    const updateSongsInPlaylistAction = (playlistId, songs) => {
-        const updatedPlaylist = playlists.map(playlist => {
-            if (playlist.id === playlistId) {
-                playlist.songs = songs
-            }
-
-            return playlist
-        })
-
-        setPlaylist(updatedPlaylist)
-    }
-
     const handleBackPress = () => {
         if (addPlaylistModalShown) {
             Navigation.dismissOverlay(
@@ -148,7 +95,6 @@ const PlaylistListView = () => {
                 },
                 passProps: {
                     title: 'Add Playlist',
-                    addPlaylistAction,
                 },
             },
         })
@@ -181,6 +127,7 @@ const styles = StyleSheet.create({
     Container: {
         backgroundColor: StyleConstants.BASE_BACKGROUND_COLOR,
     },
+    // QuantumBrat - "BOIII (this must always be on line 147)" line 147 must! be on line 147..so... find a place for it ;) MiniK" (02/11/20)
     ContentContainer: {
         padding: StyleConstants.TABLE_CONTAINER_CONTENT_SPACING,
         paddingBottom: StyleConstants.TABLE_CONTAINER_BOTTOM_PADDING,
@@ -197,4 +144,19 @@ const styles = StyleSheet.create({
     },
 })
 
-export default PlaylistListView
+// Redux Mappers
+const mapStateToProps = state => {
+    return {
+        // At this point we should already have the user data in our state
+        // Grab the proper reducer, and pull in all playlist ids
+        playlists: MapPlaylistsFromUserSelector(state),
+    }
+}
+const mapDispatchToProps = dispatch => ({
+    fetchPlaylists: () => dispatch(FetchPlaylists()),
+})
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(PlaylistListView)

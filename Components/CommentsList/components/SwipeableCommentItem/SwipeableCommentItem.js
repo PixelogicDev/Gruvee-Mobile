@@ -6,10 +6,9 @@ import SwipeAction from 'Gruvee/Components/Common/SwipeAction'
 import CommentItem from '../CommentItem/CommentItem'
 import * as StyleConstants from '@StyleConstants'
 
-// deleteItemById === func
 const SwipeableCommentItem = ({ comment, deleteItemById }) => {
     // TODO: This will be needed from user state
-    const signedInUsername = 'adilanchian'
+    const signedInUsername = 'memberAlec'
     const [isDeleting, setIsDeleting] = useState(false)
     const [itemHeight, setItemHeight] = useState(
         StyleConstants.COMMENT_ITEM_MIN_HEIGHT

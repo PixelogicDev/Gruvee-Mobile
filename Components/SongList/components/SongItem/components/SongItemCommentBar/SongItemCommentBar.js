@@ -1,4 +1,8 @@
 import React from 'react'
+
+// Redux
+import { connect } from 'react-redux'
+
 import { Text, Image, TouchableOpacity, StyleSheet } from 'react-native'
 import { Navigation } from 'react-native-navigation'
 import * as StyleConstants from '@StyleConstants'
@@ -7,24 +11,32 @@ import * as NavigationConstants from '@NavigationConstants'
 const rightChevronAsset = require('Gruvee/Assets/Icons/RightChevron/right_chevron.png')
 
 // Actions
-const navigateToCommentsListAction = (
-    songData,
-    addCommentFromSongAction,
-    deleteCommentFromSongAction
-) => {
+const navigateToCommentsListAction = songData => {
     Navigation.push(NavigationConstants.STACK_ID, {
         component: {
             name: NavigationConstants.COMMENTS_LIST_NAV_NAME,
             passProps: {
                 songId: songData.id,
                 comments: songData.comments,
-                addCommentFromSongAction,
-                deleteCommentFromSongAction,
             },
             options: {
                 topBar: {
+                    visible: true,
+                    barStyle: 'default',
+                    backButton: {
+                        showTitle: false,
+                        color: StyleConstants.TOP_BAR_BACK_BUTTON_COLOR,
+                    },
+                    background: {
+                        color: StyleConstants.TOP_BAR_BACKGROUND_COLOR,
+                        blur: false,
+                    },
                     title: {
-                        text: 'Comments',
+                        text: songData.name,
+                        fontSize: StyleConstants.TOP_BAR_TEXT_SIZE,
+                        color: StyleConstants.TOP_BAR_TEXT_COLOR,
+                        // iOS Only
+                        fontWeight: 'medium',
                     },
                 },
             },
@@ -32,26 +44,27 @@ const navigateToCommentsListAction = (
     })
 }
 
-const SongItemCommentBar = ({
-    songData,
-    addCommentFromSongAction,
-    deleteCommentFromSongAction,
-}) => {
+const SongItemCommentBar = ({ songCommentCount, songData }) => {
     return (
         <TouchableOpacity
             style={styles.Container}
             onPress={() => {
-                navigateToCommentsListAction(
-                    songData,
-                    addCommentFromSongAction,
-                    deleteCommentFromSongAction
-                )
+                navigateToCommentsListAction(songData)
             }}
         >
-            <Text style={styles.Text}>{songData.comments.length} Comments</Text>
+            <Text style={styles.Text}>{songCommentCount} Comments</Text>
             <Image style={styles.Image} source={rightChevronAsset} />
         </TouchableOpacity>
     )
+}
+
+// Helpers
+const mapStateToSongCommentsCount = (state, songId) => {
+    const { currentPlaylistId } = state.PlaylistsDataReducer
+    const playlist =
+        state.PlaylistsDataReducer.playlists.byId[currentPlaylistId]
+
+    return playlist.comments[songId].length
 }
 
 // Styles
@@ -77,4 +90,15 @@ const styles = StyleSheet.create({
     },
 })
 
-export default SongItemCommentBar
+// Redux Mappers
+const mapStateToProps = (state, props) => {
+    // Should get songIds from playlist and map accordingly
+    return {
+        songCommentCount: mapStateToSongCommentsCount(state, props.songData.id),
+    }
+}
+
+export default connect(
+    mapStateToProps,
+    null
+)(SongItemCommentBar)
