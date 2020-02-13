@@ -86,6 +86,7 @@ Navigation.events().registerAppLaunchedListener(() => {
                         openGestureMode: 'bezel',
                         right: {
                             width: 200,
+                            shouldStretchDrawer: false,
                             enabled: false,
                         },
                     },
