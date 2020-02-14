@@ -159,6 +159,7 @@ Don't be scared to join the [PixelogicDev discord](https://discord.gg/ubgX6T8) i
 
 + [@isabellabrookes](https://github.com/isabellabrookes) aka rawrsatbeards - PixelogicDev Channel Moderator
 + [poopuhchoo](https://github.com/tjengland) - PixelogicDev Team Member
++ [Bastian](https://github.com/BastianInuk) - PixelogicDev Team Member
 + [DynamicDonkey](https://github.com/DynamicDonkey) - PixelogicDev Channel Member
 + [miugel](https://github.com/miugel) - PixelogicDev Channel Member
 + [creativenobu](https://github.com/creativenobu) - PixelogicDev Channel Member
