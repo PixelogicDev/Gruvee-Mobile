@@ -16,3 +16,10 @@ export const SONG_LIST_NAV_NAME = 'navigation.gruvee.songList'
 
 export const COMMENTS_LIST_NAV_ID = 'navigation.gruvee.commentsList.id'
 export const COMMENTS_LIST_NAV_NAME = 'navigation.gruvee.commentsList'
+
+export const TOP_BAR_MEMBERS_ACTION_ID =
+    'navigation.gruvee.showMembersAction.id'
+export const TOP_BAR_MEMBERS_ACTION_NAME = 'navigation.gruvee.showMembersAction'
+
+export const SIDEMENU_ALL_MEMBERS_ID = 'navigation.gruvee.sideMenuAllMembers.id'
+export const SIDEMENU_ALL_MEMBERS_NAME = 'navigation.gruvee.sideMenuAllMembers'

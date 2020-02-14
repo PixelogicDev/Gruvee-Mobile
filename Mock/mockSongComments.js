@@ -1,57 +1,44 @@
 export default [
     {
-        id: 'comment0',
-        timestamp: new Date(),
-        message: 'Hi, my name is Alec, and I thought this song was gooooooood.',
-        sender: 'adilanchian',
-    },
-    {
-        id: 'comment1',
+        id: 'comment1-memberAlec',
         timestamp: new Date(),
         message:
             'Hi, my name is JOSMO, and I thought this song was gooooooood.',
-        sender: 'JOSMO',
+        sender: 'memberAlec', // MemberId
     },
     {
-        id: 'comment2',
+        id: 'comment2member-YaBoi',
         timestamp: new Date(),
         message:
             'Hi, my name is H3llo, and I thought this song was gooooooood.',
-        sender: 'H3llo',
+        sender: 'memberYaBoi', // MemberId
     },
     {
-        id: 'comment3',
+        id: 'comment3-memberWasHere',
         timestamp: new Date(),
         message:
             'Hi, my name is H3llo, and I thought this song was gooooooood.',
-        sender: 'SomeOneElse',
+        sender: 'memberWasHere', // MemberId
     },
     {
-        id: 'comment4',
+        id: 'comment4-memberYaBoi',
         timestamp: new Date(),
         message:
             'Hi, my name is H3llo, and I thought this song was gooooooood.',
-        sender: 'SomeOtherPerson',
+        sender: 'memberYaBoi', // MemberId
     },
     {
-        id: 'comment5',
+        id: 'comment5-memberAlec',
         timestamp: new Date(),
         message:
             'Hi, my name is H3llo, and I thought this song was gooooooood.',
-        sender: 'adilanchian',
+        sender: 'memberAlec', // MemberId
     },
     {
-        id: 'comment6',
+        id: 'comment7-memberAlec',
         timestamp: new Date(),
         message:
             'Hi, my name is H3llo, and I thought this song was gooooooood.',
-        sender: 'Boom',
-    },
-    {
-        id: 'comment7',
-        timestamp: new Date(),
-        message:
-            'Hi, my name is H3llo, and I thought this song was gooooooood.',
-        sender: 'SomeOneElse',
+        sender: 'memberAlec', // MemberId
     },
 ]

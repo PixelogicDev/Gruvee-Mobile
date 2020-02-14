@@ -3,10 +3,13 @@ import { Text, View, StyleSheet } from 'react-native'
 import * as StyleConstants from '@StyleConstants'
 
 const CardItemDetail = ({ name, numMembers, numSongs }) => {
+    const membersLabel = numMembers > 1 ? 'Members' : 'Member'
     return (
         <View style={styles.Container}>
             <Text style={styles.TextHeader}>{name}</Text>
-            <Text style={styles.TextDetail}>{numMembers} Members</Text>
+            <Text style={styles.TextDetail}>
+                {numMembers} {membersLabel}
+            </Text>
             <Text style={styles.TextDetail}>{numSongs} Songs</Text>
         </View>
     )

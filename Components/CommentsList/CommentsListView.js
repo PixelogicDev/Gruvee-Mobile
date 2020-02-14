@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
+import { connect } from 'react-redux'
 import {
     KeyboardAvoidingView,
     Platform,
@@ -8,49 +9,46 @@ import {
 } from 'react-native'
 import { SwipeListView } from 'react-native-swipe-list-view'
 
+// Redux
+import {
+    DeleteComment,
+    FetchComments,
+} from 'Gruvee/Redux/Actions/Comments/CommentsActions'
+import { AddComment } from 'Gruvee/Redux/Actions/Comments/SharedCommentActions'
+import { MapCommentsFromSongSelector } from 'Gruvee/Redux/Selectors/CommentsSelector'
+
 import SwipeableCommentItem from './components/SwipeableCommentItem/SwipeableCommentItem'
 import AddCommentTextInput from './components/AddCommentTextInput/AddCommentTextInput'
 import * as StyleConstants from '@StyleConstants'
 import SongComment from '../../lib/SongComment'
 
 const CommentsList = ({
+    currentPlaylistId,
     songId,
     comments,
-    addCommentFromSongAction,
-    deleteCommentFromSongAction,
+    addComment,
+    deleteComment,
+    fetchComments,
 }) => {
     const commentsListRef = useRef(null)
-    const [commentsState, setCommentsState] = useState([])
 
     // Actions
     const renderItem = ({ item }) => (
         <SwipeableCommentItem
             comment={item}
-            deleteItemById={deleteCommentAction}
+            deleteItemById={() =>
+                deleteComment(item.id, songId, currentPlaylistId)
+            }
         />
     )
 
     const keyExtractor = item => `${item.id}`
 
     const addCommentAction = comment => {
-        // Set Comment List View State
-        const newComments = [
-            ...commentsState,
-            new SongComment(comment, 'YaBoiAlec'),
-        ]
-
-        setCommentsState(newComments)
-        addCommentFromSongAction(songId, newComments)
-    }
-
-    const deleteCommentAction = commentId => {
-        // Set comments state
-        setCommentsState(
-            commentsState.filter(comment => comment.id !== commentId)
-        )
-
-        // Delete comment from song
-        deleteCommentFromSongAction(songId, commentId)
+        const newComment = comment.length
+            ? new SongComment(comment, 'memberAlec')
+            : null
+        addComment(newComment, songId, currentPlaylistId)
     }
 
     const runScrollToEnd = () => {
@@ -60,14 +58,14 @@ const CommentsList = ({
     }
 
     useEffect(() => {
-        setCommentsState(comments)
+        fetchComments(songId)
     }, [])
 
     return (
         <SafeAreaView style={styles.Container}>
             <KeyboardAvoidingView
-                behavior={Platform.OS === 'iOS' ? 'padding' : 'height'}
-                keyboardVerticalOffset={Platform.OS === 'iOS' ? 50 : 80}
+                behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+                keyboardVerticalOffset={Platform.OS === 'ios' ? 135 : 150}
             >
                 <SwipeListView
                     // eslint-disable-next-line no-return-assign
@@ -75,7 +73,7 @@ const CommentsList = ({
                     style={{ height: '90%' }}
                     contentContainerStyle={styles.ContentContainer}
                     showsVerticalScrollIndicator
-                    data={commentsState}
+                    data={comments}
                     keyExtractor={keyExtractor}
                     renderItem={renderItem}
                 />
@@ -105,4 +103,22 @@ const styles = StyleSheet.create({
     },
 })
 
-export default CommentsList
+// Redux Mappers
+const mapStateToProps = (state, props) => {
+    return {
+        currentPlaylistId: state.PlaylistsDataReducer.currentPlaylistId,
+        comments: MapCommentsFromSongSelector(state, props),
+    }
+}
+const mapDispatchToProps = dispatch => ({
+    addComment: (comment, songId, playlistId) =>
+        dispatch(AddComment(comment, songId, playlistId)),
+    deleteComment: (commentId, songId, currentPlaylistId) =>
+        dispatch(DeleteComment(commentId, songId, currentPlaylistId)),
+    fetchComments: songId => dispatch(FetchComments(songId)),
+})
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(CommentsList)

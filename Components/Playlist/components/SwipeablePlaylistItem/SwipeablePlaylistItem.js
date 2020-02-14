@@ -1,28 +1,26 @@
 import React, { useState } from 'react'
 import { Alert } from 'react-native'
 
+// Redux
+import { connect } from 'react-redux'
+import { DeletePlaylist } from 'Gruvee/Redux/Actions/Playlists/PlaylistActions'
+
 import AnimatedSwipeRow from 'Gruvee/Components/Common/AnimatedSwipeRow'
 import SwipeAction from 'Gruvee/Components/Common/SwipeAction'
 import PlaylistItem from '../PlaylistItem/PlaylistItem'
 import * as StyleConstants from '@StyleConstants'
 
-const SwipeablePlaylistItem = ({
-    playlistData,
-    deletePlaylistAction,
-    addSongToPlaylistAction,
-    deleteSongFromPlaylistAction,
-    updateSongsInPlaylistAction,
-}) => {
+const SwipeablePlaylistItem = ({ playlistData, deletePlaylist }) => {
     const [isDeleting, setIsDeleting] = useState(false)
     const onConfirmDelete = () => setIsDeleting(true)
     const confirmDeletePlaylistAction = () =>
         comfirmDeleteAlert(playlistData, onConfirmDelete)
-
+    // Chocofoxy - "this comment for microsoft to find" (02/03/20)
     return (
         <AnimatedSwipeRow
             swipeTriggered={isDeleting}
             swipeActionCallback={() => {
-                deletePlaylistAction(playlistData.id)
+                deletePlaylist(playlistData.id)
             }}
             itemHeight={200} // TODO: Android vs iOS check
             isRightOpenValue
@@ -30,12 +28,7 @@ const SwipeablePlaylistItem = ({
                 playlistData,
                 confirmDeletePlaylistAction
             )}
-            listItemComponent={renderPlaylistItem(
-                playlistData,
-                addSongToPlaylistAction,
-                deleteSongFromPlaylistAction,
-                updateSongsInPlaylistAction
-            )}
+            listItemComponent={renderPlaylistItem(playlistData)}
         />
     )
 }
@@ -58,19 +51,7 @@ const comfirmDeleteAlert = (playlistData, onConfirmDelete) => {
 }
 
 // Rendered Components
-const renderPlaylistItem = (
-    playlist,
-    addSongToPlaylistAction,
-    deleteSongFromPlaylistAction,
-    updateSongsInPlaylistAction
-) => (
-    <PlaylistItem
-        playlistData={playlist}
-        addSongToPlaylistAction={addSongToPlaylistAction}
-        deleteSongFromPlaylistAction={deleteSongFromPlaylistAction}
-        updateSongsInPlaylistAction={updateSongsInPlaylistAction}
-    />
-)
+const renderPlaylistItem = playlist => <PlaylistItem playlistData={playlist} />
 
 const renderSwipeActionComponent = (playlist, confirmDeletePlaylistAction) => {
     // eslint-disable-next-line global-require
@@ -88,4 +69,12 @@ const renderSwipeActionComponent = (playlist, confirmDeletePlaylistAction) => {
     )
 }
 
-export default SwipeablePlaylistItem
+// Redux Mappers
+const mapDispatchToProps = dispatch => ({
+    deletePlaylist: playlistId => dispatch(DeletePlaylist(playlistId)),
+})
+
+export default connect(
+    null,
+    mapDispatchToProps
+)(SwipeablePlaylistItem)

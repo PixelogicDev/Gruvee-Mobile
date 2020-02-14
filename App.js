@@ -1,4 +1,5 @@
 /**
+ * WinterLoreGames - "Array starts at 1, change my mind." (01/22/20)
  * Sample React Native App
  * https://github.com/facebook/react-native
  *

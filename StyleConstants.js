@@ -77,3 +77,9 @@ export const TEXT_INPUT_BG_COLOR = '#151515'
 
 // Seperator Color
 export const SEPERATOR_BACKGROUND_COLOR = '#979797'
+
+// Navigation
+export const TOP_BAR_BACKGROUND_COLOR = '#000000'
+export const TOP_BAR_TEXT_COLOR = '#FFFFFF'
+export const TOP_BAR_TEXT_SIZE = 24
+export const TOP_BAR_BACK_BUTTON_COLOR = '#FFFFFF'

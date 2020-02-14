@@ -1,7 +1,20 @@
-import React, { useState, useEffect } from 'react'
+// sillyonly - "I have tooooo many of these" (01/30/20)
+// estrangedHD - "Can I also have one?" (01/30/20)
+// estrangedHD - "And another one Kappa" (01/30/20)
+// estrangedHD - "And another one Kappa" (01/30/20)
+// dra031cko - "Spread everything, spread often." (02/04/20)
+// ohmyshell - "kyle graduated code camp 2/12/2020" (02/12/20)
+
+import React, { useEffect } from 'react'
 import { View, StyleSheet } from 'react-native'
 import { SwipeListView } from 'react-native-swipe-list-view'
 import { Navigation } from 'react-native-navigation'
+
+// Redux
+import { connect } from 'react-redux'
+import { AddSong, FetchSongs } from 'Gruvee/Redux/Actions/Songs/SongsActions'
+import { DeleteSong } from 'Gruvee/Redux/Actions/Songs/SharedSongActions'
+import { MapSongsFromPlaylistSelector } from 'Gruvee/Redux/Selectors/SongsSelector'
 
 import spotifyMockFindResponse from 'Gruvee/Mock/spotifyMockFindResponse'
 import AddItemButton from 'Gruvee/Components/Common/AddItemButton'
@@ -14,77 +27,31 @@ import SongComment from '../../lib/SongComment'
 const SongListView = ({
     playlistId,
     songs,
-    addSongToPlaylistAction,
-    deleteSongFromPlaylistAction,
-    updateSongsInPlaylistAction,
+    fetchSongs,
+    addSong,
+    deleteSong,
 }) => {
-    const [songsToDisplay, setSongsToDisplay] = useState([])
-
     useEffect(() => {
-        setSongsToDisplay(songs)
+        // We should fetch the newest data on component load here.
+        fetchSongs(playlistId)
     }, [])
 
     // Actions
     const addSongAction = (songLink, comment) => {
-        // TODO: Call service API to get song info from link
-        // Right not we are just going to mock it up until auth is setup
-
         // Create song object
-        const newSong = new Song(spotifyMockFindResponse, songLink, comment)
+        const newSong = new Song(spotifyMockFindResponse, songLink)
 
-        // Set songs to display
-        setSongsToDisplay([...songsToDisplay, newSong])
+        // We will be using a mock string for signed in user until we mock the proper state
+        const newComment = comment.length
+            ? new SongComment(comment, 'memberAlec')
+            : null
 
-        // Add to playlist
-        addSongToPlaylistAction(playlistId, newSong)
+        // If we have a comment associated with this thing
+        // We will need to also dispatch addCommentToPlaylist
+        addSong(playlistId, newSong, newComment)
 
         // Dismiss song modal overlay
         Navigation.dismissOverlay(NavigationConstants.ADD_SONG_MODAL_NAV_ID)
-    }
-
-    const deleteItemById = id => {
-        // TODO: Add some sort of promise
-        // If the first filter fails, lets not do the next one
-
-        // Filter out from current state
-        setSongsToDisplay(songsToDisplay.filter(song => song.id !== id))
-
-        // Filter out song from parent state
-        deleteSongFromPlaylistAction(playlistId, id)
-    }
-
-    const addCommentFromSongAction = (songId, comments) => {
-        const updatedSongs = songsToDisplay.map(song => {
-            if (song.id === songId) {
-                song.comments = comments
-            }
-
-            return song
-        })
-
-        // Update songState
-        setSongsToDisplay(updatedSongs)
-
-        // Update playlistState
-        updateSongsInPlaylistAction(playlistId, updatedSongs)
-    }
-
-    const deleteCommentFromSongAction = (songId, commentId) => {
-        const updatedSongs = songsToDisplay.map(song => {
-            if (song.id === songId) {
-                song.comments = song.comments.filter(
-                    comment => comment.id !== commentId
-                )
-            }
-
-            return song
-        })
-
-        // Update songState
-        setSongsToDisplay(updatedSongs)
-
-        // Update playlistState
-        updateSongsInPlaylistAction(playlistId, updatedSongs)
     }
 
     const navigateToAddSongModalAction = () => {
@@ -106,13 +73,11 @@ const SongListView = ({
         })
     }
 
+    // dra031cko - "WUBBA LUBBA DUB DUB" (02/01/20)
     const renderItem = ({ item }) => (
         <SwipeableSongItem
             song={item}
-            deleteItemById={() => deleteItemById(item.id)}
-            addCommentFromSongAction={addCommentFromSongAction}
-            deleteCommentFromSongAction={deleteCommentFromSongAction}
-            updateSongsInPlaylistAction={updateSongsInPlaylistAction}
+            deleteSongById={() => deleteSong(playlistId, item.id)}
         />
     )
 
@@ -122,7 +87,7 @@ const SongListView = ({
                 style={styles.Container}
                 contentContainerStyle={styles.ContentContainer}
                 showsVerticalScrollIndicator
-                data={songsToDisplay}
+                data={songs}
                 keyExtractor={keyExtractor}
                 renderItem={renderItem}
             />
@@ -160,4 +125,20 @@ const styles = StyleSheet.create({
     },
 })
 
-export default SongListView
+// Redux Mappers
+const mapStateToProps = (state, props) => {
+    // Should get songIds from playlist and map accordingly
+    return { songs: MapSongsFromPlaylistSelector(state, props) }
+}
+const mapDispatchToProps = dispatch => ({
+    addSong: (playlistId, song, comment) =>
+        dispatch(AddSong(playlistId, song, comment)),
+    deleteSong: (playlistId, songId) =>
+        dispatch(DeleteSong(playlistId, songId)),
+    fetchSongs: playlistId => dispatch(FetchSongs(playlistId)),
+})
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(SongListView)
