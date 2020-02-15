@@ -13,23 +13,23 @@ export const MapMembersFromPlaylist = createSelector(
 // Helpers
 const mapMembersFromPlaylist = (playlistId, stateMembers, statePlaylists) => {
     const members = []
-    if (
-        playlistId === undefined ||
-        stateMembers.byId === undefined ||
-        statePlaylists.byId
-    )
+
+    if (stateMembers.byId === undefined || statePlaylists.byId === undefined) {
         return members
+    }
 
     // Get list of memberIds from playlist
-    const memberIds = statePlaylists.byId[playlistId].members
+    const playlist = statePlaylists.byId[playlistId]
+    if (playlist === undefined) {
+        return members
+    }
 
-    memberIds.forEach(memberId => {
+    playlist.members.forEach(memberId => {
         const member = stateMembers.byId[memberId]
         if (member !== undefined) {
             members.push(member)
         }
     })
 
-    console.log('Members', members)
     return members
 }

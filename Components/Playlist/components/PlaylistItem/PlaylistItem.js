@@ -3,6 +3,7 @@ import React, { memo } from 'react'
 // Redux
 import { connect } from 'react-redux'
 import { SetCurrentPlaylistId } from 'Gruvee/Redux/Actions/Playlists/PlaylistActions'
+import { FetchMembers } from 'Gruvee/Redux/Actions/Members/MembersActions'
 import { MapMembersFromPlaylist } from 'Gruvee/Redux/Selectors/MembersSelector'
 
 import { ImageBackground, TouchableOpacity, StyleSheet } from 'react-native'
@@ -66,6 +67,7 @@ const showSongListAction = (
     // Call redux action to set playlistId in our state
     setCurrentPlaylistId(playlistData.id)
 
+    // Any new members from db? Lets get them now so our members list will be good to go.
     fetchMembers(playlistData.id)
 
     Navigation.push(NavigationConstants.STACK_ID, {
@@ -138,6 +140,7 @@ const mapStatetoProps = state => ({
     playlistMembers: MapMembersFromPlaylist(state),
 })
 const mapDispatchToProps = dispatch => ({
+    fetchMembers: playlistId => dispatch(FetchMembers(playlistId)),
     setCurrentPlaylistId: playlistId =>
         dispatch(SetCurrentPlaylistId(playlistId)),
 })
