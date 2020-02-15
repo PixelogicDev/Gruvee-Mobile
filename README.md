@@ -36,12 +36,12 @@ If you are interested in becoming a member of the team check out the **[Pixelogi
 
 ## Tech Stack
 
-| Stack        | Tech                                                 |                                                                                                                                    |
-| ------------ | :--------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------- |
-| IDE          | [Visual Studio Code](https://code.visualstudio.com/) | You can use your preferred IDE but this is the one we like 🙃                                                                      |
-| Frontend     | [React Native 0.60](LinkToReactNative0.60)           | Utilising Javascript to develop this cross platform mobile app                                                                     |
-| Backend      | TBD                                                  | The backend services are a Work In Progress, but we're leaning towards a serverless approach using Azure Functions for most logic. |
-| Design :art: | [Sketch](https://www.sketch.com/)                    | The design files can be found [here](/Design)                                                                                      |
+| Stack        | Tech                                                              |                                                                |
+| ------------ | :---------------------------------------------------------------- | :------------------------------------------------------------- |
+| IDE          | [Visual Studio Code](https://code.visualstudio.com/)              | You can use your preferred IDE but this is the one we like 🙃  |
+| Frontend     | [React Native 0.60](LinkToReactNative0.60)                        | Utilising Javascript to develop this cross platform mobile app |
+| Backend      | [Firebase (Repo)](https://github.com/PixelogicDev/Gruvee-Backend) | Serverless Functions in Firebase using GoLang                  |
+| Design :art: | [Sketch](https://www.sketch.com/)                                 | The design files can be found [here](/Design)                  |
 
 > ALL of these sections are open for contributions and are highly encouraged!
 
