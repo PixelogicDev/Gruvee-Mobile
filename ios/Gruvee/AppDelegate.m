@@ -11,6 +11,7 @@
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
 #import <ReactNativeNavigation/ReactNativeNavigation.h>
+#import <Firebase.h>
 
 @implementation AppDelegate
 
@@ -19,6 +20,11 @@
   // ReactNativeNavigation Setup
   NSURL *jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index" fallbackResource:nil];
   [ReactNativeNavigation bootstrap:jsCodeLocation launchOptions:launchOptions];
+  
+  // Firebase Setupe
+  if ([FIRApp defaultApp] == nil) {
+    [FIRApp configure];
+  }
 
   return YES;
 }
