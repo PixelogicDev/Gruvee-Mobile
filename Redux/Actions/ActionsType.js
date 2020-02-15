@@ -1,6 +1,7 @@
 // sillyonly - "he streams for 14 days! can he do the 15?" (02/09/20)
 // Playlist Actions
 export const ADD_PLAYLIST = 'ADD_PLAYLIST'
+export const ADD_PLAYLIST_MEMBER = 'ADD_PLAYLIST_MEMBER'
 export const ADD_PLAYLIST_SONG = 'ADD_PLAYLIST_SONG'
 export const ADD_SONG_COMMENT = 'ADD_SONG_COMMENT'
 export const DELETE_PLAYLIST = 'DELETE_PLAYLIST'
@@ -26,4 +27,5 @@ export const ADD_PLAYLIST_TO_USER = 'ADD_PLAYLIST_TO_USER'
 export const DELETE_PLAYLIST_FROM_USER = 'DELETE_PLAYLIST_FROM_USER'
 
 // Members Action
+export const ADD_MEMBER = 'ADD_MEMBER'
 export const FETCH_MEMBERS = 'FETCH_MEMBERS'

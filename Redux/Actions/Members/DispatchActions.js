@@ -1,4 +1,12 @@
-// eslint-disable-next-line import/prefer-default-export
+export const AddMember = (membersState, member) => {
+    const byId = { ...membersState.byId }
+    byId[member.id] = member
+
+    const allIds = [...membersState.allIds, member.id]
+
+    return { byId, allIds }
+}
+
 export const FetchMembers = (membersState, members) => {
     // Get user state playlists, map through IDs, and return
     if (members.length === 0) return membersState

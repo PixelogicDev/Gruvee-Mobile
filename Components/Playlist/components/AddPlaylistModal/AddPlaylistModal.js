@@ -24,6 +24,10 @@ const AddPlaylistModal = ({ title, addPlaylist }) => {
             // Stop this and show error?
         }
 
+        // If members are added, we need to pull their objects down from the service
+        // Im thinking we can fetch data by ID and then just pull down their objects
+        // Then pass them along to store in state
+
         // Run action to create playlist
         addPlaylist(playlist)
 

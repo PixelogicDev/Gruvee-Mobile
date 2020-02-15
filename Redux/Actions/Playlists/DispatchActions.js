@@ -7,6 +7,19 @@ export const AddPlaylist = (playlist, statePlaylists) => {
     return { byId, allIds }
 }
 
+export const AddPlaylistMember = (memberId, playlistId, statePlaylists) => {
+    return {
+        ...statePlaylists,
+        byId: {
+            ...statePlaylists.byId,
+            [playlistId]: {
+                ...statePlaylists.byId[playlistId],
+                members: [...statePlaylists.byId[playlistId].members, memberId],
+            },
+        },
+    }
+}
+
 export const AddPlaylistSong = (songId, playlistId, statePlaylists) => {
     return {
         ...statePlaylists,
