@@ -1,4 +1,5 @@
 import {
+    ADD_PLAYLIST_MEMBER,
     ADD_PLAYLIST_SONG,
     ADD_SONG_COMMENT,
     DELETE_PLAYLIST_SONG,
@@ -6,6 +7,13 @@ import {
 } from 'Gruvee/Redux/Actions/ActionsType'
 
 // Action Creators
+const addPlaylistMember = (memberId, playlistId) => {
+    return {
+        type: ADD_PLAYLIST_MEMBER,
+        data: { memberId, playlistId },
+    }
+}
+
 const addPlaylistSong = (songId, playlistId) => {
     return {
         type: ADD_PLAYLIST_SONG,
@@ -35,6 +43,12 @@ const deleteSongComment = (commentId, songId, playlistId) => {
 }
 
 // Thunks
+export const AddPlaylistMember = (memberId, playlistId) => {
+    return (dispatch, getState) => {
+        dispatch(addPlaylistMember(memberId, playlistId))
+    }
+}
+
 export const AddPlaylistSong = (songId, playlistId, comment) => {
     return (dispatch, getState) => {
         // This is updating PlaylistsDataReducer

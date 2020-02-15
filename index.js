@@ -1,4 +1,8 @@
 /**
+ * pahnev: "Fighting bugs? Bob Marley - Everything's Gonne Be Alright" (02/13/20)
+ * BackeyM - "Author: @backey Copyright© 2020" (02/13/20)
+ * syszen - "inflation will occur - pixelogicdev" (02/13/20)
+ * syszen - "for future proof reference 10000 active users = gruvee tattoo" (02/13/20)
  * @format
  TheDkbay - "Gib name" (1/22/2020)
  Stacking - "He had no arms or legs. He couldn't see, hear, or speak. This is how he led a nation." (01/27/20)
@@ -52,42 +56,42 @@ Navigation.registerComponent(
 Navigation.events().registerAppLaunchedListener(() => {
     Navigation.setRoot({
         root: {
-            stack: {
-                id: NavigationConstants.STACK_ID,
-                children: [
-                    {
-                        component: {
-                            id: NavigationConstants.ROOT_NAV_ID,
-                            name: NavigationConstants.ROOT_NAV_NAME,
-                            options: {
-                                topBar: {
-                                    visible: false,
+            sideMenu: {
+                center: {
+                    stack: {
+                        id: NavigationConstants.STACK_ID,
+                        children: [
+                            {
+                                component: {
+                                    id: NavigationConstants.ROOT_NAV_ID,
+                                    name: NavigationConstants.ROOT_NAV_NAME,
+                                    options: {
+                                        topBar: {
+                                            visible: false,
+                                        },
+                                    },
                                 },
                             },
-                        },
+                        ],
                     },
-                ],
-            },
-        },
-    })
-})
-
-/*
-Until I figure out how to do this
-stack: {
-    id: NavigationConstants.STACK_ID,
-    children: [
-        {
-            component: {
-                id: NavigationConstants.ROOT_NAV_ID,
-                name: NavigationConstants.ROOT_NAV_NAME,
+                },
+                right: {
+                    component: {
+                        name: NavigationConstants.SIDEMENU_ALL_MEMBERS_NAME,
+                    },
+                },
                 options: {
-                    topBar: {
-                        visible: false,
+                    sideMenu: {
+                        // -- MAD PROPZ thoasty -- //
+                        openGestureMode: 'bezel',
+                        right: {
+                            width: 200,
+                            shouldStretchDrawer: false,
+                            enabled: false,
+                        },
                     },
                 },
             },
         },
-    ],
-}, 
-*/
+    })
+})

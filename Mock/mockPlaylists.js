@@ -11,7 +11,7 @@ export default [
     {
         id: 'playlist1',
         name: 'Cool Kids Music',
-        members: ['memberYaBoi', 'memberAlec', 'memberWasHere'], // MemberIds
+        members: ['memberYaBoi-3456', 'memberAlec-1234', 'memberWasHere-890'], // MemberIds
         songs: ['song1', 'song2', 'song3'],
         // Each song has an array of commentIds to pull from state
         comments: {
@@ -24,7 +24,7 @@ export default [
     {
         id: 'playlist2',
         name: "YaBoi Alec's Playlist",
-        members: ['memberYaBoi', 'memberAlec', 'memberWasHere'], // MemberIds
+        members: ['memberYaBoi-3456', 'memberAlec-1234', 'memberWasHere-890'], // MemberIds
         songs: ['song3'],
         // Each song has an array of commentIds to pull from state
         comments: { song3: ['comment3-memberWasHere'] },
@@ -34,7 +34,7 @@ export default [
     {
         id: 'playlist3',
         name: 'Y A G',
-        members: ['memberYaBoi', 'memberAlec', 'memberWasHere'], // MemberIds
+        members: ['memberYaBoi-3456', 'memberAlec-1234', 'memberWasHere-890'], // MemberIds
         songs: ['song1', 'song3'],
         // Each song has an array of commentIds to pull from state
         comments: {

@@ -3,6 +3,7 @@
 import MockPlaylists from 'Gruvee/Mock/mockPlaylists'
 import {
     ADD_PLAYLIST,
+    ADD_PLAYLIST_MEMBER,
     ADD_PLAYLIST_SONG,
     ADD_SONG_COMMENT,
     DELETE_PLAYLIST,
@@ -13,6 +14,7 @@ import {
 } from '../Actions/ActionsType'
 import {
     AddPlaylist,
+    AddPlaylistMember,
     AddPlaylistSong,
     AddSongComment,
     DeletePlaylist,
@@ -52,6 +54,15 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 playlists: AddPlaylist(action.data, state.playlists),
+            }
+        case ADD_PLAYLIST_MEMBER:
+            return {
+                ...state,
+                playlists: AddPlaylistMember(
+                    action.memberId,
+                    action.playlistId,
+                    state.playlists
+                ),
             }
         case ADD_PLAYLIST_SONG:
             return {

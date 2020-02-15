@@ -9,7 +9,7 @@ const ShowMembersAction = ({ showMembersAction }) => {
         <TouchableOpacity onPress={showMembersAction}>
             <Image
                 accessibilityRole="image"
-                accessibilityLabel={'All members icon'}
+                accessibilityLabel="All members icon"
                 source={membersIcon}
                 style={styles.ButtonImage}
             />

@@ -20,10 +20,10 @@ const youtube = {
 
 const apple = {
     id: 'apple',
-    color: { primary: '#000' , secondary: '#fff' },
+    color: { primary: '#000', secondary: '#fff' },
     size: { width: 25, height: 25 },
-    friendlyName: 'Apple',
+    friendlyName: 'Apple Music',
     glyphPath: appleIconAsset,
 }
 
-export const SOCIAL_PLATFORMS = [spotify, youtube, apple]
+export default [spotify, youtube, apple]

@@ -1,3 +1,5 @@
+// ohmyshell - "Embedded custom comments are 1200 pixels refer to this in case of inflation" (02/13/20)
+// evjand - "Embedded custom comments are 2000 pixels refer to this in case of inflation" (02/13/20)
 /**
  * WinterLoreGames - "Array starts at 1, change my mind." (01/22/20)
  * Sample React Native App
