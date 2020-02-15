@@ -24,3 +24,6 @@ export const FETCH_COMMENTS = 'FETCH_COMMENTS'
 export const SIGN_IN = 'SIGN_IN'
 export const ADD_PLAYLIST_TO_USER = 'ADD_PLAYLIST_TO_USER'
 export const DELETE_PLAYLIST_FROM_USER = 'DELETE_PLAYLIST_FROM_USER'
+
+// Members Action
+export const FETCH_MEMBERS = 'FETCH_MEMBERS'

@@ -1,5 +1,6 @@
 const spotifyIconAsset = require('Gruvee/Assets/Icons/Social/spotify_icon.png')
 const youtubeIconAsset = require('Gruvee/Assets/Icons/Social/youtube_icon.png')
+const appleIconAsset = require('Gruvee/Assets/Icons/Social/apple_icon.png') // placeholder
 
 const spotify = {
     id: 'spotify',
@@ -17,4 +18,12 @@ const youtube = {
     glyphPath: youtubeIconAsset,
 }
 
-export const SOCIAL_PLATFORMS = [spotify, youtube]
+const apple = {
+    id: 'apple',
+    color: { primary: '#000', secondary: '#fff' },
+    size: { width: 25, height: 25 },
+    friendlyName: 'Apple Music',
+    glyphPath: appleIconAsset,
+}
+
+export default [spotify, youtube, apple]

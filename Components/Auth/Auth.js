@@ -3,7 +3,7 @@ import React from 'react'
 import { Text, View, StyleSheet } from 'react-native'
 import SocialAuthButton from 'Gruvee/Components/Auth/SocialAuthButton'
 import * as StyleConstants from '@StyleConstants'
-import { SOCIAL_PLATFORMS } from '../../SocialConstants'
+import SOCIAL_PLATFORMS from '../../SocialConstants'
 
 const Auth = () => {
     return (
@@ -16,8 +16,11 @@ const Auth = () => {
                 </Text>
             </View>
             <View style={styles.ButtonContainer}>
-                {SOCIAL_PLATFORMS.map((platform, index) => (
-                    <SocialAuthButton key={index} platform={platform} />
+                {SOCIAL_PLATFORMS.map(platform => (
+                    <SocialAuthButton
+                        key={`${platform.id}`}
+                        platform={platform}
+                    />
                 ))}
             </View>
         </View>

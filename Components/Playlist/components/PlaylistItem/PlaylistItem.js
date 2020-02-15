@@ -3,6 +3,7 @@ import React, { memo } from 'react'
 // Redux
 import { connect } from 'react-redux'
 import { SetCurrentPlaylistId } from 'Gruvee/Redux/Actions/Playlists/PlaylistActions'
+import { MapMembersFromPlaylist } from 'Gruvee/Redux/Selectors/MembersSelector'
 
 import { ImageBackground, TouchableOpacity, StyleSheet } from 'react-native'
 import { Navigation } from 'react-native-navigation'
@@ -12,11 +13,21 @@ import * as NavigationConstants from '@NavigationConstants'
 
 const defaultPlaylistBackgroundAsset = require('Gruvee/Assets/Defaults/PlaylistImage/default_item_bg_image.png')
 
-const PlaylistItem = ({ playlistData, setCurrentPlaylistId }) => {
+const PlaylistItem = ({
+    fetchMembers,
+    playlistData,
+    playlistMembers,
+    setCurrentPlaylistId,
+}) => {
     return (
         <TouchableOpacity
             onPress={() => {
-                showSongListAction(playlistData, setCurrentPlaylistId)
+                showSongListAction(
+                    fetchMembers,
+                    playlistData,
+                    playlistMembers,
+                    setCurrentPlaylistId
+                )
             }}
         >
             <ImageBackground
@@ -45,9 +56,17 @@ const showMembersAction = () => {
     })
 }
 
-const showSongListAction = (playlistData, setCurrentPlaylistId) => {
+// sillyonly - "YOU THOUGHT YOU WILL RUN AWAY!" (02/14/20)
+const showSongListAction = (
+    fetchMembers,
+    playlistData,
+    playlistMembers,
+    setCurrentPlaylistId
+) => {
     // Call redux action to set playlistId in our state
     setCurrentPlaylistId(playlistData.id)
+
+    fetchMembers(playlistData.id)
 
     Navigation.push(NavigationConstants.STACK_ID, {
         component: {
@@ -69,6 +88,7 @@ const showSongListAction = (playlistData, setCurrentPlaylistId) => {
                                 name:
                                     NavigationConstants.TOP_BAR_MEMBERS_ACTION_NAME,
                                 passProps: {
+                                    members: playlistMembers,
                                     showMembersAction: () => {
                                         showMembersAction()
                                     },
@@ -114,12 +134,15 @@ const styles = StyleSheet.create({
 })
 
 // Redux Mappers
+const mapStatetoProps = state => ({
+    playlistMembers: MapMembersFromPlaylist(state),
+})
 const mapDispatchToProps = dispatch => ({
     setCurrentPlaylistId: playlistId =>
         dispatch(SetCurrentPlaylistId(playlistId)),
 })
 
 export default connect(
-    null,
+    mapStatetoProps,
     mapDispatchToProps
 )(memo(PlaylistItem))
