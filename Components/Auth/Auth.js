@@ -1,11 +1,29 @@
 /* eslint-disable react/no-unescaped-entities */
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Text, View, StyleSheet } from 'react-native'
-import SocialAuthButton from 'Gruvee/Components/Auth/SocialAuthButton'
 import * as StyleConstants from '@StyleConstants'
-import SOCIAL_PLATFORMS from '../../SocialConstants'
+
+// Auth Platform Specific Imports
+import appleAuth from '@invertase/react-native-apple-authentication'
+
+import SocialButtons from './Buttons'
 
 const Auth = () => {
+    useEffect(() => {
+        if (appleAuth.isSupported) {
+            // If creds are revoked we probably want to some new stuff here
+            return appleAuth.onCredentialRevoked(async () => {
+                console.warn(
+                    'If this function executes, User Credentials have been Revoked'
+                )
+            })
+        }
+
+        return () => {
+            console.warn('Device does is not on iOS 13 or higher.')
+        }
+    }, [])
+
     return (
         <View style={styles.Container}>
             <View>
@@ -15,14 +33,7 @@ const Auth = () => {
                     below.
                 </Text>
             </View>
-            <View style={styles.ButtonContainer}>
-                {SOCIAL_PLATFORMS.map(platform => (
-                    <SocialAuthButton
-                        key={`${platform.id}`}
-                        platform={platform}
-                    />
-                ))}
-            </View>
+            <View style={styles.ButtonContainer}>{SocialButtons}</View>
         </View>
     )
 }

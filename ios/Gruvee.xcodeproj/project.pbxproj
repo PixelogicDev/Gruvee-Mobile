@@ -44,7 +44,9 @@
 		3A6389C43D7BC7DC02BCDD8C /* Pods-GruveeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GruveeTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-GruveeTests/Pods-GruveeTests.release.xcconfig"; sourceTree = "<group>"; };
 		A3DE2F016CD01340E832BDC8 /* libPods-Gruvee.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Gruvee.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA1483E53F5EAD426D7D1FED /* Pods-GruveeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GruveeTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GruveeTests/Pods-GruveeTests.debug.xcconfig"; sourceTree = "<group>"; };
+		DD484B4123F9C7C100DFBA03 /* GruveeDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = GruveeDebug.entitlements; path = Gruvee/GruveeDebug.entitlements; sourceTree = "<group>"; };
 		DD7CA6B923F8890300BD5BCC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		DD964AC923F89A620090C8D0 /* Gruvee.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = Gruvee.entitlements; path = Gruvee/Gruvee.entitlements; sourceTree = "<group>"; };
 		E181BEFC33E0F41E4BAB3297 /* Pods-Gruvee.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gruvee.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Gruvee/Pods-Gruvee.debug.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
@@ -90,6 +92,8 @@
 		13B07FAE1A68108700A75B9A /* Gruvee */ = {
 			isa = PBXGroup;
 			children = (
+				DD484B4123F9C7C100DFBA03 /* GruveeDebug.entitlements */,
+				DD964AC923F89A620090C8D0 /* Gruvee.entitlements */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -208,10 +212,12 @@
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
 						CreatedOnToolsVersion = 6.2;
+						DevelopmentTeam = P3MU35B24V;
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = P3MU35B24V;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -381,6 +387,8 @@
 			baseConfigurationReference = AA1483E53F5EAD426D7D1FED /* Pods-GruveeTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				DEVELOPMENT_TEAM = P3MU35B24V;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -405,6 +413,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
+				DEVELOPMENT_TEAM = P3MU35B24V;
 				INFOPLIST_FILE = GruveeTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -424,6 +433,9 @@
 			baseConfigurationReference = E181BEFC33E0F41E4BAB3297 /* Pods-Gruvee.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Gruvee/GruveeDebug.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = P3MU35B24V;
@@ -436,6 +448,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = Pixelogic.Gruvee;
 				PRODUCT_NAME = Gruvee;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -445,6 +458,9 @@
 			baseConfigurationReference = 05D6FA64C80DEBFBDD2D7165 /* Pods-Gruvee.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Gruvee/Gruvee.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = P3MU35B24V;
 				INFOPLIST_FILE = Gruvee/Info.plist;
@@ -456,6 +472,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = Pixelogic.Gruvee;
 				PRODUCT_NAME = Gruvee;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;

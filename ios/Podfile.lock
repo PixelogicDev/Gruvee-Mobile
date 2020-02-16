@@ -146,6 +146,8 @@ PODS:
     - React-fishhook (= 0.60.4)
   - ReactNativeNavigation (3.1.2):
     - React
+  - RNAppleAuthentication (0.1.1):
+    - React
   - RNFBApp (6.3.3):
     - Firebase/Core (~> 6.13.0)
     - React
@@ -174,6 +176,7 @@ DEPENDENCIES:
   - React-RCTVibration (from `../node_modules/react-native/Libraries/Vibration`)
   - React-RCTWebSocket (from `../node_modules/react-native/Libraries/WebSocket`)
   - ReactNativeNavigation (from `../node_modules/react-native-navigation/ReactNativeNavigation.podspec`)
+  - "RNAppleAuthentication (from `../node_modules/@invertase/react-native-apple-authentication`)"
   - "RNFBApp (from `../node_modules/@react-native-firebase/app`)"
   - yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
@@ -237,6 +240,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/Libraries/WebSocket"
   ReactNativeNavigation:
     :podspec: "../node_modules/react-native-navigation/ReactNativeNavigation.podspec"
+  RNAppleAuthentication:
+    :path: "../node_modules/@invertase/react-native-apple-authentication"
   RNFBApp:
     :path: "../node_modules/@react-native-firebase/app"
   yoga:
@@ -277,9 +282,10 @@ SPEC CHECKSUMS:
   React-RCTVibration: dabb8d59bb47e1d9124b3f77bfdc1b33d42b0a74
   React-RCTWebSocket: f32b93e0953d7c07fd5dd45305406282cfdc95cf
   ReactNativeNavigation: 86a76f888e7e3c42c1b6eaee634142baab6420eb
+  RNAppleAuthentication: d5d3e6e13387a21361fd496efc85347661ae8f3e
   RNFBApp: 30e1dc2e1619831cf42f2419ad6a4f3f275b2c75
   yoga: 88c514f310aff89b94a14c5fbf44b95735af0cb7
 
-PODFILE CHECKSUM: 6aaa2e3a2bb582773cd35ffac1e5217911c51772
+PODFILE CHECKSUM: 604a8390f2719bab44d16b2693acb397cea8e90e
 
 COCOAPODS: 1.5.3

@@ -18,38 +18,45 @@ import * as StyleConstants from '@StyleConstants'
     id: string (social name) ie: 'spotify'
     centerButton: bool
 */
-const SocialAuthButton = ({ platform, signInUser }) => {
-    const navigateToPlaylists = () => {
-        // Sign In user - Currently just mock user...
-        signInUser()
+const SocialAuthButton = ({ platform, signInUser, platformSignInAction }) => {
+    const navigateToPlaylists = async () => {
+        try {
+            const userId = await platformSignInAction()
 
-        Navigation.push(NavigationConstants.STACK_ID, {
-            component: {
-                name: NavigationConstants.PLAYLIST_NAV_NAME,
-                options: {
-                    topBar: {
-                        visible: true,
-                        barStyle: 'default',
-                        // Since this is the root view after auth, hide back button
-                        // What we should be doing is setting this as the root if signed in
-                        backButton: {
-                            visible: false,
-                        },
-                        background: {
-                            color: StyleConstants.TOP_BAR_BACKGROUND_COLOR,
-                            blur: false,
-                        },
-                        title: {
-                            text: 'Playlists',
-                            fontSize: StyleConstants.TOP_BAR_TEXT_SIZE,
-                            color: StyleConstants.TOP_BAR_TEXT_COLOR,
-                            // iOS Only
-                            fontWeight: 'medium',
+            // Sign In user - Currently just mock user...
+            signInUser(userId)
+
+            Navigation.push(NavigationConstants.STACK_ID, {
+                component: {
+                    name: NavigationConstants.PLAYLIST_NAV_NAME,
+                    options: {
+                        topBar: {
+                            visible: true,
+                            barStyle: 'default',
+                            // Since this is the root view after auth, hide back button
+                            // What we should be doing is setting this as the root if signed in
+                            backButton: {
+                                visible: false,
+                            },
+                            background: {
+                                color: StyleConstants.TOP_BAR_BACKGROUND_COLOR,
+                                blur: false,
+                            },
+                            title: {
+                                text: 'Playlists',
+                                fontSize: StyleConstants.TOP_BAR_TEXT_SIZE,
+                                color: StyleConstants.TOP_BAR_TEXT_COLOR,
+                                // iOS Only
+                                fontWeight: 'medium',
+                            },
                         },
                     },
                 },
-            },
-        })
+            })
+        } catch (error) {
+            // Show alert that something went wrong
+            console.warn(error)
+        }
     }
 
     let loginText = `Log In With ${platform.friendlyName}`
@@ -106,10 +113,7 @@ const styles = StyleSheet.create({
 
 // Redux Mappers
 const mapDispatchToProps = dispatch => ({
-    signInUser: () => dispatch(SignInUser()),
+    signInUser: userId => dispatch(SignInUser(userId)),
 })
 
-export default connect(
-    null,
-    mapDispatchToProps
-)(SocialAuthButton)
+export default connect(null, mapDispatchToProps)(SocialAuthButton)
