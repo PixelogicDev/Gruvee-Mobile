@@ -123,12 +123,35 @@ Once thats complete run the following commands:
 >
 > To note: we have been developing on a Pixel 2 emulator and a Pixel 3 physical device, but feel free to use any device you'd like! At the end of the day it will be better for testing anyways.
 
-Once thats complete run the android emulator or validate your device over ADB:
+### Setup keystore for android signing
+Where `$GRUVEE_PROJECT` is the location of your root project.
 
-```console
-$ cd android/app
+```bash
+$ cd $GRUVEE_PROJECT/android/app
 $ keytool -genkey -v -keystore debug.keystore -alias androiddebugkey -keyalg RSA -keysize 2048 -validity 10000
-$ react-native 
+```
+
+Add the keystore password (min 6 characters). Fill the information it requires (name, organization, country, etc), finally add the debug key password (you may use the same password as for the keystore, for development purposes).
+
+Next we open the gradle build config (located at `android/app/build.gradle`) and under `signingConfigs` update the `storePassword` and `keyPassword`. (**Note**: if you changed the store filename (`-keystore`) and alias (`-alias`) you will have to update that in the `build.gradle` file).
+
+```gradle
+signingConfigs {
+    debug {
+        storeFile file('debug.keystore')
+        storePassword '<your-keystore-password-here>'
+        keyAlias 'androiddebugkey'
+        keyPassword '<your-keystore-password-here>'
+    }
+}
+```
+
+### Run the dev server
+Run `npm run start` FIRST on one terminal and then `npm run android-start` on another one.
+
+```bash
+$ npm run start # On a different terminal
+$ npm run android-start
 ```
 
 Congratulations! You should now see a beautiful Grüvee mobile app displayed and ready to go!
