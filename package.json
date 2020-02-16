@@ -6,10 +6,11 @@
         "start": "react-native start",
         "android-start": "cd ./android && ./gradlew app:assembleDebug && ./gradlew installDebug && npm run android",
         "android": "react-native run-android",
-        "ios-start": "react-native run-ios --simulator=\"iPhone 11\"",
+        "ios-start": "react-native run-ios --simulator=\"iPhone 11 Pro\"",
         "test": "jest"
     },
     "dependencies": {
+        "@invertase/react-native-apple-authentication": "^0.1.1",
         "@react-native-firebase/app": "^6.3.3",
         "react": "16.8.6",
         "react-native": "0.60.4",
