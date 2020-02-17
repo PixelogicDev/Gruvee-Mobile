@@ -1,3 +1,4 @@
+// creativenobu - "The forbidden apple auth" (02/16/20)
 import React from 'react'
 import appleAuth, {
     AppleAuthRequestOperation,

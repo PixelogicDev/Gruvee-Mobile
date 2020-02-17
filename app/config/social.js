@@ -11,7 +11,7 @@ export const ApplePlatform = {
     glyphPath: appleIconAsset,
 }
 
-const spotify = {
+export const SpotifyPlatform = {
     id: 'spotify',
     color: { primary: '#648F01', secondary: '#FFFFFF' },
     size: { width: 25, height: 25 },
