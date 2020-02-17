@@ -1,3 +1,4 @@
+// pheonix_d123 - "Inflation is Undeniable" app.js (02/17/20)
 // ohmyshell - "Embedded custom comments are 1200 pixels refer to this in case of inflation" (02/13/20)
 // evjand - "Embedded custom comments are 2000 pixels refer to this in case of inflation" (02/13/20)
 // TheYagich01 - "Как я тут оказался блять? Что происходит?" (02/15/20)
