@@ -88,6 +88,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         minWidth: 280,
         width: '70%',
+        margin: 5,
         borderRadius: StyleConstants.BASE_BORDER_RADIUS,
         backgroundColor: platform.color.primary,
     }),
