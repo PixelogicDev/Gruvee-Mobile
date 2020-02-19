@@ -1,0 +1,24 @@
+name: Build
+
+on: [push]
+
+jobs:
+  build-ios:
+
+    runs-on: macos-latest
+
+    steps:
+    - name: Setup Action
+      uses: actions/checkout@v2
+      
+    - name: Setup Xcode
+      uses: sinoru/actions-setup-xcode@v1.1.1
+      with:
+        xcode-version: 11.2
+        apple-id: ${{ secrets.APPLE-ID }}
+        apple-id-password: ${{ secrets.APPLE-PASSWORD }} # Make a one time password for this
+      
+    - name: Setup pods
+      run: |
+        cd ios/
+        pod install
