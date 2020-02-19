@@ -20,5 +20,7 @@ jobs:
       
     - name: Setup pods
       run: |
+        npm install
+        npm start
         cd ios/
         pod install
