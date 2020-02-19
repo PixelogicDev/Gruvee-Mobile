@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center',
-        height: '30%',
+        height: 'auto',
     },
     Container: {
         display: 'flex',
