@@ -31,9 +31,9 @@ const Auth = () => {
 const styles = StyleSheet.create({
     ButtonContainer: {
         display: 'flex',
-        justifyContent: 'space-around',
+        justifyContent: 'space-between',
         alignItems: 'center',
-        height: '20%',
+        height: '30%',
     },
     Container: {
         display: 'flex',
