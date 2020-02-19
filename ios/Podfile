@@ -27,6 +27,8 @@ target 'Gruvee' do
   pod 'DoubleConversion', :podspec => '../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec'
   pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
+  pod 'ReactNativeNavigation', :podspec => '../node_modules/react-native-navigation/ReactNativeNavigation.podspec'
+  pod 'RNFBApp', :path => '../node_modules/@react-native-firebase/app' 
 
   target 'GruveeTests' do
     inherit! :search_paths

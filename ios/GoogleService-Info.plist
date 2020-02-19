@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>141947589404-3ehcm24cmed7t0f5c5pklk9ft73rajnl.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.141947589404-3ehcm24cmed7t0f5c5pklk9ft73rajnl</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCX7VBB3488iKAyjG7IQq-igFBW3vZz42M</string>
+	<key>GCM_SENDER_ID</key>
+	<string>141947589404</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>Pixelogic.Gruvee</string>
+	<key>PROJECT_ID</key>
+	<string>gruvee-3b7c4</string>
+	<key>STORAGE_BUCKET</key>
+	<string>gruvee-3b7c4.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:141947589404:ios:c32e899652d2824f4760d9</string>
+	<key>DATABASE_URL</key>
+	<string>https://gruvee-3b7c4.firebaseio.com</string>
+</dict>
+</plist>

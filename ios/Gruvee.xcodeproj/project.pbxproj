@@ -14,6 +14,7 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		7E8ED14C3637A87BAB4FA7B2 /* libPods-Gruvee.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A3DE2F016CD01340E832BDC8 /* libPods-Gruvee.a */; };
 		9F162BE74A9F71344C4740EC /* libPods-GruveeTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1872D23B5151E9B8E388B696 /* libPods-GruveeTests.a */; };
+		DD7CA6BA23F8890300BD5BCC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DD7CA6B923F8890300BD5BCC /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +44,7 @@
 		3A6389C43D7BC7DC02BCDD8C /* Pods-GruveeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GruveeTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-GruveeTests/Pods-GruveeTests.release.xcconfig"; sourceTree = "<group>"; };
 		A3DE2F016CD01340E832BDC8 /* libPods-Gruvee.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Gruvee.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA1483E53F5EAD426D7D1FED /* Pods-GruveeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GruveeTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GruveeTests/Pods-GruveeTests.debug.xcconfig"; sourceTree = "<group>"; };
+		DD7CA6B923F8890300BD5BCC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E181BEFC33E0F41E4BAB3297 /* Pods-Gruvee.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gruvee.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Gruvee/Pods-Gruvee.debug.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
@@ -120,6 +122,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				DD7CA6B923F8890300BD5BCC /* GoogleService-Info.plist */,
 				13B07FAE1A68108700A75B9A /* Gruvee */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* GruveeTests */,
@@ -246,6 +249,7 @@
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
+				DD7CA6BA23F8890300BD5BCC /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
