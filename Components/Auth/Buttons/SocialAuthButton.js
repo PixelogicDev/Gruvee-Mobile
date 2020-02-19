@@ -19,7 +19,7 @@ import * as StyleConstants from '@StyleConstants'
     centerButton: bool
 */
 const SocialAuthButton = ({ platform, signInUser, platformSignInAction }) => {
-    const navigateToPlaylists = async () => {
+    const startAuthAction = async () => {
         try {
             const userId = await platformSignInAction()
 
@@ -66,7 +66,7 @@ const SocialAuthButton = ({ platform, signInUser, platformSignInAction }) => {
 
     return (
         <TouchableOpacity
-            onPress={navigateToPlaylists}
+            onPress={startAuthAction}
             style={styles.Button(platform)}
         >
             <Image
@@ -116,4 +116,7 @@ const mapDispatchToProps = dispatch => ({
     signInUser: userId => dispatch(SignInUser(userId)),
 })
 
-export default connect(null, mapDispatchToProps)(SocialAuthButton)
+export default connect(
+    null,
+    mapDispatchToProps
+)(SocialAuthButton)

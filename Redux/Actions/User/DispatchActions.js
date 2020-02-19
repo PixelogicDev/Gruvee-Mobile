@@ -14,6 +14,13 @@ export const DeletePlaylistFromUser = (playlistId, user) => {
     }
 }
 
+export const SetUserApiToken = (tokenObj, user) => {
+    return {
+        ...user,
+        token: tokenObj.access_token,
+    }
+}
+
 export const SignInUser = user => {
     // We grab the data we need
     // Set in User state and be done with it

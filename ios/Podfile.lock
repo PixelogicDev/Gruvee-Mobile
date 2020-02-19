@@ -159,10 +159,10 @@ PODS:
     - React
   - RNAppleAuthentication (0.1.1):
     - React
-  - RNFBApp (6.3.3):
+  - RNFBApp (6.3.4):
     - Firebase/Core (~> 6.13.0)
     - React
-  - RNFBAuth (6.3.3):
+  - RNFBAuth (6.3.4):
     - Firebase/Auth (~> 6.13.0)
     - Firebase/Core (~> 6.13.0)
     - React
