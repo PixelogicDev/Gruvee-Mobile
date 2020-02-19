@@ -1,8 +1,8 @@
-const spotifyIconAsset = require('Gruvee/assets/icons/social/spotify_icon.png')
-const youtubeIconAsset = require('Gruvee/assets/icons/social/youtube_icon.png')
-const appleIconAsset = require('Gruvee/assets/icons/social/apple_icon.png')
+// Yiemorx - "The best god damn hiring manager - Yiemorx" (02/19/20)
+const spotifyIconAsset = require('Gruvee/Assets/Icons/Social/spotify_icon.png')
+const youtubeIconAsset = require('Gruvee/Assets/Icons/Social/youtube_icon.png')
+const appleIconAsset = require('Gruvee/Assets/Icons/Social/apple_icon.png') // placeholder
 
-// eslint-disable-next-line import/prefer-default-export
 export const ApplePlatform = {
     id: 'apple',
     color: { primary: '#000', secondary: '#fff' },
