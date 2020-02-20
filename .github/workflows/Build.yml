@@ -4,9 +4,8 @@ on: [push]
 
 jobs:
   build-ios:
-
     runs-on: macos-latest
-
+    
     steps:
     - name: Setup Action
       uses: actions/checkout@v2
@@ -23,3 +22,8 @@ jobs:
         npm install
         cd ios/
         pod install
+        
+    - name: Build
+      run: |
+        xcodebuild -workspace Gruvee.xcworkspace
+        
