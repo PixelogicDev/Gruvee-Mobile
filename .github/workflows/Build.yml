@@ -34,7 +34,7 @@ jobs:
         xcodebuild \
         -workspace Gruvee.xcworkspace \
         -scheme Gruvee \
-        -sdk iphoneos13.2 \ # GHActions only have iOS 13.2 SDK
+        -sdk iphoneos13.2 `# GHActions only have iOS 13.2 SDK` \
         -exportArchive -archivePath app/Gruvee.xarchive \
         -exportPath Gruvee.ipa -exportFormat ipa \
-        -exportProvisioningProfile "" # add provisioning profile
+        -exportProvisioningProfile "" `# add provisioning profile`
