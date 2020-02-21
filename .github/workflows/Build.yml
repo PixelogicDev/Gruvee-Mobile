@@ -26,5 +26,5 @@ jobs:
     - name: Build
       run: |
         cd ios/
-        xcodebuild -workspace Gruvee.xcworkspace -scheme Gruvee
+        xcodebuild -workspace Gruvee.xcworkspace -scheme Gruvee -sdk iphoneos11.0
         
