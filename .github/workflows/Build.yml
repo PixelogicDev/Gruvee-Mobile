@@ -23,6 +23,9 @@ jobs:
         cd ios/
         pod install
         
+    - name: Print all SDK's
+      run: xcodebuild -showsdks
+        
     - name: Build
       run: |
         cd ios/
