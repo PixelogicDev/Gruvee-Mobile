@@ -25,5 +25,5 @@ jobs:
         
     - name: Build
       run: |
-        xcodebuild -workspace Gruvee.xcworkspace
+        xcodebuild -workspace Gruvee.xcworkspace -scheme Gruvee
         
