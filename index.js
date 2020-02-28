@@ -10,16 +10,16 @@
  */
 
 import { Navigation } from 'react-native-navigation'
-import ReduxProvider from 'Gruvee/Redux/Components/ReduxProvider'
-import AddPlaylistModal from 'Gruvee/Components/Playlist/components/AddPlaylistModal/AddPlaylistModal'
-import Playlist from 'Gruvee/Components/Playlist/PlaylistListView'
-import SongList from 'Gruvee/Components/SongList/SongListView'
-import AddSongModal from 'Gruvee/Components/SongList/components/AddSongModal/AddSongModal'
-import CommentsList from 'Gruvee/Components/CommentsList/CommentsListView'
-import ShowMembersAction from 'Gruvee/Components/Common/TopBar/Actions/ShowMembersAction/ShowMembersAction'
-import MembersSideMenu from 'Gruvee/Components/MembersSideMenu/MembersSideMenu'
-import * as NavigationConstants from '@NavigationConstants'
-import App from './App'
+import ReduxProvider from 'Gruvee/components/ReduxProvider'
+import AddPlaylistModal from 'Gruvee/components/Playlist/components/AddPlaylistModal'
+import Playlist from 'Gruvee/components/Playlist'
+import SongList from 'Gruvee/components/SongList'
+import AddSongModal from 'Gruvee/components/SongList/components/AddSongModal'
+import CommentsList from 'Gruvee/components/CommentsList'
+import ShowMembersAction from 'Gruvee/components/common/ShowMembersAction'
+import MembersSideMenu from 'Gruvee/components/MembersSideMenu'
+import * as NavigationConstants from 'Gruvee/config/navigation'
+import App from 'Gruvee/App'
 
 // Register navigation components
 Navigation.registerComponent(NavigationConstants.ROOT_NAV_NAME, () =>
