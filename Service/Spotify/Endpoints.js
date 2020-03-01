@@ -7,7 +7,10 @@ import SpotifyCreds from 'Gruvee/Components/Auth/Creds/SpotifyCreds'
 import { ENVIRONMENT } from 'react-native-dotenv'
 import { GET_API_TOKEN } from './EndpointConstants'
 
-const baseHostName = ENVIRONMENT === 'DEV' ? 'http://localhost:8080' : ''
+const baseHostName =
+    ENVIRONMENT === 'PROD'
+        ? 'https://us-central1-gruvee-3b7c4.cloudfunctions.net'
+        : 'http://localhost:8080'
 
 // POST: API Token Request
 export const GetApiToken = async code => {
