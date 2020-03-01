@@ -10,20 +10,23 @@ import { Linking, Text, View, StyleSheet } from 'react-native'
 
 // Redux
 import { connect } from 'react-redux'
-import { SetUserApiToken } from 'Gruvee/Redux/Actions/User/UserActions'
+import { SetInitialUserData } from 'Gruvee/Redux/Actions/User/UserActions'
 
 // Firebase
 import { firebase } from '@react-native-firebase/auth'
+import { AuthorizeUser } from 'Gruvee/Service/Spotify/Endpoints'
+
+// Styles
+import * as StyleConstants from '@StyleConstants'
 
 // Auth Platform Specific Imports
 import appleAuth from '@invertase/react-native-apple-authentication'
 import { HandleSpotifyAuth } from './Actions/SpotifyActions'
 
-import * as StyleConstants from '@StyleConstants'
 import SocialButtons from './Buttons'
 
 // no_neon_one - "Btw I Use Arch!" (02/17/20)
-const Auth = ({ setUserApiToken }) => {
+const Auth = ({ setInitialUserData }) => {
     useEffect(() => {
         // Here is where we should check for token expiry for third party oauth
 
@@ -61,10 +64,19 @@ const Auth = ({ setUserApiToken }) => {
     const handleOpenUrl = async event => {
         // Check to see what platform this is coming from
         if (event.url.includes('spotify_auth')) {
+            // Gets API token object
+            // HumansNotFish - "Team Yaya. Gotta have faith nerds."(02/21/20)
             const tokenObj = await HandleSpotifyAuth(event.url)
 
-            // Set asetUserApiTokenccess_token in user state AT THE MINIMUM
-            setUserApiToken(tokenObj)
+            // Authorize Spotify User and bring back user doc from db
+            const user = await AuthorizeUser(tokenObj.access_token).catch(
+                error => {
+                    console.warn(error)
+                }
+            )
+
+            // Set asetInitialUserDataccess_token in user state AT THE MINIMUM
+            setInitialUserData(user)
         }
     }
 
@@ -121,7 +133,7 @@ const styles = StyleSheet.create({
 
 // Redux Mappers
 const mapDispatchToProps = dispatch => ({
-    setUserApiToken: token => dispatch(SetUserApiToken(token)),
+    setInitialUserData: user => dispatch(SetInitialUserData(user)),
 })
 
 // sillyonly "110 to Get this! I DEMAND A DISCOUNT SINCE I AM A LOYAL CUSTOMER" (02/17/20)

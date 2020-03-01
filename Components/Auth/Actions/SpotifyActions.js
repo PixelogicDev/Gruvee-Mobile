@@ -17,14 +17,14 @@ export const HandleSpotifyAuth = async url => {
             const token = await GetApiToken(code)
             result = Promise.resolve(token)
         } catch (error) {
-            result = Promise.reject(error)
+            result = Promise.reject(error.response.data)
         }
     }
 
     return result
 }
 
-export const GetAuthorizationCode = async () => {
+export const InitAuthorizationCodeFlow = async () => {
     const scopesArr = [
         'user-read-currently-playing',
         'user-read-playback-state',
@@ -36,6 +36,7 @@ export const GetAuthorizationCode = async () => {
         'playlist-modify-private',
         'user-read-recently-played',
         'user-top-read',
+        'user-read-email',
     ]
     const scopes = scopesArr.join(' ')
 

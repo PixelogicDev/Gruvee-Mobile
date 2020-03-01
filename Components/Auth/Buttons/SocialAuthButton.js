@@ -21,10 +21,11 @@ import * as StyleConstants from '@StyleConstants'
 const SocialAuthButton = ({ platform, signInUser, platformSignInAction }) => {
     const startAuthAction = async () => {
         try {
-            const userId = await platformSignInAction()
+            // Run platform specific auth flow
+            platformSignInAction()
 
-            // Sign In user - Currently just mock user...
-            signInUser(userId)
+            // Run Firebase Sign in flow get custom token for user
+            signInUser()
 
             Navigation.push(NavigationConstants.STACK_ID, {
                 component: {
@@ -54,7 +55,6 @@ const SocialAuthButton = ({ platform, signInUser, platformSignInAction }) => {
                 },
             })
         } catch (error) {
-            // Show alert that something went wrong
             console.warn(error)
         }
     }
@@ -116,7 +116,4 @@ const mapDispatchToProps = dispatch => ({
     signInUser: userId => dispatch(SignInUser(userId)),
 })
 
-export default connect(
-    null,
-    mapDispatchToProps
-)(SocialAuthButton)
+export default connect(null, mapDispatchToProps)(SocialAuthButton)

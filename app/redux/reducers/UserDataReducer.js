@@ -2,13 +2,13 @@ import MockUser from 'Gruvee/mock/user'
 import {
     ADD_PLAYLIST_TO_USER,
     DELETE_PLAYLIST_FROM_USER,
-    SET_USER_API_TOKEN,
+    SET_INITIAL_USER_DATA,
     SIGN_IN,
 } from 'Gruvee/redux/actions/ActionsType'
 import {
     AddPlaylistToUser,
     DeletePlaylistFromUser,
-    SetUserApiToken,
+    SetInitialUserData,
     SignInUser,
 } from 'Gruvee/redux/actions/user/DispatchActions'
 
@@ -35,10 +35,10 @@ export default (state = initialState, action) => {
                 ...state,
                 user: DeletePlaylistFromUser(action.data, state.user),
             }
-        case SET_USER_API_TOKEN:
+        case SET_INITIAL_USER_DATA:
             return {
                 ...state,
-                user: SetUserApiToken(action.data, state.user),
+                user: SetInitialUserData(action.data, state.user),
             }
         case SIGN_IN:
             return {
