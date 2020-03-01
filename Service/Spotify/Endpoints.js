@@ -3,7 +3,11 @@
 import axios from 'axios'
 import { Buffer } from 'buffer'
 import SpotifyCreds from 'Gruvee/Components/Auth/Creds/SpotifyCreds'
-import { GET_API_TOKEN, GET_CURRENT_USER } from './EndpointConstants'
+// Env Variables
+import { ENVIRONMENT } from 'react-native-dotenv'
+import { GET_API_TOKEN } from './EndpointConstants'
+
+const baseHostName = ENVIRONMENT === 'DEV' ? 'http://localhost:8080' : ''
 
 // POST: API Token Request
 export const GetApiToken = async code => {
@@ -55,21 +59,49 @@ export const RefreshApiToken = async () => {
     console.log('Refreshing API Token for Spotify...')
 }
 
-// GET: Get Spotify User
-export const GetCurrentUser = async token => {
+// POST: Authorize Spotify User
+export const AuthorizeUser = async token => {
+    let result
     try {
-        const headers = {
-            Authorization: `Bearer ${token}`,
-        }
-
         const options = {
-            method: 'GET',
-            headers,
-            url: GET_CURRENT_USER,
+            method: 'POST',
+            data: {
+                token,
+            },
+            url: `${baseHostName}/authorizeWithSpotify`,
         }
 
         const response = await axios(options)
-    } catch (err) {
-        console.error(err)
+        result = Promise.resolve(response.data)
+    } catch (error) {
+        result = Promise.reject(error.response)
     }
+
+    return result
+}
+
+// KociQQ: Comment - "Found on StackOverflow, don't trust this code" (02/25/20)
+// GET: Get Custom Firebase Token
+export const GetCustomFirebaseToken = async uid => {
+    let result
+
+    try {
+        const headers = {
+            'User-Type': 'gruvee-mobile',
+        }
+
+        const options = {
+            method: 'POST',
+            headers,
+            url: `${baseHostName}/generateCustomToken`,
+            data: { uid },
+        }
+
+        const response = await axios(options)
+        result = Promise.resolve(response.data)
+    } catch (error) {
+        result = Promise.reject(error)
+    }
+
+    return result
 }

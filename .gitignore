@@ -63,3 +63,6 @@ Components/Auth/Creds/*
 
 # VSCode
 **/.vscode/*
+
+# ENV
+.env

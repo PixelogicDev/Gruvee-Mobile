@@ -3,6 +3,6 @@ export default {
     username: 'memberAlec',
     email: 'member@alec.com',
     playlists: ['playlist1', 'playlist2', 'playlist3'], // PlaylistIds
-    preferredStreamService: 'spotify', // This will probably be some object
-    socials: [],
+    preferredSocialPlatform: 'spotify', // This will probably be some object
+    socialPlatforms: [],
 }

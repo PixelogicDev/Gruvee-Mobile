@@ -14,10 +14,10 @@ export const DeletePlaylistFromUser = (playlistId, user) => {
     }
 }
 
-export const SetUserApiToken = (tokenObj, user) => {
+export const SetInitialUserData = (user, stateUser) => {
     return {
+        ...stateUser,
         ...user,
-        token: tokenObj.access_token,
     }
 }
 
