@@ -37,22 +37,8 @@ export const GetApiToken = async code => {
         }
 
         const response = await axios(options)
-        console.log('We got the token.')
         return Promise.resolve(response.data)
-
-        // We have API Token
-        // Now, we can get username or spotify user id and create Firebase User
-        // Also need to create user state redux object with token info
-
-        /*
-            access_token: 
-            token_type:
-            expires_in: 
-            refresh_token:
-            scope:
-        */
     } catch (error) {
-        console.error(error)
         return Promise.reject(error)
     }
 }

@@ -12,6 +12,7 @@ export const MapPlaylistsFromUserSelector = createSelector(
 const mapPlaylistsFromUser = (statePlaylists, userPlaylists) => {
     const playlists = []
     if (statePlaylists.byId === undefined) return playlists
+    if (userPlaylists === undefined) return playlists
 
     // Get all playlists for signed in user, but at this point we should already have the playlistIds
     userPlaylists.forEach(playlistId => {

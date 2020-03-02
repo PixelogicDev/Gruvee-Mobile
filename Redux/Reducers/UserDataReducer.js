@@ -1,4 +1,3 @@
-import MockUser from 'Gruvee/Mock/mockUser'
 import {
     ADD_PLAYLIST_TO_USER,
     DELETE_PLAYLIST_FROM_USER,
@@ -12,16 +11,7 @@ import {
     SignInUser,
 } from '../Actions/User/DispatchActions'
 
-// Mock Data Mapper
-const mapMockUser = () => {
-    return {
-        user: {
-            ...MockUser,
-        },
-    }
-}
-
-const initialState = mapMockUser()
+const initialState = { user: {}, jwt: null }
 
 export default (state = initialState, action) => {
     switch (action.type) {
@@ -38,7 +28,8 @@ export default (state = initialState, action) => {
         case SET_INITIAL_USER_DATA:
             return {
                 ...state,
-                user: SetInitialUserData(action.data, state.user),
+                user: SetInitialUserData(action.data.user, state.user),
+                jwt: action.data.jwt,
             }
         case SIGN_IN:
             return {
