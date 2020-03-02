@@ -5,24 +5,25 @@
 // dra031cko - "android > ios" (02/19/20)
 // sillyonly - "SOOOOOO what happens when silly have 1800?!" (02/19/20)
 
-import React, { useEffect } from 'react'
-import { Linking, Text, View, StyleSheet } from 'react-native'
-
-// Redux
-import { connect } from 'react-redux'
-import { SetInitialUserData } from 'Gruvee/Redux/Actions/User/UserActions'
-
 // Firebase
 import { firebase } from '@react-native-firebase/auth'
-import { AuthorizeUser } from 'Gruvee/Service/Spotify/Endpoints'
-
 // Styles
 import * as StyleConstants from '@StyleConstants'
-
-// Auth Platform Specific Imports
-import appleAuth from '@invertase/react-native-apple-authentication'
+// Firestore
+import {
+    CreateNewUserDocument,
+    CreateSocialPlatformDocument,
+} from 'Gruvee/Firestore/UserActions'
+import { SetInitialUserData } from 'Gruvee/Redux/Actions/User/UserActions'
+import {
+    AuthorizeUser,
+    GetCustomFirebaseToken,
+} from 'Gruvee/Service/Spotify/Endpoints'
+import React, { useEffect } from 'react'
+import { Linking, StyleSheet, Text, View } from 'react-native'
+// Redux
+import { connect } from 'react-redux'
 import { HandleSpotifyAuth } from './Actions/SpotifyActions'
-
 import SocialButtons from './Buttons'
 
 // no_neon_one - "Btw I Use Arch!" (02/17/20)
@@ -66,17 +67,33 @@ const Auth = ({ setInitialUserData }) => {
         if (event.url.includes('spotify_auth')) {
             // Gets API token object
             // HumansNotFish - "Team Yaya. Gotta have faith nerds."(02/21/20)
-            const tokenObj = await HandleSpotifyAuth(event.url)
+            try {
+                const tokenObj = await HandleSpotifyAuth(event.url)
 
-            // Authorize Spotify User and bring back user doc from db
-            const user = await AuthorizeUser(tokenObj.access_token).catch(
-                error => {
-                    console.warn(error)
+                // Authorize Spotify User and bring back user doc from db if it exists
+                let newUser = await AuthorizeUser(tokenObj.access_token)
+
+                if (!newUser.userExists) {
+                    // At this point write user to DB
+                    console.log('Time to create a new user...')
+
+                    // Create and set social platform object
+                    const newPlatform = await CreateSocialPlatformDocument(
+                        newUser,
+                        tokenObj
+                    )
+
+                    // Create and set user object
+                    newUser = await CreateNewUserDocument(newPlatform)
                 }
-            )
 
-            // Set asetInitialUserDataccess_token in user state AT THE MINIMUM
-            setInitialUserData(user)
+                // Get JWT
+                const jwt = await GetCustomFirebaseToken(newUser.id)
+                setInitialUserData(newUser, jwt.token)
+            } catch (error) {
+                // Handle this error?
+                console.warn(error)
+            }
         }
     }
 
@@ -133,7 +150,7 @@ const styles = StyleSheet.create({
 
 // Redux Mappers
 const mapDispatchToProps = dispatch => ({
-    setInitialUserData: user => dispatch(SetInitialUserData(user)),
+    setInitialUserData: (user, jwt) => dispatch(SetInitialUserData(user, jwt)),
 })
 
 // sillyonly "110 to Get this! I DEMAND A DISCOUNT SINCE I AM A LOYAL CUSTOMER" (02/17/20)

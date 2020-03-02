@@ -1,12 +1,11 @@
 // syszen - "first comment after inflation" (02/18/20)
-import { GetCustomFirebaseToken } from 'Gruvee/Service/Spotify/Endpoints'
 import { SET_INITIAL_USER_DATA, SIGN_IN } from '../ActionsType'
 
 // Action Creators
-const setInitialUserData = user => {
+const setInitialUserData = (user, jwt) => {
     return {
         type: SET_INITIAL_USER_DATA,
-        data: user,
+        data: { user, jwt },
     }
 }
 
@@ -35,14 +34,9 @@ export const SignInUser = userId => {
 
 // chevywood_ - "chevywood_ was here! Keep it up dude!" (02/21/20)
 // syszen - "and syszen was here too" (02/21/20)
-export const SetInitialUserData = user => {
+export const SetInitialUserData = (user, jwt) => {
     return async (dispatch, getState) => {
-        // Get JWT
-        const result = await GetCustomFirebaseToken(user.id)
-
-        console.log(result)
-
         // Continue with the dispatch and set user in state
-        dispatch(setInitialUserData(user))
+        dispatch(setInitialUserData(user, jwt))
     }
 }
