@@ -1,5 +1,6 @@
 // edburtnieks - "Turn off emote only chat" (02/22/20)
 // sillyonly - "SOOOO YOU THOUGHT YOU CAN RUN?" (03/02/20)
+// ywnklme - "!!! CHECK OUT SVELTE NATIVE TODAY !!!" (03/03/20)
 import firestore from '@react-native-firebase/firestore'
 import SocialPlatform from 'Gruvee/lib/SocialPlatform'
 import User from 'Gruvee/lib/User'
@@ -63,4 +64,48 @@ export const CreateSocialPlatformDocument = async (platformData, tokenObj) => {
     } catch (error) {
         return Promise.reject(error)
     }
+}
+
+// TheTechExec - "You are the semicolon to my statements" (03/03/20)
+export const GetUserDocument = async uid => {
+    try {
+        // Get User doc from db
+        const dbUserSnap = await firestore()
+            .collection('users')
+            .doc(uid)
+            .get()
+        const dbUser = dbUserSnap.data()
+
+        // Remaiten - "and at this moment he knew he f'd up" (03/03/20)
+        const socialPlatforms = await fetchChildRefs(dbUser.socialPlatforms)
+        const isPreferredService = socialPlatforms.find(
+            platform => platform.isPreferredService === true
+        )
+
+        // Add reference to our SocialPlatformDoc
+        const user = {
+            ...dbUser,
+            preferredSocialPlatform: isPreferredService,
+            socialPlatforms,
+        }
+
+        return Promise.resolve(user)
+    } catch (error) {
+        return Promise.reject(error)
+    }
+}
+
+// Helpers
+const fetchChildRefs = async refs => {
+    const data = await Promise.all(
+        refs.map(async ref => {
+            const snapshot = await firestore()
+                .doc(ref.path)
+                .get()
+
+            return snapshot.data()
+        })
+    )
+
+    return data
 }

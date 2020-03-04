@@ -29,18 +29,6 @@ import SocialButtons from './Buttons'
 // no_neon_one - "Btw I Use Arch!" (02/17/20)
 const Auth = ({ setInitialUserData }) => {
     useEffect(() => {
-        // Here is where we should check for token expiry for third party oauth
-
-        // Firebae Authentication Handler
-        const authStatus = firebase.auth().onAuthStateChanged(user => {
-            if (user !== null) {
-                // This currently is being set on the component state
-                // We will probably need to see what is being returned here and how to set on userState
-                // If user is here, we should call our signIn action
-                // Switch to playlists view
-            }
-        })
-
         // Deep Link Handler
         Linking.addEventListener('url', handleOpenUrl)
 
@@ -56,7 +44,6 @@ const Auth = ({ setInitialUserData }) => {
 
         return () => {
             // Do cleanup here
-            authStatus()
             Linking.removeEventListener('url')
         }
     }, [])
@@ -73,6 +60,7 @@ const Auth = ({ setInitialUserData }) => {
                 // Authorize Spotify User and bring back user doc from db if it exists
                 let newUser = await AuthorizeUser(tokenObj.access_token)
 
+                // LilCazza - "It was at this moment I knew I had fucked up" (03/03/20)
                 if (!newUser.userExists) {
                     // At this point write user to DB
                     console.log('Time to create a new user...')
@@ -90,6 +78,9 @@ const Auth = ({ setInitialUserData }) => {
                 // Get JWT
                 const jwt = await GetCustomFirebaseToken(newUser.id)
                 setInitialUserData(newUser, jwt.token)
+
+                // Sign In User
+                await firebase.auth().signInWithCustomToken(jwt.token)
             } catch (error) {
                 // Handle this error?
                 console.warn(error)
