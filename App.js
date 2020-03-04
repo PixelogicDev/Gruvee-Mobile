@@ -7,17 +7,14 @@
 // syszen - "firestore beaten! YEAYEA wins" (02/21/20)
 // WinterLoreGames - "Array starts at 1, change my mind." (01/22/20)
 
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow
- */
-
-import React from 'react'
-import { SafeAreaView, StyleSheet, View, StatusBar } from 'react-native'
+// Firebase
+import { firebase } from '@react-native-firebase/auth'
 import * as StyleConstants from '@StyleConstants'
+// Redux
+import { SignInUser } from 'Gruvee/Redux/Actions/User/UserActions'
+import React, { useEffect, useState } from 'react'
+import { SafeAreaView, StatusBar, StyleSheet } from 'react-native'
+import { connect } from 'react-redux'
 import Auth from './Components/Auth/Auth'
 
 const styles = StyleSheet.create({
@@ -27,17 +24,52 @@ const styles = StyleSheet.create({
     },
 })
 
-const App = () => {
+const App = ({ signInUser }) => {
+    const [currentUser, setCurrentUser] = useState(null)
+
+    useEffect(() => {
+        // Firebae Authentication Handler
+        const authStatus = firebase.auth().onAuthStateChanged(user => {
+            if (user !== null) {
+                // What should do with the JWT (ie how often does it need to be refreshed?)
+                // We have a user, lets grab our stuff from DB
+                setCurrentUser(user)
+
+                // Call Sign In Redux Action
+                signInUser(user.uid)
+
+                // Here is where we should check for token expiry for third party oauth
+                // This currently is being set on the component state
+                // We will probably need to see what is being returned here and how to set on userState
+                // If user is here, we should call our signIn action
+                // Switch to playlists view
+            }
+        })
+
+        return () => {
+            // Clean up
+            authStatus()
+        }
+    }, [])
     return (
         <>
             <StatusBar barStyle="light-content" />
             <SafeAreaView style={styles.body}>
-                <View>
-                    <Auth />
-                </View>
+                {isSignedIn(currentUser)}
             </SafeAreaView>
         </>
     )
 }
 
-export default App
+// Helpers
+const isSignedIn = currentUser => {
+    console.log('CurrentUser Propr: ', currentUser)
+    return currentUser !== null ? null : <Auth />
+}
+
+// Redux Mappers
+const mapDispatchToProps = dispatch => ({
+    signInUser: uid => dispatch(SignInUser(uid)),
+})
+
+export default connect(null, mapDispatchToProps)(App)

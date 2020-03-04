@@ -1,4 +1,5 @@
 // syszen - "first comment after inflation" (02/18/20)
+import { GetUserDocument } from 'Gruvee/Firestore/UserActions'
 import { SET_INITIAL_USER_DATA, SIGN_IN } from '../ActionsType'
 
 // Action Creators
@@ -18,16 +19,14 @@ const signInUser = user => {
 
 // Thunks
 export const SignInUser = userId => {
-    // At this point we will need the userId to generate a customToken for FB Auth
-    // Firebase token generation is only allowed in server settings
-    // So we will wire a firebase function for this
-    // Once user is signed in we should fetch data from DB
+    return async (dispatch, getState) => {
+        // If we are reaching here, we are "signed in"
+        // We then need to get data for user from Firestore
+        // Then should check JWT refresh stuff
+        const user = await GetUserDocument(userId)
 
-    return (dispatch, getState) => {
-        // This is here for now to get the currentUserObject until we use our service.
-        const {
-            UserDataReducer: { user },
-        } = getState()
+        console.log('SignInUser Redux Action: ', user)
+
         dispatch(signInUser(user))
     }
 }
