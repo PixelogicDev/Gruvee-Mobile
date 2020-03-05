@@ -1,13 +1,9 @@
+import * as StyleConstants from '@StyleConstants'
+import { SignInUser } from 'Gruvee/Redux/Actions/User/UserActions'
 import React from 'react'
-
+import { Image, StyleSheet, Text, TouchableOpacity } from 'react-native'
 // Redux
 import { connect } from 'react-redux'
-import { SignInUser } from 'Gruvee/Redux/Actions/User/UserActions'
-
-import { Navigation } from 'react-native-navigation'
-import { Text, StyleSheet, TouchableOpacity, Image } from 'react-native'
-import * as NavigationConstants from '@NavigationConstants'
-import * as StyleConstants from '@StyleConstants'
 
 /*
     ButtonID/Buttom ie: spotify, youtube, soundcloud
@@ -18,6 +14,7 @@ import * as StyleConstants from '@StyleConstants'
     id: string (social name) ie: 'spotify'
     centerButton: bool
 */
+// sillyonly - "#collection views are amazing until you implement your own layout!" (03/04/20)
 const SocialAuthButton = ({ platform, signInUser, platformSignInAction }) => {
     const startAuthAction = async () => {
         try {
@@ -26,34 +23,6 @@ const SocialAuthButton = ({ platform, signInUser, platformSignInAction }) => {
 
             // Run Firebase Sign in flow get custom token for user
             signInUser()
-
-            Navigation.push(NavigationConstants.STACK_ID, {
-                component: {
-                    name: NavigationConstants.PLAYLIST_NAV_NAME,
-                    options: {
-                        topBar: {
-                            visible: true,
-                            barStyle: 'default',
-                            // Since this is the root view after auth, hide back button
-                            // What we should be doing is setting this as the root if signed in
-                            backButton: {
-                                visible: false,
-                            },
-                            background: {
-                                color: StyleConstants.TOP_BAR_BACKGROUND_COLOR,
-                                blur: false,
-                            },
-                            title: {
-                                text: 'Playlists',
-                                fontSize: StyleConstants.TOP_BAR_TEXT_SIZE,
-                                color: StyleConstants.TOP_BAR_TEXT_COLOR,
-                                // iOS Only
-                                fontWeight: 'medium',
-                            },
-                        },
-                    },
-                },
-            })
         } catch (error) {
             console.warn(error)
         }

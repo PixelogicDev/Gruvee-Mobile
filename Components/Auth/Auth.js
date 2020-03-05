@@ -119,6 +119,7 @@ const styles = StyleSheet.create({
         paddingBottom: 25,
         paddingLeft: 25,
         paddingRight: 25,
+        backgroundColor: StyleConstants.BASE_BACKGROUND_COLOR,
     },
     SectionTitle: {
         fontSize: StyleConstants.LARGE_TITLE_SIZE_iOS,

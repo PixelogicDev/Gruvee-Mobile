@@ -10,19 +10,15 @@
 // Firebase
 import { firebase } from '@react-native-firebase/auth'
 import * as StyleConstants from '@StyleConstants'
+import * as NavigationConstants from '@NavigationConstants'
 // Redux
 import { SignInUser } from 'Gruvee/Redux/Actions/User/UserActions'
 import React, { useEffect, useState } from 'react'
-import { SafeAreaView, StatusBar, StyleSheet } from 'react-native'
+import { StatusBar } from 'react-native'
 import { connect } from 'react-redux'
-import Auth from './Components/Auth/Auth'
-
-const styles = StyleSheet.create({
-    body: {
-        height: '100%',
-        backgroundColor: StyleConstants.BASE_BACKGROUND_COLOR,
-    },
-})
+import Auth from 'Gruvee/Components/Auth/Auth'
+import PlaylistListView from 'Gruvee/Components/Playlist/PlaylistListView'
+import { Navigation } from 'react-native-navigation'
 
 const App = ({ signInUser }) => {
     const [currentUser, setCurrentUser] = useState(null)
@@ -54,17 +50,15 @@ const App = ({ signInUser }) => {
     return (
         <>
             <StatusBar barStyle="light-content" />
-            <SafeAreaView style={styles.body}>
-                {isSignedIn(currentUser)}
-            </SafeAreaView>
+            {isSignedIn(currentUser)}
         </>
     )
 }
 
 // Helpers
+// pheonix_d123 - "Does this look propr?" (03/04/20)
 const isSignedIn = currentUser => {
-    console.log('CurrentUser Propr: ', currentUser)
-    return currentUser !== null ? null : <Auth />
+    return currentUser !== null ? <PlaylistListView /> : <Auth />
 }
 
 // Redux Mappers
