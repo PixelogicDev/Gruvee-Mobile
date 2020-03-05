@@ -9,8 +9,6 @@
 
 // Firebase
 import { firebase } from '@react-native-firebase/auth'
-import * as StyleConstants from '@StyleConstants'
-import * as NavigationConstants from '@NavigationConstants'
 // Redux
 import { SignInUser } from 'Gruvee/Redux/Actions/User/UserActions'
 import React, { useEffect, useState } from 'react'
@@ -18,7 +16,6 @@ import { StatusBar } from 'react-native'
 import { connect } from 'react-redux'
 import Auth from 'Gruvee/Components/Auth/Auth'
 import PlaylistListView from 'Gruvee/Components/Playlist/PlaylistListView'
-import { Navigation } from 'react-native-navigation'
 
 const App = ({ signInUser }) => {
     const [currentUser, setCurrentUser] = useState(null)
@@ -27,6 +24,7 @@ const App = ({ signInUser }) => {
         // Firebae Authentication Handler
         const authStatus = firebase.auth().onAuthStateChanged(user => {
             if (user !== null) {
+                console.log('We have a signed in FB user')
                 // What should do with the JWT (ie how often does it need to be refreshed?)
                 // We have a user, lets grab our stuff from DB
                 setCurrentUser(user)

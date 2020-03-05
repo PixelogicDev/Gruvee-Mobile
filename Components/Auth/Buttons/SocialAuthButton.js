@@ -20,9 +20,6 @@ const SocialAuthButton = ({ platform, signInUser, platformSignInAction }) => {
         try {
             // Run platform specific auth flow
             platformSignInAction()
-
-            // Run Firebase Sign in flow get custom token for user
-            signInUser()
         } catch (error) {
             console.warn(error)
         }
