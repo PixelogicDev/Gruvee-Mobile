@@ -5,25 +5,18 @@
 // dra031cko - "android > ios" (02/19/20)
 // sillyonly - "SOOOOOO what happens when silly have 1800?!" (02/19/20)
 
+import { Navigation } from 'react-native-navigation'
+import * as NavigationConstants from '@NavigationConstants'
 // Firebase
 import { firebase } from '@react-native-firebase/auth'
 // Styles
 import * as StyleConstants from '@StyleConstants'
-// Firestore
-import {
-    CreateNewUserDocument,
-    CreateSocialPlatformDocument,
-} from 'Gruvee/Firestore/UserActions'
 import { SetInitialUserData } from 'Gruvee/Redux/Actions/User/UserActions'
-import {
-    AuthorizeUser,
-    GetCustomFirebaseToken,
-} from 'Gruvee/Service/Spotify/Endpoints'
 import React, { useEffect } from 'react'
 import { Linking, StyleSheet, Text, View } from 'react-native'
 // Redux
 import { connect } from 'react-redux'
-import { HandleSpotifyAuth } from './Actions/SpotifyActions'
+import { HandleSpotifyDeepLink } from './Actions/SpotifyActions'
 import SocialButtons from './Buttons'
 
 // no_neon_one - "Btw I Use Arch!" (02/17/20)
@@ -50,41 +43,31 @@ const Auth = ({ setInitialUserData }) => {
 
     // Helpers
     const handleOpenUrl = async event => {
-        // Check to see what platform this is coming from
-        if (event.url.includes('spotify_auth')) {
-            // Gets API token object
-            // HumansNotFish - "Team Yaya. Gotta have faith nerds."(02/21/20)
-            try {
-                const tokenObj = await HandleSpotifyAuth(event.url)
+        try {
+            let newUserObj = {}
 
-                // Authorize Spotify User and bring back user doc from db if it exists
-                let newUser = await AuthorizeUser(tokenObj.access_token)
-
-                // LilCazza - "It was at this moment I knew I had fucked up" (03/03/20)
-                if (!newUser.userExists) {
-                    // At this point write user to DB
-                    console.log('Time to create a new user...')
-
-                    // Create and set social platform object
-                    const newPlatform = await CreateSocialPlatformDocument(
-                        newUser,
-                        tokenObj
-                    )
-
-                    // Create and set user object
-                    newUser = await CreateNewUserDocument(newPlatform)
-                }
-
-                // Get JWT
-                const jwt = await GetCustomFirebaseToken(newUser.id)
-                setInitialUserData(newUser, jwt.token)
-
-                // Sign In User
-                await firebase.auth().signInWithCustomToken(jwt.token)
-            } catch (error) {
-                // Handle this error?
-                console.warn(error)
+            // Check to see what platform this is coming from
+            if (event.url.includes('spotify_auth')) {
+                // Gets API token object
+                // HumansNotFish - "Team Yaya. Gotta have faith nerds."(02/21/20)
+                newUserObj = await HandleSpotifyDeepLink(event)
             }
+
+            // After auth, we should always set initial user data and sign via firebase
+            setInitialUserData(newUserObj.user, newUserObj.jwt)
+
+            const userCreds = await firebase
+                .auth()
+                .signInWithCustomToken(newUserObj.jwt)
+            if (userCreds !== null) {
+                console.log('Have user creds, pushing to playlists view.')
+
+                // Navigate to Playlists View
+                pushToPlaylistsList()
+            }
+        } catch (error) {
+            // TODO: Handle Error
+            console.warn(error)
         }
     }
 
@@ -100,6 +83,21 @@ const Auth = ({ setInitialUserData }) => {
             <View style={styles.ButtonContainer}>{SocialButtons}</View>
         </View>
     )
+}
+
+// Helpers
+const pushToPlaylistsList = () => {
+    Navigation.push(NavigationConstants.STACK_ID, {
+        component: {
+            name: NavigationConstants.PLAYLIST_NAV_NAME,
+            // LilCazza - 'God Save the Queen of Australia' (03/05/20)
+            options: {
+                topBar: {
+                    visible: false,
+                },
+            },
+        },
+    })
 }
 
 // Styles

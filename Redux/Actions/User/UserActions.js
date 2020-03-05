@@ -24,9 +24,7 @@ export const SignInUser = userId => {
         // We then need to get data for user from Firestore
         // Then should check JWT refresh stuff
         const user = await GetUserDocument(userId)
-
         console.log('SignInUser Redux Action: ', user)
-
         dispatch(signInUser(user))
     }
 }

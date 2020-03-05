@@ -1,8 +1,17 @@
 // Tingbangds - "Tingbang was here <><" (02/18/20)
-import { Linking } from 'react-native'
-
+// MrDemonWolf - "Союз нерушимый республик свободных Сплотила навеки Великая Русь. Да здравствует созданный волей народов Единый, могучий Советский Союз!" (03/05/20)
+// Firestore
+import {
+    CreateNewUserDocument,
+    CreateSocialPlatformDocument,
+} from 'Gruvee/Firestore/UserActions'
 import { GET_AUTHORIZATION_CODE } from 'Gruvee/Service/Spotify/EndpointConstants'
-import { GetApiToken } from 'Gruvee/Service/Spotify/Endpoints'
+import {
+    AuthorizeUser,
+    GetApiToken,
+    GetCustomFirebaseToken,
+} from 'Gruvee/Service/Spotify/Endpoints'
+import { Linking } from 'react-native'
 import SpotifyCreds from '../Creds/SpotifyCreds'
 
 export const HandleSpotifyAuth = async url => {
@@ -50,6 +59,38 @@ export const InitAuthorizationCodeFlow = async () => {
             )
         )
     } catch (err) {
+        // TODO: Handle Warnings
         console.warn(err)
+    }
+}
+
+export const HandleSpotifyDeepLink = async event => {
+    try {
+        const tokenObj = await HandleSpotifyAuth(event.url)
+
+        // Authorize Spotify User and bring back user doc from db if it exists
+        let newUser = await AuthorizeUser(tokenObj.access_token)
+
+        // LilCazza - "It was at this moment I knew I had fucked up" (03/03/20)
+        if (!newUser.userExists) {
+            // At this point write user to DB
+            console.log('Time to create a new user...')
+
+            // Create and set social platform object
+            const newPlatform = await CreateSocialPlatformDocument(
+                newUser,
+                tokenObj
+            )
+
+            // Create and set user object
+            newUser = await CreateNewUserDocument(newPlatform)
+        }
+
+        // Get JWT
+        const jwt = await GetCustomFirebaseToken(newUser.id)
+        return Promise.resolve({ user: newUser, jwt: jwt.token })
+    } catch (error) {
+        // TODO: Handle Error
+        return Promise.reject(error)
     }
 }
