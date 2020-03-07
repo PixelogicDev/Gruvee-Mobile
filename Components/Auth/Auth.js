@@ -5,8 +5,6 @@
 // dra031cko - "android > ios" (02/19/20)
 // sillyonly - "SOOOOOO what happens when silly have 1800?!" (02/19/20)
 
-import { Navigation } from 'react-native-navigation'
-import * as NavigationConstants from '@NavigationConstants'
 // Firebase
 import { firebase } from '@react-native-firebase/auth'
 // Styles

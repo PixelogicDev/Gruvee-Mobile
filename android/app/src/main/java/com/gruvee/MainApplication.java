@@ -17,36 +17,36 @@ import java.util.List;
 
 public class MainApplication extends NavigationApplication {
 
-  @Override
-  protected ReactGateway createReactGateway() {
-    ReactNativeHost host = new NavigationReactNativeHost(this, isDebug(), createAdditionalReactPackages()) {
-      @Override
-      protected String getJSMainModuleName() {
-        return "index";
-      }
-    };
+    @Override
+    protected ReactGateway createReactGateway() {
+        ReactNativeHost host = new NavigationReactNativeHost(this, isDebug(), createAdditionalReactPackages()) {
+            @Override
+            protected String getJSMainModuleName() {
+                return "index";
+            }
+        };
 
-    return new ReactGateway(this, isDebug(), host);
-  }
+        return new ReactGateway(this, isDebug(), host);
+    }
 
-  @Override
-  public boolean isDebug() {
-    return BuildConfig.DEBUG;
-  }
+    @Override
+    public boolean isDebug() {
+        return BuildConfig.DEBUG;
+    }
 
-  protected List<ReactPackage> getPackages() {
-    // Add additional packages you require here
-    // No need to add RnnPackage and MainReactPackage
-    return Arrays.<ReactPackage>asList(
-      new ReactNativeFirebaseAppPackage(),
-      new ReactNativeFirebaseFirestorePackage(),
-      new ReactNativeFirebaseAuthPackage(),
-      new AsyncStoragePackage()
-    );
-  }
+    protected List<ReactPackage> getPackages() {
+        // Add additional packages you require here
+        // No need to add RnnPackage and MainReactPackage
+        return Arrays.<ReactPackage>asList(
+                new ReactNativeFirebaseAppPackage(),
+                new ReactNativeFirebaseFirestorePackage(),
+                new ReactNativeFirebaseAuthPackage(),
+                new AsyncStoragePackage()
+        );
+    }
 
-  @Override
-  public List<ReactPackage> createAdditionalReactPackages() {
-    return getPackages();
-  }
+    @Override
+    public List<ReactPackage> createAdditionalReactPackages() {
+        return getPackages();
+    }
 }
