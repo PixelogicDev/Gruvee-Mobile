@@ -55,7 +55,7 @@ export const CreateSocialPlatformDocument = async (platformData, tokenObj) => {
 
     // Write to DB
     try {
-        await firestore()
+        firestore()
             .collection('social_platforms')
             .doc(newSocialPlatform.id)
             .set(newSocialPlatform)

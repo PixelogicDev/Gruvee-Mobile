@@ -4,13 +4,14 @@
     "private": true,
     "scripts": {
         "start": "react-native start",
-        "android-start": "cd ./android && ./gradlew app:assembleDebug && ./gradlew installDebug && npm run android",
+        "android-start": "cd ./android && ./gradlew app:assembleDebug && ./gradlew installDebug && npm run android --clearCache",
         "android": "react-native run-android",
         "ios-start": "react-native run-ios --simulator=\"iPhone 11 Pro\"",
         "test": "jest"
     },
     "dependencies": {
         "@invertase/react-native-apple-authentication": "^0.1.1",
+        "@react-native-community/async-storage": "^1.8.1",
         "@react-native-firebase/app": "^6.3.4",
         "@react-native-firebase/auth": "^6.3.4",
         "@react-native-firebase/firestore": "6.3.4",

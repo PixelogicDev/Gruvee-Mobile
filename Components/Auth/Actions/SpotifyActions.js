@@ -14,23 +14,16 @@ import {
 import { Linking } from 'react-native'
 import SpotifyCreds from '../Creds/SpotifyCreds'
 
-export const HandleSpotifyAuth = async url => {
-    // Get code
+export const HandleSpotifyAuth = url => {
     // pheonix_d123 - "Must remember that strings use the full length!" (02/18/20)
     const code = url.substring(url.indexOf('=') + 1, url.length)
-    let result
 
     if (code !== -1) {
-        // Time to get API Token
-        try {
-            const token = await GetApiToken(code)
-            result = Promise.resolve(token)
-        } catch (error) {
-            result = Promise.reject(error.response.data)
-        }
+        // This will return the promise from the network call
+        return GetApiToken(code)
     }
 
-    return result
+    return Promise.reject(new Error('URL substring did not include code'))
 }
 
 export const InitAuthorizationCodeFlow = async () => {
@@ -66,29 +59,35 @@ export const InitAuthorizationCodeFlow = async () => {
 
 export const HandleSpotifyDeepLink = async event => {
     try {
+        // Wait on this token before continuing
         const tokenObj = await HandleSpotifyAuth(event.url)
+        console.log('Resolved with tokenObj: ', tokenObj)
 
         // Authorize Spotify User and bring back user doc from db if it exists
-        let newUser = await AuthorizeUser(tokenObj.access_token)
+        const newUserResponse = await AuthorizeUser(tokenObj.data.access_token)
+        console.log('Got User: ', newUserResponse.data)
 
         // LilCazza - "It was at this moment I knew I had fucked up" (03/03/20)
-        if (!newUser.userExists) {
+        if (!newUserResponse.data.userExists) {
             // At this point write user to DB
             console.log('Time to create a new user...')
 
             // Create and set social platform object
             const newPlatform = await CreateSocialPlatformDocument(
-                newUser,
+                newUserResponse.data,
                 tokenObj
             )
 
             // Create and set user object
-            newUser = await CreateNewUserDocument(newPlatform)
+            newUserResponse.data = await CreateNewUserDocument(newPlatform)
         }
 
         // Get JWT
-        const jwt = await GetCustomFirebaseToken(newUser.id)
-        return Promise.resolve({ user: newUser, jwt: jwt.token })
+        const response = await GetCustomFirebaseToken(newUserResponse.data.id)
+        return Promise.resolve({
+            user: newUserResponse.data,
+            jwt: response.data.token,
+        })
     } catch (error) {
         // TODO: Handle Error
         return Promise.reject(error)
