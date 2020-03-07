@@ -37,6 +37,7 @@ target 'Gruvee' do
   pod 'RNFBFirestore', :path => '../node_modules/@react-native-firebase/firestore'
   pod 'RNAppleAuthentication', :path => '../node_modules/@invertase/react-native-apple-authentication' 
 
+
   target 'GruveeTests' do
     inherit! :search_paths
     # Pods for testing
