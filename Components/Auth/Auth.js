@@ -107,9 +107,9 @@ const Auth = ({ setInitialUserData }) => {
 const styles = StyleSheet.create({
     ButtonContainer: {
         display: 'flex',
-        justifyContent: 'space-around',
+        justifyContent: 'space-between',
         alignItems: 'center',
-        height: '20%',
+        height: 'auto',
     },
     Container: {
         display: 'flex',
