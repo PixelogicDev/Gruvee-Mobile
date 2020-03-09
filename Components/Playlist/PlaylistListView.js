@@ -24,7 +24,6 @@ const PlaylistListView = ({ fetchPlaylists, playlists }) => {
     const renderItem = ({ item }) => (
         <SwipeablePlaylistItem playlistData={item} />
     )
-
     useEffect(() => {
         fetchPlaylists()
 
@@ -110,7 +109,6 @@ const PlaylistListView = ({ fetchPlaylists, playlists }) => {
                 keyExtractor={keyExtractor}
                 renderItem={renderItem}
             />
-
             {/* MADPROPZ poopuhchoo */}
             <View style={styles.ButtonContainer}>
                 <AddItemButton
@@ -156,7 +154,33 @@ const mapDispatchToProps = dispatch => ({
     fetchPlaylists: () => dispatch(FetchPlaylists()),
 })
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(PlaylistListView)
+export default connect(mapStateToProps, mapDispatchToProps)(PlaylistListView)
+
+/* 
+Navigation.push(NavigationConstants.STACK_ID, {
+                component: {
+                    name: NavigationConstants.PLAYLIST_NAV_NAME,
+                    options: {
+                        topBar: {
+                            visible: true,
+                            barStyle: 'default',
+                            // Since this is the root view after auth, hide back button
+                            // What we should be doing is setting this as the root if signed in
+                            backButton: {
+                                visible: false,
+                            },
+                            background: {
+                                color: StyleConstants.TOP_BAR_BACKGROUND_COLOR,
+                                blur: false,
+                            },
+                            title: {
+                                text: 'Playlists',
+                                fontSize: StyleConstants.TOP_BAR_TEXT_SIZE,
+                                color: StyleConstants.TOP_BAR_TEXT_COLOR,
+                                // iOS Only
+                                fontWeight: 'medium',
+                            },
+                        },
+                    },
+                },
+            }) */

@@ -1,4 +1,4 @@
-<h1 align="center">Grüvee</h1>
+<h1 align="center">Grüvee-Mobile</h1>
 <p align="center">
   <strong>Let's get Grüvee with a new social, collaborative playlist for iPhone and Android</strong>
 </p>
@@ -8,7 +8,7 @@
         <img src="https://img.shields.io/discord/391635862959554561?label=Discord" alt="Discord members online" />
     </a>
     <a href="https://github.com/pixelogicdev/gruvee">
-        <img alt="GitHub issues" src="https://img.shields.io/github/issues/pixelogicdev/gruvee">
+        <img alt="GitHub issues" src="https://img.shields.io/github/issues/pixelogicdev/gruvee-mobile">
     </a>
     <a href="#-how-to-contribute">
         <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs welcome!" />
@@ -36,12 +36,12 @@ If you are interested in becoming a member of the team check out the **[Pixelogi
 
 ## Tech Stack
 
-| Stack        | Tech                                                              |                                                                |
-| ------------ | :---------------------------------------------------------------- | :------------------------------------------------------------- |
-| IDE          | [Visual Studio Code](https://code.visualstudio.com/)              | You can use your preferred IDE but this is the one we like 🙃  |
-| Frontend     | [React Native 0.60](LinkToReactNative0.60)                        | Utilising Javascript to develop this cross platform mobile app |
-| Backend      | [Firebase (Repo)](https://github.com/PixelogicDev/Gruvee-Backend) | Serverless Functions in Firebase using GoLang                  |
-| Design :art: | [Sketch](https://www.sketch.com/)                                 | The design files can be found [here](/Design)                  |
+| Stack        | Tech                                                                                     |                                                                |
+| ------------ | :--------------------------------------------------------------------------------------- | :------------------------------------------------------------- |
+| IDE          | [Visual Studio Code](https://code.visualstudio.com/)                                     | You can use your preferred IDE but this is the one we like 🙃  |
+| Frontend     | [React Native 0.60]([LinkToReactNative0.60](https://www.npmjs.com/package/react-native)) | Utilising Javascript to develop this cross platform mobile app |
+| Backend      | [Firebase (Repo)](https://github.com/PixelogicDev/Gruvee-Backend)                        | Serverless Functions in Firebase using GoLang                  |
+| Design :art: | [Sketch](https://www.sketch.com/)                                                        | The design files can be found [here](/Design)                  |
 
 > ALL of these sections are open for contributions and are highly encouraged!
 

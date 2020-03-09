@@ -1,52 +1,52 @@
 package com.gruvee;
 
-import android.app.Application;
-import android.util.Log;
-
-import com.facebook.react.PackageList;
-import com.facebook.hermes.reactexecutor.HermesExecutorFactory;
-import com.facebook.react.bridge.JavaScriptExecutorFactory;
-import com.facebook.react.ReactApplication;
-import com.facebook.soloader.SoLoader;
-
 import java.util.Arrays;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.reactnativenavigation.NavigationApplication;
 import com.reactnativenavigation.react.NavigationReactNativeHost;
 import com.reactnativenavigation.react.ReactGateway;
+import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
+
+// Firebase
+import io.invertase.firebase.app.ReactNativeFirebaseAppPackage;
+import io.invertase.firebase.firestore.ReactNativeFirebaseFirestorePackage;
+import io.invertase.firebase.auth.ReactNativeFirebaseAuthPackage;
 
 import java.util.List;
 
 public class MainApplication extends NavigationApplication {
 
-  @Override
-  protected ReactGateway createReactGateway() {
-    ReactNativeHost host = new NavigationReactNativeHost(this, isDebug(), createAdditionalReactPackages()) {
-      @Override
-      protected String getJSMainModuleName() {
-        return "index";
-      }
-    };
+    @Override
+    protected ReactGateway createReactGateway() {
+        ReactNativeHost host = new NavigationReactNativeHost(this, isDebug(), createAdditionalReactPackages()) {
+            @Override
+            protected String getJSMainModuleName() {
+                return "index";
+            }
+        };
 
-    return new ReactGateway(this, isDebug(), host);
-  }
+        return new ReactGateway(this, isDebug(), host);
+    }
 
-  @Override
-  public boolean isDebug() {
-    return BuildConfig.DEBUG;
-  }
+    @Override
+    public boolean isDebug() {
+        return BuildConfig.DEBUG;
+    }
 
-  protected List<ReactPackage> getPackages() {
-    // Add additional packages you require here
-    // No need to add RnnPackage and MainReactPackage
-    return Arrays.<ReactPackage>asList(
-            // eg. new VectorIconsPackage()
-    );
-  }
+    protected List<ReactPackage> getPackages() {
+        // Add additional packages you require here
+        // No need to add RnnPackage and MainReactPackage
+        return Arrays.<ReactPackage>asList(
+                new ReactNativeFirebaseAppPackage(),
+                new ReactNativeFirebaseFirestorePackage(),
+                new ReactNativeFirebaseAuthPackage(),
+                new AsyncStoragePackage()
+        );
+    }
 
-  @Override
-  public List<ReactPackage> createAdditionalReactPackages() {
-    return getPackages();
-  }
+    @Override
+    public List<ReactPackage> createAdditionalReactPackages() {
+        return getPackages();
+    }
 }

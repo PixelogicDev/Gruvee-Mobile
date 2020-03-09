@@ -1,4 +1,6 @@
+# ywnklme - "(╯°□°)╯︵ ┻━┻"
 platform :ios, '9.0'
+
 require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
 
 target 'Gruvee' do
@@ -28,7 +30,13 @@ target 'Gruvee' do
   pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
   pod 'ReactNativeNavigation', :podspec => '../node_modules/react-native-navigation/ReactNativeNavigation.podspec'
-  pod 'RNFBApp', :path => '../node_modules/@react-native-firebase/app' 
+  
+  # Firebase
+  pod 'RNFBApp', :path => '../node_modules/@react-native-firebase/app'
+  pod 'RNFBAuth', :path => '../node_modules/@react-native-firebase/auth'
+  pod 'RNFBFirestore', :path => '../node_modules/@react-native-firebase/firestore'
+  pod 'RNAppleAuthentication', :path => '../node_modules/@invertase/react-native-apple-authentication' 
+
 
   target 'GruveeTests' do
     inherit! :search_paths

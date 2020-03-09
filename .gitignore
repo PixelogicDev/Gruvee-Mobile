@@ -56,4 +56,13 @@ buck-out/
 *.jsbundle
 
 # CocoaPods
-/ios/Pods/
+ios/Pods/
+
+# Creds
+Components/Auth/Creds/*
+
+# VSCode
+**/.vscode/*
+
+# ENV
+.env
