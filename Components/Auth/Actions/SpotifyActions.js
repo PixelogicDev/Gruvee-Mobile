@@ -67,6 +67,10 @@ export const HandleSpotifyDeepLink = async event => {
         const newUserResponse = await AuthorizeUser(tokenObj.data.access_token)
         console.log('Got User: ', newUserResponse.data)
 
+        // Get JWT
+        // We need to be signed in, in order for us to write to our db
+        const response = await GetCustomFirebaseToken(newUserResponse.data.id)
+
         // LilCazza - "It was at this moment I knew I had fucked up" (03/03/20)
         if (!newUserResponse.data.userExists) {
             // At this point write user to DB
@@ -82,8 +86,6 @@ export const HandleSpotifyDeepLink = async event => {
             newUserResponse.data = await CreateNewUserDocument(newPlatform)
         }
 
-        // Get JWT
-        const response = await GetCustomFirebaseToken(newUserResponse.data.id)
         return Promise.resolve({
             user: newUserResponse.data,
             jwt: response.data.token,
