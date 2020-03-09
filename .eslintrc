@@ -29,9 +29,9 @@
         "import/resolver": {
             "alias": {
                 "map": [
-                    ["@StyleConstants", "./StyleConstants.js"],
-                    ["@NavigationConstants", "./NavigationConstants.js"],
-                    ["Gruvee", "./"]
+                    ["@StyleConstants", "./app/config/styles.js"],
+                    ["@NavigationConstants", "./app/config/navigation.js"],
+                    ["Gruvee", "./app"]
                 ],
                 "extensions": [".ts", ".js", ".jsx", ".json"]
             }

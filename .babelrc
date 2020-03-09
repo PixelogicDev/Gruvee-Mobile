@@ -9,10 +9,9 @@
             {
                 "root": ["./"],
                 "alias": {
-                    "@StyleConstants": "./StyleConstants.js",
-                    "@NavigationConstants": "./NavigationConstants.js",
-                    "@Mock": "./Mock",
-                    "Gruvee/*": "./*"
+                    "@StyleConstants": "./app/config/styles.js",
+                    "@NavigationConstants": "./app/config/navigation.js",
+                    "Gruvee": "./app"
                 }
             }
         ]
