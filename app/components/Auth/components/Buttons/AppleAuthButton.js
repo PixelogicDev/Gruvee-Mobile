@@ -5,7 +5,7 @@ import appleAuth, {
     AppleAuthRequestScope,
     AppleAuthCredentialState,
 } from '@invertase/react-native-apple-authentication'
-import { ApplePlatform } from 'Gruvee/SocialConstants'
+import { ApplePlatform } from 'Gruvee/config/socials'
 import SocialAuthButton from './SocialAuthButton'
 
 const AppleAuthButton = () => {

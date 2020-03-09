@@ -4,15 +4,15 @@
 import {
     CreateNewUserDocument,
     CreateSocialPlatformDocument,
-} from 'Gruvee/Firestore/UserActions'
-import { GET_AUTHORIZATION_CODE } from 'Gruvee/Service/Spotify/EndpointConstants'
+} from 'Gruvee/firestore/userActions'
+import { GET_AUTHORIZATION_CODE } from 'Gruvee/service/spotify/endpointConstants'
 import {
     AuthorizeUser,
     GetApiToken,
     GetCustomFirebaseToken,
-} from 'Gruvee/Service/Spotify/Endpoints'
+} from 'Gruvee/service/spotify/endpoints'
 import { Linking } from 'react-native'
-import SpotifyCreds from '../Creds/SpotifyCreds'
+import Creds from 'Gruvee/config/creds'
 
 export const HandleSpotifyAuth = url => {
     // pheonix_d123 - "Must remember that strings use the full length!" (02/18/20)
@@ -46,9 +46,9 @@ export const InitAuthorizationCodeFlow = async () => {
         // Will open our browser to Spotify sign in
         await Linking.openURL(
             GET_AUTHORIZATION_CODE(
-                SpotifyCreds.clientId,
+                Creds.Spotify.clientId,
                 scopes,
-                SpotifyCreds.redirectUri
+                Creds.Spotify.redirectUri
             )
         )
     } catch (err) {

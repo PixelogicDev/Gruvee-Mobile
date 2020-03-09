@@ -7,9 +7,9 @@
 // vezparsoftware - "PLZ CONTRIBUTE THX ;)" (02/19/20)
 
 import React from 'react'
-import { SpotifyPlatform } from 'Gruvee/SocialConstants'
+import { SpotifyPlatform } from 'Gruvee/config/socials'
 import SocialAuthButton from './SocialAuthButton'
-import { InitAuthorizationCodeFlow } from '../Actions/SpotifyActions'
+import { InitAuthorizationCodeFlow } from './actions/SpotifyActions'
 
 const SpotifyAuthButton = () => {
     const signInWithSpotifyAction = () => {

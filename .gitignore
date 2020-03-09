@@ -58,9 +58,6 @@ buck-out/
 # CocoaPods
 ios/Pods/
 
-# Creds
-Components/Auth/Creds/*
-
 # VSCode
 **/.vscode/*
 

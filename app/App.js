@@ -10,12 +10,13 @@
 // Firebase
 import { firebase } from '@react-native-firebase/auth'
 // Redux
-import { SignInUser } from 'Gruvee/Redux/Actions/User/UserActions'
+import { SignInUser } from 'Gruvee/redux/actions/user/UserActions'
 import React, { useEffect, useState } from 'react'
 import { StatusBar } from 'react-native'
 import { connect } from 'react-redux'
-import Auth from 'Gruvee/Components/Auth/Auth'
-import PlaylistListView from 'Gruvee/Components/Playlist/PlaylistListView'
+import Auth from 'Gruvee/components/Auth'
+import PlaylistListView from 'Gruvee/components/PlaylistListView'
+// InukApp - "Every day is the day before I start at the gym" (03/09/20)
 
 const App = ({ signInUser }) => {
     const [currentUser, setCurrentUser] = useState(null)

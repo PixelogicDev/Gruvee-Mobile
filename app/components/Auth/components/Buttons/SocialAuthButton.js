@@ -1,13 +1,9 @@
+import * as StyleConstants from '@StyleConstants'
+import { SignInUser } from 'Gruvee/redux/actions/user/UserActions'
 import React from 'react'
-
+import { Image, StyleSheet, Text, TouchableOpacity } from 'react-native'
 // Redux
 import { connect } from 'react-redux'
-import { SignInUser } from 'Gruvee/redux/actions/user/UserActions'
-
-import { Navigation } from 'react-native-navigation'
-import { Text, StyleSheet, TouchableOpacity, Image } from 'react-native'
-import * as NavigationConstants from 'Gruvee/config/navigation'
-import * as StyleConstants from 'Gruvee/config/styles'
 
 /*
     ButtonID/Buttom ie: spotify, youtube, soundcloud
@@ -18,38 +14,15 @@ import * as StyleConstants from 'Gruvee/config/styles'
     id: string (social name) ie: 'spotify'
     centerButton: bool
 */
-const SocialAuthButton = ({ platform, signInUser }) => {
-    const navigateToPlaylists = () => {
-        // Sign In user - Currently just mock user...
-        signInUser()
-
-        Navigation.push(NavigationConstants.STACK_ID, {
-            component: {
-                name: NavigationConstants.PLAYLIST_NAV_NAME,
-                options: {
-                    topBar: {
-                        visible: true,
-                        barStyle: 'default',
-                        // Since this is the root view after auth, hide back button
-                        // What we should be doing is setting this as the root if signed in
-                        backButton: {
-                            visible: false,
-                        },
-                        background: {
-                            color: StyleConstants.TOP_BAR_BACKGROUND_COLOR,
-                            blur: false,
-                        },
-                        title: {
-                            text: 'Playlists',
-                            fontSize: StyleConstants.TOP_BAR_TEXT_SIZE,
-                            color: StyleConstants.TOP_BAR_TEXT_COLOR,
-                            // iOS Only
-                            fontWeight: 'medium',
-                        },
-                    },
-                },
-            },
-        })
+// sillyonly - "#collection views are amazing until you implement your own layout!" (03/04/20)
+const SocialAuthButton = ({ platform, signInUser, platformSignInAction }) => {
+    const startAuthAction = async () => {
+        try {
+            // Run platform specific auth flow
+            platformSignInAction()
+        } catch (error) {
+            console.warn(error)
+        }
     }
 
     let loginText = `Log In With ${platform.friendlyName}`
@@ -59,7 +32,7 @@ const SocialAuthButton = ({ platform, signInUser }) => {
 
     return (
         <TouchableOpacity
-            onPress={navigateToPlaylists}
+            onPress={startAuthAction}
             style={styles.Button(platform)}
         >
             <Image
@@ -88,7 +61,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         minWidth: 280,
         width: '70%',
-        margin: 5,
         borderRadius: StyleConstants.BASE_BORDER_RADIUS,
         backgroundColor: platform.color.primary,
     }),
@@ -107,7 +79,7 @@ const styles = StyleSheet.create({
 
 // Redux Mappers
 const mapDispatchToProps = dispatch => ({
-    signInUser: () => dispatch(SignInUser()),
+    signInUser: userId => dispatch(SignInUser(userId)),
 })
 
 export default connect(null, mapDispatchToProps)(SocialAuthButton)

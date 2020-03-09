@@ -2,10 +2,10 @@
 // This will house our logic for our Spotify Endpoints
 import axios from 'axios'
 import { Buffer } from 'buffer'
-import SpotifyCreds from 'Gruvee/Components/Auth/Creds/SpotifyCreds'
+import Creds from 'Gruvee/config/creds'
 // Env Variables
 import { ENVIRONMENT } from 'react-native-dotenv'
-import { GET_API_TOKEN } from './EndpointConstants'
+import { GET_API_TOKEN } from './endpointConstants'
 
 const baseHostName =
     ENVIRONMENT === 'PROD'
@@ -15,13 +15,13 @@ const baseHostName =
 // POST: API Token Request
 export const GetApiToken = code => {
     const credsB64 = Buffer.from(
-        `${SpotifyCreds.clientId}:${SpotifyCreds.clientSecret}`
+        `${Creds.Spotify.clientId}:${Creds.Spotify.clientSecret}`
     ).toString('base64')
 
     const params = new URLSearchParams()
     params.append('grant_type', 'authorization_code')
     params.append('code', code)
-    params.append('redirect_uri', SpotifyCreds.redirectUri)
+    params.append('redirect_uri', Creds.Spotify.redirectUri)
 
     const headers = {
         Authorization: `Basic ${credsB64}`,

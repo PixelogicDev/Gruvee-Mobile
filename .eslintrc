@@ -15,11 +15,7 @@
             "jsx": true
         }
     },
-    "plugins": [
-        "react",
-        "react-native",
-        "module-resolver"
-    ],
+    "plugins": ["react", "react-native", "module-resolver"],
     "rules": {
         "react/jsx-filename-extension": 0,
         "react/prop-types": 0,
@@ -33,17 +29,11 @@
         "import/resolver": {
             "alias": {
                 "map": [
-                    [
-                        "Gruvee",
-                        "./app"
-                    ]
+                    ["@StyleConstants", "./app/config/styles.js"],
+                    ["@NavigationConstants", "./app/config/navigation.js"],
+                    ["Gruvee", "./app"]
                 ],
-                "extensions": [
-                    ".ts",
-                    ".js",
-                    ".jsx",
-                    ".json"
-                ]
+                "extensions": [".ts", ".js", ".jsx", ".json"]
             }
         }
     }
