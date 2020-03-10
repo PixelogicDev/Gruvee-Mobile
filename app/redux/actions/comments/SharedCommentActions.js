@@ -1,7 +1,4 @@
-import {
-    ADD_COMMENT,
-    BULK_COMMENTS_DELETE,
-} from 'Gruvee/redux/actions/ActionsType'
+import { ADD_COMMENT, BULK_COMMENTS_DELETE } from 'Gruvee/redux/actions/ActionsType'
 
 import { AddSongComment } from 'Gruvee/redux/actions/playlists/SharedPlaylistActions'
 

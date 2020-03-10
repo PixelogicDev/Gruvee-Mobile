@@ -24,9 +24,7 @@ export default StyleSheet.create({
     ButtonText: disabled => ({
         width: '100%',
         textAlign: 'center',
-        color: disabled
-            ? StyleConstants.INPUT_BORDER_BOTTOM_COLOR
-            : StyleConstants.BASE_FONT_COLOR,
+        color: disabled ? StyleConstants.INPUT_BORDER_BOTTOM_COLOR : StyleConstants.BASE_FONT_COLOR,
         fontWeight: StyleConstants.SEMIBOLD_WEIGHT,
         fontSize: StyleConstants.BUTTON_TEXT_SIZE_iOS,
     }),

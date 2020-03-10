@@ -65,8 +65,7 @@ export const DARK_BACKGROUND_COLOR = '#0D0B0C'
 export const SONG_LIST_COMMENT_BAR_TEXT_SIZE_iOS = 16
 
 // Song List Comments Section
-export const SONG_LIST_COMMENT_SECTION_HEIGHT =
-    Dimensions.get('window').height * 0.4
+export const SONG_LIST_COMMENT_SECTION_HEIGHT = Dimensions.get('window').height * 0.4
 
 // Comment Item
 export const COMMENT_ITEM_MIN_HEIGHT = 75

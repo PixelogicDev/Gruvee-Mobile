@@ -1,10 +1,7 @@
 // Tingbangds - "Tingbang was here <><" (02/18/20)
 // MrDemonWolf - "Союз нерушимый республик свободных Сплотила навеки Великая Русь. Да здравствует созданный волей народов Единый, могучий Советский Союз!" (03/05/20)
 // Firestore
-import {
-    CreateNewUserDocument,
-    CreateSocialPlatformDocument,
-} from 'Gruvee/firestore/userActions'
+import { CreateNewUserDocument, CreateSocialPlatformDocument } from 'Gruvee/firestore/userActions'
 import { GET_AUTHORIZATION_CODE } from 'Gruvee/service/spotify/endpointConstants'
 import {
     AuthorizeUser,
@@ -45,11 +42,7 @@ export const InitAuthorizationCodeFlow = async () => {
     try {
         // Will open our browser to Spotify sign in
         await Linking.openURL(
-            GET_AUTHORIZATION_CODE(
-                Creds.Spotify.clientId,
-                scopes,
-                Creds.Spotify.redirectUri
-            )
+            GET_AUTHORIZATION_CODE(Creds.Spotify.clientId, scopes, Creds.Spotify.redirectUri)
         )
     } catch (err) {
         // TODO: Handle Warnings
@@ -77,10 +70,7 @@ export const HandleSpotifyDeepLink = async event => {
             console.log('Time to create a new user...')
 
             // Create and set social platform object
-            const newPlatform = await CreateSocialPlatformDocument(
-                newUserResponse.data,
-                tokenObj
-            )
+            const newPlatform = await CreateSocialPlatformDocument(newUserResponse.data, tokenObj)
 
             // Create and set user object
             newUserResponse.data = await CreateNewUserDocument(newPlatform)

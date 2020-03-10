@@ -61,8 +61,7 @@ const SongItemCommentBar = ({ songCommentCount, songData }) => {
 // Helpers
 const mapStateToSongCommentsCount = (state, songId) => {
     const { currentPlaylistId } = state.PlaylistsDataReducer
-    const playlist =
-        state.PlaylistsDataReducer.playlists.byId[currentPlaylistId]
+    const playlist = state.PlaylistsDataReducer.playlists.byId[currentPlaylistId]
 
     return playlist.comments[songId].length
 }

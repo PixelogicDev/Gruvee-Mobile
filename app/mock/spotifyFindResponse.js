@@ -4,11 +4,9 @@ export default {
         artists: [
             {
                 external_urls: {
-                    spotify:
-                        'https://open.spotify.com/artist/5nuJOwgBqKBIWyCr0dQgEH',
+                    spotify: 'https://open.spotify.com/artist/5nuJOwgBqKBIWyCr0dQgEH',
                 },
-                href:
-                    'https://api.spotify.com/v1/artists/5nuJOwgBqKBIWyCr0dQgEH',
+                href: 'https://api.spotify.com/v1/artists/5nuJOwgBqKBIWyCr0dQgEH',
                 id: '5nuJOwgBqKBIWyCr0dQgEH',
                 name: 'Stil & Bense',
                 type: 'artist',
@@ -23,20 +21,17 @@ export default {
         images: [
             {
                 height: 640,
-                url:
-                    'https://i.scdn.co/image/ab67616d0000b273e3e7e6a8465c7941d6264bac',
+                url: 'https://i.scdn.co/image/ab67616d0000b273e3e7e6a8465c7941d6264bac',
                 width: 640,
             },
             {
                 height: 300,
-                url:
-                    'https://i.scdn.co/image/ab67616d00001e02e3e7e6a8465c7941d6264bac',
+                url: 'https://i.scdn.co/image/ab67616d00001e02e3e7e6a8465c7941d6264bac',
                 width: 300,
             },
             {
                 height: 64,
-                url:
-                    'https://i.scdn.co/image/ab67616d00004851e3e7e6a8465c7941d6264bac',
+                url: 'https://i.scdn.co/image/ab67616d00004851e3e7e6a8465c7941d6264bac',
                 width: 64,
             },
         ],
@@ -50,8 +45,7 @@ export default {
     artists: [
         {
             external_urls: {
-                spotify:
-                    'https://open.spotify.com/artist/5nuJOwgBqKBIWyCr0dQgEH',
+                spotify: 'https://open.spotify.com/artist/5nuJOwgBqKBIWyCr0dQgEH',
             },
             href: 'https://api.spotify.com/v1/artists/5nuJOwgBqKBIWyCr0dQgEH',
             id: '5nuJOwgBqKBIWyCr0dQgEH',

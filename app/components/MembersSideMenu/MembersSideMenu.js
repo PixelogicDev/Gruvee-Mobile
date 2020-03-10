@@ -27,11 +27,7 @@ const MembersSideMenu = ({ members, currentPlaylistId }) => {
     return (
         <SafeAreaView style={styles.Container}>
             <Text style={styles.MembersTitle}>Members</Text>
-            <FlatList
-                data={members}
-                renderItem={renderItem}
-                keyExtractor={keyExtractor}
-            />
+            <FlatList data={members} renderItem={renderItem} keyExtractor={keyExtractor} />
         </SafeAreaView>
     )
 }
@@ -70,7 +66,4 @@ const mapDispatchToProps = dispatch => ({
     fetchMembers: playlistId => dispatch(FetchMembers(playlistId)),
 })
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(memo(MembersSideMenu))
+export default connect(mapStateToProps, mapDispatchToProps)(memo(MembersSideMenu))

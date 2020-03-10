@@ -14,12 +14,7 @@ import CardItemDetail from './CardItemDetail'
 
 const defaultPlaylistBackgroundAsset = require('Gruvee/assets/defaults/playlist_image/default_item_bg_image.png')
 
-const PlaylistItem = ({
-    fetchMembers,
-    playlistData,
-    playlistMembers,
-    setCurrentPlaylistId,
-}) => {
+const PlaylistItem = ({ fetchMembers, playlistData, playlistMembers, setCurrentPlaylistId }) => {
     return (
         <TouchableOpacity
             onPress={() => {
@@ -58,12 +53,7 @@ const showMembersAction = () => {
 }
 
 // sillyonly - "YOU THOUGHT YOU WILL RUN AWAY!" (02/14/20)
-const showSongListAction = (
-    fetchMembers,
-    playlistData,
-    playlistMembers,
-    setCurrentPlaylistId
-) => {
+const showSongListAction = (fetchMembers, playlistData, playlistMembers, setCurrentPlaylistId) => {
     // Call redux action to set playlistId in our state
     setCurrentPlaylistId(playlistData.id)
 
@@ -87,8 +77,7 @@ const showSongListAction = (
                         {
                             id: NavigationConstants.TOP_BAR_MEMBERS_ACTION_ID,
                             component: {
-                                name:
-                                    NavigationConstants.TOP_BAR_MEMBERS_ACTION_NAME,
+                                name: NavigationConstants.TOP_BAR_MEMBERS_ACTION_NAME,
                                 passProps: {
                                     members: playlistMembers,
                                     showMembersAction: () => {
@@ -141,8 +130,7 @@ const mapStatetoProps = state => ({
 })
 const mapDispatchToProps = dispatch => ({
     fetchMembers: playlistId => dispatch(FetchMembers(playlistId)),
-    setCurrentPlaylistId: playlistId =>
-        dispatch(SetCurrentPlaylistId(playlistId)),
+    setCurrentPlaylistId: playlistId => dispatch(SetCurrentPlaylistId(playlistId)),
 })
 
 export default connect(mapStatetoProps, mapDispatchToProps)(memo(PlaylistItem))

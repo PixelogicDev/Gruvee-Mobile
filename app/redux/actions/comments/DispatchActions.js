@@ -40,9 +40,7 @@ export const DeleteComment = (commentsState, commentId) => {
     return {
         ...commentsState,
         byId,
-        allIds: commentsState.allIds.filter(
-            stateCommentId => stateCommentId !== commentId
-        ),
+        allIds: commentsState.allIds.filter(stateCommentId => stateCommentId !== commentId),
     }
 }
 
@@ -70,10 +68,7 @@ export const FetchComments = (commentsState, comments) => {
         ...reducedComments.byId,
         ...commentsState.byId,
     }
-    reducedComments.allIds = [
-        ...reducedComments.allIds,
-        ...commentsState.allIds,
-    ]
+    reducedComments.allIds = [...reducedComments.allIds, ...commentsState.allIds]
 
     return reducedComments
 }

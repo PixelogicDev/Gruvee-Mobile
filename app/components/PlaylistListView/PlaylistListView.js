@@ -21,29 +21,21 @@ console.ignoredYellowBox = ['Could not find image']
 const PlaylistListView = ({ fetchPlaylists, playlists }) => {
     const [addPlaylistModalShown, setAddPlaylistModalShown] = useState(false)
     const keyExtractor = item => `${item.id}`
-    const renderItem = ({ item }) => (
-        <SwipeablePlaylistItem playlistData={item} />
-    )
+    const renderItem = ({ item }) => <SwipeablePlaylistItem playlistData={item} />
     useEffect(() => {
         fetchPlaylists()
 
         // Only if on Android, let's setup for backhandler override
         if (Platform.OS === 'android') {
-            this.backHandler = BackHandler.addEventListener(
-                'hardwareBackPress',
-                () => {
-                    return handleBackPress()
-                    // Stacking - "Don't remove this comment or the app randomly breaks" (02/03/20)
-                }
-            )
+            this.backHandler = BackHandler.addEventListener('hardwareBackPress', () => {
+                return handleBackPress()
+                // Stacking - "Don't remove this comment or the app randomly breaks" (02/03/20)
+            })
 
             // Setup event listener for overlay
             this.compDidAppearListener = Navigation.events().registerComponentDidAppearListener(
                 ({ componentId }) => {
-                    if (
-                        componentId ===
-                        NavigationConstants.ADD_PLAYLIST_MODAL_NAV_ID
-                    ) {
+                    if (componentId === NavigationConstants.ADD_PLAYLIST_MODAL_NAV_ID) {
                         setAddPlaylistModalShown(true)
                     }
                 }
@@ -51,10 +43,7 @@ const PlaylistListView = ({ fetchPlaylists, playlists }) => {
 
             this.compDidDisappearListener = Navigation.events().registerComponentDidDisappearListener(
                 ({ componentId }) => {
-                    if (
-                        componentId ===
-                        NavigationConstants.ADD_PLAYLIST_MODAL_NAV_ID
-                    ) {
+                    if (componentId === NavigationConstants.ADD_PLAYLIST_MODAL_NAV_ID) {
                         setAddPlaylistModalShown(false)
                     }
                 }
@@ -73,9 +62,7 @@ const PlaylistListView = ({ fetchPlaylists, playlists }) => {
 
     const handleBackPress = () => {
         if (addPlaylistModalShown) {
-            Navigation.dismissOverlay(
-                NavigationConstants.ADD_PLAYLIST_MODAL_NAV_ID
-            )
+            Navigation.dismissOverlay(NavigationConstants.ADD_PLAYLIST_MODAL_NAV_ID)
             return true
         }
         return false

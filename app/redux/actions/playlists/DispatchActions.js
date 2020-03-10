@@ -37,12 +37,7 @@ export const AddPlaylistSong = (songId, playlistId, statePlaylists) => {
     }
 }
 
-export const AddSongComment = (
-    commentId,
-    songId,
-    playlistId,
-    statePlaylists
-) => {
+export const AddSongComment = (commentId, songId, playlistId, statePlaylists) => {
     return {
         ...statePlaylists,
         byId: {
@@ -51,10 +46,7 @@ export const AddSongComment = (
                 ...statePlaylists.byId[playlistId],
                 comments: {
                     ...statePlaylists.byId[playlistId].comments,
-                    [songId]: [
-                        ...statePlaylists.byId[playlistId].comments[songId],
-                        commentId,
-                    ],
+                    [songId]: [...statePlaylists.byId[playlistId].comments[songId], commentId],
                 },
             },
         },
@@ -98,12 +90,7 @@ export const DeletePlaylistSong = (songId, playlistId, statePlaylists) => {
     }
 }
 
-export const DeleteSongComment = (
-    commentId,
-    songId,
-    playlistId,
-    statePlaylists
-) => {
+export const DeleteSongComment = (commentId, songId, playlistId, statePlaylists) => {
     return {
         ...statePlaylists,
         byId: {
@@ -112,9 +99,9 @@ export const DeleteSongComment = (
                 ...statePlaylists.byId[playlistId],
                 comments: {
                     ...statePlaylists.byId[playlistId].comments,
-                    [songId]: statePlaylists.byId[playlistId].comments[
-                        songId
-                    ].filter(stateCommentId => stateCommentId !== commentId),
+                    [songId]: statePlaylists.byId[playlistId].comments[songId].filter(
+                        stateCommentId => stateCommentId !== commentId
+                    ),
                 },
             },
         },
@@ -141,10 +128,7 @@ export const FetchPlaylists = (playlistsState, playlists) => {
     )
 
     reducedPlaylists.byId = { ...reducedPlaylists.byId, ...playlistsState.byId }
-    reducedPlaylists.allIds = [
-        ...reducedPlaylists.allIds,
-        ...playlistsState.allIds,
-    ]
+    reducedPlaylists.allIds = [...reducedPlaylists.allIds, ...playlistsState.allIds]
 
     return reducedPlaylists
 }

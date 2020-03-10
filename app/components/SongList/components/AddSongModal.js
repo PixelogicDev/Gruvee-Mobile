@@ -21,18 +21,14 @@ const AddSongModal = ({ title, addSongAction }) => {
         >
             <TextInput
                 placeholder="Song link"
-                placeholderTextColor={
-                    StyleConstants.INPUT_PLACEHOLDER_FONT_COLOR
-                }
+                placeholderTextColor={StyleConstants.INPUT_PLACEHOLDER_FONT_COLOR}
                 style={styles.SongLinkInput}
                 onChangeText={text => setSongLink(text)}
                 value={songLink}
             />
             <TextInput
                 placeholder="This song is..."
-                placeholderTextColor={
-                    StyleConstants.INPUT_PLACEHOLDER_FONT_COLOR
-                }
+                placeholderTextColor={StyleConstants.INPUT_PLACEHOLDER_FONT_COLOR}
                 multiline
                 editable
                 style={styles.SongCommentInput}

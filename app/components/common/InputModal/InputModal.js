@@ -28,9 +28,7 @@ const InputModal = ({
     return (
         <>
             <View
-                onStartShouldSetResponder={() =>
-                    Navigation.dismissOverlay(navigationId)
-                }
+                onStartShouldSetResponder={() => Navigation.dismissOverlay(navigationId)}
                 style={styles.Backdrop}
             />
             {generateInputModal}

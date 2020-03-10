@@ -94,8 +94,7 @@ const Auth = ({ setInitialUserData }) => {
             <View>
                 <Text style={styles.SectionTitle}>Let's Get Grüvee</Text>
                 <Text style={styles.SectionDetail}>
-                    Let all of your wildest memes come true. Just sell your soul
-                    below.
+                    Let all of your wildest memes come true. Just sell your soul below.
                 </Text>
             </View>
             <View style={styles.ButtonContainer}>{Buttons}</View>

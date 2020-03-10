@@ -47,18 +47,14 @@ const AddPlaylistModal = ({ title, addPlaylist }) => {
         >
             <TextInput
                 placeholder="Playlist Name"
-                placeholderTextColor={
-                    StyleConstants.INPUT_PLACEHOLDER_FONT_COLOR
-                }
+                placeholderTextColor={StyleConstants.INPUT_PLACEHOLDER_FONT_COLOR}
                 style={styles.Input}
                 onChangeText={text => onChangePlaylistNameText(text)}
                 value={playlistNameValue}
             />
             <TextInput
                 placeholder="Members"
-                placeholderTextColor={
-                    StyleConstants.INPUT_PLACEHOLDER_FONT_COLOR
-                }
+                placeholderTextColor={StyleConstants.INPUT_PLACEHOLDER_FONT_COLOR}
                 style={styles.Input}
                 onChangeText={text => onChangeMembersNameText(text)}
                 value={membersNameValue}

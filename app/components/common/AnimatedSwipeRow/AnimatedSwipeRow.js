@@ -44,9 +44,7 @@ const AnimatedSwipeRow = ({
             ref={swipeRef}
             style={styles.SwipeRow(itemHeight)}
         >
-            <Animated.View
-                style={styles.SwipeContainer(swipeActionRunning, shrinkHeight)}
-            >
+            <Animated.View style={styles.SwipeContainer(swipeActionRunning, shrinkHeight)}>
                 {swipeActionComponent}
             </Animated.View>
             <Animated.View style={styles.AnimatedContainer(shrinkHeight)}>

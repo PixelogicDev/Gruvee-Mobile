@@ -1,7 +1,4 @@
-import {
-    ADD_PLAYLIST_TO_USER,
-    DELETE_PLAYLIST_FROM_USER,
-} from 'Gruvee/redux/actions/ActionsType'
+import { ADD_PLAYLIST_TO_USER, DELETE_PLAYLIST_FROM_USER } from 'Gruvee/redux/actions/ActionsType'
 
 // Action Creators
 const addPlaylistToUser = playlistId => {

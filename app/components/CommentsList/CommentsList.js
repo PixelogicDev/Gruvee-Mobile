@@ -1,19 +1,10 @@
 import React, { useEffect, useRef } from 'react'
 import { connect } from 'react-redux'
-import {
-    KeyboardAvoidingView,
-    Platform,
-    SafeAreaView,
-    StyleSheet,
-    View,
-} from 'react-native'
+import { KeyboardAvoidingView, Platform, SafeAreaView, StyleSheet, View } from 'react-native'
 import { SwipeListView } from 'react-native-swipe-list-view'
 
 // Redux
-import {
-    DeleteComment,
-    FetchComments,
-} from 'Gruvee/redux/actions/comments/CommentsActions'
+import { DeleteComment, FetchComments } from 'Gruvee/redux/actions/comments/CommentsActions'
 import { AddComment } from 'Gruvee/redux/actions/comments/SharedCommentActions'
 import { MapCommentsFromSongSelector } from 'Gruvee/redux/selectors/CommentsSelector'
 
@@ -37,18 +28,14 @@ const CommentsList = ({
     const renderItem = ({ item }) => (
         <SwipeableCommentItem
             comment={item}
-            deleteItemById={() =>
-                deleteComment(item.id, songId, currentPlaylistId)
-            }
+            deleteItemById={() => deleteComment(item.id, songId, currentPlaylistId)}
         />
     )
 
     const keyExtractor = item => `${item.id}`
 
     const addCommentAction = comment => {
-        const newComment = comment.length
-            ? new SongComment(comment, 'memberAlec')
-            : null
+        const newComment = comment.length ? new SongComment(comment, 'memberAlec') : null
         addComment(newComment, songId, currentPlaylistId)
     }
 
@@ -112,8 +99,7 @@ const mapStateToProps = (state, props) => {
     }
 }
 const mapDispatchToProps = dispatch => ({
-    addComment: (comment, songId, playlistId) =>
-        dispatch(AddComment(comment, songId, playlistId)),
+    addComment: (comment, songId, playlistId) => dispatch(AddComment(comment, songId, playlistId)),
     deleteComment: (commentId, songId, currentPlaylistId) =>
         dispatch(DeleteComment(commentId, songId, currentPlaylistId)),
     fetchComments: songId => dispatch(FetchComments(songId)),
