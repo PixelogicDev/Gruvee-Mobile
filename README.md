@@ -66,6 +66,9 @@ In order to develop for Grüvee you are going to need to have a few things insta
     - Android Build Tools 28.0.3 (Installable from Studio SDK Manager)
     - Android 9 SDK (Installable from Studio SDK Manager)
 
+# TODO - Add setup for 3rd party services in .env file
+# TODO - Add setup for integrating gruveebackend repo
+
 # Running Grüvee Locally
 
 Now we are at the GOOD stuff. Time to get Grüvee running locally. Make sure you have the [prerequisites](#prerequisites) installed. Open up **two instances** of your favorite terminal/command prompt and navigate to the root directory of the Grüvee repository for both of them. One is going to run your React Native bundle server and the other will start the Grüvee iOS or Android app.
