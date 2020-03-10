@@ -5,11 +5,7 @@ import AddItemButton from 'Gruvee/components/common/AddItemButton'
 
 import * as StyleConstants from 'Gruvee/config/styles'
 
-const AddCommentTextInput = ({
-    style,
-    addCommentAction,
-    scrollToBottomAction,
-}) => {
+const AddCommentTextInput = ({ style, addCommentAction, scrollToBottomAction }) => {
     const [comment, setComment] = useState('')
 
     // Actions

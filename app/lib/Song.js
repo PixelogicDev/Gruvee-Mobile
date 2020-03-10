@@ -29,9 +29,7 @@ export default class Song {
         // Since albuArtwork is ordered by image size, get
         // the second to last image
         this.albumArtwork =
-            albumImages && albumImages.length
-                ? albumImages[albumImages.length - 2].url
-                : undefined
+            albumImages && albumImages.length ? albumImages[albumImages.length - 2].url : undefined
         this.platformDeepLink = link
     }
 }

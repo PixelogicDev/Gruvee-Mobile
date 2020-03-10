@@ -4,10 +4,7 @@ import styles from './SwipeAction.styles'
 
 const SwipeAction = ({ action, actionColor, icon, name, width, height }) => {
     return (
-        <TouchableOpacity
-            style={styles.Background(actionColor)}
-            onPress={action}
-        >
+        <TouchableOpacity style={styles.Background(actionColor)} onPress={action}>
             <Image
                 accessibilityRole="image"
                 accessibilityLabel={name}

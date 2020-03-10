@@ -11,9 +11,7 @@ import SocialAuthButton from './SocialAuthButton'
 const AppleAuthButton = () => {
     const signInWithAppleAction = async () => {
         if (!appleAuth.isSupported) {
-            return Promise.reject(
-                new Error('Device is not on iOS 13 or higher.')
-            )
+            return Promise.reject(new Error('Device is not on iOS 13 or higher.'))
         }
 
         const appleAuthRequestResponse = await appleAuth.performRequest({
@@ -39,10 +37,7 @@ const AppleAuthButton = () => {
     }
 
     return (
-        <SocialAuthButton
-            platform={ApplePlatform}
-            platformSignInAction={signInWithAppleAction}
-        />
+        <SocialAuthButton platform={ApplePlatform} platformSignInAction={signInWithAppleAction} />
     )
 }
 

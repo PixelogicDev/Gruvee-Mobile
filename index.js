@@ -21,33 +21,26 @@ import * as NavigationConstants from 'Gruvee/config/navigation'
 import App from 'Gruvee/App'
 
 // Register navigation components
-Navigation.registerComponent(NavigationConstants.ROOT_NAV_NAME, () =>
-    ReduxProvider(App)
-)
-Navigation.registerComponent(
-    NavigationConstants.ADD_PLAYLIST_MODAL_NAV_NAME,
-    () => ReduxProvider(AddPlaylistModal)
+Navigation.registerComponent(NavigationConstants.ROOT_NAV_NAME, () => ReduxProvider(App))
+Navigation.registerComponent(NavigationConstants.ADD_PLAYLIST_MODAL_NAV_NAME, () =>
+    ReduxProvider(AddPlaylistModal)
 )
 Navigation.registerComponent(NavigationConstants.ADD_SONG_MODAL_NAV_NAME, () =>
     ReduxProvider(AddSongModal)
 )
-Navigation.registerComponent(NavigationConstants.SONG_LIST_NAV_NAME, () =>
-    ReduxProvider(SongList)
-)
+Navigation.registerComponent(NavigationConstants.SONG_LIST_NAV_NAME, () => ReduxProvider(SongList))
 Navigation.registerComponent(NavigationConstants.COMMENTS_LIST_NAV_NAME, () =>
     ReduxProvider(CommentsList)
 )
 
 // TopBar components
-Navigation.registerComponent(
-    NavigationConstants.TOP_BAR_MEMBERS_ACTION_NAME,
-    () => ReduxProvider(ShowMembersAction)
+Navigation.registerComponent(NavigationConstants.TOP_BAR_MEMBERS_ACTION_NAME, () =>
+    ReduxProvider(ShowMembersAction)
 )
 
 // SideMenu components
-Navigation.registerComponent(
-    NavigationConstants.SIDEMENU_ALL_MEMBERS_NAME,
-    () => ReduxProvider(MembersSideMenu)
+Navigation.registerComponent(NavigationConstants.SIDEMENU_ALL_MEMBERS_NAME, () =>
+    ReduxProvider(MembersSideMenu)
 )
 
 Navigation.events().registerAppLaunchedListener(() => {

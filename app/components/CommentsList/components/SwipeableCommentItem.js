@@ -10,12 +10,9 @@ const SwipeableCommentItem = ({ comment, deleteItemById }) => {
     // TODO: This will be needed from user state
     const signedInUsername = 'memberAlec'
     const [isDeleting, setIsDeleting] = useState(false)
-    const [itemHeight, setItemHeight] = useState(
-        StyleConstants.COMMENT_ITEM_MIN_HEIGHT
-    )
+    const [itemHeight, setItemHeight] = useState(StyleConstants.COMMENT_ITEM_MIN_HEIGHT)
     const onConfirmDelete = () => setIsDeleting(true)
-    const confirmDeleteCommentAction = () =>
-        comfirmDeleteAlert(comment, onConfirmDelete)
+    const confirmDeleteCommentAction = () => comfirmDeleteAlert(comment, onConfirmDelete)
     const setItemHeightAction = height => {
         setItemHeight(height)
     }
@@ -62,11 +59,7 @@ const renderItem = (comment, setItemHeightAction) => (
     <CommentItem comment={comment} setHeightAction={setItemHeightAction} />
 )
 
-const renderSwipeActionComponent = (
-    comment,
-    confirmDeleteCommentAction,
-    signedInUsername
-) => {
+const renderSwipeActionComponent = (comment, confirmDeleteCommentAction, signedInUsername) => {
     if (signedInUsername === comment.sender) {
         // eslint-disable-next-line global-require
         const trashIconAsset = require('Gruvee/assets/icons/trash/trash_icon.png')

@@ -10,8 +10,7 @@ import SongItem from './SongItem'
 const SwipeableSongItem = ({ song, deleteSongById }) => {
     const [isDeleting, setIsDeleting] = useState(false)
     const onConfirmDelete = () => setIsDeleting(true)
-    const confirmDeleteSongAction = () =>
-        comfirmDeleteAlert(song, onConfirmDelete)
+    const confirmDeleteSongAction = () => comfirmDeleteAlert(song, onConfirmDelete)
 
     return (
         <AnimatedSwipeRow
@@ -19,10 +18,7 @@ const SwipeableSongItem = ({ song, deleteSongById }) => {
             swipeActionCallback={deleteSongById}
             itemHeight={StyleConstants.SONG_LIST_ITEM_HEIGHT_iOS} // TODO: Android vs iOS check
             isRightOpenValue
-            swipeActionComponent={renderSwipeActionComponent(
-                song,
-                confirmDeleteSongAction
-            )}
+            swipeActionComponent={renderSwipeActionComponent(song, confirmDeleteSongAction)}
             listItemComponent={renderSongItem(song)}
         />
     )

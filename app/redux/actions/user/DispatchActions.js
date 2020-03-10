@@ -8,9 +8,7 @@ export const AddPlaylistToUser = (playlistId, user) => {
 export const DeletePlaylistFromUser = (playlistId, user) => {
     return {
         ...user,
-        playlists: user.playlists.filter(
-            statePlaylistId => statePlaylistId !== playlistId
-        ),
+        playlists: user.playlists.filter(statePlaylistId => statePlaylistId !== playlistId),
     }
 }
 

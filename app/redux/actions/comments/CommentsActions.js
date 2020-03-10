@@ -1,7 +1,4 @@
-import {
-    DELETE_COMMENT,
-    FETCH_COMMENTS,
-} from 'Gruvee/redux/actions/ActionsType'
+import { DELETE_COMMENT, FETCH_COMMENTS } from 'Gruvee/redux/actions/ActionsType'
 import { DeleteSongComment } from 'Gruvee/redux/actions/playlists/SharedPlaylistActions'
 
 // Action Creators

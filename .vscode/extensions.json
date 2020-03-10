@@ -1,0 +1,8 @@
+{
+    "recommendations": [
+        "esbenp.prettier-vscode",
+        "dbaeumer.vscode-eslint",
+        "2gua.rainbow-brackets",
+        "msjsdiag.vscode-react-native"
+    ]
+}

@@ -58,11 +58,7 @@ export default (state = initialState, action) => {
         case ADD_PLAYLIST_MEMBER:
             return {
                 ...state,
-                playlists: AddPlaylistMember(
-                    action.memberId,
-                    action.playlistId,
-                    state.playlists
-                ),
+                playlists: AddPlaylistMember(action.memberId, action.playlistId, state.playlists),
             }
         case ADD_PLAYLIST_SONG:
             return {
@@ -86,10 +82,7 @@ export default (state = initialState, action) => {
         case DELETE_PLAYLIST:
             return {
                 ...state,
-                playlists: DeletePlaylist(
-                    action.data.playlistId,
-                    state.playlists
-                ),
+                playlists: DeletePlaylist(action.data.playlistId, state.playlists),
             }
         case DELETE_PLAYLIST_SONG:
             return {

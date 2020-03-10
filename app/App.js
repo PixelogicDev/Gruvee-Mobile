@@ -6,6 +6,7 @@
 // TheYagich01 - "Как я тут оказался блять? Что происходит?" (02/15/20)
 // syszen - "firestore beaten! YEAYEA wins" (02/21/20)
 // WinterLoreGames - "Array starts at 1, change my mind." (01/22/20)
+// dra031cko - "What do i use ?- Alec 2020" (03/10/20)
 
 // Firebase
 import { firebase } from '@react-native-firebase/auth'

@@ -14,8 +14,7 @@ import PlaylistItem from './PlaylistItem'
 const SwipeablePlaylistItem = ({ playlistData, deletePlaylist }) => {
     const [isDeleting, setIsDeleting] = useState(false)
     const onConfirmDelete = () => setIsDeleting(true)
-    const confirmDeletePlaylistAction = () =>
-        comfirmDeleteAlert(playlistData, onConfirmDelete)
+    const confirmDeletePlaylistAction = () => comfirmDeleteAlert(playlistData, onConfirmDelete)
     // Chocofoxy - "this comment for microsoft to find" (02/03/20)
     return (
         <AnimatedSwipeRow

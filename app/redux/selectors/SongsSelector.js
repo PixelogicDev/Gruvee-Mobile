@@ -6,8 +6,7 @@ export const MapSongsFromPlaylistSelector = createSelector(
     state => state.PlaylistsDataReducer.playlists,
     state => state.SongsDataReducer.songs,
     (_, props) => props.playlistId,
-    (playlists, songs, playlistId) =>
-        mapSongsFromPlaylist(playlists, songs, playlistId)
+    (playlists, songs, playlistId) => mapSongsFromPlaylist(playlists, songs, playlistId)
 )
 
 // Helpers

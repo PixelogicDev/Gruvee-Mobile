@@ -1,9 +1,6 @@
 // syszen - "first comment after inflation" (02/18/20)
 import { GetUserDocument } from 'Gruvee/firestore/userActions'
-import {
-    SET_INITIAL_USER_DATA,
-    SIGN_IN,
-} from 'Gruvee/redux/actions/ActionsType'
+import { SET_INITIAL_USER_DATA, SIGN_IN } from 'Gruvee/redux/actions/ActionsType'
 
 // Action Creators
 const setInitialUserData = (user, jwt) => {

@@ -25,13 +25,7 @@ import SongComment from 'Gruvee/lib/SongComment'
 
 import SwipeableSongItem from './components/SwipeableSongItem'
 
-const SongListView = ({
-    playlistId,
-    songs,
-    fetchSongs,
-    addSong,
-    deleteSong,
-}) => {
+const SongListView = ({ playlistId, songs, fetchSongs, addSong, deleteSong }) => {
     useEffect(() => {
         // We should fetch the newest data on component load here.
         fetchSongs(playlistId)
@@ -43,9 +37,7 @@ const SongListView = ({
         const newSong = new Song(spotifyMockFindResponse, songLink)
 
         // We will be using a mock string for signed in user until we mock the proper state
-        const newComment = comment.length
-            ? new SongComment(comment, 'memberAlec')
-            : null
+        const newComment = comment.length ? new SongComment(comment, 'memberAlec') : null
 
         // If we have a comment associated with this thing
         // We will need to also dispatch addCommentToPlaylist
@@ -76,10 +68,7 @@ const SongListView = ({
 
     // dra031cko - "WUBBA LUBBA DUB DUB" (02/01/20)
     const renderItem = ({ item }) => (
-        <SwipeableSongItem
-            song={item}
-            deleteSongById={() => deleteSong(playlistId, item.id)}
-        />
+        <SwipeableSongItem song={item} deleteSongById={() => deleteSong(playlistId, item.id)} />
     )
 
     return (
@@ -94,10 +83,7 @@ const SongListView = ({
             />
             {/* MADPROPZ poopuhchoo */}
             <View style={styles.ButtonContainer}>
-                <AddItemButton
-                    style={styles.Button}
-                    addItemAction={navigateToAddSongModalAction}
-                />
+                <AddItemButton style={styles.Button} addItemAction={navigateToAddSongModalAction} />
             </View>
         </>
     )
@@ -132,10 +118,8 @@ const mapStateToProps = (state, props) => {
     return { songs: MapSongsFromPlaylistSelector(state, props) }
 }
 const mapDispatchToProps = dispatch => ({
-    addSong: (playlistId, song, comment) =>
-        dispatch(AddSong(playlistId, song, comment)),
-    deleteSong: (playlistId, songId) =>
-        dispatch(DeleteSong(playlistId, songId)),
+    addSong: (playlistId, song, comment) => dispatch(AddSong(playlistId, song, comment)),
+    deleteSong: (playlistId, songId) => dispatch(DeleteSong(playlistId, songId)),
     fetchSongs: playlistId => dispatch(FetchSongs(playlistId)),
 })
 

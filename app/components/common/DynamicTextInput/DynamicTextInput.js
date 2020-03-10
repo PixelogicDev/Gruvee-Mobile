@@ -1,9 +1,6 @@
 import React, { useState } from 'react'
 import { TextInput } from 'react-native'
-import {
-    INPUT_PLACEHOLDER_FONT_COLOR,
-    TEXT_INPUT_PADDING,
-} from 'Gruvee/config/styles'
+import { INPUT_PLACEHOLDER_FONT_COLOR, TEXT_INPUT_PADDING } from 'Gruvee/config/styles'
 
 import styles from './DynamicTextInput.style'
 
@@ -19,9 +16,7 @@ const DynamicTextInput = ({ style, value, onChangeText, placeholderText }) => {
             multiline={true}
             onChangeText={text => onChangeText(text)}
             onContentSizeChange={event => {
-                setTextInputHeight(
-                    event.nativeEvent.contentSize.height + TEXT_INPUT_PADDING
-                )
+                setTextInputHeight(event.nativeEvent.contentSize.height + TEXT_INPUT_PADDING)
             }}
             style={styles.Input(textInputHeight, style.width)}
             value={value}

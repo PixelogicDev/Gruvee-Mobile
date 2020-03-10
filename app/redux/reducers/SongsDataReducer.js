@@ -1,14 +1,6 @@
 import MockSongs from 'Gruvee/mock/songs'
-import {
-    ADD_SONG,
-    DELETE_SONG,
-    FETCH_SONGS,
-} from 'Gruvee/redux/actions/ActionsType'
-import {
-    AddSong,
-    DeleteSong,
-    FetchSongs,
-} from 'Gruvee/redux/actions/songs/DispatchActions'
+import { ADD_SONG, DELETE_SONG, FETCH_SONGS } from 'Gruvee/redux/actions/ActionsType'
+import { AddSong, DeleteSong, FetchSongs } from 'Gruvee/redux/actions/songs/DispatchActions'
 
 // Mock Data Mapper
 const mapMockSongs = () => {
