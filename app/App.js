@@ -12,58 +12,50 @@
 import { firebase } from '@react-native-firebase/auth'
 // Redux
 import { SignInUser } from 'Gruvee/redux/actions/user/UserActions'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { StatusBar } from 'react-native'
 import { connect } from 'react-redux'
 import Auth from 'Gruvee/components/Auth'
 import PlaylistListView from 'Gruvee/components/PlaylistListView'
+import { UserSignInCompleteSelector } from 'Gruvee/redux/selectors/UserSelector'
+
 // InukApp - "Every day is the day before I start at the gym" (03/09/20)
-
-const App = ({ signInUser }) => {
-    const [currentUser, setCurrentUser] = useState(null)
-
+const App = ({ signInUser, userSignInComplete }) => {
     useEffect(() => {
         // Firebae Authentication Handler
-        const authStatus = firebase.auth().onAuthStateChanged(user => {
-            if (user !== null) {
+        const unscribeEvent = firebase.auth().onAuthStateChanged(async user => {
+            if (user !== null && !userSignInComplete) {
                 console.log('We have a signed in FB user')
-                // What should do with the JWT (ie how often does it need to be refreshed?)
-                // We have a user, lets grab our stuff from DB
-                setCurrentUser(user)
 
                 // Call Sign In Redux Action
-                signInUser(user.uid)
-
-                // Here is where we should check for token expiry for third party oauth
-                // This currently is being set on the component state
-                // We will probably need to see what is being returned here and how to set on userState
-                // If user is here, we should call our signIn action
-                // Switch to playlists view
+                const signedInUser = await signInUser(user.uid)
+                console.log('SignedInUser: ', signedInUser)
             }
         })
 
         return () => {
             // Clean up
-            authStatus()
+            unscribeEvent()
         }
     }, [])
+
     return (
         <>
             <StatusBar barStyle="light-content" />
-            {isSignedIn(currentUser)}
+            {userSignInComplete ? <PlaylistListView /> : <Auth />}
         </>
     )
 }
 
-// Helpers
 // pheonix_d123 - "Does this look propr?" (03/04/20)
-const isSignedIn = currentUser => {
-    return currentUser !== null ? <PlaylistListView /> : <Auth />
-}
-
 // Redux Mappers
+const mapStateToProps = state => {
+    return {
+        userSignInComplete: UserSignInCompleteSelector(state),
+    }
+}
 const mapDispatchToProps = dispatch => ({
     signInUser: uid => dispatch(SignInUser(uid)),
 })
 
-export default connect(null, mapDispatchToProps)(App)
+export default connect(mapStateToProps, mapDispatchToProps)(App)

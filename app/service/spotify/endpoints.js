@@ -4,13 +4,10 @@ import axios from 'axios'
 import { Buffer } from 'buffer'
 import Creds from 'Gruvee/config/creds'
 // Env Variables
-import { ENVIRONMENT } from 'react-native-dotenv'
+import { ENVIRONMENT, MACHINE_IP, FIREBASE_PROD_URI } from 'react-native-dotenv'
 import { GET_API_TOKEN } from './endpointConstants'
 
-const baseHostName =
-    ENVIRONMENT === 'PROD'
-        ? 'https://us-central1-gruvee-3b7c4.cloudfunctions.net'
-        : 'http://192.168.1.12:8080'
+const baseHostName = ENVIRONMENT === 'PROD' ? FIREBASE_PROD_URI : `http://${MACHINE_IP}:8080`
 
 // POST: API Token Request
 export const GetApiToken = code => {
@@ -45,12 +42,13 @@ export const RefreshApiToken = async () => {
 }
 
 // POST: Authorize Spotify User
-export const AuthorizeUser = token => {
+export const AuthorizeUser = (token, refreshToken) => {
     const options = {
         method: 'POST',
         url: `${baseHostName}/authorizeWithSpotify`,
         data: {
             token,
+            refreshToken,
         },
     }
 
