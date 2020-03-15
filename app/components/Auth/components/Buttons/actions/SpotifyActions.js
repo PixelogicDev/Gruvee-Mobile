@@ -1,15 +1,14 @@
 // Tingbangds - "Tingbang was here <><" (02/18/20)
 // MrDemonWolf - "Союз нерушимый республик свободных Сплотила навеки Великая Русь. Да здравствует созданный волей народов Единый, могучий Советский Союз!" (03/05/20)
+// iWorkAtMcDonals - "PÅGGÄRS" (03/12/20)
+// Mheetu - "Contributing Guidelines: Use semicolons." (03/13/20)
+// Isakfk1234 - "incoming code" (03/13/20)
 // Firestore
-import { CreateNewUserDocument, CreateSocialPlatformDocument } from 'Gruvee/firestore/userActions'
 import { GET_AUTHORIZATION_CODE } from 'Gruvee/service/spotify/endpointConstants'
-import {
-    AuthorizeUser,
-    GetApiToken,
-    GetCustomFirebaseToken,
-} from 'Gruvee/service/spotify/endpoints'
+import { AuthorizeUser, GetApiToken } from 'Gruvee/service/spotify/endpoints'
 import { Linking } from 'react-native'
 import Creds from 'Gruvee/config/creds'
+import { firebase } from '@react-native-firebase/auth'
 
 export const HandleSpotifyAuth = url => {
     // pheonix_d123 - "Must remember that strings use the full length!" (02/18/20)
@@ -23,6 +22,7 @@ export const HandleSpotifyAuth = url => {
     return Promise.reject(new Error('URL substring did not include code'))
 }
 
+// LilCazza - "This project was only supposed to take 30 days. monkaS ..... It's now day 96. monkaS" (03/13/20)
 export const InitAuthorizationCodeFlow = async () => {
     const scopesArr = [
         'user-read-currently-playing',
@@ -36,6 +36,7 @@ export const InitAuthorizationCodeFlow = async () => {
         'user-read-recently-played',
         'user-top-read',
         'user-read-email',
+        'user-read-private ',
     ]
     const scopes = scopesArr.join(' ')
 
@@ -54,31 +55,20 @@ export const HandleSpotifyDeepLink = async event => {
     try {
         // Wait on this token before continuing
         const tokenObj = await HandleSpotifyAuth(event.url)
-        console.log('Resolved with tokenObj: ', tokenObj)
 
         // Authorize Spotify User and bring back user doc from db if it exists
-        const newUserResponse = await AuthorizeUser(tokenObj.data.access_token)
-        console.log('Got User: ', newUserResponse.data)
+        const userResponse = await AuthorizeUser(
+            tokenObj.data.access_token,
+            tokenObj.data.refresh_token
+        )
 
-        // Get JWT
-        // We need to be signed in, in order for us to write to our db
-        const response = await GetCustomFirebaseToken(newUserResponse.data.id)
+        // Need to login client
+        console.log(userResponse.data)
+        await firebase.auth().signInWithCustomToken(userResponse.data.jwt)
 
         // LilCazza - "It was at this moment I knew I had fucked up" (03/03/20)
-        if (!newUserResponse.data.userExists) {
-            // At this point write user to DB
-            console.log('Time to create a new user...')
-
-            // Create and set social platform object
-            const newPlatform = await CreateSocialPlatformDocument(newUserResponse.data, tokenObj)
-
-            // Create and set user object
-            newUserResponse.data = await CreateNewUserDocument(newPlatform)
-        }
-
         return Promise.resolve({
-            user: newUserResponse.data,
-            jwt: response.data.token,
+            user: userResponse.data,
         })
     } catch (error) {
         // TODO: Handle Error

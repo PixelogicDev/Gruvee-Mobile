@@ -1,9 +1,6 @@
 import * as StyleConstants from '@StyleConstants'
-import { SignInUser } from 'Gruvee/redux/actions/user/UserActions'
-import React from 'react'
+import React, { memo } from 'react'
 import { Image, StyleSheet, Text, TouchableOpacity } from 'react-native'
-// Redux
-import { connect } from 'react-redux'
 
 /*
     ButtonID/Buttom ie: spotify, youtube, soundcloud
@@ -15,7 +12,7 @@ import { connect } from 'react-redux'
     centerButton: bool
 */
 // sillyonly - "#collection views are amazing until you implement your own layout!" (03/04/20)
-const SocialAuthButton = ({ platform, signInUser, platformSignInAction }) => {
+const SocialAuthButton = ({ platform, platformSignInAction }) => {
     const startAuthAction = async () => {
         try {
             // Run platform specific auth flow
@@ -71,9 +68,4 @@ const styles = StyleSheet.create({
     }),
 })
 
-// Redux Mappers
-const mapDispatchToProps = dispatch => ({
-    signInUser: userId => dispatch(SignInUser(userId)),
-})
-
-export default connect(null, mapDispatchToProps)(SocialAuthButton)
+export default memo(SocialAuthButton)

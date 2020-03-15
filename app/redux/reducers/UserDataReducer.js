@@ -11,7 +11,7 @@ import {
     SignInUser,
 } from 'Gruvee/redux/actions/user/DispatchActions'
 
-const initialState = { user: {}, jwt: null }
+const initialState = { user: null }
 
 export default (state = initialState, action) => {
     switch (action.type) {
@@ -29,7 +29,6 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 user: SetInitialUserData(action.data.user, state.user),
-                jwt: action.data.jwt,
             }
         case SIGN_IN:
             return {

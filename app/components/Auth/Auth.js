@@ -4,9 +4,8 @@
 // BackeyM - "pee pee poo poo" (02/18/20)
 // dra031cko - "android > ios" (02/19/20)
 // sillyonly - "SOOOOOO what happens when silly have 1800?!" (02/19/20)
-
-// Firebase
 import { firebase } from '@react-native-firebase/auth'
+
 // Styles
 import * as StyleConstants from '@StyleConstants'
 import { SetInitialUserData } from 'Gruvee/redux/actions/user/UserActions'
@@ -32,6 +31,7 @@ const Auth = ({ setInitialUserData }) => {
             // Android instaniates multiple activites with deep links
             // To combat insane calls to out handler, set a flag here to stop it if it's already working
             AsyncStorage.getItem(DEEP_LINK_IN_PROGRESS_FLAG).then(value => {
+                console.log('GOT DEEPLINKFLAG: ', value)
                 if (value === null || value === 'false') {
                     // First time running this
                     Linking.getInitialURL().then(url => {
@@ -75,10 +75,7 @@ const Auth = ({ setInitialUserData }) => {
             }
 
             // After auth, we should always set initial user data and sign via firebase
-            setInitialUserData(newUserObj.user, newUserObj.jwt)
-
-            // Passes back userCreds, not sure what to do with those yet
-            firebase.auth().signInWithCustomToken(newUserObj.jwt)
+            setInitialUserData(newUserObj.user)
 
             AsyncStorage.setItem('@Deep_Link_In_Progress', 'false')
         } catch (error) {
