@@ -30,8 +30,6 @@ const App = ({ signInUser, userSignInComplete }) => {
                 // Call Sign In Redux Action
                 const signedInUser = await signInUser(user.uid)
                 console.log('SignedInUser: ', signedInUser)
-
-                // Here is where we should check for token expiry for third party oauth
             }
         })
 
