@@ -63,7 +63,6 @@ export const HandleSpotifyDeepLink = async event => {
         )
 
         // Need to login client
-        console.log(userResponse.data)
         await firebase.auth().signInWithCustomToken(userResponse.data.jwt)
 
         // LilCazza - "It was at this moment I knew I had fucked up" (03/03/20)

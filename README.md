@@ -36,12 +36,12 @@ If you are interested in becoming a member of the team check out the **[Pixelogi
 
 ## Tech Stack
 
-| Stack        | Tech                                                                                     |                                                                |
-| ------------ | :--------------------------------------------------------------------------------------- | :------------------------------------------------------------- |
-| IDE          | [Visual Studio Code](https://code.visualstudio.com/)                                     | You can use your preferred IDE but this is the one we like 🙃  |
-| Frontend     | [React Native 0.60]([LinkToReactNative0.60](https://www.npmjs.com/package/react-native)) | Utilising Javascript to develop this cross platform mobile app |
-| Backend      | [Firebase (Repo)](https://github.com/PixelogicDev/Gruvee-Backend)                        | Serverless Functions in Firebase using GoLang                  |
-| Design :art: | [Sketch](https://www.sketch.com/)                                                        | The design files can be found [here](/Design)                  |
+| Stack        | Tech                                                                                       |                                                                |
+| ------------ | :----------------------------------------------------------------------------------------- | :------------------------------------------------------------- |
+| IDE          | [Visual Studio Code](https://code.visualstudio.com/)                                       | You can use your preferred IDE but this is the one we like 🙃  |
+| Frontend     | [React Native 0.60](<[LinkToReactNative0.60](https://www.npmjs.com/package/react-native)>) | Utilising Javascript to develop this cross platform mobile app |
+| Backend      | [Firebase (Repo)](https://github.com/PixelogicDev/Gruvee-Backend)                          | Serverless Functions in Firebase using GoLang                  |
+| Design :art: | [Sketch](https://www.sketch.com/)                                                          | The design files can be found [here](/Design)                  |
 
 > ALL of these sections are open for contributions and are highly encouraged!
 
@@ -66,8 +66,11 @@ In order to develop for Grüvee you are going to need to have a few things insta
     - Android Build Tools 28.0.3 (Installable from Studio SDK Manager)
     - Android 9 SDK (Installable from Studio SDK Manager)
 
-# TODO - Add setup for 3rd party services in .env file
-# TODO - Add setup for integrating gruveebackend repo
+## TODO - Add setup for .env file
+
+## TODO - Add setup for integrating gruveebackend repo
+
+## TODO - Add setup for running Android emulator
 
 # Running Grüvee Locally
 
@@ -127,6 +130,7 @@ Once thats complete run the following commands:
 > To note: we have been developing on a Pixel 2 emulator and a Pixel 3 physical device, but feel free to use any device you'd like! At the end of the day it will be better for testing anyways.
 
 ### Setup keystore for android signing
+
 Where `$GRUVEE_PROJECT` is the location of your root project.
 
 ```bash
@@ -150,6 +154,7 @@ signingConfigs {
 ```
 
 ### Run the dev server
+
 Run `npm run start` FIRST on one terminal and then `npm run android-start` on another one.
 
 ```bash
@@ -183,9 +188,9 @@ Don't be scared to join the [PixelogicDev discord](https://discord.gg/ubgX6T8) i
 
 ## ⭐Current Contributors
 
-+ [@isabellabrookes](https://github.com/isabellabrookes) aka rawrsatbeards - PixelogicDev Channel Moderator
-+ [poopuhchoo](https://github.com/tjengland) - PixelogicDev Team Member
-+ [Bastian](https://github.com/BastianInuk) - PixelogicDev Team Member
-+ [DynamicDonkey](https://github.com/DynamicDonkey) - PixelogicDev Channel Member
-+ [miugel](https://github.com/miugel) - PixelogicDev Channel Member
-+ [creativenobu](https://github.com/creativenobu) - PixelogicDev Channel Member
+-   [@isabellabrookes](https://github.com/isabellabrookes) aka rawrsatbeards - PixelogicDev Channel Moderator
+-   [poopuhchoo](https://github.com/tjengland) - PixelogicDev Team Member
+-   [Bastian](https://github.com/BastianInuk) - PixelogicDev Team Member
+-   [DynamicDonkey](https://github.com/DynamicDonkey) - PixelogicDev Channel Member
+-   [miugel](https://github.com/miugel) - PixelogicDev Channel Member
+-   [creativenobu](https://github.com/creativenobu) - PixelogicDev Channel Member
