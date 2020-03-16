@@ -42,12 +42,13 @@ export const RefreshApiToken = async () => {
 }
 
 // POST: Authorize Spotify User
-export const AuthorizeUser = (token, refreshToken) => {
+export const AuthorizeUser = (token, expiresIn, refreshToken) => {
     const options = {
         method: 'POST',
         url: `${baseHostName}/authorizeWithSpotify`,
         data: {
             token,
+            expiresIn,
             refreshToken,
         },
     }
