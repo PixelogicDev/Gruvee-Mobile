@@ -4,10 +4,10 @@ import axios from 'axios'
 import { Buffer } from 'buffer'
 import Creds from 'Gruvee/config/creds'
 // Env Variables
-import { ENVIRONMENT, MACHINE_IP, FIREBASE_PROD_URI } from 'react-native-dotenv'
+import { ENVIRONMENT, FIREBASE_PROD_URI } from 'react-native-dotenv'
 import { GET_API_TOKEN } from './endpointConstants'
 
-const baseHostName = ENVIRONMENT === 'PROD' ? FIREBASE_PROD_URI : `http://${MACHINE_IP}:8080`
+const baseHostName = ENVIRONMENT === 'PROD' ? FIREBASE_PROD_URI : `http://localhost:8080`
 
 // POST: API Token Request
 export const GetApiToken = code => {
@@ -32,6 +32,8 @@ export const GetApiToken = code => {
         data: params,
     }
 
+    console.log('Calling GET API TOKEN')
+
     // This already returns a promise
     return axios(options)
 }
@@ -42,12 +44,13 @@ export const RefreshApiToken = async () => {
 }
 
 // POST: Authorize Spotify User
-export const AuthorizeUser = (token, refreshToken) => {
+export const AuthorizeUser = (token, expiresIn, refreshToken) => {
     const options = {
         method: 'POST',
         url: `${baseHostName}/authorizeWithSpotify`,
         data: {
             token,
+            expiresIn,
             refreshToken,
         },
     }

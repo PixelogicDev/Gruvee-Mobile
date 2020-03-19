@@ -59,6 +59,7 @@ export const HandleSpotifyDeepLink = async event => {
         // Authorize Spotify User and bring back user doc from db if it exists
         const userResponse = await AuthorizeUser(
             tokenObj.data.access_token,
+            tokenObj.data.expires_in,
             tokenObj.data.refresh_token
         )
 
