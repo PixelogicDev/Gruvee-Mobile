@@ -4,10 +4,10 @@ import axios from 'axios'
 import { Buffer } from 'buffer'
 import Creds from 'Gruvee/config/creds'
 // Env Variables
-import { ENVIRONMENT, MACHINE_IP, FIREBASE_PROD_URI } from 'react-native-dotenv'
+import { ENVIRONMENT, FIREBASE_PROD_URI } from 'react-native-dotenv'
 import { GET_API_TOKEN } from './endpointConstants'
 
-const baseHostName = ENVIRONMENT === 'PROD' ? FIREBASE_PROD_URI : `http://${MACHINE_IP}:8080`
+const baseHostName = ENVIRONMENT === 'PROD' ? FIREBASE_PROD_URI : `http://localhost:8080`
 
 // POST: API Token Request
 export const GetApiToken = code => {
@@ -31,6 +31,8 @@ export const GetApiToken = code => {
         headers,
         data: params,
     }
+
+    console.log('Calling GET API TOKEN')
 
     // This already returns a promise
     return axios(options)
