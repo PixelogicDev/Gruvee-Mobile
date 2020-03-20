@@ -26,9 +26,18 @@
 
 // -- CARS -- //
 // LilCazza - "McQueen: OK... Here we go. Focus. Speed. I am speed. McQueen: One winner. 42 losers. I eat losers for breakfast." (03/13/20)
+// LilCazza - "McQueen: Breakfast. Wait, maybe I should have had breakfast. A little breck-y could be good for me. No,no,no, stay focused. Speed." (03/20/20)
+// LilCazza - "McQueen: I'm faster than fast. Quicker than quick. I am Lightning! Mack: (knock-knock)Hey Lightning, are you ready? McQueen: Oh, yeah. Lightning's ready." (03/20/20)
+// LilCazza: - "Song McQueen: Ka-chow! Song Seller: Get your antenna here! Fans: You got that right, Slick. Bob Cutlass: Welcome back to the Dinoco 400. I'm Bob Cutlass, here with my good friend, Darrel" (03/20/20)
+
+// -- MONTY PYTHON AND THE HOLY GRAIL -- //
+// JMSWRNR - "Your mother was a hamster and your father smelt of elderberries." (03/20/20)
+// HMigo - "Look, that rabbit's got a vicious streak a mile wide! It's a killer!" (03/20/20)
 
 const BeeMovie = () => {}
 
 const CarsMovie = () => {}
 
-export default [BeeMovie, CarsMovie]
+const MontyPythonAndTheHolyGrail = () => {}
+
+export default [BeeMovie, CarsMovie, MontyPythonAndTheHolyGrail]

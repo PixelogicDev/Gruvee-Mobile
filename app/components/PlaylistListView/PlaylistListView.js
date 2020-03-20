@@ -1,4 +1,5 @@
 // LilCazza - "I copy and pasted this from stackoverflow. (I have no idea what it does, but everything breaks if it's not here" (02/03/20)
+// MrDemonWolf - "2020 is year of the Contagion Movie monkaS" (03/20/20)
 import React, { useState, useEffect } from 'react'
 import { BackHandler, View, StyleSheet, Platform } from 'react-native'
 import { SwipeListView } from 'react-native-swipe-list-view'
@@ -6,7 +7,7 @@ import { Navigation } from 'react-native-navigation'
 
 // Redux
 import { connect } from 'react-redux'
-import { FetchPlaylists } from 'Gruvee/redux/actions/playlists/PlaylistActions'
+import { HydratePlaylists } from 'Gruvee/redux/actions/playlists/PlaylistActions'
 import { MapPlaylistsFromUserSelector } from 'Gruvee/redux/selectors/PlaylistsSelector'
 
 import AddItemButton from 'Gruvee/components/common/AddItemButton'
@@ -18,13 +19,11 @@ import SwipeablePlaylistItem from './components/SwipeablePlaylistItem'
 console.disableYellowBox = true
 console.ignoredYellowBox = ['Could not find image']
 
-const PlaylistListView = ({ fetchPlaylists, playlists }) => {
+const PlaylistListView = ({ hydratePlaylists, playlists }) => {
     const [addPlaylistModalShown, setAddPlaylistModalShown] = useState(false)
     const keyExtractor = item => `${item.id}`
     const renderItem = ({ item }) => <SwipeablePlaylistItem playlistData={item} />
     useEffect(() => {
-        fetchPlaylists()
-
         // Only if on Android, let's setup for backhandler override
         if (Platform.OS === 'android') {
             this.backHandler = BackHandler.addEventListener('hardwareBackPress', () => {
@@ -138,7 +137,7 @@ const mapStateToProps = state => {
     }
 }
 const mapDispatchToProps = dispatch => ({
-    fetchPlaylists: () => dispatch(FetchPlaylists()),
+    hydratePlaylists: () => dispatch(HydratePlaylists()),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(PlaylistListView)

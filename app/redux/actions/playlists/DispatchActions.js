@@ -109,7 +109,7 @@ export const DeleteSongComment = (commentId, songId, playlistId, statePlaylists)
 }
 
 // sillyonly - "well well! I have been UNLEASHED now" (02/13/20)
-export const FetchPlaylists = (playlistsState, playlists) => {
+export const HydratePlaylists = (playlistsState, playlists) => {
     // Get user state playlists, map through IDs, and return
     if (playlists.length === 0) return playlistsState
 

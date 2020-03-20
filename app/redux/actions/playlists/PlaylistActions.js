@@ -6,7 +6,7 @@
 import {
     ADD_PLAYLIST,
     DELETE_PLAYLIST,
-    FETCH_PLAYLISTS,
+    HYDRATE_PLAYLISTS,
     SET_CURRENT_PLAYLIST_ID,
 } from 'Gruvee/redux/actions/ActionsType'
 import { DeleteSong } from 'Gruvee/redux/actions/songs/SharedSongActions'
@@ -14,6 +14,10 @@ import {
     AddPlaylistToUser,
     DeletePlaylistFromUser,
 } from 'Gruvee/redux/actions/user/SharedUserActions'
+import {
+    CreateNewPlaylistDocument,
+    UpdateUserDocumentWithPlaylist,
+} from 'Gruvee/firestore/playlistActions'
 
 // Action Creators
 const addPlaylist = playlist => {
@@ -30,25 +34,28 @@ const deletePlaylist = (playlistId, playlists) => {
     }
 }
 
-const fetchPlaylists = playlists => {
+const hydratePlaylists = playlists => {
     // Simulates call to get all playlists for current user
     // We are assuming we have a user signed in
-    return { type: FETCH_PLAYLISTS, data: playlists }
+    return { type: HYDRATE_PLAYLISTS, data: playlists }
 }
 
 // Thunks
 // evjand - "SMOrc ME CODE THUNK SMOrc" (02/13/20)
 export const AddPlaylist = newPlaylist => {
-    return (dispatch, getState) => {
+    return async (dispatch, getState) => {
         const {
             PlaylistsDataReducer: { statePlaylists },
+            UserDataReducer: { user },
         } = getState()
 
-        // Set playlist in user state
-        dispatch(AddPlaylistToUser(newPlaylist.id))
-
-        // Set playlist in state
+        // Write newly created playlist to firestore and then add to state
+        const playlistDocRef = await CreateNewPlaylistDocument(newPlaylist)
         dispatch(addPlaylist(newPlaylist, statePlaylists))
+
+        // Set db reference and write path to user doc in DB
+        await UpdateUserDocumentWithPlaylist(user.id, playlistDocRef)
+        dispatch(AddPlaylistToUser(newPlaylist.id))
     }
 }
 
@@ -72,11 +79,10 @@ export const DeletePlaylist = playlistId => {
     }
 }
 
-export const FetchPlaylists = () => {
+export const HydratePlaylists = playlists => {
     // Make async call to service to get latest playlist data for user
     return dispatch => {
-        const playlists = []
-        dispatch(fetchPlaylists(playlists))
+        dispatch(hydratePlaylists(playlists))
     }
 }
 
