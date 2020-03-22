@@ -19,7 +19,7 @@ const AddPlaylistModal = ({ addPlaylist, currentUser, title }) => {
     const runPlaylistAction = async () => {
         try {
             // Create playlist object
-            const playlist = new Playlist(playlistNameValue, membersNameValue, currentUser.username)
+            const playlist = new Playlist(playlistNameValue, membersNameValue, currentUser)
 
             if (!playlistNameValue) {
                 // TODO: Stop this and show some UI to add name
