@@ -25,10 +25,11 @@ export const SignInUser = userId => {
         // If we are reaching here, we are "signed in"
         // We then need to get data for user from Firestore
         const data = await GetUserDocument(userId)
-        dispatch(signInUser(data.user))
 
         // After we are signed in, lets hydrate the playlists state
         dispatch(HydratePlaylists(data.playlistsData))
+
+        dispatch(signInUser(data.user))
 
         return data.user
     }

@@ -12,19 +12,19 @@ export default class Playlist {
             song2: ['comment1'],
             song3: ['comment0', 'comment5', 'comment6', 'comment3'],
         },
-        albumArtworkUrl: 'SomeBrokenImagePath',
+        coverArt: 'SomeBrokenImagePath',
     */
 
     constructor(name, members = '', createdBy = '') {
         this.id = uuidv4()
         this.name = name
-        this.createBy = createdBy
+        this.createdBy = createdBy
         const cleanedMembers = !members.length
             ? [createdBy] // This should be a User Object when we get to setting this up
             : [createdBy, ...members.split(',').map(m => m.trim())]
         this.members = cleanedMembers
         this.songs = []
         this.comments = {}
-        this.albumArtworkUrl = ''
+        this.coverArt = ''
     }
 }
