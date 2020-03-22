@@ -16,6 +16,7 @@ import {
 } from 'Gruvee/redux/actions/user/SharedUserActions'
 import {
     CreateNewPlaylistDocument,
+    DeletePlaylistDocument,
     UpdateUserDocumentWithPlaylist,
 } from 'Gruvee/firestore/playlistActions'
 
@@ -60,10 +61,14 @@ export const AddPlaylist = newPlaylist => {
 }
 
 export const DeletePlaylist = playlistId => {
-    return (dispatch, getState) => {
+    return async (dispatch, getState) => {
         const {
+            UserDataReducer: { user },
             PlaylistsDataReducer: { playlists },
         } = getState()
+
+        // Delete Playlist from Firebase
+        await DeletePlaylistDocument(user.id, playlistId)
 
         playlists.byId[playlistId].songs.forEach(songId => {
             // Delete songs from playlist from SongsDataReducer

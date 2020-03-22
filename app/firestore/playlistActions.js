@@ -19,25 +19,45 @@ export const CreateNewPlaylistDocument = async playlist => {
     }
 }
 
-export const UpdateUserDocumentWithPlaylist = async (uid, playlistRef) => {
-    try {
-        const userDocRef = await firestore()
-            .collection('users')
-            .doc(uid)
+export const DeletePlaylistDocument = async (uid, playlistId) => {
+    const userDocRef = await firestore().doc(`users/${uid}`)
+    const playlistDocRef = await firestore().doc(`playlists/${playlistId}`)
 
-        firestore().runTransaction(transaction => {
-            return transaction.get(userDocRef).then(userDoc => {
-                if (!userDoc.exists) {
-                    return Promise.reject(new Error('userDoc did not exist.'))
-                }
+    // Remove playlist document
+    await playlistDocRef.delete()
 
-                const currentPlaylists = userDoc.data().playlists
-                transaction.update(userDocRef, { playlists: [...currentPlaylists, playlistRef] })
+    // Remove playlist docRef from user
+    firestore().runTransaction(transaction => {
+        return transaction.get(userDocRef).then(userDoc => {
+            if (!userDoc.exists) {
+                throw new Error('userDoc did not exist.')
+            }
 
-                return Promise.resolve()
+            const currentPlaylists = userDoc.data().playlists
+            transaction.update(userDocRef, {
+                playlists: currentPlaylists.filter(playlist => playlist.id !== playlistId),
             })
         })
-    } catch (error) {
-        return Promise.reject(error)
-    }
+    })
+
+    // TODO: Delete associated songs
+
+    // TODO: Delete associated comments
+}
+
+export const UpdateUserDocumentWithPlaylist = async (uid, playlistRef) => {
+    const userDocRef = await firestore()
+        .collection('users')
+        .doc(uid)
+
+    firestore().runTransaction(transaction => {
+        return transaction.get(userDocRef).then(userDoc => {
+            if (!userDoc.exists) {
+                return Promise.reject(new Error('userDoc did not exist.'))
+            }
+
+            const currentPlaylists = userDoc.data().playlists
+            transaction.update(userDocRef, { playlists: [...currentPlaylists, playlistRef] })
+        })
+    })
 }
