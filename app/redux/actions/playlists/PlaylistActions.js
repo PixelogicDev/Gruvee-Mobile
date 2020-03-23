@@ -51,7 +51,11 @@ export const AddPlaylist = newPlaylist => {
         } = getState()
 
         // Write newly created playlist to firestore and then add to state
-        const playlistDocRef = await CreateNewPlaylistDocument(newPlaylist)
+        const playlistDocRef = await CreateNewPlaylistDocument(
+            newPlaylist,
+            user.preferredSocialPlatform
+        )
+
         dispatch(addPlaylist(newPlaylist, statePlaylists))
 
         // Set db reference and write path to user doc in DB

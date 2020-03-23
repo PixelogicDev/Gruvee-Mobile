@@ -4,7 +4,7 @@
 // Mheetu - "Contributing Guidelines: Use semicolons." (03/13/20)
 // Isakfk1234 - "incoming code" (03/13/20)
 // Firestore
-import { GET_AUTHORIZATION_CODE } from 'Gruvee/service/spotify/endpointConstants'
+import { SPOTIFY_ENDPOINTS } from 'Gruvee/service/endpointConstants'
 import { AuthorizeUser, GetApiToken } from 'Gruvee/service/spotify/endpoints'
 import { Linking } from 'react-native'
 import Creds from 'Gruvee/config/creds'
@@ -43,7 +43,11 @@ export const InitAuthorizationCodeFlow = async () => {
     try {
         // Will open our browser to Spotify sign in
         await Linking.openURL(
-            GET_AUTHORIZATION_CODE(Creds.Spotify.clientId, scopes, Creds.Spotify.redirectUri)
+            SPOTIFY_ENDPOINTS.getAuthorizationCode(
+                Creds.Spotify.clientId,
+                scopes,
+                Creds.Spotify.redirectUri
+            )
         )
     } catch (err) {
         // TODO: Handle Warnings

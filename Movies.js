@@ -34,6 +34,9 @@
 // JMSWRNR - "Your mother was a hamster and your father smelt of elderberries." (03/20/20)
 // HMigo - "Look, that rabbit's got a vicious streak a mile wide! It's a killer!" (03/20/20)
 
+// -- OTHER MOVIE -- //
+// TheYagich01 - "Famous movie quote!" (03/23/20)
+
 const BeeMovie = () => {}
 
 const CarsMovie = () => {}

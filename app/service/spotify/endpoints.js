@@ -4,10 +4,7 @@ import axios from 'axios'
 import { Buffer } from 'buffer'
 import Creds from 'Gruvee/config/creds'
 // Env Variables
-import { ENVIRONMENT, FIREBASE_PROD_URI } from 'react-native-dotenv'
-import { GET_API_TOKEN } from './endpointConstants'
-
-const baseHostName = ENVIRONMENT === 'PROD' ? FIREBASE_PROD_URI : `http://localhost:8080`
+import { SPOTIFY_ENDPOINTS, COMMON_ENDPOINTS } from 'Gruvee/service/endpointConstants'
 
 // POST: API Token Request
 export const GetApiToken = code => {
@@ -27,7 +24,7 @@ export const GetApiToken = code => {
 
     const options = {
         method: 'POST',
-        url: GET_API_TOKEN,
+        url: SPOTIFY_ENDPOINTS.getApiToken,
         headers,
         data: params,
     }
@@ -38,16 +35,11 @@ export const GetApiToken = code => {
     return axios(options)
 }
 
-// POST: API Token Refresh
-export const RefreshApiToken = async () => {
-    console.log('Refreshing API Token for Spotify...')
-}
-
 // POST: Authorize Spotify User
 export const AuthorizeUser = (token, expiresIn, refreshToken) => {
     const options = {
         method: 'POST',
-        url: `${baseHostName}/authorizeWithSpotify`,
+        url: COMMON_ENDPOINTS.authorizeUser,
         data: {
             token,
             expiresIn,
@@ -68,7 +60,7 @@ export const GetCustomFirebaseToken = async uid => {
 
     const options = {
         method: 'POST',
-        url: `${baseHostName}/generateCustomToken`,
+        url: COMMON_ENDPOINTS.getCustomFirebaseToken,
         headers,
         data: { uid },
     }
