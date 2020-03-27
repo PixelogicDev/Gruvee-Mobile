@@ -15,6 +15,8 @@ export const CreateNewPlaylistDocument = async (playlist, preferredSocialPlatfor
 
     // Call endpoint to create playlist on social platform
     CreateSocialPlaylist(preferredSocialPlatform, playlist)
+
+    return playlistDoc
 }
 
 export const DeletePlaylistDocument = async (uid, playlistId) => {
