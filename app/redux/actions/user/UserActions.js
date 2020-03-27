@@ -1,6 +1,8 @@
 // syszen - "first comment after inflation" (02/18/20)
+// W0lfDM - "WolfDM was Here" (03/20/20)
 import { GetUserDocument } from 'Gruvee/firestore/userActions'
 import { SET_INITIAL_USER_DATA, SIGN_IN } from 'Gruvee/redux/actions/ActionsType'
+import { HydratePlaylists } from 'Gruvee/redux/actions/playlists/PlaylistActions'
 
 // Action Creators
 const setInitialUserData = user => {
@@ -19,19 +21,17 @@ const signInUser = user => {
 
 // Thunks
 export const SignInUser = userId => {
-    console.log('SignInUser Redux Action: ', userId)
-
     return async dispatch => {
         // If we are reaching here, we are "signed in"
         // We then need to get data for user from Firestore
-        try {
-            const user = await GetUserDocument(userId)
-            dispatch(signInUser(user))
+        const data = await GetUserDocument(userId)
 
-            return Promise.resolve(user)
-        } catch (error) {
-            return Promise.reject(Error('SignInUser Redux Action: ', error))
-        }
+        // After we are signed in, lets hydrate the playlists state
+        dispatch(HydratePlaylists(data.playlistsData))
+
+        dispatch(signInUser(data.user))
+
+        return data.user
     }
 }
 

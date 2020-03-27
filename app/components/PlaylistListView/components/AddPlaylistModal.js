@@ -11,28 +11,34 @@ import { AddPlaylist } from 'Gruvee/redux/actions/playlists/PlaylistActions'
 import * as StyleConstants from 'Gruvee/config/styles'
 import * as NavigationConstants from 'Gruvee/config/navigation'
 
-const AddPlaylistModal = ({ title, addPlaylist }) => {
+const AddPlaylistModal = ({ addPlaylist, currentUser, title }) => {
     const [playlistNameValue, onChangePlaylistNameText] = React.useState('')
     const [membersNameValue, onChangeMembersNameText] = React.useState('')
 
     // Actions
-    const runPlaylistAction = () => {
-        // Create playlist object
-        const playlist = new Playlist(playlistNameValue, membersNameValue)
+    const runPlaylistAction = async () => {
+        try {
+            // Create playlist object
+            const playlist = new Playlist(playlistNameValue, membersNameValue, currentUser)
 
-        if (!playlistNameValue) {
-            // Stop this and show error?
+            if (!playlistNameValue) {
+                // TODO: Stop this and show some UI to add name
+                console.log('PlaylistNameValue is empty')
+                return
+            }
+
+            // TODO: We will need some "find user" support here...
+
+            // Run action to create playlists
+            await addPlaylist(playlist)
+
+            // TODO: We will probably want to add some sort of loading indicator to our button
+
+            // Dismiss
+            Navigation.dismissOverlay(NavigationConstants.ADD_PLAYLIST_MODAL_NAV_ID)
+        } catch (error) {
+            console.warn(error)
         }
-
-        // If members are added, we need to pull their objects down from the service
-        // Im thinking we can fetch data by ID and then just pull down their objects
-        // Then pass them along to store in state
-
-        // Run action to create playlist
-        addPlaylist(playlist)
-
-        // Dismiss
-        Navigation.dismissOverlay(NavigationConstants.ADD_PLAYLIST_MODAL_NAV_ID)
     }
 
     return (
@@ -77,8 +83,13 @@ const styles = StyleSheet.create({
 })
 
 // Redux Mappers
+const mapStateToProps = state => {
+    return {
+        currentUser: state.UserDataReducer.user,
+    }
+}
 const mapDispatchToProps = dispatch => ({
     addPlaylist: playlist => dispatch(AddPlaylist(playlist)),
 })
 
-export default connect(null, mapDispatchToProps)(AddPlaylistModal)
+export default connect(mapStateToProps, mapDispatchToProps)(AddPlaylistModal)

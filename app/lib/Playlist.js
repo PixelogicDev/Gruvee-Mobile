@@ -1,7 +1,10 @@
+import { v4 as uuidv4 } from 'uuid'
+
 export default class Playlist {
     /*
         id: 'playlist1',
         name: 'Cool Kids Music',
+        createdBy: 'SomeMemberId' // This will be a user object
         members: ['memberYaBoi', 'memberAlec', 'memberWasHere'], // MemberIds
         songs: ['song1', 'song2', 'song3'],
         comments: {
@@ -9,21 +12,19 @@ export default class Playlist {
             song2: ['comment1'],
             song3: ['comment0', 'comment5', 'comment6', 'comment3'],
         },
-        albumArtworkUrl: 'SomeBrokenImagePath',
+        coverArt: 'SomeBrokenImagePath',
     */
 
-    constructor(name, members = '') {
-        const randoNum = Math.floor(Math.random() * Math.floor(1000))
-
-        this.id = `${name.replace(/\s/g, '')}-${randoNum}`
+    constructor(name, members = '', createdBy = null) {
+        this.id = uuidv4()
         this.name = name
-        // Return signed in user at the moment thats "adilanchian"
+        this.createdBy = createdBy.id
         const cleanedMembers = !members.length
-            ? ['adilanchian']
-            : ['adilanchian', ...members.split(',').map(m => m.trim())]
+            ? [createdBy.id] // This should be a User Object when we get to setting this up
+            : [createdBy.id, ...members.split(',').map(m => m.trim())]
         this.members = cleanedMembers
         this.songs = []
         this.comments = {}
-        this.albumArtworkUrl = 'SomeBrokenImagePath'
+        this.coverArt = ''
     }
 }

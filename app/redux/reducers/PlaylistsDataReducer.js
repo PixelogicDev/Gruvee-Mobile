@@ -1,6 +1,5 @@
 // sillyonly - "Swift is still better than this!" (02/03/20)
 // InukApp "Swift > JS" (01/27/20)
-import MockPlaylists from 'Gruvee/mock/playlists'
 import {
     ADD_PLAYLIST,
     ADD_PLAYLIST_MEMBER,
@@ -9,7 +8,7 @@ import {
     DELETE_PLAYLIST,
     DELETE_PLAYLIST_SONG,
     DELETE_SONG_COMMENT,
-    FETCH_PLAYLISTS,
+    HYDRATE_PLAYLISTS,
     SET_CURRENT_PLAYLIST_ID,
 } from 'Gruvee/redux/actions/ActionsType'
 import {
@@ -20,33 +19,14 @@ import {
     DeletePlaylist,
     DeletePlaylistSong,
     DeleteSongComment,
-    FetchPlaylists,
+    HydratePlaylists,
 } from 'Gruvee/redux/actions/playlists/DispatchActions'
 // InukApp - "Hello World" (01/27/20)
 // LilCazza - "PixelogicDev's code is just like monkaS when I use this bug (*feature)" (01/28/20)
 // ywnklme - "\_(ツ)_/¯" (01/27/20)
 
-// Mock Data Mapper
-const mapMockPlaylists = () => {
-    const byId = {}
-    const allIds = []
-
-    MockPlaylists.forEach(playlist => {
-        byId[playlist.id] = playlist
-        allIds.push(playlist.id)
-    })
-
-    return {
-        currentPlaylistId: '',
-        playlists: {
-            byId,
-            allIds,
-        },
-    }
-}
-
-// Map mock data for initial state using FetchPlaylists
-const initialState = mapMockPlaylists()
+// Map mock data for initial state using HydratePlaylists
+const initialState = { currentPlaylistId: '', playlists: { byId: {}, allIds: [] } }
 
 export default (state = initialState, action) => {
     switch (action.type) {
@@ -103,10 +83,10 @@ export default (state = initialState, action) => {
                     state.playlists
                 ),
             }
-        case FETCH_PLAYLISTS:
+        case HYDRATE_PLAYLISTS:
             return {
                 ...state,
-                playlists: FetchPlaylists(state.playlists, action.data),
+                playlists: HydratePlaylists(state.playlists, action.data),
             }
         case SET_CURRENT_PLAYLIST_ID:
             return {

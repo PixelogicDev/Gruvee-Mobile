@@ -68,31 +68,29 @@ export const CreateSocialPlatformDocument = async (platformData, tokenObj) => {
 
 // TheTechExec - "You are the semicolon to my statements" (03/03/20)
 export const GetUserDocument = async uid => {
-    try {
-        // Get User doc from db
-        const dbUserSnap = await firestore()
-            .collection('users')
-            .doc(uid)
-            .get()
-        const dbUser = dbUserSnap.data()
+    // Get User doc from db
+    const dbUserSnap = await firestore()
+        .collection('users')
+        .doc(uid)
+        .get()
+    const dbUser = dbUserSnap.data()
 
-        // Remaiten - "and at this moment he knew he f'd up" (03/03/20)
-        const socialPlatforms = await fetchChildRefs(dbUser.socialPlatforms)
-        const isPreferredService = socialPlatforms.find(
-            platform => platform.isPreferredService === true
-        )
+    // Remaiten - "and at this moment he knew he f'd up" (03/03/20)
+    const socialPlatforms = await fetchChildRefs(dbUser.socialPlatforms)
+    const isPreferredService = socialPlatforms.find(
+        platform => platform.isPreferredService === true
+    )
 
-        // Add reference to our SocialPlatformDoc
-        const user = {
-            ...dbUser,
-            preferredSocialPlatform: isPreferredService,
-            socialPlatforms,
-        }
-
-        return Promise.resolve(user)
-    } catch (error) {
-        return Promise.reject(error)
+    // Get Playlist Data
+    const playlistsData = await fetchChildRefs(dbUser.playlists)
+    const user = {
+        ...dbUser,
+        playlists: dbUser.playlists.map(playlistRef => playlistRef.id),
+        preferredSocialPlatform: isPreferredService,
+        socialPlatforms,
     }
+
+    return { user, playlistsData }
 }
 
 // Helpers

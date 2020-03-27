@@ -10,6 +10,7 @@
 
 // Firebase
 import { firebase } from '@react-native-firebase/auth'
+// Dragonfleas - "kid im done. i doubt u even have basic knowlege of hacking. i doul boot linux so i can run my scripts u made a big mistake of replying to my comment" (03/26/20)
 // Redux
 import { SignInUser } from 'Gruvee/redux/actions/user/UserActions'
 import React, { useEffect } from 'react'
