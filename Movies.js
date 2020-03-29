@@ -34,6 +34,9 @@
 // JMSWRNR - "Your mother was a hamster and your father smelt of elderberries." (03/20/20)
 // HMigo - "Look, that rabbit's got a vicious streak a mile wide! It's a killer!" (03/20/20)
 
+// -- Pulp Fiction -- //
+// Dragonfleas - "English, motherfucker! Do you speak it?" (03/28/20)
+
 // -- OTHER MOVIE -- //
 // TheYagich01 - "Famous movie quote!" (03/23/20)
 
@@ -43,4 +46,6 @@ const CarsMovie = () => {}
 
 const MontyPythonAndTheHolyGrail = () => {}
 
-export default [BeeMovie, CarsMovie, MontyPythonAndTheHolyGrail]
+const PulpFiction = () => {}
+
+export default [BeeMovie, CarsMovie, MontyPythonAndTheHolyGrail, PulpFiction]

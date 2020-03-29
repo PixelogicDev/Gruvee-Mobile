@@ -3,6 +3,7 @@ import { StyleSheet, TextInput } from 'react-native'
 import { Navigation } from 'react-native-navigation'
 import Playlist from 'Gruvee/lib/Playlist'
 import InputModal from 'Gruvee/components/common/InputModal'
+import AlgoliaSearch from 'Gruvee/components/common/AlgoliaSearch'
 
 // Redux
 import { connect } from 'react-redux'
@@ -58,13 +59,7 @@ const AddPlaylistModal = ({ addPlaylist, currentUser, title }) => {
                 onChangeText={text => onChangePlaylistNameText(text)}
                 value={playlistNameValue}
             />
-            <TextInput
-                placeholder="Members"
-                placeholderTextColor={StyleConstants.INPUT_PLACEHOLDER_FONT_COLOR}
-                style={styles.Input}
-                onChangeText={text => onChangeMembersNameText(text)}
-                value={membersNameValue}
-            />
+            <AlgoliaSearch attribute="username" />
         </InputModal>
     )
 }
