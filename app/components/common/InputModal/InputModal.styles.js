@@ -10,7 +10,7 @@ const getModalHeight = navigationId => {
     switch (navigationId) {
         case NavigationConstants.ADD_PLAYLIST_MODAL_NAV_ID:
             return Platform.OS === 'ios'
-                ? StyleConstants.ADD_PLAYLIST_MODAL_HEIGHT_iOS
+                ? screenHeight / 2
                 : StyleConstants.ADD_PLAYLIST_MODAL_HEIGHT_ANDROID
 
         case NavigationConstants.ADD_SONG_MODAL_NAV_ID:
@@ -33,20 +33,20 @@ export default StyleSheet.create({
         height: screenHeight,
     },
     Modal: navigationId => ({
-        position: 'absolute',
-        width: '90%',
+        // position: 'absolute',
+        width: screenWidth,
         height: getModalHeight(navigationId),
         // This is to center the modal absolutely in the background view
-        top: '50%',
-        left: '50%',
-        transform: [
-            {
-                translateX: -(screenWidth * 0.9) / 2,
-            },
-            {
-                translateY: -(getModalHeight(navigationId) / 2),
-            },
-        ],
+        // top: '50%',
+        // left: '50%',
+        // transform: [
+        //     {
+        //         translateX: -(screenWidth * 0.9) / 2,
+        //     },
+        //     {
+        //         translateY: -(getModalHeight(navigationId) / 2),
+        //     },
+        // ],
         backgroundColor: StyleConstants.BASE_MODAL_BACKGROUND_COLOR,
         borderRadius: StyleConstants.BASE_BORDER_RADIUS,
     }),
@@ -54,7 +54,8 @@ export default StyleSheet.create({
         fontSize: StyleConstants.MODAL_HEADER_SIZE_iOS,
         color: StyleConstants.BASE_FONT_COLOR,
         fontWeight: StyleConstants.SEMIBOLD_WEIGHT,
-        paddingTop: 10,
+        paddingTop: 25,
+        paddingBottom: 25,
         textAlign: 'center',
     },
     InputContainer: {

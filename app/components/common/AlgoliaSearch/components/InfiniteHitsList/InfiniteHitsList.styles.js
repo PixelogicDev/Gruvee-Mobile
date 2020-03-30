@@ -2,6 +2,44 @@ import { StyleSheet } from 'react-native'
 import * as StyleConstants from 'Gruvee/config/styles'
 
 export default StyleSheet.create({
+    ListContainer: {
+        paddingVertical: 10,
+    },
+    HitItemContainer: {
+        flexDirection: 'row',
+        width: '100%',
+        height: 44,
+        alignItems: 'center',
+    },
+    HitItemImage: {
+        width: 28,
+        height: 28,
+        marginLeft: 10,
+        borderRadius: 14,
+        backgroundColor: 'grey',
+    },
+    HitItemUsername: {
+        fontSize: 12,
+        fontWeight: StyleConstants.SEMIBOLD_WEIGHT,
+        color: 'white',
+        marginLeft: 10,
+    },
+    HitItemAddButton: {
+        width: 24,
+        height: 24,
+        borderRadius: 12,
+        marginLeft: 'auto',
+        marginRight: 10,
+        borderWidth: 1,
+        borderColor: '#FFA440',
+        backgroundColor: '#363636',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    HitItemPlusIcon: {
+        width: 10,
+        height: 10,
+    },
     Input: {
         width: '75%',
         marginBottom: 15,

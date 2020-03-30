@@ -1,3 +1,4 @@
+// Isakfk1234 - "HTML is the best programming language kappa" (03/30/20)
 import { StyleSheet } from 'react-native'
 
 import * as StyleConstants from 'Gruvee/config/styles'
@@ -10,10 +11,11 @@ export default StyleSheet.create({
     },
     Button: disabled => ({
         flexBasis: 44,
-        height: '100%',
+        minHeight: 44,
         flexDirection: 'row',
         alignItems: 'center',
         width: '60%',
+        marginBottom: 15,
         borderRadius: StyleConstants.BASE_BORDER_RADIUS,
         borderWidth: 1,
         borderColor: disabled
