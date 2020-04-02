@@ -11,9 +11,6 @@ export const AUTH_NAV_NAME = 'navigation.gruvee.auth'
 export const PLAYLIST_NAV_ID = 'navigation.gruvee.playlist.id'
 export const PLAYLIST_NAV_NAME = 'navigation.gruvee.playlist'
 
-export const ADD_PLAYLIST_MODAL_NAV_ID = 'navigation.gruvee.addPlaylistModal.id'
-export const ADD_PLAYLIST_MODAL_NAV_NAME = 'navigation.gruvee.addPlaylistModal'
-
 export const ADD_SONG_MODAL_NAV_ID = 'navigation.gruvee.addSongModal.id'
 export const ADD_SONG_MODAL_NAV_NAME = 'navigation.gruvee.addSongModal'
 

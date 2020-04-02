@@ -1,14 +1,16 @@
 import { StyleSheet } from 'react-native'
 import * as StyleConstants from 'Gruvee/config/styles'
 
+const itemContainerHeight = 44
+
 export default StyleSheet.create({
     ListContainer: {
-        paddingVertical: 10,
+        minHeight: itemContainerHeight * 3,
     },
     HitItemContainer: {
         flexDirection: 'row',
         width: '100%',
-        height: 44,
+        height: itemContainerHeight,
         alignItems: 'center',
     },
     HitItemImage: {

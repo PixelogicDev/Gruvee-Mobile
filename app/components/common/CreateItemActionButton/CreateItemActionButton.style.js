@@ -5,9 +5,9 @@ import * as StyleConstants from 'Gruvee/config/styles'
 
 export default StyleSheet.create({
     Container: {
-        display: 'flex',
-        alignItems: 'center',
         width: '100%',
+        marginTop: 15,
+        alignItems: 'center',
     },
     Button: disabled => ({
         flexBasis: 44,

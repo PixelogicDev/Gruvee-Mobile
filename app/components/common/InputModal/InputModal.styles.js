@@ -34,8 +34,8 @@ export default StyleSheet.create({
     },
     Modal: navigationId => ({
         // position: 'absolute',
-        width: screenWidth,
-        height: getModalHeight(navigationId),
+        // width: screenWidth,
+        // height: getModalHeight(navigationId),
         // This is to center the modal absolutely in the background view
         // top: '50%',
         // left: '50%',
