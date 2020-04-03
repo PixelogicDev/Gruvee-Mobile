@@ -1,5 +1,15 @@
+// syszen - "note: nokia 3310 - the most indestructible phone ever, this app will be release on it at 2021" (04/03/20)
 import React, { forwardRef, useState } from 'react'
-import { Dimensions, Platform, StyleSheet, Text, TextInput, View } from 'react-native'
+import {
+    Dimensions,
+    Image,
+    Platform,
+    StyleSheet,
+    Text,
+    TextInput,
+    TouchableOpacity,
+    View,
+} from 'react-native'
 import BottomSheet from 'reanimated-bottom-sheet'
 import AlgoliaSearch from 'Gruvee/components/common/AlgoliaSearch'
 import CreateItemActionButton from 'Gruvee/components/common/CreateItemActionButton'
@@ -12,10 +22,25 @@ import { AddPlaylist } from 'Gruvee/redux/actions/playlists/PlaylistActions'
 import * as StyleConstants from '@StyleConstants'
 
 const screenHeight = Dimensions.get('screen').height
-const navBarHeight = Platform.OS === 'ios' ? 44 : 0
+const navBarHeight = Platform.OS === 'ios' ? 44 : 36
+const timeIcon = require('Gruvee/assets/icons/times/times_icon.png')
 
 // Styles
 const styles = StyleSheet.create({
+    CloseButtonContainer: {
+        alignSelf: 'flex-end',
+        width: 28,
+        height: 28,
+        marginTop: 20,
+        borderRadius: 14,
+        backgroundColor: '#5C5C5CB3',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    CloseButtonIcon: {
+        height: 14,
+        width: 14,
+    },
     Header: {
         fontSize: StyleConstants.MODAL_HEADER_SIZE_iOS,
         color: StyleConstants.BASE_FONT_COLOR,
@@ -75,6 +100,14 @@ const generateSheetContent = (
     bottomSheetRef
 ) => (
     <View style={styles.InputContainer}>
+        <TouchableOpacity
+            style={styles.CloseButtonContainer}
+            onPress={() => {
+                dismissBottomSheet(bottomSheetRef)
+            }}
+        >
+            <Image style={styles.CloseButtonIcon} source={timeIcon} />
+        </TouchableOpacity>
         <Text style={styles.Header}>Add Playlist</Text>
         <TextInput
             placeholder="Playlist Name"
