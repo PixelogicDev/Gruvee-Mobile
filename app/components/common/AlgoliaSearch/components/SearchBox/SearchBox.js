@@ -1,15 +1,18 @@
 import React from 'react'
-import { TextInput } from 'react-native'
 import { connectSearchBox } from 'react-instantsearch-native'
+import TagsInput from 'Gruvee/components/common/TagsInput'
 import Styles from './SearchBox.styles'
-
-const SearchBox = ({ currentRefinement, placeholderText, refine }) => {
+// Dragonfleas: "hey guys, go subscribe to twitch.tv/pixelogicdev or face the consequences - the national security agency" (04/03/20)
+const SearchBox = ({ currentRefinement, placeholderText, refine, removeUser, selectedUsers }) => {
     return (
-        <TextInput
-            placeholder={placeholderText}
-            placeholderTextColor={Styles.InputPlaceHolderColor.color}
-            style={Styles.Input}
+        <TagsInput
+            containerStyles={Styles.Container}
+            inputStyles={Styles.Input}
             onChangeText={value => refine(value)}
+            placeholderText={placeholderText}
+            placeholderTextColor={Styles.InputPlaceHolderColor.color}
+            removeUser={removeUser}
+            selectedUsers={selectedUsers}
             value={currentRefinement}
         />
     )
