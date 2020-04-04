@@ -11,6 +11,7 @@ export default StyleSheet.create({
         backgroundColor: 'white',
         borderRadius: 8,
         paddingHorizontal: 3,
+        marginRight: 5,
     },
     Item: {
         alignSelf: 'center',

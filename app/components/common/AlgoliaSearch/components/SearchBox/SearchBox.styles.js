@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native'
-import { BASE_FONT_COLOR, TEXT_INPUT_PADDING } from '@StyleConstants'
+import { BASE_FONT_COLOR } from '@StyleConstants'
 
 export default StyleSheet.create({
     Container: {
@@ -12,7 +12,6 @@ export default StyleSheet.create({
     },
     Input: {
         flexGrow: 1,
-        padding: TEXT_INPUT_PADDING,
         color: 'white',
         fontSize: 12,
     },

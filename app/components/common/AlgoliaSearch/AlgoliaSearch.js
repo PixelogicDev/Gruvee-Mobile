@@ -15,6 +15,7 @@ const searchClient = algoliasearch(Creds.Algolia.appId, Creds.Algolia.appKey)
 const AlgoliaSearch = ({ attribute }) => {
     const [searchState, onChangeSearchState] = useState({})
     const [selectedUsers, setSelectedUser] = useState([])
+    const [clearInput, setClearInput] = useState(false)
 
     return (
         <InstantSearch
@@ -25,18 +26,23 @@ const AlgoliaSearch = ({ attribute }) => {
         >
             <VirtualRefinementList attribute={attribute} />
             <SearchBox
+                clearInput={clearInput}
                 placeholderText="Members"
                 removeUser={removeUser(selectedUsers, setSelectedUser)}
                 selectedUsers={selectedUsers}
+                setClearInput={setClearInput}
             />
-            <InfiniteHitsList selectUser={selectUser(selectedUsers, setSelectedUser)} />
+            <InfiniteHitsList
+                selectUser={selectUser(selectedUsers, setSelectedUser, setClearInput)}
+            />
         </InstantSearch>
     )
 }
 
 // Actions
-const selectUser = (selectedUsers, setSelectedUser) => user => {
+const selectUser = (selectedUsers, setSelectedUser, setClearInput) => user => {
     setSelectedUser(users => [...users, user])
+    setClearInput(true)
 }
 
 const removeUser = (selectedUsers, setSelectedUser) => objectID => {

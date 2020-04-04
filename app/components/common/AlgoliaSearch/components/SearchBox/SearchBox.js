@@ -1,21 +1,47 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import { connectSearchBox } from 'react-instantsearch-native'
 import TagsInput from 'Gruvee/components/common/TagsInput'
 import Styles from './SearchBox.styles'
 // Dragonfleas: "hey guys, go subscribe to twitch.tv/pixelogicdev or face the consequences - the national security agency" (04/03/20)
-const SearchBox = ({ currentRefinement, placeholderText, refine, removeUser, selectedUsers }) => {
+const SearchBox = ({
+    clearInput,
+    currentRefinement,
+    placeholderText,
+    refine,
+    removeUser,
+    selectedUsers,
+    setClearInput,
+}) => {
+    const tagInputRef = useRef(null)
+
+    useEffect(() => {
+        // If we are clearing the text, that means we should refocus the input
+        if (clearInput === true && tagInputRef.current) {
+            tagInputRef.current.focus()
+        }
+    }, [clearInput])
+
     return (
         <TagsInput
             containerStyles={Styles.Container}
             inputStyles={Styles.Input}
-            onChangeText={value => refine(value)}
+            onChangeText={onChangeText(refine, clearInput, setClearInput)}
             placeholderText={placeholderText}
             placeholderTextColor={Styles.InputPlaceHolderColor.color}
             removeUser={removeUser}
+            ref={tagInputRef}
             selectedUsers={selectedUsers}
-            value={currentRefinement}
+            value={!clearInput ? currentRefinement : ''}
         />
     )
+}
+
+// Actions
+const onChangeText = (refine, clearInput, setClearInput) => value => {
+    refine(value)
+    if (clearInput) {
+        setClearInput(false)
+    }
 }
 
 export default connectSearchBox(SearchBox)

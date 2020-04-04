@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
 })
 
 const AddPlaylistBottomSheet = ({ addPlaylist, currentUser, bottomSheetRef }) => {
-    const [playlistNameText, onChangePlaylistNameText] = useState('')
+    const [playlistNameText, setPlaylistNameText] = useState('')
 
     return (
         <BottomSheet
@@ -81,7 +81,7 @@ const AddPlaylistBottomSheet = ({ addPlaylist, currentUser, bottomSheetRef }) =>
                 generateSheetContent(
                     addPlaylist,
                     currentUser,
-                    onChangePlaylistNameText,
+                    setPlaylistNameText,
                     playlistNameText,
                     runPlaylistAction,
                     bottomSheetRef
@@ -95,7 +95,7 @@ const AddPlaylistBottomSheet = ({ addPlaylist, currentUser, bottomSheetRef }) =>
 const generateSheetContent = (
     addPlaylist,
     currentUser,
-    onChangePlaylistNameText,
+    setPlaylistNameText,
     playlistNameText,
     addPlaylistAction,
     bottomSheetRef
@@ -104,7 +104,7 @@ const generateSheetContent = (
         <TouchableOpacity
             style={styles.CloseButtonContainer}
             onPress={() => {
-                dismissBottomSheet(bottomSheetRef)
+                dismissBottomSheet(bottomSheetRef, setPlaylistNameText)
             }}
         >
             <Image style={styles.CloseButtonIcon} source={timeIcon} />
@@ -114,7 +114,7 @@ const generateSheetContent = (
             placeholder="Playlist Name"
             placeholderTextColor={StyleConstants.BASE_FONT_COLOR}
             style={styles.Input}
-            onChangeText={text => onChangePlaylistNameText(text)}
+            onChangeText={text => setPlaylistNameText(text)}
             value={playlistNameText}
         />
         <View>
@@ -129,7 +129,7 @@ const generateSheetContent = (
                         playlistNameText,
                         bottomSheetRef
                     )
-                    onChangePlaylistNameText('')
+                    setPlaylistNameText('')
                 }}
                 disabled={!playlistNameText}
             />
@@ -138,13 +138,15 @@ const generateSheetContent = (
 )
 
 // Actions
-const dismissBottomSheet = bottomSheetRef => {
+const dismissBottomSheet = (bottomSheetRef, setPlaylistNameText) => {
     // Dismiss - We will need to dismiss our card
     if (bottomSheetRef.current) {
         // TODO: To fix current issue with dismissing card, call this thing twice
         bottomSheetRef.current.snapTo(1)
         bottomSheetRef.current.snapTo(1)
     }
+
+    setPlaylistNameText('')
 }
 const runPlaylistAction = async (
     addPlaylist,

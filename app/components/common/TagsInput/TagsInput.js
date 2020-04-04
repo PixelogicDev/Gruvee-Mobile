@@ -1,44 +1,50 @@
-import React, { useEffect, useState } from 'react'
+import React, { forwardRef, useEffect, useState } from 'react'
 import { TextInput, View } from 'react-native'
 import TagInputItem from './components/TagInputItem'
 import Styles from './TagsInput.styles'
 
-const TagsInput = ({
-    containerStyles,
-    inputStyles,
-    onChangeText,
-    placeholderText,
-    placeholderTextColor,
-    removeUser,
-    selectedUsers,
-    value,
-}) => {
-    const [higlightedIndex, setHighlightedIndex] = useState(-1)
+const TagsInput = forwardRef(
+    (
+        {
+            containerStyles,
+            inputStyles,
+            onChangeText,
+            placeholderText,
+            placeholderTextColor,
+            removeUser,
+            selectedUsers,
+            value,
+        },
+        ref
+    ) => {
+        const [higlightedIndex, setHighlightedIndex] = useState(-1)
 
-    useEffect(() => {
-        setHighlightedIndex(-1)
-    }, [selectedUsers])
+        useEffect(() => {
+            setHighlightedIndex(-1)
+        }, [selectedUsers])
 
-    return (
-        <View style={containerStyles || Styles.Container}>
-            {renderSelectedUsers(selectedUsers, higlightedIndex)}
-            <TextInput
-                onChangeText={onChangeText}
-                onKeyPress={backspace(
-                    value,
-                    selectedUsers,
-                    higlightedIndex,
-                    setHighlightedIndex,
-                    removeUser
-                )}
-                placeholder={!selectedUsers.length && placeholderText ? placeholderText : ''}
-                placeholderTextColor={placeholderTextColor}
-                style={inputStyles}
-                value={value}
-            />
-        </View>
-    )
-}
+        return (
+            <View style={containerStyles || Styles.Container}>
+                {renderSelectedUsers(selectedUsers, higlightedIndex)}
+                <TextInput
+                    onChangeText={onChangeText}
+                    onKeyPress={backspace(
+                        value,
+                        selectedUsers,
+                        higlightedIndex,
+                        setHighlightedIndex,
+                        removeUser
+                    )}
+                    placeholder={!selectedUsers.length && placeholderText ? placeholderText : ''}
+                    placeholderTextColor={placeholderTextColor}
+                    ref={ref}
+                    style={inputStyles}
+                    value={value}
+                />
+            </View>
+        )
+    }
+)
 
 // Actions
 const renderSelectedUsers = (selectedUsers, higlightedIndex) =>
@@ -59,6 +65,8 @@ const backspace = (value, selectedUsers, highlightedIndex, setHighlightedIndex, 
         } else {
             setHighlightedIndex(selectedUsers.length - 1)
         }
+    } else if (highlightedIndex !== -1) {
+        setHighlightedIndex(-1)
     }
 }
 
