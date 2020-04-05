@@ -42,6 +42,17 @@
 // fluffypoga - "Do you feel lucky, punk?" (03/31/20)
 // d_e_s_ - "Boris The Blade. Or Boris the Bullet Dodger. As hard as the Soviet hammer and as bent as the sickle that crosses it." (04/02/20)
 
+// -- SUDOKU -- //
+// OnePocketPimp: |8 _ _ | _ _ _ | _ _ _ |
+// OnePocketPimp: |_ _ 3 | 6 _ _ | _ _ _ |
+// OnePocketPimp: |_ 7 _ | _ 9 _ | 2 _ _ |
+// OnePocketPimp: -_ 5 _ + _ _ 7 + _ _ _ -
+// OnePocketPimp: |_ _ _ | _ 4 5 | 7 _ _ |
+// OnePocketPimp: |_ _ _ | 1 _ _ | _ 3 _ |
+// OnePocketPimp: -_ _ 1 + _ _ _ + _ 6 8 -
+// OnePocketPimp: |_ _ 8 | 5 _ _ | _ 1 _ |
+// OnePocketPimp: |_ 9 _ | _ _ _ | 4 _ _ |
+
 const BeeMovie = () => {}
 
 const CarsMovie = () => {}
