@@ -1,5 +1,5 @@
 // syszen - "note: nokia 3310 - the most indestructible phone ever, this app will be release on it at 2021" (04/03/20)
-import React, { forwardRef, useState } from 'react'
+import React, { forwardRef, useState, useRef } from 'react'
 import {
     Dimensions,
     Image,
@@ -70,6 +70,7 @@ const styles = StyleSheet.create({
 
 const AddPlaylistBottomSheet = ({ addPlaylist, currentUser, bottomSheetRef }) => {
     const [playlistNameText, setPlaylistNameText] = useState('')
+    const algoliaSearchRef = useRef(null)
 
     return (
         <BottomSheet
@@ -79,6 +80,7 @@ const AddPlaylistBottomSheet = ({ addPlaylist, currentUser, bottomSheetRef }) =>
             initialSnap={2}
             renderContent={() =>
                 generateSheetContent(
+                    algoliaSearchRef,
                     addPlaylist,
                     currentUser,
                     setPlaylistNameText,
@@ -93,6 +95,7 @@ const AddPlaylistBottomSheet = ({ addPlaylist, currentUser, bottomSheetRef }) =>
 
 // Actions
 const generateSheetContent = (
+    algoliaSearchRef,
     addPlaylist,
     currentUser,
     setPlaylistNameText,
@@ -104,7 +107,7 @@ const generateSheetContent = (
         <TouchableOpacity
             style={styles.CloseButtonContainer}
             onPress={() => {
-                dismissBottomSheet(bottomSheetRef, setPlaylistNameText)
+                dismissBottomSheet(bottomSheetRef, setPlaylistNameText, algoliaSearchRef)
             }}
         >
             <Image style={styles.CloseButtonIcon} source={timeIcon} />
@@ -118,18 +121,20 @@ const generateSheetContent = (
             value={playlistNameText}
         />
         <View>
-            <AlgoliaSearch attribute="username" />
+            <AlgoliaSearch ref={algoliaSearchRef} attribute="username" />
             <CreateItemActionButton
                 title="Add"
                 createAction={() => {
                     addPlaylistAction(
+                        algoliaSearchRef,
                         addPlaylist,
                         currentUser,
                         [], // This will be our list of member ids
                         playlistNameText,
+                        setPlaylistNameText,
                         bottomSheetRef
                     )
-                    setPlaylistNameText('')
+                    clearInputs(setPlaylistNameText)
                 }}
                 disabled={!playlistNameText}
             />
@@ -138,7 +143,16 @@ const generateSheetContent = (
 )
 
 // Actions
-const dismissBottomSheet = (bottomSheetRef, setPlaylistNameText) => {
+const clearInputs = (setPlaylistNameText, algoliaSearchRef) => {
+    // Clear playlist name
+    setPlaylistNameText('')
+
+    //TODO: Registered with Issue #57 - Clear algolia search
+    if (algoliaSearchRef.current) {
+        algoliaSearchRef.current.clearOnClose()
+    }
+}
+const dismissBottomSheet = (bottomSheetRef, setPlaylistNameText, algoliaSearchRef) => {
     // Dismiss - We will need to dismiss our card
     if (bottomSheetRef.current) {
         // TODO: To fix current issue with dismissing card, call this thing twice
@@ -146,13 +160,16 @@ const dismissBottomSheet = (bottomSheetRef, setPlaylistNameText) => {
         bottomSheetRef.current.snapTo(2)
     }
 
-    setPlaylistNameText('')
+    // Clear playlist name
+    clearInputs(setPlaylistNameText, algoliaSearchRef)
 }
 const runPlaylistAction = async (
+    algoliaSearchRef,
     addPlaylist,
     currentUser,
     members,
     playlistName,
+    setPlaylistNameText,
     bottomSheetRef
 ) => {
     try {
@@ -165,7 +182,7 @@ const runPlaylistAction = async (
             return
         }
 
-        dismissBottomSheet(bottomSheetRef)
+        dismissBottomSheet(bottomSheetRef, setPlaylistNameText, algoliaSearchRef)
 
         // Run action to create playlists
         await addPlaylist(playlist)

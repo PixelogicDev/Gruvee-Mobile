@@ -16,6 +16,8 @@ const AlgoliaSearch = ({ attribute }) => {
     const [searchState, onChangeSearchState] = useState({})
     const [selectedUsers, setSelectedUser] = useState([])
     const [clearInput, setClearInput] = useState(false)
+    // TODO: Registered with Issue #57
+    const closeOnClear = () => {}
 
     return (
         <InstantSearch
