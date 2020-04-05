@@ -13,11 +13,14 @@ const SearchBox = ({
     setClearInput,
 }) => {
     const tagInputRef = useRef(null)
+    // This is used to refine our search and return all results
+    let clearRefinementValue
 
     useEffect(() => {
         // If we are clearing the text, that means we should refocus the input
         if (clearInput === true && tagInputRef.current) {
             tagInputRef.current.focus()
+            clearRefinementValue = refine('')
         }
     }, [clearInput])
 
@@ -31,7 +34,7 @@ const SearchBox = ({
             removeUser={removeUser}
             ref={tagInputRef}
             selectedUsers={selectedUsers}
-            value={!clearInput ? currentRefinement : ''}
+            value={!clearInput ? currentRefinement : clearRefinementValue}
         />
     )
 }

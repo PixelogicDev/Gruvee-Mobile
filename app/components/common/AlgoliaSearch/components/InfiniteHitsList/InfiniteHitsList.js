@@ -5,7 +5,7 @@ import Styles from './InfiniteHitsList.styles'
 
 const plusIcon = require('Gruvee/assets/icons/plus/plus_icon.png')
 
-const InfiniteHitsList = ({ hits, hasMore, selectUser, refine }) => {
+const InfiniteHitsList = ({ hits, hasMore, selectedUsers, selectUser, refine }) => {
     const renderItem = ({ item }) => (
         <TouchableOpacity
             style={Styles.HitItemContainer}
@@ -23,13 +23,18 @@ const InfiniteHitsList = ({ hits, hasMore, selectUser, refine }) => {
 
     return (
         <FlatList
-            data={hits}
+            data={filteredHits(hits, selectedUsers)}
             style={Styles.ListContainer}
             keyExtractor={item => item.objectID}
             onEndReached={() => hasMore && refine()}
             renderItem={renderItem}
         />
     )
+}
+
+const filteredHits = (hits, selectedUsers) => {
+    const userIds = selectedUsers.map(user => user.objectID)
+    return hits.filter(hit => !userIds.includes(hit.objectID))
 }
 
 export default connectInfiniteHits(InfiniteHitsList)

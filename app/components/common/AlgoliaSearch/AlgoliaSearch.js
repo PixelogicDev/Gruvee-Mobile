@@ -33,6 +33,7 @@ const AlgoliaSearch = ({ attribute }) => {
                 setClearInput={setClearInput}
             />
             <InfiniteHitsList
+                selectedUsers={selectedUsers}
                 selectUser={selectUser(selectedUsers, setSelectedUser, setClearInput)}
             />
         </InstantSearch>
