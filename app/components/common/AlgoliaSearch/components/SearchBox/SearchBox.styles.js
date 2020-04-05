@@ -3,10 +3,11 @@ import { BASE_FONT_COLOR } from '@StyleConstants'
 
 export default StyleSheet.create({
     Container: {
-        flexDirection: 'row',
+        flexWrap: 'wrap',
         width: '100%',
         paddingHorizontal: 5,
-        height: 44,
+        minHeight: 44,
+        justifyContent: 'center',
         borderRadius: 5,
         backgroundColor: '#424242',
     },
@@ -14,6 +15,7 @@ export default StyleSheet.create({
         flexGrow: 1,
         color: 'white',
         fontSize: 12,
+        paddingLeft: 5,
     },
     InputPlaceHolderColor: {
         color: BASE_FONT_COLOR,

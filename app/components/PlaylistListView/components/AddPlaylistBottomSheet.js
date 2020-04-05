@@ -74,9 +74,9 @@ const AddPlaylistBottomSheet = ({ addPlaylist, currentUser, bottomSheetRef }) =>
     return (
         <BottomSheet
             ref={bottomSheetRef}
-            snapPoints={[screenHeight / 2 + navBarHeight, 0]}
+            snapPoints={[screenHeight - navBarHeight, screenHeight / 2 + navBarHeight, 0]}
             borderRadius={10}
-            initialSnap={1}
+            initialSnap={2}
             renderContent={() =>
                 generateSheetContent(
                     addPlaylist,
@@ -142,8 +142,8 @@ const dismissBottomSheet = (bottomSheetRef, setPlaylistNameText) => {
     // Dismiss - We will need to dismiss our card
     if (bottomSheetRef.current) {
         // TODO: To fix current issue with dismissing card, call this thing twice
-        bottomSheetRef.current.snapTo(1)
-        bottomSheetRef.current.snapTo(1)
+        bottomSheetRef.current.snapTo(2)
+        bottomSheetRef.current.snapTo(2)
     }
 
     setPlaylistNameText('')

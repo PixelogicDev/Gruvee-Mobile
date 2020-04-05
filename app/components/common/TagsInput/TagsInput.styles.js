@@ -7,4 +7,8 @@ export default StyleSheet.create({
         flexDirection: 'row',
         width: '100%',
     },
+    ItemsContainer: {
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+    },
 })

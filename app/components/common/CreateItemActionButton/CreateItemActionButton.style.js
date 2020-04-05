@@ -14,7 +14,7 @@ export default StyleSheet.create({
         minHeight: 44,
         flexDirection: 'row',
         alignItems: 'center',
-        width: '60%',
+        width: '70%',
         marginBottom: 15,
         borderRadius: StyleConstants.BASE_BORDER_RADIUS,
         borderWidth: 1,

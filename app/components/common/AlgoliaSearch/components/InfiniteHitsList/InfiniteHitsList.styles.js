@@ -5,7 +5,7 @@ const itemContainerHeight = 44
 
 export default StyleSheet.create({
     ListContainer: {
-        minHeight: itemContainerHeight * 3,
+        height: itemContainerHeight * 5,
     },
     HitItemContainer: {
         flexDirection: 'row',

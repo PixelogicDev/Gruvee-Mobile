@@ -25,22 +25,26 @@ const TagsInput = forwardRef(
 
         return (
             <View style={containerStyles || Styles.Container}>
-                {renderSelectedUsers(selectedUsers, higlightedIndex)}
-                <TextInput
-                    onChangeText={onChangeText}
-                    onKeyPress={backspace(
-                        value,
-                        selectedUsers,
-                        higlightedIndex,
-                        setHighlightedIndex,
-                        removeUser
-                    )}
-                    placeholder={!selectedUsers.length && placeholderText ? placeholderText : ''}
-                    placeholderTextColor={placeholderTextColor}
-                    ref={ref}
-                    style={inputStyles}
-                    value={value}
-                />
+                <View style={Styles.ItemsContainer}>
+                    {renderSelectedUsers(selectedUsers, higlightedIndex)}
+                    <TextInput
+                        onChangeText={onChangeText}
+                        onKeyPress={backspace(
+                            value,
+                            selectedUsers,
+                            higlightedIndex,
+                            setHighlightedIndex,
+                            removeUser
+                        )}
+                        placeholder={
+                            !selectedUsers.length && placeholderText ? placeholderText : ''
+                        }
+                        placeholderTextColor={placeholderTextColor}
+                        ref={ref}
+                        style={inputStyles}
+                        value={value}
+                    />
+                </View>
             </View>
         )
     }

@@ -28,6 +28,7 @@ const InfiniteHitsList = ({ hits, hasMore, selectedUsers, selectUser, refine }) 
             keyExtractor={item => item.objectID}
             onEndReached={() => hasMore && refine()}
             renderItem={renderItem}
+            showsVerticalScrollIndicator={false}
         />
     )
 }
