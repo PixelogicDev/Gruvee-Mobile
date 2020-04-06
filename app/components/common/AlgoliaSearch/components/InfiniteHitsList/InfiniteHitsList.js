@@ -1,11 +1,19 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import { FlatList, Image, TouchableOpacity, Text, View } from 'react-native'
 import { connectInfiniteHits } from 'react-instantsearch-native'
 import Styles from './InfiniteHitsList.styles'
 
 const plusIcon = require('Gruvee/assets/icons/plus/plus_icon.png')
 
-const InfiniteHitsList = ({ hits, hasMore, selectedUsers, selectUser, refine }) => {
+const ConnectedInfiniteHitsList = ({
+    currentUser,
+    hits,
+    hasMore,
+    selectedUsers,
+    selectUser,
+    refine,
+}) => {
     const renderItem = ({ item }) => (
         <TouchableOpacity
             style={Styles.HitItemContainer}
@@ -23,7 +31,7 @@ const InfiniteHitsList = ({ hits, hasMore, selectedUsers, selectUser, refine }) 
 
     return (
         <FlatList
-            data={filteredHits(hits, selectedUsers)}
+            data={filterHits(hits, selectedUsers, currentUser)}
             style={Styles.ListContainer}
             keyExtractor={item => item.objectID}
             onEndReached={() => hasMore && refine()}
@@ -33,9 +41,17 @@ const InfiniteHitsList = ({ hits, hasMore, selectedUsers, selectUser, refine }) 
     )
 }
 
-const filteredHits = (hits, selectedUsers) => {
+const filterHits = (hits, selectedUsers, currentUser) => {
+    const filteredHits = hits.filter(hit => hit.objectID !== currentUser.id)
     const userIds = selectedUsers.map(user => user.objectID)
-    return hits.filter(hit => !userIds.includes(hit.objectID))
+    return filteredHits.filter(hit => !userIds.includes(hit.objectID))
 }
 
+const mapStateToProps = state => {
+    return {
+        currentUser: state.UserDataReducer.user,
+    }
+}
+
+const InfiniteHitsList = connect(mapStateToProps)(ConnectedInfiniteHitsList)
 export default connectInfiniteHits(InfiniteHitsList)

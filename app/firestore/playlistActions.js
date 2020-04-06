@@ -10,8 +10,14 @@ export const CreateNewPlaylistDocument = async (playlist, preferredSocialPlatfor
         .collection('playlists')
         .doc(playlist.id)
 
+    // Create reference to members if any
+    const editedPlaylist = playlist`
+    if (editedPlaylist.members.length > 1) {
+        editedPlaylist.members = editedPlaylist.members.map(memberId => `/users/${memberId}`)
+    }
+
     // If our document creation is a success, we can set data in document
-    await playlistDoc.set(playlist)
+    await playlistDoc.set(editedPlaylist)
 
     // Call endpoint to create playlist on social platform
     CreateSocialPlaylist(preferredSocialPlatform, playlist)

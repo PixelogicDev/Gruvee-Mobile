@@ -12,12 +12,9 @@ const VirtualRefinementList = connectRefinementList(() => null)
 const searchClient = algoliasearch(Creds.Algolia.appId, Creds.Algolia.appKey)
 
 // AlgoliaSearch
-const AlgoliaSearch = ({ attribute }) => {
+const AlgoliaSearch = ({ attribute, selectedUsers, setSelectedUser }) => {
     const [searchState, onChangeSearchState] = useState({})
-    const [selectedUsers, setSelectedUser] = useState([])
     const [clearInput, setClearInput] = useState(false)
-    // TODO: Registered with Issue #57
-    const closeOnClear = () => {}
 
     return (
         <InstantSearch
