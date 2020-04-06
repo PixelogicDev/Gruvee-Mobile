@@ -121,7 +121,7 @@ const generateSheetContent = (
             value={playlistNameText}
         />
         <View>
-            <AlgoliaSearch ref={algoliaSearchRef} attribute="username" />
+            <AlgoliaSearch attribute="username" />
             <CreateItemActionButton
                 title="Add"
                 createAction={() => {
@@ -147,7 +147,7 @@ const clearInputs = (setPlaylistNameText, algoliaSearchRef) => {
     // Clear playlist name
     setPlaylistNameText('')
 
-    //TODO: Registered with Issue #57 - Clear algolia search
+    // TODO: Registered with Issue #57 - Clear algolia search
     if (algoliaSearchRef.current) {
         algoliaSearchRef.current.clearOnClose()
     }

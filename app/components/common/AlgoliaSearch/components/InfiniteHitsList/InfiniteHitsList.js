@@ -13,7 +13,7 @@ const InfiniteHitsList = ({ hits, hasMore, selectedUsers, selectUser, refine }) 
                 selectUser(item)
             }}
         >
-            <View style={Styles.HitItemImage} />
+            <Image source={{ uri: item.profileImage ?? null }} style={Styles.HitItemImage} />
             <Text style={Styles.HitItemUsername}>{item.username}</Text>
             <View style={Styles.HitItemAddButton}>
                 <Image source={plusIcon} style={Styles.HitItemPlusIcon} />
