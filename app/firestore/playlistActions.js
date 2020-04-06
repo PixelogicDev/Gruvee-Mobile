@@ -5,35 +5,47 @@ import firestore from '@react-native-firebase/firestore'
 import { CreateSocialPlaylist } from 'Gruvee/service/common/endpoints'
 
 export const CreateNewPlaylistDocument = async (playlist, preferredSocialPlatform) => {
-    // Write to DB
-    const playlistDoc = firestore()
-        .collection('playlists')
-        .doc(playlist.id)
+    try {
+        // Write to DB
+        const db = firestore()
+        const playlistDoc = db.collection('playlists').doc(playlist.id)
 
-    // Create reference to members if any
-    const editedPlaylist = playlist`
-    if (editedPlaylist.members.length > 1) {
-        editedPlaylist.members = editedPlaylist.members.map(memberId => `/users/${memberId}`)
+        // Create reference to members if any
+        const editedPlaylist = { ...playlist }
+
+        if (editedPlaylist.members.length) {
+            editedPlaylist.members = editedPlaylist.members.map(memberId =>
+                db.doc(`users/${memberId}`)
+            )
+        }
+
+        // Add reference for createdBy
+        editedPlaylist.createdBy = db.doc(`users/${editedPlaylist.createdBy}`)
+
+        // If our document creation is a success, we can set data in document
+        await playlistDoc.set(editedPlaylist)
+
+        // Call endpoint to create playlist on social platform
+        CreateSocialPlaylist(preferredSocialPlatform, playlist)
+
+        return playlistDoc
+    } catch (error) {
+        console.warn(error)
     }
 
-    // If our document creation is a success, we can set data in document
-    await playlistDoc.set(editedPlaylist)
-
-    // Call endpoint to create playlist on social platform
-    CreateSocialPlaylist(preferredSocialPlatform, playlist)
-
-    return playlistDoc
+    return null
 }
 
 export const DeletePlaylistDocument = async (uid, playlistId) => {
-    const userDocRef = await firestore().doc(`users/${uid}`)
-    const playlistDocRef = await firestore().doc(`playlists/${playlistId}`)
+    const db = firestore()
+    const userDocRef = await db.doc(`users/${uid}`)
+    const playlistDocRef = await db.doc(`playlists/${playlistId}`)
 
     // Remove playlist document
     await playlistDocRef.delete()
 
     // Remove playlist docRef from user
-    firestore().runTransaction(transaction => {
+    db.runTransaction(transaction => {
         return transaction.get(userDocRef).then(userDoc => {
             if (!userDoc.exists) {
                 throw new Error('userDoc did not exist.')
@@ -52,11 +64,10 @@ export const DeletePlaylistDocument = async (uid, playlistId) => {
 }
 
 export const UpdateUserDocumentWithPlaylist = async (uid, playlistRef) => {
-    const userDocRef = await firestore()
-        .collection('users')
-        .doc(uid)
+    const db = firestore()
+    const userDocRef = await db.collection('users').doc(uid)
 
-    firestore().runTransaction(transaction => {
+    db.runTransaction(transaction => {
         return transaction.get(userDocRef).then(userDoc => {
             if (!userDoc.exists) {
                 return Promise.reject(new Error('userDoc did not exist.'))
