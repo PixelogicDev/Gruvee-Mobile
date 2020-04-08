@@ -14,20 +14,23 @@ const ConnectedInfiniteHitsList = ({
     selectUser,
     refine,
 }) => {
-    const renderItem = ({ item }) => (
-        <TouchableOpacity
-            style={Styles.HitItemContainer}
-            onPress={() => {
-                selectUser(item)
-            }}
-        >
-            <Image source={{ uri: item.profileImage ?? null }} style={Styles.HitItemImage} />
-            <Text style={Styles.HitItemUsername}>{item.username}</Text>
-            <View style={Styles.HitItemAddButton}>
-                <Image source={plusIcon} style={Styles.HitItemPlusIcon} />
-            </View>
-        </TouchableOpacity>
-    )
+    const renderItem = ({ item }) => {
+        const profileImage = item.profileImage !== '' ? { uri: item.profileImage } : null
+        return (
+            <TouchableOpacity
+                style={Styles.HitItemContainer}
+                onPress={() => {
+                    selectUser(item)
+                }}
+            >
+                <Image source={profileImage} style={Styles.HitItemImage} />
+                <Text style={Styles.HitItemUsername}>{item.username}</Text>
+                <View style={Styles.HitItemAddButton}>
+                    <Image source={plusIcon ?? null} style={Styles.HitItemPlusIcon} />
+                </View>
+            </TouchableOpacity>
+        )
+    }
 
     return (
         <FlatList

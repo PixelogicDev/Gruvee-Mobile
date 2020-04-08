@@ -1,8 +1,9 @@
 // syszen - "first comment after inflation" (02/18/20)
 // W0lfDM - "WolfDM was Here" (03/20/20)
 import { GetUserDocument } from 'Gruvee/firestore/userActions'
-import { SET_INITIAL_USER_DATA, SIGN_IN } from 'Gruvee/redux/actions/ActionsType'
+import { SET_INITIAL_USER_DATA, SIGN_IN, SIGNING_IN_USER } from 'Gruvee/redux/actions/ActionsType'
 import { HydratePlaylists } from 'Gruvee/redux/actions/playlists/PlaylistActions'
+import { FetchMembers } from 'Gruvee/redux/actions/members/MembersActions'
 
 // Action Creators
 const setInitialUserData = user => {
@@ -19,6 +20,13 @@ const signInUser = user => {
     }
 }
 
+const signingInUser = value => {
+    return {
+        type: SIGNING_IN_USER,
+        data: value,
+    }
+}
+
 // Thunks
 export const SignInUser = userId => {
     return async dispatch => {
@@ -27,8 +35,12 @@ export const SignInUser = userId => {
         const data = await GetUserDocument(userId)
 
         // After we are signed in, lets hydrate the playlists state
-        dispatch(HydratePlaylists(data.playlistsData))
+        dispatch(HydratePlaylists(data.playlists))
 
+        // Pass in playlists to fetch members for each
+        dispatch(FetchMembers(data.playlists))
+
+        // Finally, sign in user with latest data
         dispatch(signInUser(data.user))
 
         return data.user
@@ -39,7 +51,12 @@ export const SignInUser = userId => {
 // syszen - "and syszen was here too" (02/21/20)
 export const SetInitialUserData = user => {
     return async dispatch => {
-        // Continue with the dispatch and set user in state
         dispatch(setInitialUserData(user))
+    }
+}
+
+export const SigningInUser = value => {
+    return dispatch => {
+        dispatch(signingInUser(value))
     }
 }

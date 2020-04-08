@@ -5,11 +5,12 @@ import * as StyleConstants from 'Gruvee/config/styles'
 const defaultAlbumArtworkAsset = require('Gruvee/assets/defaults/album_artwork/default_album_cover_bg_image.png')
 
 const SongItemDetail = ({ songData }) => {
+    const albumArtwork = songData.albumArtwork !== '' ? { uri: songData.albumArtwork } : null
     return (
         <View style={styles.Container}>
             <Image
                 style={styles.Image}
-                source={{ uri: songData.albumArtwork }}
+                source={albumArtwork}
                 // Anroid debug builds ignore default source cuz why not?
                 defaultSource={defaultAlbumArtworkAsset}
                 resizeMode="cover"

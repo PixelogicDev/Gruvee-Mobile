@@ -1,10 +1,12 @@
-// pheonix_d123 "Hey! Who turned out the lights?" (02/24/20)
+// rushkiB - "Should have used flutter instead." (04/08/20)
+// pheonix_d123 - "Hey! Who turned out the lights?" (02/24/20)
 // Kendaryth - "I can't wait to use Grüvee on my windows phone" (02/18/20)
 // pheonix_d123 - "Inflation is Undeniable" app.js (02/17/20)
 // ohmyshell - "Embedded custom comments are 1200 pixels refer to this in case of inflation" (02/13/20)
 // evjand - "Embedded custom comments are 2000 pixels refer to this in case of inflation" (02/13/20)
 // TheYagich01 - "Как я тут оказался блять? Что происходит?" (02/15/20)
 // syszen - "firestore beaten! YEAYEA wins" (02/21/20)
+// Dragonfleas - "Dear maintainer: Once you are done trying to 'optimize' this simple app.js file to prove your worth, and have realized what a terrible mistake that was, please increment the following counter as a warning to the next guy: total_hours_wasted_here = 42"(04/06/20)
 // WinterLoreGames - "Array starts at 1, change my mind." (01/22/20)
 // dra031cko - "What do i use ?- Alec 2020" (03/10/20)
 
@@ -21,21 +23,26 @@ import PlaylistListView from 'Gruvee/components/PlaylistListView'
 import { UserSignInCompleteSelector } from 'Gruvee/redux/selectors/UserSelector'
 
 // InukApp - "Every day is the day before I start at the gym" (03/09/20)
+// fr3fou - "i helped build this too AYAYA, follow @fr3fou on github uwu, diana cavendish best girl don't @ me" (04/07/20)
 const App = ({ signInUser, userSignInComplete }) => {
     useEffect(() => {
-        // Firebae Authentication Handler
+        /*
+            Firebase states that: "This method gets invoked in the UI thread on changes 
+            in the authentication state". This flag keeps us from logging in on initialization
+            and only when an actual sign in / sign out event happens
+            REF: https://firebase.google.com/docs/reference/android/com/google/firebase/auth/FirebaseAuth.AuthStateListener
+        */
+        let isInitialAuthMount = true
         const unscribeEvent = firebase.auth().onAuthStateChanged(async user => {
-            if (user !== null && !userSignInComplete) {
-                console.log('We have a signed in FB user')
-
+            if (user !== null && !isInitialAuthMount) {
                 // Call Sign In Redux Action
-                const signedInUser = await signInUser(user.uid)
-                console.log('SignedInUser: ', signedInUser)
+                await signInUser(user.uid)
             }
+
+            isInitialAuthMount = false
         })
 
         return () => {
-            // Clean up
             unscribeEvent()
         }
     }, [])

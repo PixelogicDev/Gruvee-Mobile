@@ -8,7 +8,7 @@ const SwipeAction = ({ action, actionColor, icon, name, width, height }) => {
             <Image
                 accessibilityRole="image"
                 accessibilityLabel={name}
-                source={icon}
+                source={icon ?? null}
                 style={styles.Icon(width, height)}
             />
         </TouchableOpacity>

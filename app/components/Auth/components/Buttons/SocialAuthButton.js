@@ -29,7 +29,7 @@ const SocialAuthButton = ({ platform, platformSignInAction }) => {
 
     return (
         <TouchableOpacity onPress={startAuthAction} style={styles.Button(platform)}>
-            <Image style={styles.ButtonIcon(platform)} source={platform.glyphPath} />
+            <Image style={styles.ButtonIcon(platform)} source={platform.glyphPath ?? null} />
             <Text
                 accessibilityLabel={`${platform.friendlyName} login button`}
                 style={styles.ButtonText(platform)}

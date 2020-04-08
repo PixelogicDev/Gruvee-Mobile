@@ -1,3 +1,4 @@
+// curiousdrive - "Musicians were helped while building this!!!" (04/07/20)
 // QuantumBrat - "Remember this comment." (02/03/20)
 // sillyonly - "One more comment to go!!" (02/13/20)
 // ywnklme - "I gotta change the amount of points for this stuff. It is too much” – Alec, January 2020" (01/28/20)
@@ -5,6 +6,7 @@
 // ywknlme - "TODO DODODODODO DODODODODODODODO DODODODODO... *plays Darude – Sandstorm*" (01/29/20)
 import { ADD_MEMBER, FETCH_MEMBERS } from 'Gruvee/redux/actions/ActionsType'
 import { AddPlaylistMember } from 'Gruvee/redux/actions/playlists/SharedPlaylistActions'
+import { GetMembersDocuments } from 'Gruvee/firestore/memberActions'
 
 // Action Creators
 const addMember = member => {
@@ -34,10 +36,15 @@ export const AddMember = (member, playlistId) => {
     }
 }
 
-export const FetchMembers = () => {
-    // PlaylistId will be used to get list of members from service
-    const membersFromService = []
-    return dispatch => {
-        dispatch(fetchMembers(membersFromService))
+export const FetchMembers = playlists => {
+    return async dispatch => {
+        // Get members from each playlist and reduce
+        const reducedMemberIds = playlists.reduce((state, currentPlaylist) => {
+            return [...state, ...currentPlaylist.members]
+        }, [])
+
+        const membersData = await GetMembersDocuments(reducedMemberIds)
+
+        dispatch(fetchMembers(membersData))
     }
 }

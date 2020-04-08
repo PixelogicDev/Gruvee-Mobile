@@ -3,6 +3,7 @@ import {
     DELETE_PLAYLIST_FROM_USER,
     SET_INITIAL_USER_DATA,
     SIGN_IN,
+    SIGNING_IN_USER,
 } from 'Gruvee/redux/actions/ActionsType'
 import {
     AddPlaylistToUser,
@@ -11,7 +12,7 @@ import {
     SignInUser,
 } from 'Gruvee/redux/actions/user/DispatchActions'
 
-const initialState = { user: null }
+const initialState = { user: null, signingInUser: false }
 
 export default (state = initialState, action) => {
     switch (action.type) {
@@ -34,6 +35,11 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 user: SignInUser(action.data),
+            }
+        case SIGNING_IN_USER:
+            return {
+                ...state,
+                signingInUser: action.data,
             }
         default:
             return state

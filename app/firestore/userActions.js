@@ -68,8 +68,8 @@ export const CreateSocialPlatformDocument = async (platformData, tokenObj) => {
 
 // TheTechExec - "You are the semicolon to my statements" (03/03/20)
 export const GetUserDocument = async uid => {
-    // Get User doc from db
-    const dbUserSnap = await firestore()
+    const db = firestore()
+    const dbUserSnap = await db
         .collection('users')
         .doc(uid)
         .get()
@@ -83,6 +83,16 @@ export const GetUserDocument = async uid => {
 
     // Get Playlist Data
     const playlistsData = await fetchChildRefs(dbUser.playlists)
+    const reducedPlaylists = playlistsData.reduce((state, currentPlaylistData) => {
+        return [
+            ...state,
+            {
+                ...currentPlaylistData,
+                members: currentPlaylistData.members.map(memberRef => memberRef.id),
+            },
+        ]
+    }, [])
+
     const user = {
         ...dbUser,
         playlists: dbUser.playlists.map(playlistRef => playlistRef.id),
@@ -90,17 +100,15 @@ export const GetUserDocument = async uid => {
         socialPlatforms,
     }
 
-    return { user, playlistsData }
+    return { user, playlists: reducedPlaylists }
 }
 
 // Helpers
 const fetchChildRefs = async refs => {
+    const db = firestore()
     const data = await Promise.all(
         refs.map(async ref => {
-            const snapshot = await firestore()
-                .doc(ref.path)
-                .get()
-
+            const snapshot = await db.doc(ref.path).get()
             return snapshot.data()
         })
     )

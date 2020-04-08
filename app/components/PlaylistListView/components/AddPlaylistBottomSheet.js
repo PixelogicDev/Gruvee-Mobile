@@ -112,7 +112,7 @@ const generateSheetContent = (
                 dismissBottomSheet(bottomSheetRef, setPlaylistNameText, setSelectedUser)
             }}
         >
-            <Image style={styles.CloseButtonIcon} source={timeIcon} />
+            <Image style={styles.CloseButtonIcon} source={timeIcon ?? null} />
         </TouchableOpacity>
         <Text style={styles.Header}>Add Playlist</Text>
         <TextInput
