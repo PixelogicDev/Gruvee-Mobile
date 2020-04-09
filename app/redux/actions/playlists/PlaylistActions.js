@@ -20,6 +20,7 @@ import {
     DeletePlaylistDocument,
     UpdateUserDocumentWithPlaylist,
 } from 'Gruvee/firestore/playlistActions'
+import { FetchMembers } from 'Gruvee/redux/actions/members/MembersActions'
 
 // Action Creators
 const addPlaylist = playlist => {
@@ -62,6 +63,9 @@ export const AddPlaylist = newPlaylist => {
         // Set db reference and write path to user doc in DB
         await UpdateUserDocumentWithPlaylist(user.id, playlistDocRef)
         dispatch(AddPlaylistToUser(newPlaylist.id))
+
+        // Get members from playlists and put in state
+        dispatch(FetchMembers([newPlaylist]))
     }
 }
 
