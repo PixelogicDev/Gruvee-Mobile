@@ -7,6 +7,26 @@ export const AddMember = (membersState, member) => {
     return { byId, allIds }
 }
 
+export const DeleteMember = (membersState, memberId) => {
+    const byId = Object.entries(membersState.byId)
+        .filter(([key]) => {
+            return key !== memberId
+        })
+        .reduce(
+            (obj, [key, value]) => {
+                return { ...obj, [key]: value }
+            },
+            // Will reduce the byId {}
+            {}
+        )
+
+    return {
+        ...membersState,
+        byId,
+        allIds: membersState.allIds.filter(stateMemberId => stateMemberId !== memberId),
+    }
+}
+
 export const FetchMembers = (membersState, members) => {
     // Get user state playlists, map through IDs, and return
     if (members.length === 0) return membersState

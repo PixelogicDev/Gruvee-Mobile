@@ -14,6 +14,7 @@ import {
     AddPlaylistToUser,
     DeletePlaylistFromUser,
 } from 'Gruvee/redux/actions/user/SharedUserActions'
+import { DeleteMember } from 'Gruvee/redux/actions/members/SharedMembersActions'
 import {
     CreateNewPlaylistDocument,
     DeletePlaylistDocument,
@@ -78,6 +79,11 @@ export const DeletePlaylist = playlistId => {
             // Delete songs from playlist from SongsDataReducer
             // Delete comments from song from CommentsDataReducer
             dispatch(DeleteSong(playlistId, songId))
+        })
+
+        // Delete members from MembersDataReducer
+        playlists.byId[playlistId].members.forEach(memberId => {
+            dispatch(DeleteMember(playlistId, memberId))
         })
 
         // Delete playlist from PlaylistsDataReducer

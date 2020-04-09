@@ -1,6 +1,5 @@
-import { FETCH_MEMBERS, ADD_MEMBER } from 'Gruvee/redux/actions/ActionsType'
-import { FetchMembers } from 'Gruvee/redux/actions/members/DispatchActions'
-import { AddMember } from 'Gruvee/redux/actions/members/MembersActions'
+import { ADD_MEMBER, DELETE_MEMBER, FETCH_MEMBERS } from 'Gruvee/redux/actions/ActionsType'
+import { AddMember, DeleteMember, FetchMembers } from 'Gruvee/redux/actions/members/DispatchActions'
 
 const initialState = { members: { byId: {}, allIds: [] } }
 
@@ -10,6 +9,11 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 members: AddMember(state.members, action.data),
+            }
+        case DELETE_MEMBER:
+            return {
+                ...state,
+                members: DeleteMember(state.members, action.data),
             }
         case FETCH_MEMBERS:
             return {

@@ -30,4 +30,5 @@ export const DELETE_PLAYLIST_FROM_USER = 'DELETE_PLAYLIST_FROM_USER'
 
 // Members Action
 export const ADD_MEMBER = 'ADD_MEMBER'
+export const DELETE_MEMBER = 'DELETE_MEMBER'
 export const FETCH_MEMBERS = 'FETCH_MEMBERS'
