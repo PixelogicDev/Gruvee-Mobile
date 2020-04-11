@@ -13,6 +13,7 @@ import { DeleteSong } from 'Gruvee/redux/actions/songs/SharedSongActions'
 import {
     AddPlaylistToUser,
     DeletePlaylistFromUser,
+    UpdateUserAPIToken,
 } from 'Gruvee/redux/actions/user/SharedUserActions'
 import { DeleteMember } from 'Gruvee/redux/actions/members/SharedMembersActions'
 import {
@@ -20,6 +21,7 @@ import {
     DeletePlaylistDocument,
     UpdateUserDocumentWithPlaylist,
 } from 'Gruvee/firestore/playlistActions'
+import { CreateSocialPlaylist } from 'Gruvee/service/common/endpoints'
 import { FetchMembers } from 'Gruvee/redux/actions/members/MembersActions'
 
 // Action Creators
@@ -53,11 +55,7 @@ export const AddPlaylist = newPlaylist => {
         } = getState()
 
         // Write newly created playlist to firestore and then add to state
-        const playlistDocRef = await CreateNewPlaylistDocument(
-            newPlaylist,
-            user.preferredSocialPlatform
-        )
-
+        const playlistDocRef = await CreateNewPlaylistDocument(newPlaylist)
         dispatch(addPlaylist(newPlaylist, statePlaylists))
 
         // Set db reference and write path to user doc in DB
@@ -66,6 +64,21 @@ export const AddPlaylist = newPlaylist => {
 
         // Get members from playlists and put in state
         dispatch(FetchMembers([newPlaylist]))
+
+        // Call endpoint to create playlist on social platform
+        // If we needed a refreshed token, it will be passed back here
+        CreateSocialPlaylist(user.preferredSocialPlatform, newPlaylist)
+            .then(response => {
+                if (response.status !== 204) {
+                    // Call redux action to update userDoc
+                    dispatch(UpdateUserAPIToken(response.data))
+                } else {
+                    console.log('SocialPlatform was not updated.')
+                }
+            })
+            .catch(error => {
+                console.warn('Error trying to create playlist on platform: ', error)
+            })
     }
 }
 

@@ -44,6 +44,7 @@
 // TheYagich01 - "Famous movie quote!" (03/23/20)
 // fluffypoga - "Do you feel lucky, punk?" (03/31/20)
 // d_e_s_ - "Boris The Blade. Or Boris the Bullet Dodger. As hard as the Soviet hammer and as bent as the sickle that crosses it." (04/02/20)
+// youugotssponged - "I'm gonna make him an offer he can't refuse - The Godfather" (04/11/20)
 
 // -- SUDOKU -- //
 // OnePocketPimp: |8 _ _ | _ _ _ | _ _ _ |

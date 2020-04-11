@@ -2,9 +2,8 @@
 // TheDkbay - "Do these even matter anymore? Also remember Corona future Alec? or nah?" (03/20/20)
 // JMSWRNR - "the government is making us quarantine so they can change the batteries in the pigeons" (03/20/20)
 import firestore from '@react-native-firebase/firestore'
-import { CreateSocialPlaylist } from 'Gruvee/service/common/endpoints'
 
-export const CreateNewPlaylistDocument = async (playlist, preferredSocialPlatform) => {
+export const CreateNewPlaylistDocument = async playlist => {
     try {
         // Write to DB
         const db = firestore()
@@ -24,9 +23,6 @@ export const CreateNewPlaylistDocument = async (playlist, preferredSocialPlatfor
 
         // If our document creation is a success, we can set data in document
         await playlistDoc.set(editedPlaylist)
-
-        // Call endpoint to create playlist on social platform
-        CreateSocialPlaylist(preferredSocialPlatform, playlist)
 
         return playlistDoc
     } catch (error) {
@@ -70,7 +66,7 @@ export const UpdateUserDocumentWithPlaylist = async (uid, playlistRef) => {
     db.runTransaction(transaction => {
         return transaction.get(userDocRef).then(userDoc => {
             if (!userDoc.exists) {
-                return Promise.reject(new Error('userDoc did not exist.'))
+                throw new Error('userDoc did not exist.')
             }
 
             const currentPlaylists = userDoc.data().playlists
