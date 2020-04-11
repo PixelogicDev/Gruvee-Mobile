@@ -30,6 +30,39 @@ Grüvee is an open source social, collabortive playlist made by the [PixelogicDe
 
 If you are interested in becoming a member of the team check out the **[PixelogicDev Twitch](https://twitch.tv/pixelogicdev)**, the **[PixelogicDev Discord](https://discord.gg/ubgX6T8)** and **[contribute](#-how-to-contribute)** to this awesome project!
 
+# MVP Checklist & Timeline For Beta
+
+### Checklist
+#### Authentication
+- [x] Authenicate with Spotify
+- [ ] Authenticate with Apple Music
+- [ ] Authenticate with Youtube Music
+
+#### Playlist Actions
+- [x] Create a playlist
+- [x] Delete a playlist
+- [x] Add members to a playlist (*Only able add members when adding a playlist)
+- [x] Create playlist on specific music provider
+
+#### Song Actions
+- [ ] Add a song
+- [ ] Remove a song
+- [ ] Comment on a song
+- [ ] Add song on specific music provider
+- [ ] Convert uploaded song link to all supported platforms
+
+#### Comment Actions
+- [ ] Add a comment
+- [ ] Remove a comment
+
+#### Feedback Hub (We can probably utilize Firebase even more)
+- [ ] Add a way for people to leave feedback in app
+- [ ] Direct people towards the Discord for feedback
+
+### Timeline
+- [ ] Release Grüvee Beta 1: Friday, April 18th 2020 by EOD for iOS and Android
+- After beta 1 release we will have WEEKLY updates to the app based on feedback and roadmap ahead
+
 ---
 
 # Getting Started
@@ -38,7 +71,7 @@ If you are interested in becoming a member of the team check out the **[Pixelogi
 
 | Stack        | Tech                                                                                       |                                                                |
 | ------------ | :----------------------------------------------------------------------------------------- | :------------------------------------------------------------- |
-| IDE          | [Visual Studio Code](https://code.visualstudio.com/)                                       | You can use your preferred IDE but this is the one we like 🙃  |
+| IDE          | [Visual Studio Code](https://code.visualstudio.com/)                                       | You can use your preferred IDE but this is the one we like 🙃   |
 | Frontend     | [React Native 0.60](<[LinkToReactNative0.60](https://www.npmjs.com/package/react-native)>) | Utilising Javascript to develop this cross platform mobile app |
 | Backend      | [Firebase (Repo)](https://github.com/PixelogicDev/Gruvee-Backend)                          | Serverless Functions in Firebase using GoLang                  |
 | Design :art: | [Sketch](https://www.sketch.com/)                                                          | The design files can be found [here](/Design)                  |
