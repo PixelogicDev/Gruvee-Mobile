@@ -22,7 +22,7 @@ import { AddPlaylist } from 'Gruvee/redux/actions/playlists/PlaylistActions'
 import * as StyleConstants from '@StyleConstants'
 
 const screenHeight = Dimensions.get('screen').height
-const navBarHeight = Platform.OS === 'ios' ? 44 : 36
+const navBarHeight = Platform.OS === 'ios' ? 44 : 84
 const timeIcon = require('Gruvee/assets/icons/times/times_icon.png')
 
 // Styles

@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React, { memo, useState } from 'react'
 import Creds from 'Gruvee/config/creds'
-import { connectRefinementList, InstantSearch } from 'react-instantsearch-native'
+import { InstantSearch } from 'react-instantsearch-native'
 import algoliasearch from 'algoliasearch/lite'
 
 // Children Components
@@ -8,11 +8,10 @@ import SearchBox from './components/SearchBox'
 import InfiniteHitsList from './components/InfiniteHitsList'
 
 // Properties
-const VirtualRefinementList = connectRefinementList(() => null)
 const searchClient = algoliasearch(Creds.Algolia.appId, Creds.Algolia.appKey)
 
 // AlgoliaSearch
-const AlgoliaSearch = ({ attribute, selectedUsers, setSelectedUser }) => {
+const AlgoliaSearch = ({ selectedUsers, setSelectedUser }) => {
     const [searchState, onChangeSearchState] = useState({})
     const [clearInput, setClearInput] = useState(false)
 
@@ -23,7 +22,6 @@ const AlgoliaSearch = ({ attribute, selectedUsers, setSelectedUser }) => {
             searchState={searchState}
             onSearchStateChange={onChangeSearchState}
         >
-            <VirtualRefinementList attribute={attribute} />
             <SearchBox
                 clearInput={clearInput}
                 placeholderText="Members"
@@ -49,4 +47,4 @@ const removeUser = (selectedUsers, setSelectedUser) => objectID => {
     setSelectedUser(users => users.filter(user => user.objectID !== objectID))
 }
 
-export default AlgoliaSearch
+export default memo(AlgoliaSearch)

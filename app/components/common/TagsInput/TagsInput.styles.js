@@ -10,5 +10,6 @@ export default StyleSheet.create({
     ItemsContainer: {
         flexDirection: 'row',
         flexWrap: 'wrap',
+        alignItems: 'center',
     },
 })
