@@ -45,16 +45,6 @@ const Auth = ({ setInitialUserData }) => {
             Linking.addEventListener('url', handleOpenUrl)
         }
 
-        // Apple Authentication Handler
-        /* if (appleAuth.isSupported) {
-            // If creds are revoked we probably want to some new stuff here
-            return appleAuth.onCredentialRevoked(async () => {
-                console.warn(
-                    'If this function executes, User Credentials have been Revoked'
-                )
-            })
-        } */
-
         return () => {
             // Do cleanup here
             Linking.removeEventListener('url')

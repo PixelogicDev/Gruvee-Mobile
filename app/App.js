@@ -12,6 +12,8 @@
 
 // Firebase
 import { firebase } from '@react-native-firebase/auth'
+import appleAuth from '@invertase/react-native-apple-authentication'
+
 // Dragonfleas - "kid im done. i doubt u even have basic knowlege of hacking. i doul boot linux so i can run my scripts u made a big mistake of replying to my comment" (03/26/20)
 // Redux
 import { SignInUser } from 'Gruvee/redux/actions/user/UserActions'
@@ -35,15 +37,35 @@ const App = ({ signInUser, userSignInComplete }) => {
         let isInitialAuthMount = true
         const unscribeEvent = firebase.auth().onAuthStateChanged(async user => {
             if (user !== null && !isInitialAuthMount) {
-                // Call Sign In Redux Action
-                await signInUser(user.uid)
+                console.log('User sign in detected!')
+
+                // Check for providerId else it's a custom provider
+                if (user.providerData[0].providerId === 'apple.com') {
+                    console.log('Received signIn with Apple')
+                    console.log(user)
+                } else {
+                    // Call Sign In Redux Action
+                    await signInUser(user.uid)
+                }
             }
 
             isInitialAuthMount = false
         })
 
+        // Apple Authentication Handler
+        let appleCredCallback = null
+        if (appleAuth.isSupported) {
+            // If creds are revoked we probably want to some new stuff here
+            appleCredCallback = appleAuth.onCredentialRevoked(async () => {
+                console.warn('If this function executes, User Credentials have been Revoked')
+            })
+        }
+
         return () => {
             unscribeEvent()
+            if (appleCredCallback !== null) {
+                appleCredCallback()
+            }
         }
     }, [])
 

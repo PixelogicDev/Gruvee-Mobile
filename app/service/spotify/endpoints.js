@@ -34,10 +34,10 @@ export const GetApiToken = code => {
 }
 
 // POST: Authorize Spotify User
-export const AuthorizeUser = (token, expiresIn, refreshToken) => {
+export const authorizeSpotifyUser = (token, expiresIn, refreshToken) => {
     const options = {
         method: 'POST',
-        url: COMMON_ENDPOINTS.authorizeUser,
+        url: COMMON_ENDPOINTS.authorizeSpotifyUser,
         data: {
             token,
             expiresIn,
