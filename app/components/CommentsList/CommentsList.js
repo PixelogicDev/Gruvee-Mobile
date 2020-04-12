@@ -57,7 +57,10 @@ const CommentsList = ({
             >
                 <SwipeListView
                     // eslint-disable-next-line no-return-assign
-                    listViewRef={ref => (commentsListRef.current = ref)}
+                    listViewRef={ref => {
+                        commentsListRef.current = ref
+                        return ref
+                    }}
                     style={{ height: '90%' }}
                     contentContainerStyle={styles.ContentContainer}
                     showsVerticalScrollIndicator

@@ -29,8 +29,6 @@ export const GetApiToken = code => {
         data: params,
     }
 
-    console.log('Calling GET API TOKEN')
-
     // This already returns a promise
     return axios(options)
 }

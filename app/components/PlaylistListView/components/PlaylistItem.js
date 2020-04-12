@@ -15,6 +15,8 @@ import CardItemDetail from './CardItemDetail'
 const defaultPlaylistBackgroundAsset = require('Gruvee/assets/defaults/playlist_image/default_item_bg_image.png')
 
 const PlaylistItem = ({ fetchMembers, playlistData, playlistMembers, setCurrentPlaylistId }) => {
+    const imageBackground =
+        playlistData.albumArtworkUrl !== '' ? { uri: `${playlistData.albumArtworkUrl}` } : null
     return (
         <TouchableOpacity
             onPress={() => {
@@ -28,7 +30,7 @@ const PlaylistItem = ({ fetchMembers, playlistData, playlistMembers, setCurrentP
         >
             <ImageBackground
                 style={styles.Container}
-                source={{ uri: `${playlistData.albumArtworkUrl}` }}
+                source={imageBackground}
                 defaultSource={defaultPlaylistBackgroundAsset}
             >
                 <CardItemDetail
@@ -58,7 +60,7 @@ const showSongListAction = (fetchMembers, playlistData, playlistMembers, setCurr
     setCurrentPlaylistId(playlistData.id)
 
     // Any new members from db? Lets get them now so our members list will be good to go.
-    fetchMembers(playlistData.id)
+    fetchMembers([playlistData])
 
     Navigation.push(NavigationConstants.STACK_ID, {
         component: {

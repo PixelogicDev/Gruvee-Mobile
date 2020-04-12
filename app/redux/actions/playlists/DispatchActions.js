@@ -55,7 +55,6 @@ export const AddSongComment = (commentId, songId, playlistId, statePlaylists) =>
 
 export const DeletePlaylist = (playlistId, playlists) => {
     // LiquoriceLion - "Add some logic here." (02/03/20)
-    // Filter out allIds to remove playlistId
     // Permafrost1991 - "Finger guns will never die! -Alec 2019" (02/06/20)
     // dra031cko - "Another One" (02/06/20)
     const allIds = playlists.allIds.filter(id => id !== playlistId)

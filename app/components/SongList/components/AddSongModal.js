@@ -11,7 +11,7 @@ const AddSongModal = ({ title, addSongAction }) => {
 
     return (
         <InputModal
-            title={title}
+            headerTitle={title}
             buttonTitle="Add"
             createAction={() => {
                 addSongAction(songLink, songComment)

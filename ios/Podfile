@@ -38,6 +38,10 @@ target 'Gruvee' do
   pod 'RNAppleAuthentication', :path => '../node_modules/@invertase/react-native-apple-authentication' 
 
 
+  pod 'RNGestureHandler', :path => '../node_modules/react-native-gesture-handler'
+
+  pod 'RNReanimated', :path => '../node_modules/react-native-reanimated'
+
   target 'GruveeTests' do
     inherit! :search_paths
     # Pods for testing

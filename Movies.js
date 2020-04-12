@@ -34,8 +34,28 @@
 // JMSWRNR - "Your mother was a hamster and your father smelt of elderberries." (03/20/20)
 // HMigo - "Look, that rabbit's got a vicious streak a mile wide! It's a killer!" (03/20/20)
 
+// -- MONTY PYTHON'S LIFE OF BRIAN -- //
+// HMigo - "Wait until Biggus Dickus hears of this!!!" (04/08/20)
+
+// -- Pulp Fiction -- //
+// Dragonfleas - "English, motherfucker! Do you speak it?" (03/28/20)
+
 // -- OTHER MOVIE -- //
 // TheYagich01 - "Famous movie quote!" (03/23/20)
+// fluffypoga - "Do you feel lucky, punk?" (03/31/20)
+// d_e_s_ - "Boris The Blade. Or Boris the Bullet Dodger. As hard as the Soviet hammer and as bent as the sickle that crosses it." (04/02/20)
+// youugotssponged - "I'm gonna make him an offer he can't refuse - The Godfather" (04/11/20)
+
+// -- SUDOKU -- //
+// OnePocketPimp: |8 _ _ | _ _ _ | _ _ _ |
+// OnePocketPimp: |_ _ 3 | 6 _ _ | _ _ _ |
+// OnePocketPimp: |_ 7 _ | _ 9 _ | 2 _ _ |
+// OnePocketPimp: -_ 5 _ + _ _ 7 + _ _ _ -
+// OnePocketPimp: |_ _ _ | _ 4 5 | 7 _ _ |
+// OnePocketPimp: |_ _ _ | 1 _ _ | _ 3 _ |
+// OnePocketPimp: -_ _ 1 + _ _ _ + _ 6 8 -
+// OnePocketPimp: |_ _ 8 | 5 _ _ | _ 1 _ |
+// OnePocketPimp: |_ 9 _ | _ _ _ | 4 _ _ |
 
 const BeeMovie = () => {}
 
@@ -43,4 +63,6 @@ const CarsMovie = () => {}
 
 const MontyPythonAndTheHolyGrail = () => {}
 
-export default [BeeMovie, CarsMovie, MontyPythonAndTheHolyGrail]
+const PulpFiction = () => {}
+
+export default [BeeMovie, CarsMovie, MontyPythonAndTheHolyGrail, PulpFiction]

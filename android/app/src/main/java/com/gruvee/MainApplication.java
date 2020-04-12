@@ -7,6 +7,8 @@ import com.reactnativenavigation.NavigationApplication;
 import com.reactnativenavigation.react.NavigationReactNativeHost;
 import com.reactnativenavigation.react.ReactGateway;
 import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
+import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
+import com.swmansion.reanimated.ReanimatedPackage;
 
 // Firebase
 import io.invertase.firebase.app.ReactNativeFirebaseAppPackage;
@@ -41,7 +43,9 @@ public class MainApplication extends NavigationApplication {
                 new ReactNativeFirebaseAppPackage(),
                 new ReactNativeFirebaseFirestorePackage(),
                 new ReactNativeFirebaseAuthPackage(),
-                new AsyncStoragePackage()
+                new AsyncStoragePackage(),
+                new RNGestureHandlerPackage(),
+                new ReanimatedPackage()
         );
     }
 

@@ -13,12 +13,16 @@ import { DeleteSong } from 'Gruvee/redux/actions/songs/SharedSongActions'
 import {
     AddPlaylistToUser,
     DeletePlaylistFromUser,
+    UpdateUserAPIToken,
 } from 'Gruvee/redux/actions/user/SharedUserActions'
+import { DeleteMember } from 'Gruvee/redux/actions/members/SharedMembersActions'
 import {
     CreateNewPlaylistDocument,
     DeletePlaylistDocument,
     UpdateUserDocumentWithPlaylist,
 } from 'Gruvee/firestore/playlistActions'
+import { CreateSocialPlaylist } from 'Gruvee/service/common/endpoints'
+import { FetchMembers } from 'Gruvee/redux/actions/members/MembersActions'
 
 // Action Creators
 const addPlaylist = playlist => {
@@ -51,16 +55,30 @@ export const AddPlaylist = newPlaylist => {
         } = getState()
 
         // Write newly created playlist to firestore and then add to state
-        const playlistDocRef = await CreateNewPlaylistDocument(
-            newPlaylist,
-            user.preferredSocialPlatform
-        )
-
+        const playlistDocRef = await CreateNewPlaylistDocument(newPlaylist)
         dispatch(addPlaylist(newPlaylist, statePlaylists))
 
         // Set db reference and write path to user doc in DB
         await UpdateUserDocumentWithPlaylist(user.id, playlistDocRef)
         dispatch(AddPlaylistToUser(newPlaylist.id))
+
+        // Get members from playlists and put in state
+        dispatch(FetchMembers([newPlaylist]))
+
+        // Call endpoint to create playlist on social platform
+        // If we needed a refreshed token, it will be passed back here
+        CreateSocialPlaylist(user.preferredSocialPlatform, newPlaylist)
+            .then(response => {
+                if (response.status !== 204) {
+                    // Call redux action to update userDoc
+                    dispatch(UpdateUserAPIToken(response.data))
+                } else {
+                    console.log('SocialPlatform was not updated.')
+                }
+            })
+            .catch(error => {
+                console.warn('Error trying to create playlist on platform: ', error)
+            })
     }
 }
 
@@ -78,6 +96,11 @@ export const DeletePlaylist = playlistId => {
             // Delete songs from playlist from SongsDataReducer
             // Delete comments from song from CommentsDataReducer
             dispatch(DeleteSong(playlistId, songId))
+        })
+
+        // Delete members from MembersDataReducer
+        playlists.byId[playlistId].members.forEach(memberId => {
+            dispatch(DeleteMember(playlistId, memberId))
         })
 
         // Delete playlist from PlaylistsDataReducer

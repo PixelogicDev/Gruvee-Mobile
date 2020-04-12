@@ -53,7 +53,7 @@ const SongItemCommentBar = ({ songCommentCount, songData }) => {
             }}
         >
             <Text style={styles.Text}>{songCommentCount} Comments</Text>
-            <Image style={styles.Image} source={rightChevronAsset} />
+            <Image style={styles.Image} source={rightChevronAsset ?? null} />
         </TouchableOpacity>
     )
 }

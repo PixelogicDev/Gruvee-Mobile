@@ -71,7 +71,7 @@ export const SONG_LIST_COMMENT_SECTION_HEIGHT = Dimensions.get('window').height 
 export const COMMENT_ITEM_MIN_HEIGHT = 75
 
 // Text Input
-export const TEXT_INPUT_PADDING = 8
+export const TEXT_INPUT_PADDING = 10
 export const TEXT_INPUT_BG_COLOR = '#151515'
 
 // Seperator Color
