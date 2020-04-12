@@ -9,6 +9,7 @@ import {
     TouchableOpacity,
     View,
 } from 'react-native'
+import { GetSongMetadata } from 'Gruvee/service/common/endpoints'
 import BottomSheet from 'reanimated-bottom-sheet'
 import CreateItemActionButton from 'Gruvee/components/common/CreateItemActionButton'
 import * as StyleConstants from '@StyleConstants'
@@ -82,6 +83,21 @@ const AddSongBottomSheet = (props, ref) => {
 }
 
 // Actions
+const addSongAction = (songLink, comment) => () => {
+    // Get songLink and run metadata check to get the proper Song Object
+    GetSongMetadata(songLink)
+
+    // Return our song object
+
+    // TODO: Run any comment creation logic here
+
+    // We will be using a mock string for signed in user until we mock the proper state
+    // const newComment = comment.length ? new SongComment(comment, 'memberAlec') : null
+
+    // Run Redux add song action which should handle a lot of what we need
+    // addSong(playlistId, newSong, newComment)
+}
+
 const clearInputs = (setSongLink, setSongComment) => {
     // Clear song link
     setSongLink('')
@@ -138,9 +154,7 @@ const generateSheetContent = (
             />
             <CreateItemActionButton
                 title="Add"
-                createAction={() => {
-                    console.log('Add song tapped!')
-                }}
+                createAction={addSongAction(songLink, songComment)}
                 disabled={!songLink}
             />
         </View>

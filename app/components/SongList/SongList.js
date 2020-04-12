@@ -15,10 +15,8 @@ import { AddSong, FetchSongs } from 'Gruvee/redux/actions/songs/SongsActions'
 import { DeleteSong } from 'Gruvee/redux/actions/songs/SharedSongActions'
 import { MapSongsFromPlaylistSelector } from 'Gruvee/redux/selectors/SongsSelector'
 
-import spotifyMockFindResponse from 'Gruvee/mock/spotifyFindResponse'
 import AddItemButton from 'Gruvee/components/common/AddItemButton'
 import * as StyleConstants from 'Gruvee/config/styles'
-import Song from 'Gruvee/lib/Song'
 import SongComment from 'Gruvee/lib/SongComment'
 import AddSongBottomSheet from 'Gruvee/components/SongList/components/AddSongBottomSheet'
 
@@ -53,19 +51,6 @@ const SongListView = ({ playlistId, songs, fetchSongs, addSong, deleteSong }) =>
         // We should fetch the newest data on component load here.
         fetchSongs(playlistId)
     }, [])
-
-    // Actions
-    const addSongAction = (songLink, comment) => {
-        // Create song object
-        const newSong = new Song(spotifyMockFindResponse, songLink)
-
-        // We will be using a mock string for signed in user until we mock the proper state
-        const newComment = comment.length ? new SongComment(comment, 'memberAlec') : null
-
-        // If we have a comment associated with this thing
-        // We will need to also dispatch addCommentToPlaylist
-        addSong(playlistId, newSong, newComment)
-    }
 
     // dra031cko - "WUBBA LUBBA DUB DUB" (02/01/20)
     const renderItem = ({ item }) => (
