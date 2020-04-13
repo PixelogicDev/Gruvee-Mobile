@@ -10,6 +10,7 @@ import { ApplePlatform } from 'Gruvee/config/socials'
 import SocialPlatform from 'Gruvee/lib/SocialPlatform'
 import { CreateNewUserDocument } from 'Gruvee/firestore/userActions'
 import SocialAuthButton from './SocialAuthButton'
+import { CreateDocumentAndSignIn } from './actions/SharedActions'
 
 const AppleAuthButton = () => {
     const signInWithAppleAction = async () => {
@@ -48,12 +49,12 @@ const AppleAuthButton = () => {
             )
             console.log(applePlatform)
 
-            const fbUser = await CreateNewUserDocument(applePlatform)
+            CreateDocumentAndSignIn(applePlatform, appleCredential)
 
-            console.log(fbUser)
+            //const fbUser = await CreateNewUserDocument(applePlatform)
 
             // Sign in
-            return firebase.auth().signInWithCredential(appleCredential)
+            // return firebase.auth().signInWithCredential(appleCredential)
         } catch (error) {
             console.warn(error)
         }

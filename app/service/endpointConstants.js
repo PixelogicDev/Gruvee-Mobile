@@ -16,6 +16,8 @@ export const SPOTIFY_ENDPOINTS = {
 // curiousdrive - "East to West Gruvee is the best!!!" (03/22/20)
 export const COMMON_ENDPOINTS = {
     authorizeSpotifyUser: `${baseHostName}/authorizeWithSpotify`,
+    createSocialPlatform: `${baseHostName}/createSocialPlatform`,
     createSocialPlaylist: `${baseHostName}/createSocialPlaylist`,
+    createUser: `${baseHostName}/createUser`,
     getCustomFirebaseToken: `${baseHostName}/generateCustomToken`,
 }

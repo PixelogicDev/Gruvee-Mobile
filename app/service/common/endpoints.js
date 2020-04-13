@@ -18,3 +18,37 @@ export const CreateSocialPlaylist = (socialPlatform, playlist) => {
     // This already returns a promise
     return axios(options)
 }
+
+// POST: Create Social Platform and store in DB
+export const CreateSocialPlatform = socialPlatform => {
+    const headers = {
+        'User-Type': 'gruvee-mobile',
+    }
+
+    const options = {
+        method: 'POST',
+        url: COMMON_ENDPOINTS.createSocialPlatform,
+        headers,
+        data: socialPlatform,
+    }
+
+    // This already returns a promise
+    return axios(options)
+}
+
+// POST: Create User and store in DB
+export const CreateUser = user => {
+    const headers = {
+        'User-Type': 'gruvee-mobile',
+    }
+
+    const options = {
+        method: 'POST',
+        url: COMMON_ENDPOINTS.createUser,
+        headers,
+        data: user,
+    }
+
+    // This already returns a promise
+    return axios(options)
+}
