@@ -42,7 +42,7 @@ const App = ({ signInUser, userSignInComplete }) => {
                 // Check for providerId else it's a custom provider
                 if (user.providerData[0].providerId === 'apple.com') {
                     console.log('Received signIn with Apple')
-                    console.log(user)
+                    // await signInUser(user.uid)
                 } else {
                     // Call Sign In Redux Action
                     await signInUser(user.uid)

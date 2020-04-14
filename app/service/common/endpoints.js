@@ -37,7 +37,7 @@ export const CreateSocialPlatform = socialPlatform => {
 }
 
 // POST: Create User and store in DB
-export const CreateUser = user => {
+export const CreateUser = createUserReq => {
     const headers = {
         'User-Type': 'gruvee-mobile',
     }
@@ -46,7 +46,7 @@ export const CreateUser = user => {
         method: 'POST',
         url: COMMON_ENDPOINTS.createUser,
         headers,
-        data: user,
+        data: createUserReq,
     }
 
     // This already returns a promise
