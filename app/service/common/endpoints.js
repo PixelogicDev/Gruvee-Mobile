@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { COMMON_ENDPOINTS } from 'Gruvee/service/endpointConstants'
-import { ParseSongUri } from 'Gruvee/helpers/SongRegexHelper'
+import { ParseSongLink } from 'Gruvee/helpers/SongRegexHelper'
 
 // POST: Create Playlist On Preferred Social Platform
 // eslint-disable-next-line import/prefer-default-export
@@ -20,12 +20,19 @@ export const CreateSocialPlaylist = (socialPlatform, playlist) => {
     return axios(options)
 }
 
-export const GetSongMetadata = songUri => {
+export const GetSongMetadata = songLink => {
     console.log('Starting GetSongMetadata Service')
 
-    // TODO: Check for valid url
-    // Try to grab service provider from url
-    ParseSongUri(songUri)
+    // This will retrun: {id: string, mediaType: string}
+    const { id, mediaType } = ParseSongLink(songLink)
+
+    console.log(id)
+    console.log(mediaType)
+
+    // Get spotify data
+    // GetSpotifyTrack('1234')
+    // Create new song document for playlist
+    // When song is added to collection, service should trigger function to get data for other platforms
 
     // Get setup some sort of regex filter, and grab the filter
 }
