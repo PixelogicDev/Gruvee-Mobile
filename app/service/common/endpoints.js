@@ -24,15 +24,32 @@ export const GetSongMetadata = songLink => {
     console.log('Starting GetSongMetadata Service')
 
     // This will retrun: {id: string, mediaType: string}
-    const { id, mediaType } = ParseSongLink(songLink)
-
-    console.log(id)
-    console.log(mediaType)
-
     // Get spotify data
-    // GetSpotifyTrack('1234')
+    const metadata = ParseSongLink(songLink)
+    if (metadata !== null) {
+        console.log(metadata.provider)
+        console.log(metadata.id)
+        console.log(metadata.mediaType)
+    } else {
+        console.log('SongLink returned nil')
+        return null
+    }
+
+    // Call function to get metadata for song based on provider
+    switch (metadata.provider) {
+        case 'spotify':
+            console.log('Calling Spotify')
+            break
+        case 'youtube':
+            console.log('Calling Youtube')
+            break
+        case 'apple':
+            console.log('Calling Apple')
+            break
+        default:
+            console.log(`${metadata.provider} is not supported`)
+    }
+
     // Create new song document for playlist
     // When song is added to collection, service should trigger function to get data for other platforms
-
-    // Get setup some sort of regex filter, and grab the filter
 }
