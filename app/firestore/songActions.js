@@ -44,7 +44,9 @@ export const UpdatePlaylistDocumentWithSong = async (playlistId, songDocRef, use
 
             // Add user that added song to addedBy
             const currentSongsAddedBy = { ...currentSongs.addedBy }
-            currentSongsAddedBy[user.id] = songDocRef.id
+            currentSongsAddedBy[user.id] = currentSongsAddedBy[user.id]
+                ? [...currentSongsAddedBy[user.id], songDocRef.id]
+                : [songDocRef.id]
 
             // Add songDocRef to allSongs array
             const currentAllSongs = [...currentSongs.allSongs, songDocRef]

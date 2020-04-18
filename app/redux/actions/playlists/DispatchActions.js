@@ -21,6 +21,12 @@ export const AddPlaylistMember = (memberId, playlistId, statePlaylists) => {
 }
 
 export const AddPlaylistSong = (user, songId, playlistId, statePlaylists) => {
+    // Check
+    const songsAddedeBy = statePlaylists.byId[playlistId].songs.addedBy
+    const updatedAddedByVal = songsAddedeBy[user.id]
+        ? [...songsAddedeBy[user.id], songId]
+        : [songId]
+
     return {
         ...statePlaylists,
         byId: {
@@ -30,7 +36,7 @@ export const AddPlaylistSong = (user, songId, playlistId, statePlaylists) => {
                 songs: {
                     addedBy: {
                         ...statePlaylists.byId[playlistId].songs.addedBy,
-                        [user.id]: songId,
+                        [user.id]: updatedAddedByVal,
                     },
                     allSongs: [...statePlaylists.byId[playlistId].songs.allSongs, songId],
                 },
@@ -80,15 +86,22 @@ export const DeletePlaylistSong = (songId, playlistId, statePlaylists) => {
     const comments = { ...statePlaylists.byId[playlistId].comments }
     delete comments[songId]
 
+    // Remove song from addedBy object - If we are deleting that means it's the person who added the song
+    // so find them, and filter the array
+    // const updatedAddBy = statePlaylists.byId[playlistId].songs.addedBy
+
+    // Filter allSongs array
+    const updatedAllSongs = statePlaylists.byId[playlistId].songs.allSongs.filter(
+        stateSongId => stateSongId !== songId
+    )
+
     return {
         ...statePlaylists,
         byId: {
             ...statePlaylists.byId,
             [playlistId]: {
                 ...statePlaylists.byId[playlistId],
-                songs: statePlaylists.byId[playlistId].songs.filter(
-                    stateSongId => stateSongId !== songId
-                ),
+                songs: { allSongs: updatedAllSongs },
                 comments,
             },
         },
