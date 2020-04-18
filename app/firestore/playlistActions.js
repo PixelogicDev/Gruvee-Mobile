@@ -21,6 +21,9 @@ export const CreateNewPlaylistDocument = async playlist => {
         // Add reference for createdBy
         editedPlaylist.createdBy = db.doc(`users/${editedPlaylist.createdBy}`)
 
+        // Initialize songs object
+        editedPlaylist.songs = { addedBy: {}, allSongs: [] }
+
         // If our document creation is a success, we can set data in document
         await playlistDoc.set(editedPlaylist)
 

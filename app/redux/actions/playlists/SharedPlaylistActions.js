@@ -14,10 +14,10 @@ const addPlaylistMember = (memberId, playlistId) => {
     }
 }
 
-const addPlaylistSong = (songId, playlistId) => {
+const addPlaylistSong = (user, songId, playlistId) => {
     return {
         type: ADD_PLAYLIST_SONG,
-        data: { songId, playlistId },
+        data: { user, songId, playlistId },
     }
 }
 
@@ -49,10 +49,10 @@ export const AddPlaylistMember = (memberId, playlistId) => {
     }
 }
 
-export const AddPlaylistSong = (songId, playlistId, comment) => {
+export const AddPlaylistSong = (user, songId, playlistId) => {
     return dispatch => {
         // This is updating PlaylistsDataReducer
-        dispatch(addPlaylistSong(songId, playlistId, comment))
+        dispatch(addPlaylistSong(user, songId, playlistId))
     }
 }
 

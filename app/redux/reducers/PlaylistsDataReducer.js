@@ -44,6 +44,7 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 playlists: AddPlaylistSong(
+                    action.data.user,
                     action.data.songId,
                     action.data.playlistId,
                     state.playlists

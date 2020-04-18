@@ -1,7 +1,6 @@
 export default class Song {
-    constructor(addedBy, mediaBlob) {
+    constructor(mediaBlob) {
         this.id = mediaBlob.id
-        // TODO: Remove this as once implemented this.addedBy = addedBy
         this.name = mediaBlob.name
         this.artist = mediaBlob.artists.map(a => a.name).join(',')
         this.album = mediaBlob.album ? mediaBlob.album.name : undefined

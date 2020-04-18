@@ -20,14 +20,20 @@ export const AddPlaylistMember = (memberId, playlistId, statePlaylists) => {
     }
 }
 
-export const AddPlaylistSong = (songId, playlistId, statePlaylists) => {
+export const AddPlaylistSong = (user, songId, playlistId, statePlaylists) => {
     return {
         ...statePlaylists,
         byId: {
             ...statePlaylists.byId,
             [playlistId]: {
                 ...statePlaylists.byId[playlistId],
-                songs: [...statePlaylists.byId[playlistId].songs, songId],
+                songs: {
+                    addedBy: {
+                        ...statePlaylists.byId[playlistId].songs.addedBy,
+                        [user.id]: songId,
+                    },
+                    allSongs: [...statePlaylists.byId[playlistId].songs.allSongs, songId],
+                },
                 comments: {
                     ...statePlaylists.byId[playlistId].comments,
                     [songId]: [],

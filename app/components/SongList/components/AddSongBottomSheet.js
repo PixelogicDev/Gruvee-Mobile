@@ -92,20 +92,28 @@ const AddSongBottomSheet = ({ currentUser, addSong, currentPlaylistId, bottomShe
 }
 
 // Actions
-const addSongAction = (currentUser, mediaLink, comment, addSong, currentPlaylistId) => async () => {
+const addSongAction = (
+    currentUser,
+    mediaLink,
+    comment,
+    addSong,
+    currentPlaylistId,
+    dismissBottomSheetAction
+) => async () => {
     try {
         // Get songLink and run metadata check to get the proper Song Object
         const mediaMetadata = await GetMediaData(mediaLink)
 
         // Create song object
-        const song = new Song(currentUser, mediaMetadata.data)
+        const song = new Song(mediaMetadata.data)
 
         // Call redux action
-        addSong(currentPlaylistId, song, comment)
+        addSong(currentUser, currentPlaylistId, song, comment)
 
         // When song is added to collection, service should trigger function to get data for other platforms
 
         // TODO: Run any comment creation logic here
+        dismissBottomSheetAction()
     } catch (error) {
         console.warn(error)
     }
@@ -140,13 +148,15 @@ const generateSheetContent = (
     addSong,
     currentPlaylistId
 ) => () => {
+    const dismissBottomSheetAction = () => {
+        dismissBottomSheet(setSongLink, setSongComment, bottomSheetRef)
+    }
+
     return (
         <View style={styles.InputContainer}>
             <TouchableOpacity
                 style={styles.CloseButtonContainer}
-                onPress={() => {
-                    dismissBottomSheet(setSongLink, setSongComment, bottomSheetRef)
-                }}
+                onPress={dismissBottomSheetAction}
             >
                 <Image style={styles.CloseButtonIcon} source={timesIcon ?? null} />
             </TouchableOpacity>
@@ -175,7 +185,8 @@ const generateSheetContent = (
                     songLink,
                     songComment,
                     addSong,
-                    currentPlaylistId
+                    currentPlaylistId,
+                    dismissBottomSheetAction
                 )}
                 disabled={!songLink}
             />

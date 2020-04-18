@@ -59,7 +59,7 @@ const PlaylistItem = ({
                 <CardItemDetail
                     name={playlistData.name}
                     numMembers={playlistData.members.length}
-                    numSongs={playlistData.songs.length}
+                    numSongs={playlistData.songs.allSongs.length}
                 />
             </ImageBackground>
         </TouchableOpacity>

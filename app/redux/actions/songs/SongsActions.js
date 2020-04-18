@@ -26,21 +26,22 @@ const fetchSongs = songs => {
 }
 
 // Thunks
-export const AddSong = (playlistId, song, comment) => {
+export const AddSong = (user, playlistId, song, comment) => {
     return async dispatch => {
         // Write song to songs collection
         const songDocRef = await CreateNewSongDocument(song)
+        if (songDocRef === null) {
+            throw new Error('SongDocRef was null and not created.')
+        }
 
         // Write reference to playlist document
-        await UpdatePlaylistDocumentWithSong(playlistId, songDocRef)
+        await UpdatePlaylistDocumentWithSong(playlistId, songDocRef, user)
 
         // Add songs to state
         dispatch(addSong(song))
 
         // Update playlist in PlaylistsDataReducer
-        dispatch(AddPlaylistSong(song.id, playlistId))
-
-        // TODO: Update member with songId reference
+        dispatch(AddPlaylistSong(user, song.id, playlistId, comment))
 
         // Check for comment and if not null update PlaylistsDataReducer with comment
         dispatch(AddComment(comment, song.id, playlistId))

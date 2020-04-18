@@ -17,7 +17,7 @@ const mapSongsFromPlaylist = (statePlaylists, stateSongs, playlistId) => {
     if (statePlaylists.byId === undefined) return songs
 
     // Get list of songIds from playlist
-    const songIds = statePlaylists.byId[playlistId].songs
+    const songIds = statePlaylists.byId[playlistId].songs.allSongs
 
     songIds.forEach(songId => {
         const song = stateSongs.byId[songId]

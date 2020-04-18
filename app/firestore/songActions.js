@@ -9,7 +9,7 @@ export const GetSongsDocuments = async playlistId => {
         .get()
 
     const dbPlaylist = dbPlaylistSnap.data()
-    const songs = await FetchChildRefs(dbPlaylist.songs)
+    const songs = await FetchChildRefs(dbPlaylist.songs.allSongs)
 
     return songs
 }
@@ -20,15 +20,8 @@ export const CreateNewSongDocument = async song => {
         const db = firestore()
         const songDoc = db.collection('songs').doc(song.id)
 
-        // Create reference to addedBy user
-        const editedSong = { ...song }
-
-        // Add reference for createdBy
-        editedSong.addedBy = db.doc(`users/${song.addedBy.id}`)
-
         // If our document creation is a success, we can set data in document
-        await songDoc.set(editedSong)
-
+        await songDoc.set(song)
         return songDoc
     } catch (error) {
         console.warn(error)
@@ -37,7 +30,7 @@ export const CreateNewSongDocument = async song => {
     return null
 }
 
-export const UpdatePlaylistDocumentWithSong = async (playlistId, songDocRef) => {
+export const UpdatePlaylistDocumentWithSong = async (playlistId, songDocRef, user) => {
     const db = firestore()
     const playlistDocRef = await db.collection('playlists').doc(playlistId)
 
@@ -48,7 +41,17 @@ export const UpdatePlaylistDocumentWithSong = async (playlistId, songDocRef) => 
             }
 
             const currentSongs = playlistDoc.data().songs
-            transaction.update(playlistDocRef, { songs: [...currentSongs, songDocRef] })
+
+            // Add user that added song to addedBy
+            const currentSongsAddedBy = { ...currentSongs.addedBy }
+            currentSongsAddedBy[user.id] = songDocRef.id
+
+            // Add songDocRef to allSongs array
+            const currentAllSongs = [...currentSongs.allSongs, songDocRef]
+
+            transaction.update(playlistDocRef, {
+                songs: { addedBy: currentSongsAddedBy, allSongs: currentAllSongs },
+            })
         })
     })
 }
