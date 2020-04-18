@@ -3,6 +3,7 @@ import { DELETE_SONG } from 'Gruvee/redux/actions/ActionsType'
 
 import { BulkCommentsDelete } from 'Gruvee/redux/actions/comments/SharedCommentActions'
 import { DeletePlaylistSong } from 'Gruvee/redux/actions/playlists/SharedPlaylistActions'
+import { RemoveSongFromPlaylist } from 'Gruvee/firestore/songActions'
 
 // Action Creators
 const deleteSong = songId => {
@@ -15,13 +16,17 @@ const deleteSong = songId => {
 // Thunks
 // eslint-disable-next-line import/prefer-default-export
 export const DeleteSong = (playlistId, songId) => {
-    return (dispatch, getState) => {
+    return async (dispatch, getState) => {
         const {
+            UserDataReducer: { user },
             PlaylistsDataReducer: { playlists },
         } = getState()
 
+        // Update firebase
+        await RemoveSongFromPlaylist(playlistId, user.id, songId)
+
         // If we are deleting our song, we should dispatch a comment delete as well (in CommentsDataReducer)
-        dispatch(BulkCommentsDelete(playlists.byId[playlistId].comments[songId]))
+        // dispatch(BulkCommentsDelete(playlists.byId[playlistId].comments[songId]))
 
         // Here we will need to also remove all the comments associated with it (in playlist)
         dispatch(DeletePlaylistSong(songId, playlistId))

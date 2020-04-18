@@ -60,8 +60,8 @@ If you are interested in becoming a member of the team check out the **[Pixelogi
 - [ ] Direct people towards the Discord for feedback (Phase 1 or 2)
 
 ### Notifications
-- [ ] Add support for notifications when added to a playlist (Phase 2)
-- [ ] Add support for push notifications when new song is added to a playlist you are a part of (Phase 2)
+- [ ] Add support for notifications when added to a playlist (Pushing for Phase 1 | Phase 2)
+- [ ] Add support for push notifications when new song is added to a playlist you are a part of (Pushing for Phase 1 | Phase 2)
 
 ### Users Portal
 - [ ] Create a user page that allows for some basic settings such as: Login/Logout, setting perferred provider, authenticating with other services, etc. (Phase 3)

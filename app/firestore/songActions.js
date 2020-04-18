@@ -30,6 +30,32 @@ export const CreateNewSongDocument = async song => {
     return null
 }
 
+export const RemoveSongFromPlaylist = async (playlistId, userId, songId) => {
+    const db = firestore()
+    const playlistDocRef = await db.doc(`playlists/${playlistId}`)
+
+    // Remove song docRef from playlist
+    db.runTransaction(transaction => {
+        return transaction.get(playlistDocRef).then(playlistDoc => {
+            if (!playlistDoc.exists) {
+                throw new Error('userDoc did not exist.')
+            }
+
+            const currentSongs = playlistDoc.data().songs
+            const allSongs = currentSongs.allSongs.filter(songDocRef => songDocRef.id !== songId)
+            const userAddedBy = currentSongs.addedBy[userId]
+            const addedBy = {
+                ...currentSongs.addedBy,
+                [userId]: userAddedBy.filter(dbSongId => dbSongId !== songId),
+            }
+
+            transaction.update(playlistDocRef, {
+                songs: { addedBy, allSongs },
+            })
+        })
+    })
+}
+
 export const UpdatePlaylistDocumentWithSong = async (playlistId, songDocRef, user) => {
     const db = firestore()
     const playlistDocRef = await db.collection('playlists').doc(playlistId)
