@@ -1,6 +1,6 @@
 import axios from 'axios'
-import { COMMON_ENDPOINTS } from 'Gruvee/service/endpointConstants'
-import { ParseSongLink } from 'Gruvee/helpers/SongRegexHelper'
+import { COMMON_ENDPOINTS, SPOTIFY_ENDPOINTS } from 'Gruvee/service/endpointConstants'
+import { ParseMediaLink } from 'Gruvee/helpers/SongRegexHelper'
 
 // POST: Create Playlist On Preferred Social Platform
 // eslint-disable-next-line import/prefer-default-export
@@ -20,36 +20,44 @@ export const CreateSocialPlaylist = (socialPlatform, playlist) => {
     return axios(options)
 }
 
-export const GetSongMetadata = songLink => {
-    console.log('Starting GetSongMetadata Service')
-
-    // This will retrun: {id: string, mediaType: string}
+export const GetMediaData = mediaLink => {
     // Get spotify data
-    const metadata = ParseSongLink(songLink)
-    if (metadata !== null) {
-        console.log(metadata.provider)
-        console.log(metadata.id)
-        console.log(metadata.mediaType)
-    } else {
+    const metadata = ParseMediaLink(mediaLink)
+    if (metadata === null) {
         console.log('SongLink returned nil')
         return null
     }
 
+    let providerUrl
+
     // Call function to get metadata for song based on provider
     switch (metadata.provider) {
         case 'spotify':
+            providerUrl = SPOTIFY_ENDPOINTS.getSpotifyMedia
             console.log('Calling Spotify')
             break
         case 'youtube':
+            providerUrl = ''
             console.log('Calling Youtube')
             break
         case 'apple':
+            providerUrl = ''
             console.log('Calling Apple')
             break
         default:
             console.log(`${metadata.provider} is not supported`)
     }
 
-    // Create new song document for playlist
-    // When song is added to collection, service should trigger function to get data for other platforms
+    const headers = {
+        'User-Type': 'gruvee-mobile',
+    }
+
+    const options = {
+        method: 'POST',
+        url: providerUrl,
+        headers,
+        data: metadata,
+    }
+
+    return axios(options)
 }

@@ -4,6 +4,11 @@
 import { ADD_SONG, FETCH_SONGS } from 'Gruvee/redux/actions/ActionsType'
 import { AddPlaylistSong } from 'Gruvee/redux/actions/playlists/SharedPlaylistActions'
 import { AddComment } from 'Gruvee/redux/actions/comments/SharedCommentActions'
+import {
+    GetSongsDocuments,
+    CreateNewSongDocument,
+    UpdatePlaylistDocumentWithSong,
+} from 'Gruvee/firestore/songActions'
 
 // Action Creators
 const addSong = song => {
@@ -22,12 +27,20 @@ const fetchSongs = songs => {
 
 // Thunks
 export const AddSong = (playlistId, song, comment) => {
-    return dispatch => {
-        // Add songs to SongsDataReducer
+    return async dispatch => {
+        // Write song to songs collection
+        const songDocRef = await CreateNewSongDocument(song)
+
+        // Write reference to playlist document
+        await UpdatePlaylistDocumentWithSong(playlistId, songDocRef)
+
+        // Add songs to state
         dispatch(addSong(song))
 
         // Update playlist in PlaylistsDataReducer
         dispatch(AddPlaylistSong(song.id, playlistId))
+
+        // TODO: Update member with songId reference
 
         // Check for comment and if not null update PlaylistsDataReducer with comment
         dispatch(AddComment(comment, song.id, playlistId))
@@ -35,12 +48,10 @@ export const AddSong = (playlistId, song, comment) => {
 }
 
 // InukApp - "I bet if Swift had better Android support, Alec would've chosen to code in Swift." (02/09/20)
-export const FetchSongs = () => {
-    // At this point make async call to get songs for playlist
-    return dispatch => {
-        // poopuhchoo - "YASSSS" (01/30/20)
-        // Map ids to songs state
-        const songs = []
-        dispatch(fetchSongs(songs))
+export const FetchSongs = playlistId => {
+    // poopuhchoo - "YASSSS" (01/30/20)
+    return async dispatch => {
+        const songsData = await GetSongsDocuments(playlistId)
+        dispatch(fetchSongs(songsData))
     }
 }

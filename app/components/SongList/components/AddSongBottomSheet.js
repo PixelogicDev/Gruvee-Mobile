@@ -9,10 +9,16 @@ import {
     TouchableOpacity,
     View,
 } from 'react-native'
-import { GetSongMetadata } from 'Gruvee/service/common/endpoints'
+
+// Redux
+import { connect } from 'react-redux'
+import { AddSong } from 'Gruvee/redux/actions/songs/SongsActions'
+
+import { GetMediaData } from 'Gruvee/service/common/endpoints'
 import BottomSheet from 'reanimated-bottom-sheet'
 import CreateItemActionButton from 'Gruvee/components/common/CreateItemActionButton'
 import * as StyleConstants from '@StyleConstants'
+import Song from 'Gruvee/lib/Song'
 
 const screenHeight = Dimensions.get('screen').height
 const navBarHeight = Platform.OS === 'ios' ? 80 : 84
@@ -61,13 +67,13 @@ const styles = StyleSheet.create({
     },
 })
 
-const AddSongBottomSheet = (props, ref) => {
+const AddSongBottomSheet = ({ currentUser, addSong, currentPlaylistId, bottomSheetRef }) => {
     const [songLink, setSongLink] = useState('')
     const [songComment, setSongComment] = useState('')
 
     return (
         <BottomSheet
-            ref={ref}
+            ref={bottomSheetRef}
             snapPoints={[screenHeight - navBarHeight, screenHeight / 2 + navBarHeight, 0]}
             borderRadius={10}
             initialSnap={2}
@@ -76,26 +82,33 @@ const AddSongBottomSheet = (props, ref) => {
                 setSongLink,
                 songComment,
                 setSongComment,
-                ref
+                bottomSheetRef,
+                currentUser,
+                addSong,
+                currentPlaylistId
             )}
         />
     )
 }
 
 // Actions
-const addSongAction = (songLink, comment) => () => {
-    // Get songLink and run metadata check to get the proper Song Object
-    GetSongMetadata(songLink)
+const addSongAction = (currentUser, mediaLink, comment, addSong, currentPlaylistId) => async () => {
+    try {
+        // Get songLink and run metadata check to get the proper Song Object
+        const mediaMetadata = await GetMediaData(mediaLink)
 
-    // Return our song object
+        // Create song object
+        const song = new Song(currentUser, mediaMetadata.data)
 
-    // TODO: Run any comment creation logic here
+        // Call redux action
+        addSong(currentPlaylistId, song, comment)
 
-    // We will be using a mock string for signed in user until we mock the proper state
-    // const newComment = comment.length ? new SongComment(comment, 'memberAlec') : null
+        // When song is added to collection, service should trigger function to get data for other platforms
 
-    // Run Redux add song action which should handle a lot of what we need
-    // addSong(playlistId, newSong, newComment)
+        // TODO: Run any comment creation logic here
+    } catch (error) {
+        console.warn(error)
+    }
 }
 
 const clearInputs = (setSongLink, setSongComment) => {
@@ -122,7 +135,10 @@ const generateSheetContent = (
     setSongLink,
     songComment,
     setSongComment,
-    bottomSheetRef
+    bottomSheetRef,
+    currentUser,
+    addSong,
+    currentPlaylistId
 ) => () => {
     return (
         <View style={styles.InputContainer}>
@@ -154,11 +170,31 @@ const generateSheetContent = (
             />
             <CreateItemActionButton
                 title="Add"
-                createAction={addSongAction(songLink, songComment)}
+                createAction={addSongAction(
+                    currentUser,
+                    songLink,
+                    songComment,
+                    addSong,
+                    currentPlaylistId
+                )}
                 disabled={!songLink}
             />
         </View>
     )
 }
 
-export default forwardRef(AddSongBottomSheet)
+const mapStateToProps = state => {
+    return {
+        currentPlaylistId: state.PlaylistsDataReducer.currentPlaylistId,
+        currentUser: state.UserDataReducer.user,
+    }
+}
+
+const mapDispatchToProps = dispatch => ({
+    addSong: (playlistId, song, comment) => dispatch(AddSong(playlistId, song, comment)),
+})
+
+const ConnectedAddSongBottomSheet = connect(mapStateToProps, mapDispatchToProps)(AddSongBottomSheet)
+export default forwardRef((props, ref) => (
+    <ConnectedAddSongBottomSheet {...props} bottomSheetRef={ref} />
+))

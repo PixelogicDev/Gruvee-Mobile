@@ -5,19 +5,18 @@
 // dra031cko - "Spread everything, spread often." (02/04/20)
 // ohmyshell - "kyle graduated code camp 2/12/2020" (02/12/20)
 
-import React, { useEffect, useRef } from 'react'
+import React, { useRef } from 'react'
 import { View, StyleSheet } from 'react-native'
 import { SwipeListView } from 'react-native-swipe-list-view'
 
 // Redux
 import { connect } from 'react-redux'
-import { AddSong, FetchSongs } from 'Gruvee/redux/actions/songs/SongsActions'
+import { AddSong } from 'Gruvee/redux/actions/songs/SongsActions'
 import { DeleteSong } from 'Gruvee/redux/actions/songs/SharedSongActions'
 import { MapSongsFromPlaylistSelector } from 'Gruvee/redux/selectors/SongsSelector'
 
 import AddItemButton from 'Gruvee/components/common/AddItemButton'
 import * as StyleConstants from 'Gruvee/config/styles'
-import SongComment from 'Gruvee/lib/SongComment'
 import AddSongBottomSheet from 'Gruvee/components/SongList/components/AddSongBottomSheet'
 
 import SwipeableSongItem from './components/SwipeableSongItem'
@@ -43,14 +42,9 @@ const styles = StyleSheet.create({
     },
 })
 
-const SongListView = ({ playlistId, songs, fetchSongs, addSong, deleteSong }) => {
+const SongListView = ({ playlistId, songs, deleteSong }) => {
     const bottomSheetRef = useRef(null)
     const keyExtractor = item => `${item.id}`
-
-    useEffect(() => {
-        // We should fetch the newest data on component load here.
-        fetchSongs(playlistId)
-    }, [])
 
     // dra031cko - "WUBBA LUBBA DUB DUB" (02/01/20)
     const renderItem = ({ item }) => (
@@ -98,7 +92,6 @@ const mapStateToProps = (state, props) => {
 const mapDispatchToProps = dispatch => ({
     addSong: (playlistId, song, comment) => dispatch(AddSong(playlistId, song, comment)),
     deleteSong: (playlistId, songId) => dispatch(DeleteSong(playlistId, songId)),
-    fetchSongs: playlistId => dispatch(FetchSongs(playlistId)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(SongListView)

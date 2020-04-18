@@ -11,7 +11,7 @@ export const SPOTIFY_ENDPOINTS = {
             scopes ? `&scope=${encodeURIComponent(scopes)}` : ''
         }&redirect_uri=${redirectUri}`.trim(),
     getCurrentUser: `${spotifyApiHostname}/v1/me`,
-    getTrack: `${spotifyApiHostname}/v1/tracks`,
+    getSpotifyMedia: `${baseHostName}/getSpotifyMedia`,
 }
 
 // curiousdrive - "East to West Gruvee is the best!!!" (03/22/20)
