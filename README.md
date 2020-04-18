@@ -34,34 +34,53 @@ If you are interested in becoming a member of the team check out the **[Pixelogi
 
 ### Checklist
 #### Authentication
-- [x] Authenicate with Spotify
-- [ ] Authenticate with Apple Music
-- [ ] Authenticate with Youtube Music
+- [x] Authenicate with Spotify (Phase 1)
+- [ ] Authenticate with Apple Music (Phase 2)
+- [ ] Authenticate with Youtube Music (Phase 3)
 
 #### Playlist Actions
-- [x] Create a playlist
-- [x] Delete a playlist
-- [x] Add members to a playlist (*Only able add members when adding a playlist)
-- [x] Create playlist on specific music provider
+- [x] Create a playlist (Phase 1)
+- [x] Delete a playlist (Phase 1)
+- [x] Add members to a playlist (*Only able add members when adding a playlist) (Phase 1)
+- [x] Create playlist on specific music provider (Phase 1)
+- [ ] Remove members from a playlist (Phase 2)
 
 #### Song Actions
-- [ ] Add a song
-- [ ] Remove a song
-- [ ] Comment on a song
-- [ ] Add song on specific music provider
-- [ ] Convert uploaded song link to all supported platforms
+- [x] Add a song (Phase 1)
+- [ ] Remove a song (Phase 1)
+- [ ] Add song on specific music provider (Phase 1 & 2 & 3)
+- [ ] Convert uploaded song link to all supported platforms (Phase 1 & 2 & 3)
 
 #### Comment Actions
-- [ ] Add a comment
-- [ ] Remove a comment
+- [ ] Add a comment (Phase 1)
+- [ ] Remove a comment (Phase 1)
 
 #### Feedback Hub (We can probably utilize Firebase even more)
-- [ ] Add a way for people to leave feedback in app
-- [ ] Direct people towards the Discord for feedback
+- [ ] Add a way for people to leave feedback in app (Phase 1 or 2)
+- [ ] Direct people towards the Discord for feedback (Phase 1 or 2)
+
+### Notifications
+- [ ] Add support for notifications when added to a playlist (Phase 2)
+- [ ] Add support for push notifications when new song is added to a playlist you are a part of (Phase 2)
+
+### Users Portal
+- [ ] Create a user page that allows for some basic settings such as: Login/Logout, setting perferred provider, authenticating with other services, etc. (Phase 3)
 
 ### Timeline
-- [ ] Release Grüvee Beta 1: Friday, April 18th 2020 by EOD for iOS and Android
-- After beta 1 release we will have WEEKLY updates to the app based on feedback and roadmap ahead
+- [ ] Release Grüvee Beta, Phase 1: Sunday, April 19th 2020 by EOD for iOS and Android
+- [ ] Release Grüvee Beta, Phase 2: Sunday, May 3rd 2020 by EOD for iOS and Android
+- [ ] Release Grüvee Beta, Phase 3: Sunday, May 17th 2020 by EOD for iOS and Android
+
+### Phase Details
+The idea of phasing is to allow for an ease of people coming into the app and using it. This will help us fix and major issues off the bat for the next batch of beta users and allows us to put more time into makeing each phase top tier.
+
+```
+Phase #1 - Spotify Phase
+Phase #2 - Apple Music Phase
+Phase #3 - Youtube Music Phase
+```
+
+The
 
 ---
 
