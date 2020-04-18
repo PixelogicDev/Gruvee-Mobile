@@ -92,10 +92,9 @@ export const DeletePlaylist = playlistId => {
         // Delete Playlist from Firebase
         await DeletePlaylistDocument(user.id, playlistId)
 
-        playlists.byId[playlistId].songs.forEach(songId => {
-            // Delete songs from playlist from SongsDataReducer
-            // Delete comments from song from CommentsDataReducer
-            dispatch(DeleteSong(playlistId, songId))
+        playlists.byId[playlistId].songs.allSongs.forEach(songId => {
+            // the true flag is isDeletingPlaylist
+            dispatch(DeleteSong(playlistId, songId, true))
         })
 
         // Delete members from MembersDataReducer

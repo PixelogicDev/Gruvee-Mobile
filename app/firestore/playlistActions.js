@@ -56,9 +56,6 @@ export const DeletePlaylistDocument = async (uid, playlistId) => {
             })
         })
     })
-
-    // TODO: Delete associated songs
-
     // TODO: Delete associated comments
 }
 

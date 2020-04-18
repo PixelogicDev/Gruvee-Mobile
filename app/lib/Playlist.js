@@ -22,7 +22,7 @@ export default class Playlist {
         this.name = name
         this.createdBy = createdBy.id
         this.members = cleanedMembers
-        this.songs = []
+        this.songs = { addedBy: {}, allSongs: [] }
         this.comments = {}
         this.coverArt = ''
     }

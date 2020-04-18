@@ -28,10 +28,10 @@ const addSongComment = (commentId, songId, playlistId) => {
     }
 }
 
-const deletePlaylistSong = (songId, playlistId) => {
+const deletePlaylistSong = (songId, playlistId, userId) => {
     return {
         type: DELETE_PLAYLIST_SONG,
-        data: { songId, playlistId },
+        data: { songId, playlistId, userId },
     }
 }
 
@@ -63,9 +63,9 @@ export const AddSongComment = (commentId, songId, playlistId) => {
     }
 }
 
-export const DeletePlaylistSong = (songId, playlistId) => {
+export const DeletePlaylistSong = (songId, playlistId, userId) => {
     return dispatch => {
-        dispatch(deletePlaylistSong(songId, playlistId))
+        dispatch(deletePlaylistSong(songId, playlistId, userId))
     }
 }
 

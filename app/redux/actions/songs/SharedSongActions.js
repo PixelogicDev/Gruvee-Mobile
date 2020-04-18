@@ -15,21 +15,22 @@ const deleteSong = songId => {
 
 // Thunks
 // eslint-disable-next-line import/prefer-default-export
-export const DeleteSong = (playlistId, songId) => {
+export const DeleteSong = (playlistId, songId, isDeletingPlaylist) => {
     return async (dispatch, getState) => {
         const {
             UserDataReducer: { user },
             PlaylistsDataReducer: { playlists },
         } = getState()
 
-        // Update firebase
-        await RemoveSongFromPlaylist(playlistId, user.id, songId)
+        if (!isDeletingPlaylist) {
+            RemoveSongFromPlaylist(playlistId, user.id, songId)
+        }
 
         // If we are deleting our song, we should dispatch a comment delete as well (in CommentsDataReducer)
         // dispatch(BulkCommentsDelete(playlists.byId[playlistId].comments[songId]))
 
         // Here we will need to also remove all the comments associated with it (in playlist)
-        dispatch(DeletePlaylistSong(songId, playlistId))
+        dispatch(DeletePlaylistSong(songId, playlistId, user.id))
 
         // Check to see if we should delete the song from our state
         if (!isSharedSong(playlists, playlistId, songId)) {
@@ -43,7 +44,7 @@ const isSharedSong = (playlists, playlistId, songId) => {
     // Check to see if songId is part of another playlist
     // If it is do not run the deleteSong from state
     const val = Object.entries(playlists.byId).find(([key, playlistObj]) => {
-        return key !== playlistId && playlistObj.songs.includes(songId)
+        return key !== playlistId && playlistObj.songs.allSongs.includes(songId)
     })
 
     return val

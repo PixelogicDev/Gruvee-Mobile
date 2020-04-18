@@ -91,7 +91,9 @@ const mapStateToProps = (state, props) => {
 }
 const mapDispatchToProps = dispatch => ({
     addSong: (playlistId, song, comment) => dispatch(AddSong(playlistId, song, comment)),
-    deleteSong: (playlistId, songId) => dispatch(DeleteSong(playlistId, songId)),
+    deleteSong: (playlistId, songId) =>
+        // The false flag is for isDeletingPlaylist
+        dispatch(DeleteSong(playlistId, songId, false)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(SongListView)
