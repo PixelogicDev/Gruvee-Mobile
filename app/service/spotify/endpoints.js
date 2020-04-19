@@ -7,24 +7,6 @@ import Creds from 'Gruvee/config/creds'
 import { SPOTIFY_ENDPOINTS, COMMON_ENDPOINTS } from 'Gruvee/service/endpointConstants'
 
 // -- Spotify API -- //
-// GET: Calls spotify API to get track info based on ID
-export const GetSpotifyTrack = (trackId, token) => {
-    // Header needs an Authorization token
-    // We need to append the trackId to to the url
-    const headers = {
-        Authorization: `Bearer ${token}`,
-        'User-Type': 'gruvee-mobile',
-    }
-
-    const options = {
-        method: 'GET',
-        url: `SPOTIFY_ENDPOINTS.getTrack/${trackId}`,
-        headers,
-    }
-
-    // This already returns a promise
-    return axios(options)
-}
 
 // POST: API Token Request
 export const GetApiToken = code => {

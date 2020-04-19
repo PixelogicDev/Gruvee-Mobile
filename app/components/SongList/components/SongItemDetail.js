@@ -5,7 +5,8 @@ import * as StyleConstants from 'Gruvee/config/styles'
 const defaultAlbumArtworkAsset = require('Gruvee/assets/defaults/album_artwork/default_album_cover_bg_image.png')
 
 const SongItemDetail = ({ songData }) => {
-    const albumArtwork = songData.albumArtwork !== '' ? { uri: songData.albumArtwork } : null
+    // First image is always the widest
+    const albumArtwork = songData.images.length ? { uri: songData.images[0].url } : null
     return (
         <View style={styles.Container}>
             <Image
@@ -20,7 +21,7 @@ const SongItemDetail = ({ songData }) => {
                 <Text numberOfLines={1} style={styles.SongTitleText}>
                     {songData.name}
                 </Text>
-                <Text style={styles.SongDetailText}>{songData.artist}</Text>
+                <Text style={styles.SongDetailText}>{songData.creator}</Text>
                 <Text style={styles.SongDetailText}>{songData.album}</Text>
             </View>
         </View>
