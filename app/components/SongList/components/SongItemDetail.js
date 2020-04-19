@@ -6,7 +6,8 @@ const defaultAlbumArtworkAsset = require('Gruvee/assets/defaults/album_artwork/d
 
 const SongItemDetail = ({ songData }) => {
     // First image is always the widest
-    const albumArtwork = songData.images.length ? { uri: songData.images[0].url } : null
+    const albumArtwork =
+        songData.images && songData.images.length ? { uri: songData.images[0].url } : null
     return (
         <View style={styles.Container}>
             <Image

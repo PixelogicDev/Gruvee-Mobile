@@ -1,6 +1,5 @@
 import axios from 'axios'
 import { COMMON_ENDPOINTS, SPOTIFY_ENDPOINTS } from 'Gruvee/service/endpointConstants'
-import { ParseMediaLink } from 'Gruvee/helpers/SongRegexHelper'
 
 // POST: Create Playlist On Preferred Social Platform
 // eslint-disable-next-line import/prefer-default-export
@@ -20,9 +19,7 @@ export const CreateSocialPlaylist = (socialPlatform, playlist) => {
     return axios(options)
 }
 
-export const GetMediaData = mediaLink => {
-    // Get spotify data
-    const metadata = ParseMediaLink(mediaLink)
+export const GetMediaData = metadata => {
     if (metadata === null) {
         console.log('SongLink returned nil')
         return null

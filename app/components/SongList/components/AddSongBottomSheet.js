@@ -1,5 +1,6 @@
 import React, { forwardRef, useState } from 'react'
 import {
+    Alert,
     Dimensions,
     Image,
     Platform,
@@ -17,6 +18,7 @@ import { AddSong } from 'Gruvee/redux/actions/songs/SongsActions'
 import { GetMediaData } from 'Gruvee/service/common/endpoints'
 import BottomSheet from 'reanimated-bottom-sheet'
 import CreateItemActionButton from 'Gruvee/components/common/CreateItemActionButton'
+import { ParseMediaLink } from 'Gruvee/helpers/SongRegexHelper'
 import * as StyleConstants from '@StyleConstants'
 import Song from 'Gruvee/lib/Song'
 
@@ -67,7 +69,13 @@ const styles = StyleSheet.create({
     },
 })
 
-const AddSongBottomSheet = ({ currentUser, addSong, currentPlaylistId, bottomSheetRef }) => {
+const AddSongBottomSheet = ({
+    currentUser,
+    addSong,
+    currentPlaylistId,
+    currentPlaylist,
+    bottomSheetRef,
+}) => {
     const [songLink, setSongLink] = useState('')
     const [songComment, setSongComment] = useState('')
 
@@ -85,7 +93,8 @@ const AddSongBottomSheet = ({ currentUser, addSong, currentPlaylistId, bottomShe
                 bottomSheetRef,
                 currentUser,
                 addSong,
-                currentPlaylistId
+                currentPlaylistId,
+                currentPlaylist
             )}
         />
     )
@@ -98,11 +107,21 @@ const addSongAction = (
     comment,
     addSong,
     currentPlaylistId,
+    currentPlaylist,
     dismissBottomSheetAction
 ) => async () => {
     try {
+        // Parse link
+        const linkMetadata = ParseMediaLink(mediaLink)
+
+        // Check if song exists in playlist already
+        if (currentPlaylist.songs.allSongs.includes(linkMetadata.mediaId)) {
+            showAlert('Looks like this already exists in your playlist')
+            return
+        }
+
         // Get songLink and run metadata check to get the proper Song Object
-        const mediaMetadata = await GetMediaData(mediaLink)
+        const mediaMetadata = await GetMediaData(linkMetadata)
 
         // Create song object
         const song = new Song(mediaMetadata.data)
@@ -138,6 +157,11 @@ const dismissBottomSheet = (setSongLink, setSongComment, bottomSheetRef) => {
     // Clear playlist name
     clearInputs(setSongLink, setSongComment)
 }
+
+const showAlert = message => {
+    Alert.alert('Uh-Oh! 🤭', message)
+}
+
 const generateSheetContent = (
     songLink,
     setSongLink,
@@ -146,7 +170,8 @@ const generateSheetContent = (
     bottomSheetRef,
     currentUser,
     addSong,
-    currentPlaylistId
+    currentPlaylistId,
+    currentPlaylist
 ) => () => {
     const dismissBottomSheetAction = () => {
         dismissBottomSheet(setSongLink, setSongComment, bottomSheetRef)
@@ -186,6 +211,7 @@ const generateSheetContent = (
                     songComment,
                     addSong,
                     currentPlaylistId,
+                    currentPlaylist,
                     dismissBottomSheetAction
                 )}
                 disabled={!songLink}
@@ -196,6 +222,8 @@ const generateSheetContent = (
 
 const mapStateToProps = state => {
     return {
+        currentPlaylist:
+            state.PlaylistsDataReducer.playlists.byId[state.PlaylistsDataReducer.currentPlaylistId],
         currentPlaylistId: state.PlaylistsDataReducer.currentPlaylistId,
         currentUser: state.UserDataReducer.user,
     }
