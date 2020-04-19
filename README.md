@@ -47,13 +47,13 @@ If you are interested in becoming a member of the team check out the **[Pixelogi
 
 #### Song Actions
 - [x] Add a song (Phase 1)
-- [ ] Remove a song (Phase 1)
+- [x] Remove a song (Phase 1)
 - [ ] Add song on specific music provider (Phase 1 & 2 & 3)
-- [ ] Convert uploaded song link to all supported platforms (Phase 1 & 2 & 3)
+- [ ] Convert uploaded song link to all supported platforms (Phase 1(COMPLETE) & 2 & 3)
 
 #### Comment Actions
-- [ ] Add a comment (Phase 1)
-- [ ] Remove a comment (Phase 1)
+- [x] Add a comment (Phase 1)
+- [x] Remove a comment (Phase 1)
 
 #### Feedback Hub (We can probably utilize Firebase even more)
 - [ ] Add a way for people to leave feedback in app (Phase 1 or 2)

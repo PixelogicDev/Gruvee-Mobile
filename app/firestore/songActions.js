@@ -49,8 +49,17 @@ export const RemoveSongFromPlaylist = async (playlistId, userId, songId) => {
                 [userId]: userAddedBy.filter(dbSongId => dbSongId !== songId),
             }
 
+            // Delete Comments from playlist
+            const currentComments = playlistDoc.data().comments
+            const commentsCopy = { ...currentComments }
+            delete commentsCopy[songId]
+
             transaction.update(playlistDocRef, {
-                songs: { addedBy, allSongs },
+                comments: commentsCopy,
+                songs: {
+                    addedBy,
+                    allSongs,
+                },
             })
         })
     })
@@ -67,6 +76,7 @@ export const UpdatePlaylistDocumentWithSong = async (playlistId, songDocRef, use
             }
 
             const currentSongs = playlistDoc.data().songs
+            const currentComments = playlistDoc.data().comments
 
             // Add user that added song to addedBy
             const currentSongsAddedBy = { ...currentSongs.addedBy }
@@ -77,7 +87,12 @@ export const UpdatePlaylistDocumentWithSong = async (playlistId, songDocRef, use
             // Add songDocRef to allSongs array
             const currentAllSongs = [...currentSongs.allSongs, songDocRef]
 
+            // Add new key to comments
+            const updatedComments = { ...currentComments, [songDocRef.id]: [] }
+
             transaction.update(playlistDocRef, {
+                // When adding a new song, go ahead and add an empty array for comments
+                comments: updatedComments,
                 songs: { addedBy: currentSongsAddedBy, allSongs: currentAllSongs },
             })
         })

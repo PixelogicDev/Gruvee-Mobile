@@ -14,11 +14,10 @@ export const MapCommentsFromSongSelector = createSelector(
 // Helpers
 const mapCommentsFromSong = (playlistId, songId, statePlaylists, stateComments) => {
     const comments = []
-    if (playlistId === undefined || songId === undefined || stateComments.byId === undefined)
-        return comments
 
     // Get list of commentIds from playlist, from song
     const commentIds = statePlaylists.byId[playlistId].comments[songId]
+    if (!commentIds) return comments
 
     commentIds.forEach(commentId => {
         const comment = stateComments.byId[commentId]
