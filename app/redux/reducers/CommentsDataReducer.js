@@ -1,4 +1,3 @@
-import MockComments from 'Gruvee/mock/songComments'
 import {
     ADD_COMMENT,
     BULK_COMMENTS_DELETE,

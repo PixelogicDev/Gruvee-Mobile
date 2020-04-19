@@ -1,6 +1,10 @@
 import { DELETE_COMMENT, FETCH_COMMENTS } from 'Gruvee/redux/actions/ActionsType'
 import { DeleteSongComment } from 'Gruvee/redux/actions/playlists/SharedPlaylistActions'
-import { GetCommentsDocuments } from 'Gruvee/firestore/commentActions'
+import {
+    GetCommentsDocuments,
+    DeleteCommentDocument,
+    DeleteCommentFromPlaylist,
+} from 'Gruvee/firestore/commentActions'
 
 // Action Creators
 const deleteComment = commentId => {
@@ -22,7 +26,13 @@ export const DeleteComment = (commentId, songId, playlistId) => {
     // Make async call to update our db with removing comment
     // We also will need to update our respected song given the songId
 
-    return dispatch => {
+    return async dispatch => {
+        // Remove comment from collection
+        await DeleteCommentDocument(commentId)
+
+        // Remove comment reference from song array in playlist
+        await DeleteCommentFromPlaylist(playlistId, songId, commentId)
+
         // Remove comment from PlaylistsDataReducer
         dispatch(DeleteSongComment(commentId, songId, playlistId))
 

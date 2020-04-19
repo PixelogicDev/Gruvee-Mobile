@@ -21,6 +21,7 @@ import CreateItemActionButton from 'Gruvee/components/common/CreateItemActionBut
 import { ParseMediaLink } from 'Gruvee/helpers/SongRegexHelper'
 import * as StyleConstants from '@StyleConstants'
 import Song from 'Gruvee/lib/Song'
+import SongComment from 'Gruvee/lib/SongComment'
 
 const screenHeight = Dimensions.get('screen').height
 const navBarHeight = Platform.OS === 'ios' ? 80 : 84
@@ -126,12 +127,13 @@ const addSongAction = (
         // Create song object
         const song = new Song(mediaMetadata.data)
 
+        // Create comment object
+        const newComment = comment.length ? new SongComment(comment, currentUser.id) : null
+
         // Call redux action
-        addSong(currentUser, currentPlaylistId, song, comment)
+        addSong(currentUser, currentPlaylistId, song, newComment)
 
         // When song is added to collection, service should trigger function to get data for other platforms
-
-        // TODO: Run any comment creation logic here
         dismissBottomSheetAction()
     } catch (error) {
         console.warn(error)
@@ -230,7 +232,8 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = dispatch => ({
-    addSong: (playlistId, song, comment) => dispatch(AddSong(playlistId, song, comment)),
+    addSong: (currentUser, currentPlaylistId, song, newComment) =>
+        dispatch(AddSong(currentUser, currentPlaylistId, song, newComment)),
 })
 
 const ConnectedAddSongBottomSheet = connect(mapStateToProps, mapDispatchToProps)(AddSongBottomSheet)

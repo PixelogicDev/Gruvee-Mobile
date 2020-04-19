@@ -9,9 +9,9 @@ export const GetCommentsDocuments = async (songId, playlistId) => {
         .get()
 
     const dbPlaylist = dbPlaylistSnap.data()
-    const commentRefs = dbPlaylist.comments[songId].map(commentId =>
-        db.doc(`comments/${commentId}`)
-    )
+    const commentRefs = dbPlaylist.comments[songId]
+        ? dbPlaylist.comments[songId].map(commentId => db.doc(`comments/${commentId}`))
+        : []
 
     const comments = await FetchChildRefs(commentRefs)
     const updatedComments = comments.map(comment => {
@@ -40,31 +40,36 @@ export const CreateNewCommentDocument = async comment => {
     return null
 }
 
-// export const RemoveSongFromPlaylist = async (playlistId, userId, songId) => {
-//     const db = firestore()
-//     const playlistDocRef = await db.doc(`playlists/${playlistId}`)
+export const DeleteCommentDocument = async commentId => {
+    const db = firestore()
+    const commentDocRef = await db.doc(`comments/${commentId}`)
 
-//     // Remove song docRef from playlist
-//     db.runTransaction(transaction => {
-//         return transaction.get(playlistDocRef).then(playlistDoc => {
-//             if (!playlistDoc.exists) {
-//                 throw new Error('userDoc did not exist.')
-//             }
+    // Remove playlist document
+    await commentDocRef.delete()
+}
 
-//             const currentSongs = playlistDoc.data().songs
-//             const allSongs = currentSongs.allSongs.filter(songDocRef => songDocRef.id !== songId)
-//             const userAddedBy = currentSongs.addedBy[userId]
-//             const addedBy = {
-//                 ...currentSongs.addedBy,
-//                 [userId]: userAddedBy.filter(dbSongId => dbSongId !== songId),
-//             }
+export const DeleteCommentFromPlaylist = async (playlistId, songId, commentId) => {
+    const db = firestore()
+    const playlistDocRef = await db.doc(`playlists/${playlistId}`)
 
-//             transaction.update(playlistDocRef, {
-//                 songs: { addedBy, allSongs },
-//             })
-//         })
-//     })
-// }
+    // Remove comment ref docRef from playlist
+    db.runTransaction(transaction => {
+        return transaction.get(playlistDocRef).then(playlistDoc => {
+            if (!playlistDoc.exists) {
+                throw new Error('userDoc did not exist.')
+            }
+
+            const currentComments = playlistDoc.data().comments
+            const songComments = currentComments[songId].filter(
+                songCommentId => songCommentId !== commentId
+            )
+
+            transaction.update(playlistDocRef, {
+                comments: { [songId]: [...songComments] },
+            })
+        })
+    })
+}
 
 export const UpdatePlaylistDocumentWithComment = async (playlistId, commentDocRef, songId) => {
     const db = firestore()

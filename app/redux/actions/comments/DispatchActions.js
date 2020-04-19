@@ -1,8 +1,15 @@
 export const AddComment = (commentsState, newComment) => {
+    const byId = Object.keys(commentsState.byId).length
+        ? { ...commentsState.byId, [newComment.id]: newComment }
+        : { [newComment.id]: newComment }
+    const allIds = commentsState.allIds.length
+        ? [...commentsState.allIds, newComment.id]
+        : [newComment.id]
+
     return {
         ...commentsState,
-        byId: { ...commentsState.byId, [newComment.id]: newComment },
-        allIds: [...commentsState.allIds, newComment.id],
+        byId,
+        allIds,
     }
 }
 
@@ -47,8 +54,11 @@ export const DeleteComment = (commentsState, commentId) => {
 export const FetchComments = (commentsState, comments) => {
     if (commentsState.length === 0) return commentsState
 
+    // If the song is already in state, don't set again
+    const newComments = comments.filter(song => !commentsState.byId[song.id])
+
     // TODO: Think if we want to use reduce vs forEach (O(n^2) vs O(n))
-    const reducedComments = comments.reduce(
+    const reducedComments = newComments.reduce(
         (state, currentComments) => {
             return {
                 byId: {
