@@ -1,5 +1,6 @@
 import { DELETE_COMMENT, FETCH_COMMENTS } from 'Gruvee/redux/actions/ActionsType'
 import { DeleteSongComment } from 'Gruvee/redux/actions/playlists/SharedPlaylistActions'
+import { GetCommentsDocuments } from 'Gruvee/firestore/commentActions'
 
 // Action Creators
 const deleteComment = commentId => {
@@ -30,10 +31,11 @@ export const DeleteComment = (commentId, songId, playlistId) => {
     }
 }
 
-export const FetchComments = () => {
+export const FetchComments = (songId, playlistId) => {
     // Make async call to service to get latest comments data for song
-    return dispatch => {
-        const comments = [] // Will be an array of comments objects
+    return async dispatch => {
+        const comments = await GetCommentsDocuments(songId, playlistId)
+
         dispatch(fetchComments(comments))
     }
 }
