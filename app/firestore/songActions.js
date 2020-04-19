@@ -49,8 +49,17 @@ export const RemoveSongFromPlaylist = async (playlistId, userId, songId) => {
                 [userId]: userAddedBy.filter(dbSongId => dbSongId !== songId),
             }
 
+            // Delete Comments from playlist
+            const currentComments = playlistDoc.data().comments
+            const commentsCopy = { ...currentComments }
+            delete commentsCopy[songId]
+
             transaction.update(playlistDocRef, {
-                songs: { addedBy, allSongs },
+                comments: commentsCopy,
+                songs: {
+                    addedBy,
+                    allSongs,
+                },
             })
         })
     })

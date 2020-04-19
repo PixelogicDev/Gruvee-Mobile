@@ -3,6 +3,7 @@ import { ADD_COMMENT, BULK_COMMENTS_DELETE } from 'Gruvee/redux/actions/ActionsT
 import { AddSongComment } from 'Gruvee/redux/actions/playlists/SharedPlaylistActions'
 import {
     CreateNewCommentDocument,
+    DeleteCommentDocument,
     UpdatePlaylistDocumentWithComment,
 } from 'Gruvee/firestore/commentActions'
 
@@ -12,6 +13,13 @@ const addComment = comment => {
         // evjand - "This app will never be finished" (02/07/20)
         type: ADD_COMMENT,
         data: comment,
+    }
+}
+
+const bulkDeleteComments = commentIds => {
+    return {
+        type: BULK_COMMENTS_DELETE,
+        data: commentIds,
     }
 }
 
@@ -41,10 +49,15 @@ export const AddComment = (comment, songId, playlistId) => {
     }
 }
 
-// Local State Settings
 export const BulkCommentsDelete = commentIds => {
-    return {
-        type: BULK_COMMENTS_DELETE,
-        data: commentIds,
+    return dispatch => {
+        // Delete comments from state
+        dispatch(bulkDeleteComments(commentIds))
+
+        const commentDocDeleteProimses = commentIds.map(commentId =>
+            DeleteCommentDocument(commentId)
+        )
+
+        Promise.all(commentDocDeleteProimses)
     }
 }

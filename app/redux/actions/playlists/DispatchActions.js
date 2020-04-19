@@ -86,6 +86,7 @@ export const DeletePlaylist = (playlistId, playlists) => {
 
 // sillyonly - "Here we go again!" (02/06/20)
 export const DeletePlaylistSong = (songId, playlistId, userId, statePlaylists) => {
+    // Delete Comments from playlist
     const comments = { ...statePlaylists.byId[playlistId].comments }
     delete comments[songId]
 
