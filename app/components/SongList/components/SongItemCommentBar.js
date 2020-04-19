@@ -63,7 +63,7 @@ const mapStateToSongCommentsCount = (state, songId) => {
     const { currentPlaylistId } = state.PlaylistsDataReducer
     const playlist = state.PlaylistsDataReducer.playlists.byId[currentPlaylistId]
 
-    return playlist.comments[songId].length
+    return playlist.comments[songId] ? playlist.comments[songId].length : 0
 }
 
 // Styles

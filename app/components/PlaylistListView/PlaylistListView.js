@@ -6,7 +6,6 @@ import { SwipeListView } from 'react-native-swipe-list-view'
 
 // Redux
 import { connect } from 'react-redux'
-import { HydratePlaylists } from 'Gruvee/redux/actions/playlists/PlaylistActions'
 import { MapPlaylistsFromUserSelector } from 'Gruvee/redux/selectors/PlaylistsSelector'
 
 import AddItemButton from 'Gruvee/components/common/AddItemButton'
@@ -42,7 +41,7 @@ const styles = StyleSheet.create({
 })
 
 // TODO: Make sure to check if we need hydratePlaylists
-const PlaylistListView = ({ hydratePlaylists, playlists }) => {
+const PlaylistListView = ({ playlists }) => {
     const keyExtractor = item => `${item.id}`
     const renderItem = ({ item }) => <SwipeablePlaylistItem playlistData={item} />
     const bottomSheetRef = useRef(null)
@@ -90,8 +89,5 @@ const mapStateToProps = state => {
         playlists: MapPlaylistsFromUserSelector(state),
     }
 }
-const mapDispatchToProps = dispatch => ({
-    hydratePlaylists: () => dispatch(HydratePlaylists()),
-})
 
-export default connect(mapStateToProps, mapDispatchToProps)(PlaylistListView)
+export default connect(mapStateToProps, null)(PlaylistListView)

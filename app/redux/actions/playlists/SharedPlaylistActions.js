@@ -14,10 +14,10 @@ const addPlaylistMember = (memberId, playlistId) => {
     }
 }
 
-const addPlaylistSong = (songId, playlistId) => {
+const addPlaylistSong = (user, songId, playlistId) => {
     return {
         type: ADD_PLAYLIST_SONG,
-        data: { songId, playlistId },
+        data: { user, songId, playlistId },
     }
 }
 
@@ -28,10 +28,10 @@ const addSongComment = (commentId, songId, playlistId) => {
     }
 }
 
-const deletePlaylistSong = (songId, playlistId) => {
+const deletePlaylistSong = (songId, playlistId, userId) => {
     return {
         type: DELETE_PLAYLIST_SONG,
-        data: { songId, playlistId },
+        data: { songId, playlistId, userId },
     }
 }
 
@@ -49,10 +49,10 @@ export const AddPlaylistMember = (memberId, playlistId) => {
     }
 }
 
-export const AddPlaylistSong = (songId, playlistId, comment) => {
+export const AddPlaylistSong = (user, songId, playlistId) => {
     return dispatch => {
         // This is updating PlaylistsDataReducer
-        dispatch(addPlaylistSong(songId, playlistId, comment))
+        dispatch(addPlaylistSong(user, songId, playlistId))
     }
 }
 
@@ -63,9 +63,9 @@ export const AddSongComment = (commentId, songId, playlistId) => {
     }
 }
 
-export const DeletePlaylistSong = (songId, playlistId) => {
+export const DeletePlaylistSong = (songId, playlistId, userId) => {
     return dispatch => {
-        dispatch(deletePlaylistSong(songId, playlistId))
+        dispatch(deletePlaylistSong(songId, playlistId, userId))
     }
 }
 

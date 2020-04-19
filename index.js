@@ -12,7 +12,6 @@
 import { Navigation } from 'react-native-navigation'
 import ReduxProvider from 'Gruvee/components/ReduxProvider'
 import SongList from 'Gruvee/components/SongList'
-import AddSongModal from 'Gruvee/components/SongList/components/AddSongModal'
 import CommentsList from 'Gruvee/components/CommentsList'
 import ShowMembersAction from 'Gruvee/components/common/ShowMembersAction'
 import MembersSideMenu from 'Gruvee/components/MembersSideMenu'
@@ -21,9 +20,6 @@ import App from 'Gruvee/App'
 
 // Register navigation components
 Navigation.registerComponent(NavigationConstants.ROOT_NAV_NAME, () => ReduxProvider(App))
-Navigation.registerComponent(NavigationConstants.ADD_SONG_MODAL_NAV_NAME, () =>
-    ReduxProvider(AddSongModal)
-)
 Navigation.registerComponent(NavigationConstants.SONG_LIST_NAV_NAME, () => ReduxProvider(SongList))
 Navigation.registerComponent(NavigationConstants.COMMENTS_LIST_NAV_NAME, () =>
     ReduxProvider(CommentsList)

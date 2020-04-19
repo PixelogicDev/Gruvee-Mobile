@@ -1,8 +1,16 @@
 export const AddSong = (newSong, stateSongs) => {
+    const allIds =
+        stateSongs.allIds.findIndex(id => newSong.id === id) === -1
+            ? [...stateSongs.allIds, newSong.id]
+            : [...stateSongs.allIds]
+
     return {
         ...stateSongs,
-        byId: { ...stateSongs.byId, [newSong.id]: newSong },
-        allIds: [...stateSongs.allIds, newSong.id],
+        byId: {
+            ...stateSongs.byId,
+            [newSong.id]: newSong,
+        },
+        allIds,
     }
 }
 
@@ -30,8 +38,11 @@ export const DeleteSong = (songId, stateSongs) => {
 export const FetchSongs = (songs, songsState) => {
     if (songs.length === 0) return songsState
 
+    // If the song is already in state, don't set again
+    const newSongs = songs.filter(song => !songsState.byId[song.id])
+
     // TODO: Think if we want to use reduce vs forEach (O(n^2) vs O(n))
-    const reducedSongs = songs.reduce(
+    const reducedSongs = newSongs.reduce(
         (state, currentSongs) => {
             return {
                 byId: {

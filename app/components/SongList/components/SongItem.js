@@ -1,9 +1,18 @@
 import React, { memo } from 'react'
+import { connect } from 'react-redux'
 import { Alert, Linking, StyleSheet, TouchableOpacity } from 'react-native'
 import SongItemCommentBar from './SongItemCommentBar'
 import SongItemDetail from './SongItemDetail'
 
-const SongItem = ({ songData }) => {
+// Styles
+const styles = StyleSheet.create({
+    Container: {
+        paddingBottom: 25,
+        flex: 1,
+    },
+})
+
+const SongItem = ({ songData, currentUser }) => {
     // Actions
     const openSongDeepLinkAction = platformDeepLink => {
         Linking.canOpenURL(platformDeepLink)
@@ -27,7 +36,9 @@ const SongItem = ({ songData }) => {
             <TouchableOpacity
                 style={styles.Container}
                 onPress={() => {
-                    openSongDeepLinkAction(songData.platformDeepLink)
+                    openSongDeepLinkAction(
+                        songData.externalUrls[currentUser.preferredSocialPlatform.platformName]
+                    )
                 }}
             >
                 <SongItemDetail songData={songData} />
@@ -37,12 +48,9 @@ const SongItem = ({ songData }) => {
     )
 }
 
-// Styles
-const styles = StyleSheet.create({
-    Container: {
-        paddingBottom: 25,
-        flex: 1,
-    },
+// Redux Mappers
+const mapStatetoProps = state => ({
+    currentUser: state.UserDataReducer.user,
 })
 
-export default memo(SongItem)
+export default connect(mapStatetoProps, null)(memo(SongItem))
