@@ -54,12 +54,8 @@ const comfirmDeleteAlert = (comment, onConfirmDelete) => {
 }
 
 // Rendered Components
-const renderItem = (comment, setItemHeightAction, senderUsername) => (
-    <CommentItem
-        senderUsername={senderUsername}
-        comment={comment}
-        setHeightAction={setItemHeightAction}
-    />
+const renderItem = (comment, setItemHeightAction) => (
+    <CommentItem comment={comment} setHeightAction={setItemHeightAction} />
 )
 
 const renderSwipeActionComponent = (comment, confirmDeleteCommentAction, currentUser) => {

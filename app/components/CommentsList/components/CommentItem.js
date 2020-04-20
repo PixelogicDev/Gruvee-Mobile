@@ -1,5 +1,7 @@
 import React, { memo } from 'react'
 import { View, StyleSheet, Text } from 'react-native'
+import { connect } from 'react-redux'
+import { GetMemberForCommentSelector } from 'Gruvee/redux/selectors/MembersSelector'
 import * as StyleConstants from 'Gruvee/config/styles'
 
 const styles = StyleSheet.create({
@@ -25,7 +27,7 @@ const styles = StyleSheet.create({
     },
 })
 
-const CommentItem = ({ comment, setHeightAction, senderUsername }) => {
+const CommentItem = ({ comment, setHeightAction, commentSender }) => {
     return (
         <View
             style={styles.Container}
@@ -35,9 +37,16 @@ const CommentItem = ({ comment, setHeightAction, senderUsername }) => {
             }}
         >
             <Text style={styles.CommentText}>{comment.message}</Text>
-            <Text style={styles.DisplayNameText}>{senderUsername}</Text>
+            <Text style={styles.DisplayNameText}>{commentSender.username}</Text>
         </View>
     )
 }
 
-export default memo(CommentItem)
+// Redux Mappers
+const mapStateToProps = (state, props) => {
+    return {
+        commentSender: GetMemberForCommentSelector(state, props),
+    }
+}
+
+export default connect(mapStateToProps, null)(memo(CommentItem))
