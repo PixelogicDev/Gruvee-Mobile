@@ -59,7 +59,12 @@ export const AddPlaylist = newPlaylist => {
         dispatch(addPlaylist(newPlaylist, statePlaylists))
 
         // Set db reference and write path to user doc in DB
-        await UpdateUserDocumentWithPlaylist(user.id, playlistDocRef)
+        const userPlaylistDocUpdates = newPlaylist.members.map(memberId =>
+            UpdateUserDocumentWithPlaylist(memberId, playlistDocRef)
+        )
+        await Promise.all(userPlaylistDocUpdates)
+
+        // await UpdateUserDocumentWithPlaylist(user.id, playlistDocRef)
         dispatch(AddPlaylistToUser(newPlaylist.id))
 
         // Get members from playlists and put in state
