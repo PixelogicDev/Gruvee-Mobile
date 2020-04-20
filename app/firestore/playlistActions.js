@@ -2,6 +2,7 @@
 // TheDkbay - "Do these even matter anymore? Also remember Corona future Alec? or nah?" (03/20/20)
 // JMSWRNR - "the government is making us quarantine so they can change the batteries in the pigeons" (03/20/20)
 import firestore from '@react-native-firebase/firestore'
+import { FetchChildRefs } from './helpers'
 
 export const CreateNewPlaylistDocument = async playlist => {
     try {
@@ -57,6 +58,19 @@ export const DeletePlaylistDocument = async (uid, playlistId) => {
         })
     })
     // TODO: Delete associated comments
+}
+
+export const GetPlaylists = async uid => {
+    const db = firestore()
+    const dbUsersSnap = await db
+        .collection('users')
+        .doc(uid)
+        .get()
+
+    const dbUser = dbUsersSnap.data()
+    const playlists = await FetchChildRefs(dbUser.playlists)
+
+    return playlists
 }
 
 export const UpdateUserDocumentWithPlaylist = async (uid, playlistRef) => {

@@ -1,11 +1,14 @@
 // LilCazza - "I copy and pasted this from stackoverflow. (I have no idea what it does, but everything breaks if it's not here" (02/03/20)
+// curiousdrive - "We are neighbors on the internet" (04/20/20)
 // MrDemonWolf - "2020 is year of the Contagion Movie monkaS" (03/20/20)
-import React, { useRef } from 'react'
+// isakfk1234 - "incoming code" (04/20/20)
+import React, { useState, useRef } from 'react'
 import { View, StyleSheet } from 'react-native'
 import { SwipeListView } from 'react-native-swipe-list-view'
 
 // Redux
 import { connect } from 'react-redux'
+import { FetchPlaylists } from 'Gruvee/redux/actions/playlists/PlaylistActions'
 import { MapPlaylistsFromUserSelector } from 'Gruvee/redux/selectors/PlaylistsSelector'
 
 import AddItemButton from 'Gruvee/components/common/AddItemButton'
@@ -41,7 +44,8 @@ const styles = StyleSheet.create({
 })
 
 // TODO: Make sure to check if we need hydratePlaylists
-const PlaylistListView = ({ playlists }) => {
+const PlaylistListView = ({ fetchPlaylists, playlists }) => {
+    const [isRefreshing, setIsRefreshing] = useState(false)
     const keyExtractor = item => `${item.id}`
     const renderItem = ({ item }) => <SwipeablePlaylistItem playlistData={item} />
     const bottomSheetRef = useRef(null)
@@ -55,6 +59,13 @@ const PlaylistListView = ({ playlists }) => {
                 data={playlists}
                 keyExtractor={keyExtractor}
                 renderItem={renderItem}
+                refreshing={isRefreshing}
+                onRefresh={() => {
+                    setIsRefreshing(true)
+                    fetchPlaylists().finally(() => {
+                        setIsRefreshing(false)
+                    })
+                }}
             />
             {/* MADPROPZ poopuhchoo */}
             <View style={styles.ButtonContainer}>
@@ -90,4 +101,8 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps, null)(PlaylistListView)
+const mapDispatchToProps = dispatch => ({
+    fetchPlaylists: () => dispatch(FetchPlaylists()),
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(PlaylistListView)

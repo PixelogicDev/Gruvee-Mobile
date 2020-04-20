@@ -19,6 +19,7 @@ import { DeleteMember } from 'Gruvee/redux/actions/members/SharedMembersActions'
 import {
     CreateNewPlaylistDocument,
     DeletePlaylistDocument,
+    GetPlaylists,
     UpdateUserDocumentWithPlaylist,
 } from 'Gruvee/firestore/playlistActions'
 import { CreateSocialPlaylist } from 'Gruvee/service/common/endpoints'
@@ -112,6 +113,22 @@ export const DeletePlaylist = playlistId => {
 
         // Delete playlist from User
         dispatch(DeletePlaylistFromUser(playlistId))
+    }
+}
+
+export const FetchPlaylists = () => {
+    return async (dispatch, getState) => {
+        try {
+            const {
+                UserDataReducer: { user },
+            } = getState()
+
+            const playlists = await GetPlaylists(user.id)
+
+            dispatch(HydratePlaylists(playlists))
+        } catch (error) {
+            console.warn(error)
+        }
     }
 }
 
