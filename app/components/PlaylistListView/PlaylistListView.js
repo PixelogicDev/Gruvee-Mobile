@@ -43,7 +43,6 @@ const styles = StyleSheet.create({
     },
 })
 
-// TODO: Make sure to check if we need hydratePlaylists
 const PlaylistListView = ({ fetchPlaylists, playlists }) => {
     const [isRefreshing, setIsRefreshing] = useState(false)
     const keyExtractor = item => `${item.id}`

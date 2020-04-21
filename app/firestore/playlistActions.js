@@ -36,28 +36,12 @@ export const CreateNewPlaylistDocument = async playlist => {
     return null
 }
 
-export const DeletePlaylistDocument = async (uid, playlistId) => {
+export const DeletePlaylistDocument = async playlistId => {
     const db = firestore()
-    const userDocRef = await db.doc(`users/${uid}`)
     const playlistDocRef = await db.doc(`playlists/${playlistId}`)
 
     // Remove playlist document
     await playlistDocRef.delete()
-
-    // Remove playlist docRef from user
-    db.runTransaction(transaction => {
-        return transaction.get(userDocRef).then(userDoc => {
-            if (!userDoc.exists) {
-                throw new Error('userDoc did not exist.')
-            }
-
-            const currentPlaylists = userDoc.data().playlists
-            transaction.update(userDocRef, {
-                playlists: currentPlaylists.filter(playlist => playlist.id !== playlistId),
-            })
-        })
-    })
-    // TODO: Delete associated comments
 }
 
 export const GetPlaylists = async uid => {
@@ -68,9 +52,45 @@ export const GetPlaylists = async uid => {
         .get()
 
     const dbUser = dbUsersSnap.data()
-    const playlists = await FetchChildRefs(dbUser.playlists)
 
-    return playlists
+    // Get Playlist Data And Reduce
+    const playlistsData = await FetchChildRefs(dbUser.playlists)
+    const reducedPlaylists = playlistsData.reduce((state, currentPlaylistData) => {
+        return [
+            ...state,
+            {
+                ...currentPlaylistData,
+                createdBy: currentPlaylistData.createdBy.id,
+                songs: {
+                    addedBy: {
+                        ...currentPlaylistData.songs.addedBy,
+                    },
+                    allSongs: currentPlaylistData.songs.allSongs.map(songRef => songRef.id),
+                },
+                members: currentPlaylistData.members.map(memberRef => memberRef.id),
+            },
+        ]
+    }, [])
+
+    return reducedPlaylists
+}
+
+export const RemovePlaylistRefFromUserDocument = async (uid, playlistId) => {
+    const db = firestore()
+    const userDocRef = await db.collection('users').doc(uid)
+
+    db.runTransaction(transaction => {
+        return transaction.get(userDocRef).then(userDoc => {
+            if (!userDoc.exists) {
+                throw new Error('userDoc did not exist.')
+            }
+
+            const currentPlaylists = userDoc.data().playlists
+            transaction.update(userDocRef, {
+                playlists: currentPlaylists.filter(playlistRef => playlistRef.id !== playlistId),
+            })
+        })
+    })
 }
 
 export const UpdateUserDocumentWithPlaylist = async (uid, playlistRef) => {

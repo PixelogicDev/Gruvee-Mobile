@@ -20,6 +20,7 @@ import {
     CreateNewPlaylistDocument,
     DeletePlaylistDocument,
     GetPlaylists,
+    RemovePlaylistRefFromUserDocument,
     UpdateUserDocumentWithPlaylist,
 } from 'Gruvee/firestore/playlistActions'
 import { CreateSocialPlaylist } from 'Gruvee/service/common/endpoints'
@@ -95,8 +96,25 @@ export const DeletePlaylist = playlistId => {
             PlaylistsDataReducer: { playlists },
         } = getState()
 
-        // Delete Playlist from Firebase
-        await DeletePlaylistDocument(user.id, playlistId)
+        // If the creator of the playlist is deleting it, all members should not be able to access anymore
+        // Check if currentSigned in user === createdBy user
+        const playlist = playlists.byId[playlistId]
+        if (playlist && playlist.createdBy === user.id) {
+            console.log('Creator is deleting playlist...')
+
+            // Get all members from playlist & delete reference to this playlist
+            const promises = playlist.members.map(memberId =>
+                RemovePlaylistRefFromUserDocument(memberId, playlistId)
+            )
+
+            Promise.all(promises)
+
+            // Delete Playlist from Firebase
+            await DeletePlaylistDocument(playlistId)
+        }
+
+        // Else if non-creator deletes the playlist just remove from that user document
+        RemovePlaylistRefFromUserDocument(user.id, playlistId)
 
         playlists.byId[playlistId].songs.allSongs.forEach(songId => {
             // the true flag is isDeletingPlaylist
@@ -123,6 +141,7 @@ export const FetchPlaylists = () => {
                 UserDataReducer: { user },
             } = getState()
 
+            // Get playlists from Database
             const playlists = await GetPlaylists(user.id)
 
             dispatch(HydratePlaylists(playlists))

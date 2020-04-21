@@ -139,11 +139,8 @@ export const HydratePlaylists = (playlistsState, playlists) => {
     // Get user state playlists, map through IDs, and return
     if (playlists.length === 0) return playlistsState
 
-    // If the playlist is already in state, don't set again
-    const newPlaylists = playlists.filter(song => !playlistsState.byId[song.id])
-
     // TODO: Think if we want to use reduce vs forEach (O(n^2) vs O(n))
-    const reducedPlaylists = newPlaylists.reduce(
+    const reducedPlaylists = playlists.reduce(
         (state, currentPlaylist) => {
             return {
                 byId: {
@@ -158,9 +155,8 @@ export const HydratePlaylists = (playlistsState, playlists) => {
 
     reducedPlaylists.byId = {
         ...reducedPlaylists.byId,
-        ...playlistsState.byId,
     }
-    reducedPlaylists.allIds = [...reducedPlaylists.allIds, ...playlistsState.allIds]
+    reducedPlaylists.allIds = [...reducedPlaylists.allIds]
 
     return reducedPlaylists
 }

@@ -89,6 +89,7 @@ export const GetUserDocument = async uid => {
             ...state,
             {
                 ...currentPlaylistData,
+                createdBy: currentPlaylistData.createdBy.id,
                 songs: {
                     addedBy: { ...currentPlaylistData.songs.addedBy },
                     allSongs: currentPlaylistData.songs.allSongs.map(songRef => songRef.id),
