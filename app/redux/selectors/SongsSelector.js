@@ -5,23 +5,18 @@ import { createSelector } from 'reselect'
 export const MapSongsFromPlaylistSelector = createSelector(
     state => state.PlaylistsDataReducer.playlists,
     state => state.SongsDataReducer.songs,
-    (_, props) => props.playlistId,
+    state => state.PlaylistsDataReducer.currentPlaylistId,
     (playlists, songs, playlistId) => mapSongsFromPlaylist(playlists, songs, playlistId)
 )
 
 // Helpers
 const mapSongsFromPlaylist = (statePlaylists, stateSongs, playlistId) => {
     const songs = []
+    if (!stateSongs.allIds.length) return songs
 
-    if (stateSongs.byId === undefined) return songs
-    if (statePlaylists.byId === undefined) return songs
-
-    // Get list of songIds from playlist
-    const songIds = statePlaylists.byId[playlistId].songs.allSongs
-
-    songIds.forEach(songId => {
+    statePlaylists.byId[playlistId].songs.allSongs.forEach(songId => {
         const song = stateSongs.byId[songId]
-        if (song !== undefined) {
+        if (song) {
             songs.push(song)
         }
     })

@@ -8,7 +8,7 @@ import { SwipeListView } from 'react-native-swipe-list-view'
 
 // Redux
 import { connect } from 'react-redux'
-import { FetchPlaylists } from 'Gruvee/redux/actions/playlists/PlaylistActions'
+import { FetchPlaylists } from 'Gruvee/redux/actions/playlists/SharedPlaylistActions'
 import { MapPlaylistsFromUserSelector } from 'Gruvee/redux/selectors/PlaylistsSelector'
 
 import AddItemButton from 'Gruvee/components/common/AddItemButton'

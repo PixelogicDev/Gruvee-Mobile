@@ -2,7 +2,10 @@
 // sillyonly - "SOOOOOOOOOOOOOOOOOOOOOOOOOO! some say, swift is simply better is this a good comment?? and can it fit in a line?!" (02/11/20)
 // TheDkbay - "I really don't wanna do Elasticsearch anymore but I guess I'll have to figure it out also I like trains :)" (02/11/20)
 import { ADD_SONG, FETCH_SONGS } from 'Gruvee/redux/actions/ActionsType'
-import { AddPlaylistSong } from 'Gruvee/redux/actions/playlists/SharedPlaylistActions'
+import {
+    AddPlaylistSong,
+    FetchPlaylists,
+} from 'Gruvee/redux/actions/playlists/SharedPlaylistActions'
 import { AddComment } from 'Gruvee/redux/actions/comments/SharedCommentActions'
 import {
     GetSongsDocuments,
@@ -49,9 +52,14 @@ export const AddSong = (user, playlistId, song, comment) => {
 }
 
 // InukApp - "I bet if Swift had better Android support, Alec would've chosen to code in Swift." (02/09/20)
+// rushkiB - "Why didn't i choose typescript" (04/21/20)
 export const FetchSongs = playlistId => {
     // poopuhchoo - "YASSSS" (01/30/20)
     return async dispatch => {
+        // Get up to date playlist info (Since we read the songIds from the Playlist Doc)
+        dispatch(FetchPlaylists())
+
+        // Fetch songs
         const songsData = await GetSongsDocuments(playlistId)
         dispatch(fetchSongs(songsData))
     }

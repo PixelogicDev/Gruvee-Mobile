@@ -6,7 +6,6 @@
 import {
     ADD_PLAYLIST,
     DELETE_PLAYLIST,
-    HYDRATE_PLAYLISTS,
     SET_CURRENT_PLAYLIST_ID,
 } from 'Gruvee/redux/actions/ActionsType'
 import { DeleteSong } from 'Gruvee/redux/actions/songs/SharedSongActions'
@@ -19,7 +18,6 @@ import { DeleteMember } from 'Gruvee/redux/actions/members/SharedMembersActions'
 import {
     CreateNewPlaylistDocument,
     DeletePlaylistDocument,
-    GetPlaylists,
     RemovePlaylistRefFromUserDocument,
     UpdateUserDocumentWithPlaylist,
 } from 'Gruvee/firestore/playlistActions'
@@ -39,12 +37,6 @@ const deletePlaylist = (playlistId, playlists) => {
         type: DELETE_PLAYLIST,
         data: { playlistId, playlists },
     }
-}
-
-const hydratePlaylists = playlists => {
-    // Simulates call to get all playlists for current user
-    // We are assuming we have a user signed in
-    return { type: HYDRATE_PLAYLISTS, data: playlists }
 }
 
 // Thunks
@@ -131,30 +123,6 @@ export const DeletePlaylist = playlistId => {
 
         // Delete playlist from User
         dispatch(DeletePlaylistFromUser(playlistId))
-    }
-}
-
-export const FetchPlaylists = () => {
-    return async (dispatch, getState) => {
-        try {
-            const {
-                UserDataReducer: { user },
-            } = getState()
-
-            // Get playlists from Database
-            const playlists = await GetPlaylists(user.id)
-
-            dispatch(HydratePlaylists(playlists))
-        } catch (error) {
-            console.warn(error)
-        }
-    }
-}
-
-export const HydratePlaylists = playlists => {
-    // Make async call to service to get latest playlist data for user
-    return dispatch => {
-        dispatch(hydratePlaylists(playlists))
     }
 }
 
