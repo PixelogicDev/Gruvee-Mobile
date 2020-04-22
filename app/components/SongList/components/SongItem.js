@@ -1,13 +1,13 @@
 import React, { memo } from 'react'
 import { connect } from 'react-redux'
-import { Alert, Linking, StyleSheet, TouchableOpacity } from 'react-native'
+import { Alert, Linking, StyleSheet, TouchableOpacity, View } from 'react-native'
 import SongItemCommentBar from './SongItemCommentBar'
 import SongItemDetail from './SongItemDetail'
 
 // Styles
 const styles = StyleSheet.create({
     Container: {
-        paddingBottom: 25,
+        paddingBottom: 15,
         flex: 1,
     },
 })
@@ -32,9 +32,8 @@ const SongItem = ({ songData, currentUser }) => {
     }
 
     return (
-        <>
+        <View style={styles.Container}>
             <TouchableOpacity
-                style={styles.Container}
                 onPress={() => {
                     openSongDeepLinkAction(
                         songData.externalUrls[currentUser.preferredSocialPlatform.platformName]
@@ -44,7 +43,7 @@ const SongItem = ({ songData, currentUser }) => {
                 <SongItemDetail songData={songData} />
             </TouchableOpacity>
             <SongItemCommentBar songData={songData} />
-        </>
+        </View>
     )
 }
 
