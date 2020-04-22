@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { connect } from 'react-redux'
 import { KeyboardAvoidingView, Platform, SafeAreaView, StyleSheet, View } from 'react-native'
 import { SwipeListView } from 'react-native-swipe-list-view'
@@ -38,6 +38,7 @@ const CommentsList = ({
     deleteComment,
     fetchComments,
 }) => {
+    const [isRefreshing, setIsRefreshing] = useState(false)
     const commentsListRef = useRef(null)
 
     // Actions
@@ -83,6 +84,13 @@ const CommentsList = ({
                     data={comments}
                     keyExtractor={keyExtractor}
                     renderItem={renderItem}
+                    refreshing={isRefreshing}
+                    onRefresh={() => {
+                        setIsRefreshing(true)
+                        fetchComments(songId, currentPlaylistId).finally(() => {
+                            setIsRefreshing(false)
+                        })
+                    }}
                 />
                 <View style={styles.Separator} />
                 <AddCommentTextInput

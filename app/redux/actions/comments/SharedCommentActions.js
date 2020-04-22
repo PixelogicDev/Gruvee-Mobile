@@ -4,6 +4,7 @@ import { AddSongComment } from 'Gruvee/redux/actions/playlists/SharedPlaylistAct
 import {
     CreateNewCommentDocument,
     DeleteCommentDocument,
+    DeleteCommentFromPlaylist,
     UpdatePlaylistDocumentWithComment,
 } from 'Gruvee/firestore/commentActions'
 
@@ -49,7 +50,7 @@ export const AddComment = (comment, songId, playlistId) => {
     }
 }
 
-export const BulkCommentsDelete = commentIds => {
+export const BulkCommentsDelete = (commentIds, playlistId, songId) => {
     return dispatch => {
         // Delete comments from state
         dispatch(bulkDeleteComments(commentIds))
@@ -57,7 +58,11 @@ export const BulkCommentsDelete = commentIds => {
         const commentDocDeleteProimses = commentIds.map(commentId =>
             DeleteCommentDocument(commentId)
         )
-
         Promise.all(commentDocDeleteProimses)
+
+        const deleteCommentRefFromPlaylistPromises = commentIds.map(commentId =>
+            DeleteCommentFromPlaylist(playlistId, songId, commentId)
+        )
+        Promise.all(deleteCommentRefFromPlaylistPromises)
     }
 }

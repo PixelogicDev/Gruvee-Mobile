@@ -16,12 +16,9 @@ const mapCommentsFromSong = (playlistId, songId, statePlaylists, stateComments) 
     const comments = []
 
     // Get list of commentIds from playlist, from song
-    const commentIds = statePlaylists.byId[playlistId].comments[songId]
-    if (!commentIds) return comments
-
-    commentIds.forEach(commentId => {
+    statePlaylists.byId[playlistId].comments[songId].forEach(commentId => {
         const comment = stateComments.byId[commentId]
-        if (comment !== undefined) {
+        if (comment) {
             comments.push(comment)
         }
     })
