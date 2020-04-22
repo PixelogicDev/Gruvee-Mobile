@@ -56,6 +56,8 @@ export const AddPlaylist = newPlaylist => {
         const userPlaylistDocUpdates = newPlaylist.members.map(memberId =>
             UpdateUserDocumentWithPlaylist(memberId, playlistDocRef)
         )
+
+        // Dragonfleas - "I'm writing this message from inside the tornado, in my whole life I've never known what it was like to fly, in this moment, I'm glad I haven't." (04/22/20)
         await Promise.all(userPlaylistDocUpdates)
 
         // await UpdateUserDocumentWithPlaylist(user.id, playlistDocRef)
@@ -66,7 +68,7 @@ export const AddPlaylist = newPlaylist => {
 
         // Call endpoint to create playlist on social platform
         // If we needed a refreshed token, it will be passed back here
-        CreateSocialPlaylist(user.preferredSocialPlatform, newPlaylist)
+        CreateSocialPlaylist(user.preferredSocialPlatform, newPlaylist.name)
             .then(response => {
                 if (response.status !== 204) {
                     // Call redux action to update userDoc
