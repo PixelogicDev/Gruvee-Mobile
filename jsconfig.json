@@ -1,0 +1,10 @@
+{
+    "compilerOptions": {
+        "baseUrl": ".",
+        "paths": {
+            "@StyleConstants": ["./app/config/styles.js"],
+            "@NavigationConstants": ["./app/config/navigation.js"],
+            "Gruvee/*": ["./app/*"]
+        }
+    }
+}
