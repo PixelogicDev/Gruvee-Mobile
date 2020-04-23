@@ -4,7 +4,7 @@
 // no_neon_one - "Where's my comments!!!!" (04/09/20)
 import { GetUserDocument } from 'Gruvee/firestore/userActions'
 import { SET_INITIAL_USER_DATA, SIGN_IN, SIGNING_IN_USER } from 'Gruvee/redux/actions/ActionsType'
-import { HydratePlaylists } from 'Gruvee/redux/actions/playlists/PlaylistActions'
+import { HydratePlaylists } from 'Gruvee/redux/actions/playlists/SharedPlaylistActions'
 import { FetchMembers } from 'Gruvee/redux/actions/members/MembersActions'
 
 // Action Creators

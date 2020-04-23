@@ -3,7 +3,7 @@ import { COMMON_ENDPOINTS, SPOTIFY_ENDPOINTS } from 'Gruvee/service/endpointCons
 
 // POST: Create Playlist On Preferred Social Platform
 // eslint-disable-next-line import/prefer-default-export
-export const CreateSocialPlaylist = (socialPlatform, playlist) => {
+export const CreateSocialPlaylist = (socialPlatform, playlistName) => {
     const headers = {
         'User-Type': 'gruvee-mobile',
     }
@@ -12,7 +12,7 @@ export const CreateSocialPlaylist = (socialPlatform, playlist) => {
         method: 'POST',
         url: COMMON_ENDPOINTS.createSocialPlaylist,
         headers,
-        data: { socialPlatform, playlist },
+        data: { socialPlatform, playlistName },
     }
 
     // This already returns a promise

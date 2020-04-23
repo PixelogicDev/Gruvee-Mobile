@@ -5,13 +5,13 @@
 // dra031cko - "Spread everything, spread often." (02/04/20)
 // ohmyshell - "kyle graduated code camp 2/12/2020" (02/12/20)
 
-import React, { useRef } from 'react'
+import React, { useState, useRef } from 'react'
 import { View, StyleSheet } from 'react-native'
 import { SwipeListView } from 'react-native-swipe-list-view'
 
 // Redux
 import { connect } from 'react-redux'
-import { AddSong } from 'Gruvee/redux/actions/songs/SongsActions'
+import { AddSong, FetchSongs } from 'Gruvee/redux/actions/songs/SongsActions'
 import { DeleteSong } from 'Gruvee/redux/actions/songs/SharedSongActions'
 import { MapSongsFromPlaylistSelector } from 'Gruvee/redux/selectors/SongsSelector'
 
@@ -42,7 +42,8 @@ const styles = StyleSheet.create({
     },
 })
 
-const SongListView = ({ playlistId, songs, deleteSong }) => {
+const SongListView = ({ playlistId, songs, deleteSong, fetchSongs }) => {
+    const [isRefreshing, setIsRefreshing] = useState(false)
     const bottomSheetRef = useRef(null)
     const keyExtractor = item => `${item.id}`
 
@@ -60,6 +61,13 @@ const SongListView = ({ playlistId, songs, deleteSong }) => {
                 data={songs}
                 keyExtractor={keyExtractor}
                 renderItem={renderItem}
+                refreshing={isRefreshing}
+                onRefresh={() => {
+                    setIsRefreshing(true)
+                    fetchSongs(playlistId).finally(() => {
+                        setIsRefreshing(false)
+                    })
+                }}
             />
             {/* MADPROPZ poopuhchoo */}
             <View style={styles.ButtonContainer}>
@@ -94,6 +102,7 @@ const mapDispatchToProps = dispatch => ({
     deleteSong: (playlistId, songId) =>
         // The false flag is for isDeletingPlaylist
         dispatch(DeleteSong(playlistId, songId, false)),
+    fetchSongs: playlistId => dispatch(FetchSongs(playlistId)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(SongListView)

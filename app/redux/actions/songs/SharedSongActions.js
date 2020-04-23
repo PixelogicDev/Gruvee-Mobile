@@ -27,7 +27,8 @@ export const DeleteSong = (playlistId, songId, isDeletingPlaylist) => {
         }
 
         // If we are deleting our song, we should dispatch a comment delete as well (in CommentsDataReducer)
-        dispatch(BulkCommentsDelete(playlists.byId[playlistId].comments[songId]))
+        const comments = playlists.byId[playlistId].comments[songId]
+        dispatch(BulkCommentsDelete(comments, playlistId, songId))
 
         // Here we will need to also remove all the comments associated with it (in playlist)
         dispatch(DeletePlaylistSong(songId, playlistId, user.id))

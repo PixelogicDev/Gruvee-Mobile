@@ -16,9 +16,7 @@ const SwipeableCommentItem = ({ comment, deleteItemById, currentUser }) => {
         setItemHeight(height)
     }
 
-    return currentUser.id !== comment.sender ? (
-        renderItem(comment, setItemHeightAction, currentUser.username)
-    ) : (
+    return currentUser.id === comment.sender ? (
         <AnimatedSwipeRow
             swipeTriggered={isDeleting}
             swipeActionCallback={() => {
@@ -31,8 +29,10 @@ const SwipeableCommentItem = ({ comment, deleteItemById, currentUser }) => {
                 confirmDeleteCommentAction,
                 currentUser
             )}
-            listItemComponent={renderItem(comment, setItemHeightAction, currentUser.username)}
+            listItemComponent={renderItem(comment, setItemHeightAction)}
         />
+    ) : (
+        renderItem(comment, setItemHeightAction)
     )
 }
 
@@ -54,34 +54,26 @@ const comfirmDeleteAlert = (comment, onConfirmDelete) => {
 }
 
 // Rendered Components
-const renderItem = (comment, setItemHeightAction, senderUsername) => (
-    <CommentItem
-        senderUsername={senderUsername}
-        comment={comment}
-        setHeightAction={setItemHeightAction}
-    />
+const renderItem = (comment, setItemHeightAction) => (
+    <CommentItem comment={comment} setHeightAction={setItemHeightAction} />
 )
 
-const renderSwipeActionComponent = (comment, confirmDeleteCommentAction, currentUser) => {
-    if (currentUser.id === comment.sender) {
-        // eslint-disable-next-line global-require
-        const trashIconAsset = require('Gruvee/assets/icons/trash/trash_icon.png')
+const renderSwipeActionComponent = (comment, confirmDeleteCommentAction) => {
+    // eslint-disable-next-line global-require
+    const trashIconAsset = require('Gruvee/assets/icons/trash/trash_icon.png')
 
-        return (
-            <SwipeAction
-                name="Delete Action Button"
-                action={() => {
-                    confirmDeleteCommentAction(comment)
-                }}
-                icon={trashIconAsset}
-                actionColor={StyleConstants.DELETE_SWIPE_ACTION_BG_COLOR}
-                width={19}
-                height={25}
-            />
-        )
-    }
-
-    return null
+    return (
+        <SwipeAction
+            name="Delete Action Button"
+            action={() => {
+                confirmDeleteCommentAction(comment)
+            }}
+            icon={trashIconAsset}
+            actionColor={StyleConstants.DELETE_SWIPE_ACTION_BG_COLOR}
+            width={19}
+            height={25}
+        />
+    )
 }
 
 // Redux Mappers

@@ -1,5 +1,8 @@
 import { DELETE_COMMENT, FETCH_COMMENTS } from 'Gruvee/redux/actions/ActionsType'
-import { DeleteSongComment } from 'Gruvee/redux/actions/playlists/SharedPlaylistActions'
+import {
+    DeleteSongComment,
+    FetchPlaylists,
+} from 'Gruvee/redux/actions/playlists/SharedPlaylistActions'
 import {
     GetCommentsDocuments,
     DeleteCommentDocument,
@@ -44,8 +47,9 @@ export const DeleteComment = (commentId, songId, playlistId) => {
 export const FetchComments = (songId, playlistId) => {
     // Make async call to service to get latest comments data for song
     return async dispatch => {
-        const comments = await GetCommentsDocuments(songId, playlistId)
+        dispatch(FetchPlaylists())
 
+        const comments = await GetCommentsDocuments(songId, playlistId)
         dispatch(fetchComments(comments))
     }
 }

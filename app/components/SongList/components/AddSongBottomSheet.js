@@ -3,6 +3,7 @@ import {
     Alert,
     Dimensions,
     Image,
+    Keyboard,
     Platform,
     StyleSheet,
     Text,
@@ -158,6 +159,9 @@ const dismissBottomSheet = (setSongLink, setSongComment, bottomSheetRef) => {
 
     // Clear playlist name
     clearInputs(setSongLink, setSongComment)
+
+    // If keyboard is open, dismiss it
+    Keyboard.dismiss()
 }
 
 const showAlert = message => {

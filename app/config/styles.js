@@ -24,6 +24,7 @@ export const BOLD_WEIGHT = '700'
 
 // Font Size - iOS
 export const LARGE_TITLE_SIZE_iOS = 34
+export const MEDIUM_TITLE_SIZE_iOS = 26
 export const MODAL_HEADER_SIZE_iOS = 24
 export const HEADLINE_SIZE_iOS = 17
 export const BUTTON_TEXT_SIZE_iOS = 17

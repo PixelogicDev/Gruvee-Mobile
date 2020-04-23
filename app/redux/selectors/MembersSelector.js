@@ -10,6 +10,12 @@ export const MapMembersFromPlaylist = createSelector(
         mapMembersFromPlaylist(currentPlaylistId, members, playlists)
 )
 
+export const GetMemberForCommentSelector = createSelector(
+    state => state.MembersDataReducer.members,
+    (_, props) => props.comment.sender,
+    (members, memberId) => members.byId[memberId]
+)
+
 // Helpers
 const mapMembersFromPlaylist = (playlistId, stateMembers, statePlaylists) => {
     const members = []

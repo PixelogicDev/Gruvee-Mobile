@@ -6,7 +6,6 @@
 import {
     ADD_PLAYLIST,
     DELETE_PLAYLIST,
-    HYDRATE_PLAYLISTS,
     SET_CURRENT_PLAYLIST_ID,
 } from 'Gruvee/redux/actions/ActionsType'
 import { DeleteSong } from 'Gruvee/redux/actions/songs/SharedSongActions'
@@ -19,6 +18,7 @@ import { DeleteMember } from 'Gruvee/redux/actions/members/SharedMembersActions'
 import {
     CreateNewPlaylistDocument,
     DeletePlaylistDocument,
+    RemovePlaylistRefFromUserDocument,
     UpdateUserDocumentWithPlaylist,
 } from 'Gruvee/firestore/playlistActions'
 import { CreateSocialPlaylist } from 'Gruvee/service/common/endpoints'
@@ -39,12 +39,6 @@ const deletePlaylist = (playlistId, playlists) => {
     }
 }
 
-const hydratePlaylists = playlists => {
-    // Simulates call to get all playlists for current user
-    // We are assuming we have a user signed in
-    return { type: HYDRATE_PLAYLISTS, data: playlists }
-}
-
 // Thunks
 // evjand - "SMOrc ME CODE THUNK SMOrc" (02/13/20)
 export const AddPlaylist = newPlaylist => {
@@ -59,7 +53,14 @@ export const AddPlaylist = newPlaylist => {
         dispatch(addPlaylist(newPlaylist, statePlaylists))
 
         // Set db reference and write path to user doc in DB
-        await UpdateUserDocumentWithPlaylist(user.id, playlistDocRef)
+        const userPlaylistDocUpdates = newPlaylist.members.map(memberId =>
+            UpdateUserDocumentWithPlaylist(memberId, playlistDocRef)
+        )
+
+        // Dragonfleas - "I'm writing this message from inside the tornado, in my whole life I've never known what it was like to fly, in this moment, I'm glad I haven't." (04/22/20)
+        await Promise.all(userPlaylistDocUpdates)
+
+        // await UpdateUserDocumentWithPlaylist(user.id, playlistDocRef)
         dispatch(AddPlaylistToUser(newPlaylist.id))
 
         // Get members from playlists and put in state
@@ -67,7 +68,7 @@ export const AddPlaylist = newPlaylist => {
 
         // Call endpoint to create playlist on social platform
         // If we needed a refreshed token, it will be passed back here
-        CreateSocialPlaylist(user.preferredSocialPlatform, newPlaylist)
+        CreateSocialPlaylist(user.preferredSocialPlatform, newPlaylist.name)
             .then(response => {
                 if (response.status !== 204) {
                     // Call redux action to update userDoc
@@ -89,8 +90,25 @@ export const DeletePlaylist = playlistId => {
             PlaylistsDataReducer: { playlists },
         } = getState()
 
-        // Delete Playlist from Firebase
-        await DeletePlaylistDocument(user.id, playlistId)
+        // If the creator of the playlist is deleting it, all members should not be able to access anymore
+        // Check if currentSigned in user === createdBy user
+        const playlist = playlists.byId[playlistId]
+        if (playlist && playlist.createdBy === user.id) {
+            console.log('Creator is deleting playlist...')
+
+            // Get all members from playlist & delete reference to this playlist
+            const promises = playlist.members.map(memberId =>
+                RemovePlaylistRefFromUserDocument(memberId, playlistId)
+            )
+
+            Promise.all(promises)
+
+            // Delete Playlist from Firebase
+            await DeletePlaylistDocument(playlistId)
+        }
+
+        // Else if non-creator deletes the playlist just remove from that user document
+        RemovePlaylistRefFromUserDocument(user.id, playlistId)
 
         playlists.byId[playlistId].songs.allSongs.forEach(songId => {
             // the true flag is isDeletingPlaylist
@@ -107,13 +125,6 @@ export const DeletePlaylist = playlistId => {
 
         // Delete playlist from User
         dispatch(DeletePlaylistFromUser(playlistId))
-    }
-}
-
-export const HydratePlaylists = playlists => {
-    // Make async call to service to get latest playlist data for user
-    return dispatch => {
-        dispatch(hydratePlaylists(playlists))
     }
 }
 

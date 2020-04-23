@@ -4,7 +4,10 @@ import {
     ADD_SONG_COMMENT,
     DELETE_PLAYLIST_SONG,
     DELETE_SONG_COMMENT,
+    HYDRATE_PLAYLISTS,
 } from 'Gruvee/redux/actions/ActionsType'
+
+import { GetPlaylists } from 'Gruvee/firestore/playlistActions'
 
 // Action Creators
 const addPlaylistMember = (memberId, playlistId) => {
@@ -72,5 +75,35 @@ export const DeletePlaylistSong = (songId, playlistId, userId) => {
 export const DeleteSongComment = (commentId, songId, playlistId) => {
     return dispatch => {
         dispatch(deleteSongComment(commentId, songId, playlistId))
+    }
+}
+
+const hydratePlaylists = playlists => {
+    // Simulates call to get all playlists for current user
+    // We are assuming we have a user signed in
+    return { type: HYDRATE_PLAYLISTS, data: playlists }
+}
+
+export const FetchPlaylists = () => {
+    return async (dispatch, getState) => {
+        try {
+            const {
+                UserDataReducer: { user },
+            } = getState()
+
+            // Get playlists from Database
+            const playlists = await GetPlaylists(user.id)
+
+            dispatch(HydratePlaylists(playlists))
+        } catch (error) {
+            console.warn(error)
+        }
+    }
+}
+
+export const HydratePlaylists = playlists => {
+    // Make async call to service to get latest playlist data for user
+    return dispatch => {
+        dispatch(hydratePlaylists(playlists))
     }
 }

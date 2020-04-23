@@ -7,7 +7,7 @@ import { Provider } from 'react-redux'
 import ReduxThunk from 'redux-thunk'
 import Logger from 'Gruvee/redux/helpers/logger'
 
-import reducer from 'Gruvee/redux/reducers'
+import rootReducer from 'Gruvee/redux/reducers'
 
 const middlewares = [Logger, ReduxThunk]
 // eslint-disable-next-line no-underscore-dangle
@@ -16,7 +16,7 @@ const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 let store
 
 const ReduxProvider = Component => {
-    store = store || createStore(reducer, composeEnhancer(applyMiddleware(...middlewares)))
+    store = store || createStore(rootReducer, composeEnhancer(applyMiddleware(...middlewares)))
 
     return props => (
         <Provider store={store}>

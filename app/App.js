@@ -14,6 +14,7 @@
 import { firebase } from '@react-native-firebase/auth'
 // Dragonfleas - "kid im done. i doubt u even have basic knowlege of hacking. i doul boot linux so i can run my scripts u made a big mistake of replying to my comment" (03/26/20)
 // Redux
+import { SIGN_OUT } from 'Gruvee/redux/actions/ActionsType'
 import { SignInUser } from 'Gruvee/redux/actions/user/UserActions'
 import React, { useEffect } from 'react'
 import { StatusBar } from 'react-native'
@@ -24,7 +25,7 @@ import { UserSignInCompleteSelector } from 'Gruvee/redux/selectors/UserSelector'
 
 // InukApp - "Every day is the day before I start at the gym" (03/09/20)
 // fr3fou - "i helped build this too AYAYA, follow @fr3fou on github uwu, diana cavendish best girl don't @ me" (04/07/20)
-const App = ({ signInUser, userSignInComplete }) => {
+const App = ({ signInUser, signOut, userSignInComplete }) => {
     useEffect(() => {
         /*
             Firebase states that: "This method gets invoked in the UI thread on changes 
@@ -37,6 +38,8 @@ const App = ({ signInUser, userSignInComplete }) => {
             if (user !== null && !isInitialAuthMount) {
                 // Call Sign In Redux Action
                 await signInUser(user.uid)
+            } else if (!isInitialAuthMount && user === null) {
+                signOut()
             }
 
             isInitialAuthMount = false
@@ -64,6 +67,7 @@ const mapStateToProps = state => {
 }
 const mapDispatchToProps = dispatch => ({
     signInUser: uid => dispatch(SignInUser(uid)),
+    signOut: () => dispatch({ type: SIGN_OUT }),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(App)

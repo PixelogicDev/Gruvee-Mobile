@@ -3,6 +3,7 @@ import React, { forwardRef, useState } from 'react'
 import {
     Dimensions,
     Image,
+    Keyboard,
     Platform,
     StyleSheet,
     Text,
@@ -166,6 +167,9 @@ const dismissBottomSheet = (bottomSheetRef, setPlaylistNameText, setSelectedUser
 
     // Clear playlist name
     clearInputs(setPlaylistNameText, setSelectedUser)
+
+    // If keyboard is open, dismiss it
+    Keyboard.dismiss()
 }
 const runPlaylistAction = async (
     addPlaylist,

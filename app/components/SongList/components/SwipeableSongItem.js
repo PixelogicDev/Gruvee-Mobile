@@ -1,18 +1,19 @@
 import React, { useState } from 'react'
+import { connect } from 'react-redux'
 import { Alert } from 'react-native'
 
 import AnimatedSwipeRow from 'Gruvee/components/common/AnimatedSwipeRow'
+import { DidUserAddSongSelector } from 'Gruvee/redux/selectors/SongsSelector'
 import SwipeAction from 'Gruvee/components/common/SwipeAction'
 import * as StyleConstants from 'Gruvee/config/styles'
 import SongItem from './SongItem'
 
-// deleteItemById === func
-const SwipeableSongItem = ({ song, deleteSongById }) => {
+const SwipeableSongItem = ({ song, deleteSongById, didUserAddSong }) => {
     const [isDeleting, setIsDeleting] = useState(false)
     const onConfirmDelete = () => setIsDeleting(true)
     const confirmDeleteSongAction = () => comfirmDeleteAlert(song, onConfirmDelete)
 
-    return (
+    return didUserAddSong ? (
         <AnimatedSwipeRow
             swipeTriggered={isDeleting}
             swipeActionCallback={deleteSongById}
@@ -21,6 +22,8 @@ const SwipeableSongItem = ({ song, deleteSongById }) => {
             swipeActionComponent={renderSwipeActionComponent(song, confirmDeleteSongAction)}
             listItemComponent={renderSongItem(song)}
         />
+    ) : (
+        renderSongItem(song)
     )
 }
 
@@ -42,20 +45,8 @@ const comfirmDeleteAlert = (song, onConfirmDelete) => {
 }
 
 // Rendered Components
-const renderSongItem = (
-    song,
-    addCommentFromSongAction,
-    deleteCommentFromSongAction,
-    updateSongsInPlaylistAction
-) => {
-    return (
-        <SongItem
-            songData={song}
-            addCommentFromSongAction={addCommentFromSongAction}
-            deleteCommentFromSongAction={deleteCommentFromSongAction}
-            updateSongsInPlaylistAction={updateSongsInPlaylistAction}
-        />
-    )
+const renderSongItem = song => {
+    return <SongItem songData={song} />
 }
 
 const renderSwipeActionComponent = (song, confirmDeleteSongAction) => {
@@ -76,4 +67,11 @@ const renderSwipeActionComponent = (song, confirmDeleteSongAction) => {
     )
 }
 
-export default SwipeableSongItem
+// Redux Mappers
+const mapStateToProps = (state, props) => {
+    return {
+        didUserAddSong: DidUserAddSongSelector(state, props),
+    }
+}
+
+export default connect(mapStateToProps, null)(SwipeableSongItem)

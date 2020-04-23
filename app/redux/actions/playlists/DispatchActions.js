@@ -153,8 +153,10 @@ export const HydratePlaylists = (playlistsState, playlists) => {
         { byId: {}, allIds: [] }
     )
 
-    reducedPlaylists.byId = { ...reducedPlaylists.byId, ...playlistsState.byId }
-    reducedPlaylists.allIds = [...reducedPlaylists.allIds, ...playlistsState.allIds]
+    reducedPlaylists.byId = {
+        ...reducedPlaylists.byId,
+    }
+    reducedPlaylists.allIds = [...reducedPlaylists.allIds]
 
     return reducedPlaylists
 }

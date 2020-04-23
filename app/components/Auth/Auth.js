@@ -88,10 +88,18 @@ const Auth = ({ setInitialUserData }) => {
 
     return (
         <View style={styles.Container}>
-            <View>
-                <Text style={styles.SectionTitle}>Let's Get Grüvee</Text>
+            <Text style={styles.SectionTitle}>Welcome to Grüvee Beta!</Text>
+            <View style={styles.TextContainer}>
                 <Text style={styles.SectionDetail}>
-                    Let all of your wildest memes come true. Just sell your soul below.
+                    Thanks for taking part in Grüvee Beta for iOS and Android!
+                </Text>
+                <Text style={styles.SectionDetail}>
+                    It's pretty simple, to get started all you need to do is press the "Login With
+                    Spotify" button.
+                </Text>
+                <Text style={styles.SectionDetail}>
+                    This will give you all the fanciness Grüvee has to offer. Please reach out on
+                    the Discord for any feedback and or questions!
                 </Text>
             </View>
             <View style={styles.ButtonContainer}>{Buttons}</View>
@@ -119,7 +127,7 @@ const styles = StyleSheet.create({
         backgroundColor: StyleConstants.BASE_BACKGROUND_COLOR,
     },
     SectionTitle: {
-        fontSize: StyleConstants.LARGE_TITLE_SIZE_iOS,
+        fontSize: StyleConstants.MEDIUM_TITLE_SIZE_iOS,
         color: StyleConstants.BASE_FONT_COLOR,
     },
     SectionDetail: {
@@ -127,6 +135,9 @@ const styles = StyleSheet.create({
         fontSize: StyleConstants.HEADLINE_SIZE_iOS,
         fontWeight: StyleConstants.SEMIBOLD_WEIGHT,
         color: StyleConstants.BASE_FONT_COLOR,
+    },
+    TextContainer: {
+        justifyContent: 'center',
     },
 })
 
