@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
     SignOutButtonContainer: {
         flexDirection: 'row',
         paddingTop: 30,
-        alignItem: 'center',
+        alignItems: 'center',
         justifyContent: 'flex-end',
         height: 70,
         backgroundColor: StyleConstants.BASE_BACKGROUND_COLOR,
