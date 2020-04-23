@@ -3,8 +3,9 @@
 // MrDemonWolf - "2020 is year of the Contagion Movie monkaS" (03/20/20)
 // isakfk1234 - "incoming code" (04/20/20)
 import React, { useState, useRef } from 'react'
-import { View, StyleSheet } from 'react-native'
+import { Button, View, StyleSheet } from 'react-native'
 import { SwipeListView } from 'react-native-swipe-list-view'
+import { firebase } from '@react-native-firebase/auth'
 
 // Redux
 import { connect } from 'react-redux'
@@ -41,6 +42,14 @@ const styles = StyleSheet.create({
         width: StyleConstants.ADD_BUTTON_SIZE,
         height: StyleConstants.ADD_BUTTON_SIZE,
     },
+    SignOutButtonContainer: {
+        flexDirection: 'row',
+        paddingTop: 30,
+        alignItem: 'center',
+        justifyContent: 'flex-end',
+        height: 70,
+        backgroundColor: StyleConstants.BASE_BACKGROUND_COLOR,
+    },
 })
 
 const PlaylistListView = ({ fetchPlaylists, playlists }) => {
@@ -51,6 +60,14 @@ const PlaylistListView = ({ fetchPlaylists, playlists }) => {
 
     return (
         <>
+            <View style={styles.SignOutButtonContainer}>
+                <Button
+                    title="Sign Out"
+                    onPress={() => {
+                        firebase.auth().signOut()
+                    }}
+                />
+            </View>
             <SwipeListView
                 style={styles.Container}
                 contentContainerStyle={styles.ContentContainer}

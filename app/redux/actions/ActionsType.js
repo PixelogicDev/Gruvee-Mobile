@@ -23,6 +23,7 @@ export const FETCH_COMMENTS = 'FETCH_COMMENTS'
 
 // User Actions
 export const SIGN_IN = 'SIGN_IN'
+export const SIGN_OUT = 'SIGN_OUT'
 export const SIGNING_IN_USER = 'SIGNING_IN_USER'
 export const SET_INITIAL_USER_DATA = 'SET_INITIAL_USER_DATA'
 export const ADD_PLAYLIST_TO_USER = 'ADD_PLAYLIST_TO_USER'
