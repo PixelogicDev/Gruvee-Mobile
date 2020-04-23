@@ -1,6 +1,7 @@
 import {
     ALGOLIA_APP_ID,
     ALGOLIA_DEV_INDEX_NAME,
+    ALGOLIA_PROD_INDEX_NAME,
     ALGOLIA_APP_KEY,
     ENVIRONMENT,
     SPOTIFY_CLIENTID,
@@ -19,6 +20,6 @@ export default {
     Algolia: {
         appId: ALGOLIA_APP_ID,
         appKey: ALGOLIA_APP_KEY,
-        indexName: ENVIRONMENT === 'DEV' ? ALGOLIA_DEV_INDEX_NAME : '',
+        indexName: ENVIRONMENT === 'DEV' ? ALGOLIA_DEV_INDEX_NAME : ALGOLIA_PROD_INDEX_NAME,
     },
 }
