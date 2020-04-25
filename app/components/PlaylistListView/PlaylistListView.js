@@ -1,12 +1,15 @@
 // LilCazza - "I copy and pasted this from stackoverflow. (I have no idea what it does, but everything breaks if it's not here" (02/03/20)
+// curiousdrive - "We are neighbors on the internet" (04/20/20)
 // MrDemonWolf - "2020 is year of the Contagion Movie monkaS" (03/20/20)
-import React, { useRef } from 'react'
-import { View, StyleSheet } from 'react-native'
+// isakfk1234 - "incoming code" (04/20/20)
+import React, { useState, useRef } from 'react'
+import { Button, View, StyleSheet } from 'react-native'
 import { SwipeListView } from 'react-native-swipe-list-view'
+import { firebase } from '@react-native-firebase/auth'
 
 // Redux
 import { connect } from 'react-redux'
-import { HydratePlaylists } from 'Gruvee/redux/actions/playlists/PlaylistActions'
+import { FetchPlaylists } from 'Gruvee/redux/actions/playlists/SharedPlaylistActions'
 import { MapPlaylistsFromUserSelector } from 'Gruvee/redux/selectors/PlaylistsSelector'
 
 import AddItemButton from 'Gruvee/components/common/AddItemButton'
@@ -39,16 +42,32 @@ const styles = StyleSheet.create({
         width: StyleConstants.ADD_BUTTON_SIZE,
         height: StyleConstants.ADD_BUTTON_SIZE,
     },
+    SignOutButtonContainer: {
+        flexDirection: 'row',
+        paddingTop: 30,
+        alignItems: 'center',
+        justifyContent: 'flex-end',
+        height: 70,
+        backgroundColor: StyleConstants.BASE_BACKGROUND_COLOR,
+    },
 })
 
-// TODO: Make sure to check if we need hydratePlaylists
-const PlaylistListView = ({ hydratePlaylists, playlists }) => {
+const PlaylistListView = ({ fetchPlaylists, playlists }) => {
+    const [isRefreshing, setIsRefreshing] = useState(false)
     const keyExtractor = item => `${item.id}`
     const renderItem = ({ item }) => <SwipeablePlaylistItem playlistData={item} />
     const bottomSheetRef = useRef(null)
 
     return (
         <>
+            <View style={styles.SignOutButtonContainer}>
+                <Button
+                    title="Sign Out"
+                    onPress={() => {
+                        firebase.auth().signOut()
+                    }}
+                />
+            </View>
             <SwipeListView
                 style={styles.Container}
                 contentContainerStyle={styles.ContentContainer}
@@ -56,6 +75,13 @@ const PlaylistListView = ({ hydratePlaylists, playlists }) => {
                 data={playlists}
                 keyExtractor={keyExtractor}
                 renderItem={renderItem}
+                refreshing={isRefreshing}
+                onRefresh={() => {
+                    setIsRefreshing(true)
+                    fetchPlaylists().finally(() => {
+                        setIsRefreshing(false)
+                    })
+                }}
             />
             {/* MADPROPZ poopuhchoo */}
             <View style={styles.ButtonContainer}>
@@ -90,8 +116,9 @@ const mapStateToProps = state => {
         playlists: MapPlaylistsFromUserSelector(state),
     }
 }
+
 const mapDispatchToProps = dispatch => ({
-    hydratePlaylists: () => dispatch(HydratePlaylists()),
+    fetchPlaylists: () => dispatch(FetchPlaylists()),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(PlaylistListView)

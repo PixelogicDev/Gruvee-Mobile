@@ -1,27 +1,8 @@
-import MockSongs from 'Gruvee/mock/songs'
 import { ADD_SONG, DELETE_SONG, FETCH_SONGS } from 'Gruvee/redux/actions/ActionsType'
 import { AddSong, DeleteSong, FetchSongs } from 'Gruvee/redux/actions/songs/DispatchActions'
 
-// Mock Data Mapper
-const mapMockSongs = () => {
-    const byId = {}
-    const allIds = []
-
-    MockSongs.forEach(song => {
-        byId[song.id] = song
-        allIds.push(song.id)
-    })
-
-    return {
-        songs: {
-            byId,
-            allIds,
-        },
-    }
-}
-
 // estrangedHD - "Another one Kappa" (02/05/20)
-const initialState = mapMockSongs()
+const initialState = { songs: { byId: {}, allIds: [] } }
 
 // TODO: Should this reducer ALWAYS include a songs prop when returning
 export default (state = initialState, action) => {

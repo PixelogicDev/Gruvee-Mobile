@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { connect } from 'react-redux'
 import { KeyboardAvoidingView, Platform, SafeAreaView, StyleSheet, View } from 'react-native'
 import { SwipeListView } from 'react-native-swipe-list-view'
@@ -14,7 +14,23 @@ import SongComment from 'Gruvee/lib/SongComment'
 import SwipeableCommentItem from './components/SwipeableCommentItem'
 import AddCommentTextInput from './components/AddCommentTextInput'
 
+const styles = StyleSheet.create({
+    Container: {
+        backgroundColor: StyleConstants.BASE_BACKGROUND_COLOR,
+        height: '100%',
+    },
+    ContentContainer: {
+        padding: StyleConstants.TABLE_CONTAINER_CONTENT_SPACING,
+    },
+    Separator: {
+        width: '100%',
+        height: 1,
+        backgroundColor: StyleConstants.SEPERATOR_BACKGROUND_COLOR,
+    },
+})
+
 const CommentsList = ({
+    currentUser,
     currentPlaylistId,
     songId,
     comments,
@@ -22,6 +38,7 @@ const CommentsList = ({
     deleteComment,
     fetchComments,
 }) => {
+    const [isRefreshing, setIsRefreshing] = useState(false)
     const commentsListRef = useRef(null)
 
     // Actions
@@ -35,7 +52,7 @@ const CommentsList = ({
     const keyExtractor = item => `${item.id}`
 
     const addCommentAction = comment => {
-        const newComment = comment.length ? new SongComment(comment, 'memberAlec') : null
+        const newComment = comment.length ? new SongComment(comment, currentUser.id) : null
         addComment(newComment, songId, currentPlaylistId)
     }
 
@@ -46,7 +63,7 @@ const CommentsList = ({
     }
 
     useEffect(() => {
-        fetchComments(songId)
+        fetchComments(songId, currentPlaylistId)
     }, [])
 
     return (
@@ -67,6 +84,13 @@ const CommentsList = ({
                     data={comments}
                     keyExtractor={keyExtractor}
                     renderItem={renderItem}
+                    refreshing={isRefreshing}
+                    onRefresh={() => {
+                        setIsRefreshing(true)
+                        fetchComments(songId, currentPlaylistId).finally(() => {
+                            setIsRefreshing(false)
+                        })
+                    }}
                 />
                 <View style={styles.Separator} />
                 <AddCommentTextInput
@@ -79,24 +103,10 @@ const CommentsList = ({
     )
 }
 
-const styles = StyleSheet.create({
-    Container: {
-        backgroundColor: StyleConstants.BASE_BACKGROUND_COLOR,
-        height: '100%',
-    },
-    ContentContainer: {
-        padding: StyleConstants.TABLE_CONTAINER_CONTENT_SPACING,
-    },
-    Separator: {
-        width: '100%',
-        height: 1,
-        backgroundColor: StyleConstants.SEPERATOR_BACKGROUND_COLOR,
-    },
-})
-
 // Redux Mappers
 const mapStateToProps = (state, props) => {
     return {
+        currentUser: state.UserDataReducer.user,
         currentPlaylistId: state.PlaylistsDataReducer.currentPlaylistId,
         comments: MapCommentsFromSongSelector(state, props),
     }
@@ -105,7 +115,7 @@ const mapDispatchToProps = dispatch => ({
     addComment: (comment, songId, playlistId) => dispatch(AddComment(comment, songId, playlistId)),
     deleteComment: (commentId, songId, currentPlaylistId) =>
         dispatch(DeleteComment(commentId, songId, currentPlaylistId)),
-    fetchComments: songId => dispatch(FetchComments(songId)),
+    fetchComments: (songId, playlistId) => dispatch(FetchComments(songId, playlistId)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(CommentsList)

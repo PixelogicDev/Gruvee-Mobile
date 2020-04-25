@@ -1,4 +1,3 @@
-import MockComments from 'Gruvee/mock/songComments'
 import {
     ADD_COMMENT,
     BULK_COMMENTS_DELETE,
@@ -12,26 +11,7 @@ import {
     FetchComments,
 } from 'Gruvee/redux/actions/comments/DispatchActions'
 
-// Mock Data Mapper
-const mapMockComments = () => {
-    const byId = {}
-    const allIds = []
-
-    MockComments.forEach(comment => {
-        byId[comment.id] = comment
-        allIds.push(comment.id)
-    })
-
-    return {
-        comments: {
-            byId,
-            allIds,
-        },
-    }
-}
-
-// Map mock data for initial state using FetchComments
-const initialState = mapMockComments()
+const initialState = { comments: { byId: {}, allIds: [] } }
 
 export default (state = initialState, action) => {
     switch (action.type) {

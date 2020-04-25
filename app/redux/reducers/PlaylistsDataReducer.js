@@ -44,6 +44,7 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 playlists: AddPlaylistSong(
+                    action.data.user,
                     action.data.songId,
                     action.data.playlistId,
                     state.playlists
@@ -62,6 +63,7 @@ export default (state = initialState, action) => {
         case DELETE_PLAYLIST:
             return {
                 ...state,
+                currentPlaylistId: '',
                 playlists: DeletePlaylist(action.data.playlistId, state.playlists),
             }
         case DELETE_PLAYLIST_SONG:
@@ -70,6 +72,7 @@ export default (state = initialState, action) => {
                 playlists: DeletePlaylistSong(
                     action.data.songId,
                     action.data.playlistId,
+                    action.data.userId,
                     state.playlists
                 ),
             }

@@ -33,6 +33,7 @@
 // -- MONTY PYTHON AND THE HOLY GRAIL -- //
 // JMSWRNR - "Your mother was a hamster and your father smelt of elderberries." (03/20/20)
 // HMigo - "Look, that rabbit's got a vicious streak a mile wide! It's a killer!" (03/20/20)
+// HMigo - “We are the Knights who say... NI.” (04/23/20)
 
 // -- MONTY PYTHON'S LIFE OF BRIAN -- //
 // HMigo - "Wait until Biggus Dickus hears of this!!!" (04/08/20)
@@ -45,6 +46,8 @@
 // fluffypoga - "Do you feel lucky, punk?" (03/31/20)
 // d_e_s_ - "Boris The Blade. Or Boris the Bullet Dodger. As hard as the Soviet hammer and as bent as the sickle that crosses it." (04/02/20)
 // youugotssponged - "I'm gonna make him an offer he can't refuse - The Godfather" (04/11/20)
+// MoonTory - "Wingardium Leviosa" (04/20/20)
+// TheYagich01 - "They're eating her! And then they're going to eat me! OH MY GOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOD" (04/20/20)
 
 // -- SUDOKU -- //
 // OnePocketPimp: |8 _ _ | _ _ _ | _ _ _ |

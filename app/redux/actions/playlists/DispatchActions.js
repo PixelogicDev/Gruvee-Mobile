@@ -20,14 +20,25 @@ export const AddPlaylistMember = (memberId, playlistId, statePlaylists) => {
     }
 }
 
-export const AddPlaylistSong = (songId, playlistId, statePlaylists) => {
+export const AddPlaylistSong = (user, songId, playlistId, statePlaylists) => {
+    const songsAddedeBy = statePlaylists.byId[playlistId].songs.addedBy
+    const updatedAddedByVal = songsAddedeBy[user.id]
+        ? [...songsAddedeBy[user.id], songId]
+        : [songId]
+
     return {
         ...statePlaylists,
         byId: {
             ...statePlaylists.byId,
             [playlistId]: {
                 ...statePlaylists.byId[playlistId],
-                songs: [...statePlaylists.byId[playlistId].songs, songId],
+                songs: {
+                    addedBy: {
+                        ...statePlaylists.byId[playlistId].songs.addedBy,
+                        [user.id]: updatedAddedByVal,
+                    },
+                    allSongs: [...statePlaylists.byId[playlistId].songs.allSongs, songId],
+                },
                 comments: {
                     ...statePlaylists.byId[playlistId].comments,
                     [songId]: [],
@@ -38,6 +49,11 @@ export const AddPlaylistSong = (songId, playlistId, statePlaylists) => {
 }
 
 export const AddSongComment = (commentId, songId, playlistId, statePlaylists) => {
+    const stateComments = statePlaylists.byId[playlistId].comments
+    const updatedComments = Object.keys(stateComments).length
+        ? { ...stateComments, [songId]: [...stateComments[songId], commentId] }
+        : { [songId]: [commentId] }
+
     return {
         ...statePlaylists,
         byId: {
@@ -45,8 +61,7 @@ export const AddSongComment = (commentId, songId, playlistId, statePlaylists) =>
             [playlistId]: {
                 ...statePlaylists.byId[playlistId],
                 comments: {
-                    ...statePlaylists.byId[playlistId].comments,
-                    [songId]: [...statePlaylists.byId[playlistId].comments[songId], commentId],
+                    ...updatedComments,
                 },
             },
         },
@@ -70,9 +85,23 @@ export const DeletePlaylist = (playlistId, playlists) => {
 }
 
 // sillyonly - "Here we go again!" (02/06/20)
-export const DeletePlaylistSong = (songId, playlistId, statePlaylists) => {
+export const DeletePlaylistSong = (songId, playlistId, userId, statePlaylists) => {
+    // Delete Comments from playlist
     const comments = { ...statePlaylists.byId[playlistId].comments }
     delete comments[songId]
+
+    // Remove song from addedBy object - If we are deleting that means it's the person who added the song
+    // so find them, and filter the array
+    const addedBy = { ...statePlaylists.byId[playlistId].songs.addedBy }
+    const updatedAddBy = {
+        ...addedBy,
+        [userId]: addedBy[userId].filter(addedBySongId => addedBySongId !== songId),
+    }
+
+    // Filter allSongs array
+    const updatedAllSongs = statePlaylists.byId[playlistId].songs.allSongs.filter(
+        stateSongId => stateSongId !== songId
+    )
 
     return {
         ...statePlaylists,
@@ -80,9 +109,7 @@ export const DeletePlaylistSong = (songId, playlistId, statePlaylists) => {
             ...statePlaylists.byId,
             [playlistId]: {
                 ...statePlaylists.byId[playlistId],
-                songs: statePlaylists.byId[playlistId].songs.filter(
-                    stateSongId => stateSongId !== songId
-                ),
+                songs: { allSongs: updatedAllSongs, addedBy: updatedAddBy },
                 comments,
             },
         },
@@ -126,8 +153,10 @@ export const HydratePlaylists = (playlistsState, playlists) => {
         { byId: {}, allIds: [] }
     )
 
-    reducedPlaylists.byId = { ...reducedPlaylists.byId, ...playlistsState.byId }
-    reducedPlaylists.allIds = [...reducedPlaylists.allIds, ...playlistsState.allIds]
+    reducedPlaylists.byId = {
+        ...reducedPlaylists.byId,
+    }
+    reducedPlaylists.allIds = [...reducedPlaylists.allIds]
 
     return reducedPlaylists
 }

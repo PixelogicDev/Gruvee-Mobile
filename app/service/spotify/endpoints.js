@@ -6,6 +6,8 @@ import Creds from 'Gruvee/config/creds'
 // Env Variables
 import { SPOTIFY_ENDPOINTS, COMMON_ENDPOINTS } from 'Gruvee/service/endpointConstants'
 
+// -- Spotify API -- //
+
 // POST: API Token Request
 export const GetApiToken = code => {
     const credsB64 = Buffer.from(

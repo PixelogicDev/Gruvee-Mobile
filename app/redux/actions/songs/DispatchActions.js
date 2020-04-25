@@ -1,8 +1,16 @@
 export const AddSong = (newSong, stateSongs) => {
+    const allIds =
+        stateSongs.allIds.findIndex(id => newSong.id === id) === -1
+            ? [...stateSongs.allIds, newSong.id]
+            : [...stateSongs.allIds]
+
     return {
         ...stateSongs,
-        byId: { ...stateSongs.byId, [newSong.id]: newSong },
-        allIds: [...stateSongs.allIds, newSong.id],
+        byId: {
+            ...stateSongs.byId,
+            [newSong.id]: newSong,
+        },
+        allIds,
     }
 }
 
@@ -51,9 +59,8 @@ export const FetchSongs = (songs, songsState) => {
     // estrangedHD - "Well what a same, I still need another one Kappa" (02/05/20)
     reducedSongs.byId = {
         ...reducedSongs.byId,
-        ...songsState.byId,
     }
-    reducedSongs.allIds = [...reducedSongs.allIds, ...songsState.allIds]
+    reducedSongs.allIds = [...reducedSongs.allIds]
 
     return reducedSongs
 }

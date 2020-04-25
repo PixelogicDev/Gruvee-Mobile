@@ -1,14 +1,13 @@
 import React, { useState } from 'react'
 import { Alert } from 'react-native'
+import { connect } from 'react-redux'
 import AnimatedSwipeRow from 'Gruvee/components/common/AnimatedSwipeRow'
 import SwipeAction from 'Gruvee/components/common/SwipeAction'
 import * as StyleConstants from 'Gruvee/config/styles'
 
 import CommentItem from './CommentItem'
 
-const SwipeableCommentItem = ({ comment, deleteItemById }) => {
-    // TODO: This will be needed from user state
-    const signedInUsername = 'memberAlec'
+const SwipeableCommentItem = ({ comment, deleteItemById, currentUser }) => {
     const [isDeleting, setIsDeleting] = useState(false)
     const [itemHeight, setItemHeight] = useState(StyleConstants.COMMENT_ITEM_MIN_HEIGHT)
     const onConfirmDelete = () => setIsDeleting(true)
@@ -17,9 +16,7 @@ const SwipeableCommentItem = ({ comment, deleteItemById }) => {
         setItemHeight(height)
     }
 
-    return signedInUsername !== comment.sender ? (
-        renderItem(comment, setItemHeightAction)
-    ) : (
+    return currentUser.id === comment.sender ? (
         <AnimatedSwipeRow
             swipeTriggered={isDeleting}
             swipeActionCallback={() => {
@@ -30,10 +27,12 @@ const SwipeableCommentItem = ({ comment, deleteItemById }) => {
             swipeActionComponent={renderSwipeActionComponent(
                 comment,
                 confirmDeleteCommentAction,
-                signedInUsername
+                currentUser
             )}
             listItemComponent={renderItem(comment, setItemHeightAction)}
         />
+    ) : (
+        renderItem(comment, setItemHeightAction)
     )
 }
 
@@ -59,26 +58,29 @@ const renderItem = (comment, setItemHeightAction) => (
     <CommentItem comment={comment} setHeightAction={setItemHeightAction} />
 )
 
-const renderSwipeActionComponent = (comment, confirmDeleteCommentAction, signedInUsername) => {
-    if (signedInUsername === comment.sender) {
-        // eslint-disable-next-line global-require
-        const trashIconAsset = require('Gruvee/assets/icons/trash/trash_icon.png')
+const renderSwipeActionComponent = (comment, confirmDeleteCommentAction) => {
+    // eslint-disable-next-line global-require
+    const trashIconAsset = require('Gruvee/assets/icons/trash/trash_icon.png')
 
-        return (
-            <SwipeAction
-                name="Delete Action Button"
-                action={() => {
-                    confirmDeleteCommentAction(comment)
-                }}
-                icon={trashIconAsset}
-                actionColor={StyleConstants.DELETE_SWIPE_ACTION_BG_COLOR}
-                width={19}
-                height={25}
-            />
-        )
-    }
-
-    return null
+    return (
+        <SwipeAction
+            name="Delete Action Button"
+            action={() => {
+                confirmDeleteCommentAction(comment)
+            }}
+            icon={trashIconAsset}
+            actionColor={StyleConstants.DELETE_SWIPE_ACTION_BG_COLOR}
+            width={19}
+            height={25}
+        />
+    )
 }
 
-export default SwipeableCommentItem
+// Redux Mappers
+const mapStateToProps = state => {
+    return {
+        currentUser: state.UserDataReducer.user,
+    }
+}
+
+export default connect(mapStateToProps, null)(SwipeableCommentItem)

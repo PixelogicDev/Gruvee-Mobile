@@ -4,6 +4,7 @@
 import firestore from '@react-native-firebase/firestore'
 import SocialPlatform from 'Gruvee/lib/SocialPlatform'
 import User from 'Gruvee/lib/User'
+import { FetchChildRefs } from './helpers'
 
 // sillyonly - "SOOOOO I HAVE ENOUGH TO DO THIS!" (02/21/20)
 // eslint-disable-next-line import/prefer-default-export
@@ -76,18 +77,23 @@ export const GetUserDocument = async uid => {
     const dbUser = dbUserSnap.data()
 
     // Remaiten - "and at this moment he knew he f'd up" (03/03/20)
-    const socialPlatforms = await fetchChildRefs(dbUser.socialPlatforms)
+    const socialPlatforms = await FetchChildRefs(dbUser.socialPlatforms)
     const isPreferredService = socialPlatforms.find(
         platform => platform.isPreferredService === true
     )
 
     // Get Playlist Data
-    const playlistsData = await fetchChildRefs(dbUser.playlists)
+    const playlistsData = await FetchChildRefs(dbUser.playlists)
     const reducedPlaylists = playlistsData.reduce((state, currentPlaylistData) => {
         return [
             ...state,
             {
                 ...currentPlaylistData,
+                createdBy: currentPlaylistData.createdBy.id,
+                songs: {
+                    addedBy: { ...currentPlaylistData.songs.addedBy },
+                    allSongs: currentPlaylistData.songs.allSongs.map(songRef => songRef.id),
+                },
                 members: currentPlaylistData.members.map(memberRef => memberRef.id),
             },
         ]
@@ -101,17 +107,4 @@ export const GetUserDocument = async uid => {
     }
 
     return { user, playlists: reducedPlaylists }
-}
-
-// Helpers
-const fetchChildRefs = async refs => {
-    const db = firestore()
-    const data = await Promise.all(
-        refs.map(async ref => {
-            const snapshot = await db.doc(ref.path).get()
-            return snapshot.data()
-        })
-    )
-
-    return data
 }

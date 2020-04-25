@@ -5,23 +5,37 @@ import { createSelector } from 'reselect'
 export const MapSongsFromPlaylistSelector = createSelector(
     state => state.PlaylistsDataReducer.playlists,
     state => state.SongsDataReducer.songs,
-    (_, props) => props.playlistId,
+    state => state.PlaylistsDataReducer.currentPlaylistId,
     (playlists, songs, playlistId) => mapSongsFromPlaylist(playlists, songs, playlistId)
 )
 
+export const DidUserAddSongSelector = createSelector(
+    state => state.UserDataReducer.user.id,
+    state => state.PlaylistsDataReducer.currentPlaylistId,
+    state => state.PlaylistsDataReducer.playlists,
+    (_, props) => props.song.id,
+    (userId, playlistId, playlists, songId) => didUserAddSong(userId, playlistId, playlists, songId)
+)
+
 // Helpers
+const didUserAddSong = (userId, playlistId, playlists, songId) => {
+    const userSongs = playlists.byId[playlistId].songs.addedBy[userId]
+    if (userSongs) {
+        return userSongs.includes(songId)
+    }
+
+    return false
+}
+
 const mapSongsFromPlaylist = (statePlaylists, stateSongs, playlistId) => {
     const songs = []
 
-    if (stateSongs.byId === undefined) return songs
-    if (statePlaylists.byId === undefined) return songs
+    if (!statePlaylists.byId[playlistId]) return songs
+    if (!statePlaylists.byId[playlistId].songs) return songs
 
-    // Get list of songIds from playlist
-    const songIds = statePlaylists.byId[playlistId].songs
-
-    songIds.forEach(songId => {
+    statePlaylists.byId[playlistId].songs.allSongs.forEach(songId => {
         const song = stateSongs.byId[songId]
-        if (song !== undefined) {
+        if (song) {
             songs.push(song)
         }
     })
