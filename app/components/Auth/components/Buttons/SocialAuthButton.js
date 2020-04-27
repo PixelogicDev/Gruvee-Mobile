@@ -1,6 +1,6 @@
 import * as StyleConstants from '@StyleConstants'
 import React, { memo } from 'react'
-import { Image, StyleSheet, Text, TouchableOpacity } from 'react-native'
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 
 /*
     ButtonID/Buttom ie: spotify, youtube, soundcloud
@@ -56,6 +56,7 @@ const styles = StyleSheet.create({
         backgroundColor: platform.color.primary,
     }),
     ButtonText: platform => ({
+        flexBasis: 140, // We set this so that it doesnt "cut out long text like spotify"
         color: platform.color.secondary,
         fontWeight: StyleConstants.SEMIBOLD_WEIGHT,
         fontSize: StyleConstants.BUTTON_TEXT_SIZE_iOS,
