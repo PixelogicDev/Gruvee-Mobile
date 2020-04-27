@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
         backgroundColor: platform.color.primary,
     }),
     ButtonText: platform => ({
-        flexBasis: 150, // We set this so that it doesnt "cut out long text like spotify"
+        minWidth: 140, // We set this so that it doesnt "cut out long text like spotify"
         flexWrap: 'wrap',
         color: platform.color.secondary,
         fontWeight: StyleConstants.SEMIBOLD_WEIGHT,
