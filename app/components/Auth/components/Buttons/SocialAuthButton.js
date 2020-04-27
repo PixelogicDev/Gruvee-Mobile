@@ -1,6 +1,6 @@
 import * as StyleConstants from '@StyleConstants'
 import React, { memo } from 'react'
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { Image, StyleSheet, Text, TouchableOpacity } from 'react-native'
 
 /*
     ButtonID/Buttom ie: spotify, youtube, soundcloud
