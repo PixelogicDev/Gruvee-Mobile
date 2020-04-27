@@ -4,7 +4,6 @@
 // BackeyM - "pee pee poo poo" (02/18/20)
 // dra031cko - "android > ios" (02/19/20)
 // sillyonly - "SOOOOOO what happens when silly have 1800?!" (02/19/20)
-import { firebase } from '@react-native-firebase/auth'
 
 // Styles
 import * as StyleConstants from '@StyleConstants'
@@ -23,9 +22,6 @@ const DEEP_LINK_IN_PROGRESS_FLAG = '@Deep_Link_In_Progress'
 // no_neon_one - "Btw I Use Arch!" (02/17/20)
 const Auth = ({ setInitialUserData }) => {
     useEffect(() => {
-        // TODO: These are used now while we do not have a signout method
-        // firebase.auth().signOut()
-        // AsyncStorage.setItem('@Deep_Link_In_Progress', 'false')
         // Deep Link Handler
         if (Platform.OS === 'android') {
             // Android instaniates multiple activites with deep links

@@ -133,6 +133,16 @@ In order to develop for Grüvee you are going to need to have a few things insta
 
     - `emulator -avd Pixel_2_API_29`
 
+## Building App Grüvee-Mobile
+
+#### iOS
+
+-   In Xcode, make sure to change scheme to Release
+
+#### Android
+
+TODO
+
 # Running Grüvee Locally
 
 Now we are at the GOOD stuff. Time to get Grüvee running locally. Make sure you have the [prerequisites](#prerequisites) installed. Open up **two instances** of your favorite terminal/command prompt and navigate to the root directory of the Grüvee repository for both of them. One is going to run your React Native bundle server and the other will start the Grüvee iOS or Android app.

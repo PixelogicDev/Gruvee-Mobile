@@ -41,7 +41,7 @@ const App = ({ signInUser, signOut, userSignInComplete }) => {
                 console.log('User sign in detected!')
 
                 // Check for providerId else it's a custom provider
-                if (user.providerData[0].providerId === 'apple.com') {
+                if (user.providerData.length && user.providerData[0].providerId === 'apple.com') {
                     console.log('Received signIn with Apple')
                     // await signInUser(user.uid)
                 } else if (!isInitialAuthMount && user === null) {
