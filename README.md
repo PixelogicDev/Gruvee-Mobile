@@ -255,3 +255,4 @@ Don't be scared to join the [PixelogicDev discord](https://discord.gg/ubgX6T8) i
 -   [DynamicDonkey](https://github.com/DynamicDonkey) - PixelogicDev Channel Member
 -   [miugel](https://github.com/miugel) - PixelogicDev Channel Member
 -   [creativenobu](https://github.com/creativenobu) - PixelogicDev Channel Member
+-   [rushkiB](https://github.com/maxemiliang) - PixelogicDev Channel Member

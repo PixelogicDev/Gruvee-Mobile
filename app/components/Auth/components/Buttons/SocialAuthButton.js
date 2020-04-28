@@ -56,6 +56,8 @@ const styles = StyleSheet.create({
         backgroundColor: platform.color.primary,
     }),
     ButtonText: platform => ({
+        minWidth: 140, // We set this so that it doesnt "cut out long text like spotify"
+        flexWrap: 'wrap',
         color: platform.color.secondary,
         fontWeight: StyleConstants.SEMIBOLD_WEIGHT,
         fontSize: StyleConstants.BUTTON_TEXT_SIZE_iOS,
