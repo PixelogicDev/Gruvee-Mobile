@@ -10,7 +10,7 @@
     <a href="https://github.com/pixelogicdev/gruvee">
         <img alt="GitHub issues" src="https://img.shields.io/github/issues/pixelogicdev/gruvee-mobile">
     </a>
-    <a href="#-how-to-contribute">
+    <a href="CONTRIBUTING.md#-how-to-contribute">
         <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs welcome!" />
     </a>
 </p>
@@ -20,9 +20,9 @@
   <span> · </span>
   <a href="#running-grüvee-locally">Running Grüvee Locally</a>
   <span> · </span>
-  <a href="#-how-to-contribute">How to Contribute</a>
+  <a href="CONTRIBUTING.md#-how-to-contribute">How to Contribute</a>
   <span> · </span>
-  <a href="#current-contributors">Current Contributors</a>
+  <a href="CONTRIBUTING.md#current-contributors">Current Contributors</a>
 
 </h3>
 
