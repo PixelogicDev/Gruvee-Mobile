@@ -2,7 +2,7 @@
 
 ## The Mantra
 
-We are great believers in open source and the greate community that it builds, we feel that is anyone's right to participate in the development of Grüvee, this means everyone should have equal oppertunity to contrubute to the awesome world of open source, and at the same time be treated with the highest levels of respect.
+We are great believers in open source and the great community that it builds, we feel that is anyone's right to participate in the development of Grüvee, this means everyone should have equal oppertunity to contrubute to the awesome world of open source, and at the same time be treated with the highest levels of respect.
 
 At the end of the day we're all here to build something awesome, so let's go ahead and make something awesome!
 
@@ -30,7 +30,7 @@ Leave a brief description of your changes, any images/videos of what your new co
 > [DesiredName](linkToYourSocial) - Where did you come from?
 > ```
 
-### ⭐Current Contributors
+### ⭐ Current Contributors
 
 -   [@isabellabrookes](https://github.com/isabellabrookes) aka rawrsatbeards - PixelogicDev Channel Moderator
 -   [poopuhchoo](https://github.com/tjengland) - PixelogicDev Team Member
@@ -38,4 +38,5 @@ Leave a brief description of your changes, any images/videos of what your new co
 -   [DynamicDonkey](https://github.com/DynamicDonkey) - PixelogicDev Channel Member
 -   [miugel](https://github.com/miugel) - PixelogicDev Channel Member
 -   [creativenobu](https://github.com/creativenobu) - PixelogicDev Channel Member
--   [DR-DinoMight](https://github.com/DR-DinoMight) - PoxelogicDev Channel Member
+-   [rushkiB](https://github.com/maxemiliang) - PixelogicDev Channel Member
+-   [DR-DinoMight](https://github.com/DR-DinoMight) - PixelogicDev Channel Member
