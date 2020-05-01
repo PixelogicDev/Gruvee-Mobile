@@ -10,7 +10,7 @@
     <a href="https://github.com/pixelogicdev/gruvee">
         <img alt="GitHub issues" src="https://img.shields.io/github/issues/pixelogicdev/gruvee-mobile">
     </a>
-    <a href="#-how-to-contribute">
+    <a href="CONTRIBUTING.md#-how-to-contribute">
         <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs welcome!" />
     </a>
 </p>
@@ -20,10 +20,10 @@
   <span> · </span>
   <a href="#running-grüvee-locally">Running Grüvee Locally</a>
   <span> · </span>
-  <a href="#-how-to-contribute">How to Contribute</a>
+  <a href="CONTRIBUTING.md#-how-to-contribute">How to Contribute</a>
   <span> · </span>
-  <a href="#current-contributors">Current Contributors</a>
-  
+  <a href="CONTRIBUTING.md#current-contributors">Current Contributors</a>
+
 </h3>
 
 Grüvee is an open source social, collabortive playlist made by the [PixelogicDev Twitch Community](https://twitch.tv/pixelogicdev). This project was entirely made live, on Twitch while receiving help from chat and contributing to Pull Requests here!
@@ -235,34 +235,6 @@ $ npm run android-start
 
 Congratulations! You should now see a beautiful Grüvee mobile app displayed and ready to go!
 
-# 🎉 How to Contribute
+# 🤘 Contributing changes
 
-## 🔀 Pull Requests
-
-Now that you are up and running, it's time to push your incredible changes to the Grüvee Repo! For this we will utilize [Pull Requests](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request).
-
-Make sure all your changes are committed to your forked version of Grüvee and go to [the Grüvee repository](https://github.com/PixelogicDev/Gruvee) and create a Pull Request to merge your changes into the current release branch (ie: `release-1.0`).
-
-Leave a brief description of your changes, any images/videos of what your new code is doing (if applicable), and any associated GitHub issues. Get ready for some feedback and thank you for contributing!
-
-## 🐛 Issues
-
-The only way this project will keep growing and getting better is by all of us chipping in to log bugs and suggesting new features! Please utilize [GitHub Issues](https://github.com/PixelogicDev/Gruvee/issues) to report any bugs or add suggestions!
-
-Don't be scared to join the [PixelogicDev discord](https://discord.gg/ubgX6T8) if you need help.
-
-> One last thing to note here: if you are a first time contributor and you are not currently on the [Current Contributors List](#current-contributors), please make sure to include a change with adding yourself! The format is as follows:
->
-> ```
-> [DesiredName](linkToYourSocial) - Where did you come from?
-> ```
-
-## ⭐Current Contributors
-
--   [@isabellabrookes](https://github.com/isabellabrookes) aka rawrsatbeards - PixelogicDev Channel Moderator
--   [poopuhchoo](https://github.com/tjengland) - PixelogicDev Team Member
--   [Bastian](https://github.com/BastianInuk) - PixelogicDev Team Member
--   [DynamicDonkey](https://github.com/DynamicDonkey) - PixelogicDev Channel Member
--   [miugel](https://github.com/miugel) - PixelogicDev Channel Member
--   [creativenobu](https://github.com/creativenobu) - PixelogicDev Channel Member
--   [rushkiB](https://github.com/maxemiliang) - PixelogicDev Channel Member
+See [CONTRIBUTING.md](CONTRIBUTING.md)
