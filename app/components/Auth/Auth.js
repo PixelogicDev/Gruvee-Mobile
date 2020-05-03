@@ -58,8 +58,9 @@ const Auth = ({ setInitialUserData }) => {
                 // Gets API token object
                 // HumansNotFish - "Team Yaya. Gotta have faith nerds."(02/21/20)
                 newUserObj = await HandleSpotifyDeepLink(event)
+            } else if (event.url.includes('apple_auth')) {
+                console.log('Starting apple auth deeplink')
             }
-
             // After auth, we should always set initial user data and sign via firebase
             setInitialUserData(newUserObj.user)
 
