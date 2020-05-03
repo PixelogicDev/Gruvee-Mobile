@@ -4,6 +4,10 @@ const baseHostName = ENVIRONMENT === 'PROD' ? FIREBASE_PROD_URI : FIREBASE_DEV_U
 const spotifyApiHostname = 'https://api.spotify.com'
 const spotifyAccountsHostname = 'https://accounts.spotify.com'
 
+export const APPLE_ENDPOINTS = {
+    authorizeAppleUser: `${baseHostName}/authorizeWithApple`,
+}
+
 export const SPOTIFY_ENDPOINTS = {
     getApiToken: `${spotifyAccountsHostname}/api/token`,
     getAuthorizationCode: (clientId, scopes, redirectUri) =>

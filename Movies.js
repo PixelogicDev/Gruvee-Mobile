@@ -49,6 +49,9 @@
 // youugotssponged - "I'm gonna make him an offer he can't refuse - The Godfather" (04/11/20)
 // MoonTory - "Wingardium Leviosa" (04/20/20)
 // TheYagich01 - "They're eating her! And then they're going to eat me! OH MY GOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOD" (04/20/20)
+// jackconceprio - "you are a marine now Improvise, Adapt and Overcome" (04/28/20)
+// DR_DinoMight - "An idea is like a virus. Resilient. Highly contagious. & even the smallest seed of an idea can grow. It can grow to define or destroy you. - Inception" (04/28/20)
+// pcopley - "PC Load Letter? What the fuck does that mean?" - Michael Bolton, Office Space (04/29/20)
 
 // -- SUDOKU -- //
 // OnePocketPimp: |8 _ _ | _ _ _ | _ _ _ |

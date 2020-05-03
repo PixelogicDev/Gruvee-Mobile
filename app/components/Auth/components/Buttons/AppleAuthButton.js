@@ -11,11 +11,12 @@ import SocialPlatform from 'Gruvee/lib/SocialPlatform'
 import { CreateNewUserDocument } from 'Gruvee/firestore/userActions'
 import SocialAuthButton from './SocialAuthButton'
 import { CreateDocumentAndSignIn } from './actions/SharedActions'
+import { InitAppleMusicAuthFlow } from './actions/AppleActions'
 
 const AppleAuthButton = () => {
     const signInWithAppleAction = async () => {
         try {
-            if (!appleAuth.isSupported) {
+            /*    if (!appleAuth.isSupported) {
                 return Promise.reject(new Error('Device is not on iOS 13 or higher.'))
             }
 
@@ -49,12 +50,32 @@ const AppleAuthButton = () => {
             )
             console.log(applePlatform)
 
-            CreateDocumentAndSignIn(applePlatform, appleCredential)
+                // Things we get:
+                // email
+                // id
+                // platformName
 
-            //const fbUser = await CreateNewUserDocument(applePlatform)
+                // Things we need:
+                // profileImage
+                // username
+                // APIToken stuff
+            
 
+            // Once we get sign in information, we should get MusicKit keys/token
+
+            CreateDocumentAndSignIn(applePlatform, appleCredential) 
             // Sign in
-            // return firebase.auth().signInWithCredential(appleCredential)
+            // return firebase.auth().signInWithCredential(appleCredential) 
+            */
+
+            // Call Firebase function for auth
+            InitAppleMusicAuthFlow()
+            // Let Firebase function do it's thing
+            // We should probably prepare to handle a deep link once authed
+            // Create new social platform
+            // Create new user document
+            // Get custom auth token
+            // Sign in
         } catch (error) {
             console.warn(error)
         }
