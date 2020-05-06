@@ -12,11 +12,15 @@ import { firebase } from '@react-native-firebase/auth'
 
 export const HandleSpotifyAuth = url => {
     // pheonix_d123 - "Must remember that strings use the full length!" (02/18/20)
-    const code = url.substring(url.indexOf('=') + 1, url.length)
+    const code = url.substring(url.indexOf('code=') + 5, url.length)
 
     if (code !== -1) {
+        // When logging in with Facebook, they are now adding `#_=_` to the deeplink
+        // this actually causes the entire token to break... So check here for this and split if necessary
+        const updatedCode = code.split('#_=_')
+
         // This will return the promise from the network call
-        return GetApiToken(code)
+        return GetApiToken(updatedCode[0])
     }
 
     return Promise.reject(new Error('URL substring did not include code'))
@@ -25,18 +29,14 @@ export const HandleSpotifyAuth = url => {
 // LilCazza - "This project was only supposed to take 30 days. monkaS ..... It's now day 96. monkaS" (03/13/20)
 export const InitAuthorizationCodeFlow = async () => {
     const scopesArr = [
-        'user-read-currently-playing',
-        'user-read-playback-state',
         'user-library-modify',
         'user-library-read',
         'playlist-read-private',
         'playlist-read-collaborative',
         'playlist-modify-public',
         'playlist-modify-private',
-        'user-read-recently-played',
-        'user-top-read',
         'user-read-email',
-        'user-read-private ',
+        'user-read-private',
     ]
     const scopes = scopesArr.join(' ')
 

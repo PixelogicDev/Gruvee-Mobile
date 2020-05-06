@@ -131,7 +131,11 @@ In order to develop for Grüvee you are going to need to have a few things insta
 
 ## TODO - Add setup for running Android emulator
 
-    - `emulator -avd Pixel_2_API_29`
+-   `emulator -avd Pixel_2_API_29`
+
+## TODO - Add APK build process
+
+-   `./gradlew app:assembleRelease`
 
 # Running Grüvee Locally
 
