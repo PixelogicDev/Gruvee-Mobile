@@ -9,23 +9,31 @@
 // Dragonfleas - "Dear maintainer: Once you are done trying to 'optimize' this simple app.js file to prove your worth, and have realized what a terrible mistake that was, please increment the following counter as a warning to the next guy: total_hours_wasted_here = 42"(04/06/20)
 // WinterLoreGames - "Array starts at 1, change my mind." (01/22/20)
 // dra031cko - "What do i use ?- Alec 2020" (03/10/20)
+// Dragonfleas - "kid im done. i doubt u even have basic knowlege of hacking. i doul boot linux so i can run my scripts u made a big mistake of replying to my comment" (03/26/20)
+
+import React, { useEffect } from 'react'
+import { Linking, Platform, StatusBar } from 'react-native'
 
 // Firebase
 import { firebase } from '@react-native-firebase/auth'
-// Dragonfleas - "kid im done. i doubt u even have basic knowlege of hacking. i doul boot linux so i can run my scripts u made a big mistake of replying to my comment" (03/26/20)
+
 // Redux
 import { SIGN_OUT } from 'Gruvee/redux/actions/ActionsType'
-import { SignInUser } from 'Gruvee/redux/actions/user/UserActions'
-import React, { useEffect } from 'react'
-import { StatusBar } from 'react-native'
+import { SetInitialUserData, SignInUser } from 'Gruvee/redux/actions/user/UserActions'
 import { connect } from 'react-redux'
+import { UserSignInCompleteSelector } from 'Gruvee/redux/selectors/UserSelector'
+import { HandleSpotifyDeepLink } from 'Gruvee/components/Auth/components/Buttons/actions/SpotifyActions'
+
+import AsyncStorage from '@react-native-community/async-storage'
 import Auth from 'Gruvee/components/Auth'
 import PlaylistListView from 'Gruvee/components/PlaylistListView'
-import { UserSignInCompleteSelector } from 'Gruvee/redux/selectors/UserSelector'
 
 // InukApp - "Every day is the day before I start at the gym" (03/09/20)
 // fr3fou - "i helped build this too AYAYA, follow @fr3fou on github uwu, diana cavendish best girl don't @ me" (04/07/20)
-const App = ({ signInUser, signOut, userSignInComplete }) => {
+
+const DEEP_LINK_IN_PROGRESS_FLAG = '@Deep_Link_In_Progress'
+
+const App = ({ setInitialUserData, signInUser, signOut, userSignInComplete }) => {
     useEffect(() => {
         /*
             Firebase states that: "This method gets invoked in the UI thread on changes 
@@ -35,6 +43,7 @@ const App = ({ signInUser, signOut, userSignInComplete }) => {
         */
         let isInitialAuthMount = true
         const unscribeEvent = firebase.auth().onAuthStateChanged(async user => {
+            console.log(user)
             if (user !== null && !isInitialAuthMount) {
                 // Call Sign In Redux Action
                 await signInUser(user.uid)
@@ -45,8 +54,28 @@ const App = ({ signInUser, signOut, userSignInComplete }) => {
             isInitialAuthMount = false
         })
 
+        // Deep Link Handler
+        if (Platform.OS === 'android') {
+            // Android instaniates multiple activites with deep links
+            // To combat insane calls to this handler, set a flag here to stop it if it's already working
+            AsyncStorage.getItem(DEEP_LINK_IN_PROGRESS_FLAG).then(value => {
+                console.log('GOT DEEPLINKFLAG: ', value)
+                if (value === null || value === 'false') {
+                    // First time running this
+                    Linking.getInitialURL().then(url => {
+                        if (url !== null) {
+                            handleOpenUrl(setInitialUserData)({ url })
+                        }
+                    })
+                }
+            })
+        } else {
+            Linking.addEventListener('url', handleOpenUrl(setInitialUserData))
+        }
+
         return () => {
             unscribeEvent()
+            Linking.removeEventListener('url')
         }
     }, [])
 
@@ -58,6 +87,29 @@ const App = ({ signInUser, signOut, userSignInComplete }) => {
     )
 }
 
+// Helpers
+const handleOpenUrl = setInitialUserData => async event => {
+    try {
+        let newUserObj = {}
+        AsyncStorage.setItem('@Deep_Link_In_Progress', 'true')
+
+        // Check to see what platform this is coming from
+        if (event.url.includes('spotify_auth')) {
+            // HumansNotFish - "Team Yaya. Gotta have faith nerds."(02/21/20)
+            newUserObj = await HandleSpotifyDeepLink(event)
+        }
+
+        // After auth, we should always set initial user data and sign via firebase
+        setInitialUserData(newUserObj.user)
+
+        AsyncStorage.setItem('@Deep_Link_In_Progress', 'false')
+    } catch (error) {
+        // TODO: Handle Error
+        console.warn(error)
+        AsyncStorage.setItem('@Deep_Link_In_Progress', 'false')
+    }
+}
+
 // pheonix_d123 - "Does this look propr?" (03/04/20)
 // Redux Mappers
 const mapStateToProps = state => {
@@ -66,6 +118,7 @@ const mapStateToProps = state => {
     }
 }
 const mapDispatchToProps = dispatch => ({
+    setInitialUserData: (user, jwt) => dispatch(SetInitialUserData(user, jwt)),
     signInUser: uid => dispatch(SignInUser(uid)),
     signOut: () => dispatch({ type: SIGN_OUT }),
 })
