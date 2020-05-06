@@ -91,3 +91,21 @@ export const GetMediaData = metadata => {
 
     return axios(options)
 }
+
+// KociQQ: Comment - "Found on StackOverflow, don't trust this code" (02/25/20)
+// GET: Get Custom Firebase Token
+export const GetCustomFirebaseToken = async uid => {
+    const headers = {
+        'User-Type': 'gruvee-mobile',
+    }
+
+    const options = {
+        method: 'POST',
+        url: COMMON_ENDPOINTS.getCustomFirebaseToken,
+        headers,
+        data: { uid },
+    }
+
+    // This already returns a promise
+    return axios(options)
+}

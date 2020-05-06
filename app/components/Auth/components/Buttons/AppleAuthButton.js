@@ -70,12 +70,6 @@ const AppleAuthButton = () => {
 
             // Call Firebase function for auth
             InitAppleMusicAuthFlow()
-            // Let Firebase function do it's thing
-            // We should probably prepare to handle a deep link once authed
-            // Create new social platform
-            // Create new user document
-            // Get custom auth token
-            // Sign in
         } catch (error) {
             console.warn(error)
         }
