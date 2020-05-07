@@ -125,8 +125,6 @@ In order to develop for Grüvee you are going to need to have a few things insta
     - Android Build Tools 28.0.3 (Installable from Studio SDK Manager)
     - Android 9 SDK (Installable from Studio SDK Manager)
 
-## TODO - Add setup for .env file
-
 ## TODO - Add setup for integrating gruveebackend repo
 
 ## TODO - Add setup for running Android emulator
@@ -140,6 +138,41 @@ In order to develop for Grüvee you are going to need to have a few things insta
 # Running Grüvee Locally
 
 Now we are at the GOOD stuff. Time to get Grüvee running locally. Make sure you have the [prerequisites](#prerequisites) installed. Open up **two instances** of your favorite terminal/command prompt and navigate to the root directory of the Grüvee repository for both of them. One is going to run your React Native bundle server and the other will start the Grüvee iOS or Android app.
+
+## 🌲 Environment Variables
+
+We have included an [`.example.env`](/.example.env) that has the properties that are needed for the app to run properly. Start here by making a `.env` in the root of the repo
+
+### `Environment`
+
+This property does not need to be changed
+
+### `SPOTIFY_CLIENTID & SPOTIFY_CLIENTSECRET`
+
+If you would like to have Spotify support you will need to setup a Spotify developers app. To do this follow these steps:
+
+1. Head to [https://developer.spotify.com/](`https://developer.spotify.com/`)
+2. Log in with your Spotify account
+3. Select 'Create An App'
+4. Fill out the information. You can honestly put anything here
+5. On the next prompt select 'non-commercial'
+6. Agree to the terms and conditions
+7. Grab the Client ID and the Client Secret
+
+### `SPOTIFY_REDIRECTURI`
+
+For Spotify auth you will need to add a redirect URI. This is currently set to what we currently use in Grüvee. In your newly created Spotify Dev App, head to the 'Edit Settings' section and add `gruvee://spotify_auth` to the Redirect URIs section.
+
+### `FIREBASE_DEV_URI`
+
+In order to get the app running you will need to create a Firebase project and set the Dev URI here. Use the following steps:
+
+1. Head to [https://console.firebase.google.com/](https://console.firebase.google.com/)
+2. Select `+ Add Project`
+3. Continue through the prompts and then select Create Project
+4. Head to 'Authentication' section and then the 'Sign-in method' section
+5. Scroll down to Authorized domains
+6. You will see a list of domains. Grab the one that that looks like this: `{YourProject-Id}.firebaseapp.com`
 
 ## NPM Commands
 
