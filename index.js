@@ -15,6 +15,7 @@ import SongList from 'Gruvee/components/SongList'
 import CommentsList from 'Gruvee/components/CommentsList'
 import ShowMembersAction from 'Gruvee/components/common/ShowMembersAction'
 import MembersSideMenu from 'Gruvee/components/MembersSideMenu'
+import UsernameInputView from 'Gruvee/components/UsernameInputView'
 import * as NavigationConstants from 'Gruvee/config/navigation'
 import App from 'Gruvee/App'
 
@@ -23,6 +24,9 @@ Navigation.registerComponent(NavigationConstants.ROOT_NAV_NAME, () => ReduxProvi
 Navigation.registerComponent(NavigationConstants.SONG_LIST_NAV_NAME, () => ReduxProvider(SongList))
 Navigation.registerComponent(NavigationConstants.COMMENTS_LIST_NAV_NAME, () =>
     ReduxProvider(CommentsList)
+)
+Navigation.registerComponent(NavigationConstants.USERNAME_INPUT_VIEW_NAME, () =>
+    ReduxProvider(UsernameInputView)
 )
 
 // TopBar components
@@ -35,7 +39,7 @@ Navigation.registerComponent(NavigationConstants.SIDEMENU_ALL_MEMBERS_NAME, () =
     ReduxProvider(MembersSideMenu)
 )
 
-Navigation.events().registerAppLaunchedListener(() => {
+Navigation.events().registerAppLaunchedListener(async () => {
     Navigation.setRoot({
         root: {
             sideMenu: {

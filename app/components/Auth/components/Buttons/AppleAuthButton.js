@@ -1,11 +1,13 @@
 // creativenobu - "The forbidden apple auth" (02/16/20)
 import React from 'react'
+import { Navigation } from 'react-native-navigation'
 import { firebase } from '@react-native-firebase/auth'
 import appleAuth, {
     AppleAuthRequestOperation,
     AppleAuthRequestScope,
     AppleAuthCredentialState,
 } from '@invertase/react-native-apple-authentication'
+import * as NavigationConstants from 'Gruvee/config/navigation'
 import { ApplePlatform } from 'Gruvee/config/socials'
 import SocialPlatform from 'Gruvee/lib/SocialPlatform'
 import { CreateNewUserDocument } from 'Gruvee/firestore/userActions'
@@ -44,6 +46,13 @@ const AppleAuthButton = () => {
                 true,
                 false
             ) */
+
+            // At this point navigate to choose username view
+            Navigation.push(NavigationConstants.ROOT_NAV_ID, {
+                component: {
+                    name: NavigationConstants.USERNAME_INPUT_VIEW_NAME,
+                },
+            })
 
             // Once we get sign in information, we should get MusicKit keys/token
             // CreateDocumentAndSignIn(applePlatform, appleCredential)

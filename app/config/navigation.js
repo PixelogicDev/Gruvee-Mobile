@@ -23,6 +23,9 @@ export const TOP_BAR_MEMBERS_ACTION_NAME = 'navigation.gruvee.showMembersAction'
 export const SIDEMENU_ALL_MEMBERS_ID = 'navigation.gruvee.sideMenuAllMembers.id'
 export const SIDEMENU_ALL_MEMBERS_NAME = 'navigation.gruvee.sideMenuAllMembers'
 
+export const USERNAME_INPUT_VIEW_ID = 'navigation.gruvee.usernameInputView.id'
+export const USERNAME_INPUT_VIEW_NAME = 'navigation.gruvee.usernameInputView'
+
 // Navigation objects
 export const AUTH_VIEW_ROOT = {
     component: {
