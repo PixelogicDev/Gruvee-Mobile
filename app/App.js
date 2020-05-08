@@ -108,18 +108,22 @@ const handleOpenUrl = setInitialUserData => async event => {
             newUserObj = await HandleSpotifyDeepLink(event)
         } else if (event.url.includes('apple_auth')) {
             console.log('Starting apple auth deeplink')
-            console.log(event.url)
 
+            // Create social platform
             await HandleAppleDeepLink(event)
+
+            // TODO: Prompt add username UI
+
+            // TODO: Create firebase user
+
+            // TODO: Sign in
         }
         // After auth, we should always set initial user data and sign via firebase
         setInitialUserData(newUserObj.user)
-
         AsyncStorage.setItem('@Deep_Link_In_Progress', 'false')
     } catch (error) {
         // TODO: Handle Error
         console.warn(error)
-
         AsyncStorage.setItem('@Deep_Link_In_Progress', 'false')
     }
 }

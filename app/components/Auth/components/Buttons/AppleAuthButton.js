@@ -16,28 +16,24 @@ import { InitAppleMusicAuthFlow } from './actions/AppleActions'
 const AppleAuthButton = () => {
     const signInWithAppleAction = async () => {
         try {
-            /*    if (!appleAuth.isSupported) {
-                return Promise.reject(new Error('Device is not on iOS 13 or higher.'))
+            if (!appleAuth.isSupported) {
+                // TODO: NEEDS A FALLBACK
+                throw new Error('Device is not on iOS 13 or higher.')
             }
-
-            console.log('Starting AppleAuth request!')
 
             const appleAuthRequestResponse = await appleAuth.performRequest({
                 requestedOperation: AppleAuthRequestOperation.LOGIN,
                 requestedScopes: [AppleAuthRequestScope.EMAIL],
             })
 
-            console.log('appleAuthRequestResponse', appleAuthRequestResponse)
-
             const { email, nonce, identityToken, user } = appleAuthRequestResponse
-            const appleCredential = firebase.auth.AppleAuthProvider.credential(identityToken, nonce)
-
             if (!identityToken) {
                 throw new Error('Apple Auth Sign in failed - no identity token returned')
             }
 
+            const appleCredential = firebase.auth.AppleAuthProvider.credential(identityToken, nonce)
             // Create new platform Object
-            const applePlatform = new SocialPlatform(
+            /* const applePlatform = new SocialPlatform(
                 'apple',
                 user,
                 null,
@@ -47,29 +43,11 @@ const AppleAuthButton = () => {
                 null,
                 true,
                 false
-            )
-            console.log(applePlatform)
-
-                // Things we get:
-                // email
-                // id
-                // platformName
-
-                // Things we need:
-                // profileImage
-                // username
-                // APIToken stuff
-            
+            ) */
 
             // Once we get sign in information, we should get MusicKit keys/token
-
-            CreateDocumentAndSignIn(applePlatform, appleCredential) 
-            // Sign in
-            // return firebase.auth().signInWithCredential(appleCredential) 
-            */
-
-            // Call Firebase function for auth
-            InitAppleMusicAuthFlow()
+            // CreateDocumentAndSignIn(applePlatform, appleCredential)
+            // InitAppleMusicAuthFlow()
         } catch (error) {
             console.warn(error)
         }

@@ -1,6 +1,11 @@
 import { Linking } from 'react-native'
+import { firebase } from '@react-native-firebase/auth'
 import SocialPlatform from 'Gruvee/lib/SocialPlatform'
-import { CreateSocialPlatform, GetCustomFirebaseToken } from 'Gruvee/service/common/endpoints'
+import {
+    CreateSocialPlatform,
+    CreateUser,
+    GetCustomFirebaseToken,
+} from 'Gruvee/service/common/endpoints'
 import { APPLE_ENDPOINTS } from 'Gruvee/service/endpointConstants'
 import { v4 as uuidv4 } from 'uuid'
 
@@ -20,15 +25,16 @@ export const InitAppleMusicAuthFlow = () => {
     // TODO: Add deep link supprt for: gruvee://apple_auth
 }
 
+// OnePocketPimp - "Alec discovered Apple APIs are a pain in the ass" (05/06/20)
 export const HandleAppleDeepLink = async event => {
     try {
-        // Wait on this token before continuing
         const code = event.url.substring(event.url.indexOf('?') + 1, event.url.length)
 
         // Create new social platform
+        const id = uuidv4()
         const applePlatform = new SocialPlatform(
             'apple',
-            `apple:${uuidv4()}`, // this is usually the id of the user brought from the provider
+            id,
             null,
             null,
             null,
@@ -45,15 +51,26 @@ export const HandleAppleDeepLink = async event => {
             return
         }
 
+        // Create User object
+        const createUserRequest = {
+            id: `apple:${id}`,
+            email: applePlatform.email,
+            socialPlatformPath: `social_platforms/${id}`,
+            profileImage: applePlatform.profileImage,
+            username: 'YaBoiApple', // TODO: NEED ACTUAL USERNAME
+        }
+
+        const firebaseUser = await CreateUser(createUserRequest)
+
         // We need to generate a firebase JWT
-        const tokenObj = await GetCustomFirebaseToken(applePlatform.id)
+        // DevBowser - "They made me write it, against my will." (05/06/20)
+        const tokenObj = await GetCustomFirebaseToken(firebaseUser.data.id)
 
-        // Sign in
+        // Need to login client
+        const userResponse = await firebase.auth().signInWithCustomToken(tokenObj.data.token)
 
-        // I think we need to create user before signing in
-
-        // We musicUserToken and thats it
-        // We actually need to show some sort of username picker thing here
+        // LilCazza - "It was at this moment I knew I had fucked up" (03/03/20)
+        return userResponse.data
     } catch (error) {
         // TODO: Handle Error
         return Promise.reject(error)

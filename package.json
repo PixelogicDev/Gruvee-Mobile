@@ -3,7 +3,7 @@
     "version": "1.0.0",
     "private": true,
     "scripts": {
-        "start": "react-native start",
+        "start": "react-native start --reset-cache",
         "android-start": "cd ./android && ./gradlew app:assembleDebug && ./gradlew installDebug && npm run android --clearCache",
         "android": "react-native run-android",
         "ios-start": "react-native run-ios --simulator=\"iPhone 11 Pro\"",
