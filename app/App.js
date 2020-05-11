@@ -11,11 +11,17 @@
 // dra031cko - "What do i use ?- Alec 2020" (03/10/20)
 // Dragonfleas - "kid im done. i doubt u even have basic knowlege of hacking. i doul boot linux so i can run my scripts u made a big mistake of replying to my comment" (03/26/20)
 
+import 'react-native-gesture-handler'
 import React, { useEffect } from 'react'
 import { Linking, Platform, StatusBar } from 'react-native'
 
+// React Navigation
+import { NavigationContainer } from '@react-navigation/native'
+import { createStackNavigator } from '@react-navigation/stack'
+
 // Firebase
 import { firebase } from '@react-native-firebase/auth'
+
 // Redux
 import { SIGN_OUT } from 'Gruvee/redux/actions/ActionsType'
 import { SetInitialUserData, SignInUser } from 'Gruvee/redux/actions/user/UserActions'
@@ -32,6 +38,7 @@ import PlaylistListView from 'Gruvee/components/PlaylistListView'
 // fr3fou - "i helped build this too AYAYA, follow @fr3fou on github uwu, diana cavendish best girl don't @ me" (04/07/20)
 
 const DEEP_LINK_IN_PROGRESS_FLAG = '@Deep_Link_In_Progress'
+const Stack = createStackNavigator()
 
 const App = ({ setInitialUserData, signInUser, signOut, userSignInComplete }) => {
     useEffect(() => {
@@ -88,10 +95,12 @@ const App = ({ setInitialUserData, signInUser, signOut, userSignInComplete }) =>
     }, [])
 
     return (
-        <>
-            <StatusBar barStyle="light-content" />
-            {userSignInComplete ? <PlaylistListView /> : <Auth />}
-        </>
+        <NavigationContainer>
+            {/* <StatusBar barStyle="light-content" /> */}
+            <Stack.Navigator>
+                <Stack.Screen name="Auth" component={Auth} />
+            </Stack.Navigator>
+        </NavigationContainer>
     )
 }
 

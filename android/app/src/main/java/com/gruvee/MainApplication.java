@@ -3,9 +3,6 @@ package com.gruvee;
 import java.util.Arrays;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
-import com.reactnativenavigation.NavigationApplication;
-import com.reactnativenavigation.react.NavigationReactNativeHost;
-import com.reactnativenavigation.react.ReactGateway;
 import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
 import com.swmansion.reanimated.ReanimatedPackage;
@@ -17,7 +14,7 @@ import io.invertase.firebase.auth.ReactNativeFirebaseAuthPackage;
 
 import java.util.List;
 
-public class MainApplication extends NavigationApplication {
+public class MainApplication {
 
     @Override
     protected ReactGateway createReactGateway() {

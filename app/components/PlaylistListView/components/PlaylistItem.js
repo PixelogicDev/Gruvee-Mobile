@@ -8,9 +8,7 @@ import { FetchMembers } from 'Gruvee/redux/actions/members/MembersActions'
 import { FetchSongs } from 'Gruvee/redux/actions/songs/SongsActions'
 import { MapMembersFromPlaylist } from 'Gruvee/redux/selectors/MembersSelector'
 
-import { Navigation } from 'react-native-navigation'
 import * as StyleConstants from 'Gruvee/config/styles'
-import * as NavigationConstants from 'Gruvee/config/navigation'
 import CardItemDetail from './CardItemDetail'
 
 const defaultPlaylistBackgroundAsset = require('Gruvee/assets/defaults/playlist_image/default_item_bg_image.png')
@@ -68,13 +66,13 @@ const PlaylistItem = ({
 
 // Actions
 const showMembersAction = () => {
-    Navigation.mergeOptions(NavigationConstants.STACK_ID, {
-        sideMenu: {
-            right: {
-                visible: true,
-            },
-        },
-    })
+    // Navigation.mergeOptions(NavigationConstants.STACK_ID, {
+    //     sideMenu: {
+    //         right: {
+    //             visible: true,
+    //         },
+    //     },
+    // })
 }
 
 // sillyonly - "YOU THOUGHT YOU WILL RUN AWAY!" (02/14/20)
@@ -94,53 +92,53 @@ const showSongListAction = (
     // Any new members from db? Lets get them now so our members list will be good to go.
     fetchMembers([playlistData])
 
-    Navigation.push(NavigationConstants.STACK_ID, {
-        component: {
-            name: NavigationConstants.SONG_LIST_NAV_NAME,
-            passProps: {
-                playlistId: playlistData.id,
-            },
-            options: {
-                topBar: {
-                    visible: true,
-                    barStyle: 'default',
-                    backButton: {
-                        color: StyleConstants.TOP_BAR_BACK_BUTTON_COLOR,
-                    },
-                    rightButtons: [
-                        {
-                            id: NavigationConstants.TOP_BAR_MEMBERS_ACTION_ID,
-                            component: {
-                                name: NavigationConstants.TOP_BAR_MEMBERS_ACTION_NAME,
-                                passProps: {
-                                    members: playlistMembers,
-                                    showMembersAction: () => {
-                                        showMembersAction()
-                                    },
-                                },
-                            },
-                        },
-                    ],
-                    background: {
-                        color: StyleConstants.TOP_BAR_BACKGROUND_COLOR,
-                        blur: false,
-                    },
-                    title: {
-                        text: playlistData.name,
-                        fontSize: StyleConstants.TOP_BAR_TEXT_SIZE,
-                        color: StyleConstants.TOP_BAR_TEXT_COLOR,
-                        // iOS Only
-                        fontWeight: 'medium',
-                    },
-                },
-                sideMenu: {
-                    right: {
-                        enabled: true,
-                    },
-                },
-            },
-        },
-    })
+    // Navigation.push(NavigationConstants.STACK_ID, {
+    //     component: {
+    //         name: NavigationConstants.SONG_LIST_NAV_NAME,
+    //         passProps: {
+    //             playlistId: playlistData.id,
+    //         },
+    //         options: {
+    //             topBar: {
+    //                 visible: true,
+    //                 barStyle: 'default',
+    //                 backButton: {
+    //                     color: StyleConstants.TOP_BAR_BACK_BUTTON_COLOR,
+    //                 },
+    //                 rightButtons: [
+    //                     {
+    //                         id: NavigationConstants.TOP_BAR_MEMBERS_ACTION_ID,
+    //                         component: {
+    //                             name: NavigationConstants.TOP_BAR_MEMBERS_ACTION_NAME,
+    //                             passProps: {
+    //                                 members: playlistMembers,
+    //                                 showMembersAction: () => {
+    //                                     showMembersAction()
+    //                                 },
+    //                             },
+    //                         },
+    //                     },
+    //                 ],
+    //                 background: {
+    //                     color: StyleConstants.TOP_BAR_BACKGROUND_COLOR,
+    //                     blur: false,
+    //                 },
+    //                 title: {
+    //                     text: playlistData.name,
+    //                     fontSize: StyleConstants.TOP_BAR_TEXT_SIZE,
+    //                     color: StyleConstants.TOP_BAR_TEXT_COLOR,
+    //                     // iOS Only
+    //                     fontWeight: 'medium',
+    //                 },
+    //             },
+    //             sideMenu: {
+    //                 right: {
+    //                     enabled: true,
+    //                 },
+    //             },
+    //         },
+    //     },
+    // })
 }
 
 // Redux Mappers

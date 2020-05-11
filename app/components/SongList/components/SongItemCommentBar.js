@@ -4,44 +4,42 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import { Text, Image, TouchableOpacity, StyleSheet } from 'react-native'
-import { Navigation } from 'react-native-navigation'
 import * as StyleConstants from 'Gruvee/config/styles'
-import * as NavigationConstants from 'Gruvee/config/navigation'
 
 const rightChevronAsset = require('Gruvee/assets/icons/right_chevron/right_chevron.png')
 
 // Actions
 const navigateToCommentsListAction = songData => {
-    Navigation.push(NavigationConstants.STACK_ID, {
-        component: {
-            name: NavigationConstants.COMMENTS_LIST_NAV_NAME,
-            passProps: {
-                songId: songData.id,
-                comments: songData.comments,
-            },
-            options: {
-                topBar: {
-                    visible: true,
-                    barStyle: 'default',
-                    backButton: {
-                        showTitle: false,
-                        color: StyleConstants.TOP_BAR_BACK_BUTTON_COLOR,
-                    },
-                    background: {
-                        color: StyleConstants.TOP_BAR_BACKGROUND_COLOR,
-                        blur: false,
-                    },
-                    title: {
-                        text: songData.name,
-                        fontSize: StyleConstants.TOP_BAR_TEXT_SIZE,
-                        color: StyleConstants.TOP_BAR_TEXT_COLOR,
-                        // iOS Only
-                        fontWeight: 'medium',
-                    },
-                },
-            },
-        },
-    })
+    // Navigation.push(NavigationConstants.STACK_ID, {
+    //     component: {
+    //         name: NavigationConstants.COMMENTS_LIST_NAV_NAME,
+    //         passProps: {
+    //             songId: songData.id,
+    //             comments: songData.comments,
+    //         },
+    //         options: {
+    //             topBar: {
+    //                 visible: true,
+    //                 barStyle: 'default',
+    //                 backButton: {
+    //                     showTitle: false,
+    //                     color: StyleConstants.TOP_BAR_BACK_BUTTON_COLOR,
+    //                 },
+    //                 background: {
+    //                     color: StyleConstants.TOP_BAR_BACKGROUND_COLOR,
+    //                     blur: false,
+    //                 },
+    //                 title: {
+    //                     text: songData.name,
+    //                     fontSize: StyleConstants.TOP_BAR_TEXT_SIZE,
+    //                     color: StyleConstants.TOP_BAR_TEXT_COLOR,
+    //                     // iOS Only
+    //                     fontWeight: 'medium',
+    //                 },
+    //             },
+    //         },
+    //     },
+    // })
 }
 
 const SongItemCommentBar = ({ songCommentCount, songData }) => {
