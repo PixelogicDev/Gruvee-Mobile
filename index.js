@@ -12,6 +12,8 @@
 import { AppRegistry } from 'react-native'
 import App from 'Gruvee/App'
 import ReduxProvider from 'Gruvee/components/ReduxProvider'
+import { enableScreens } from 'react-native-screens'
 import { name as appName } from './app.json'
 
+enableScreens()
 AppRegistry.registerComponent(appName, () => ReduxProvider(App))

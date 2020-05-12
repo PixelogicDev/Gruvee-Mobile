@@ -16,7 +16,7 @@
         "@react-native-firebase/app": "^6.3.4",
         "@react-native-firebase/auth": "^6.3.4",
         "@react-native-firebase/firestore": "6.3.4",
-        "@react-navigation/native": "^5.2.5",
+        "@react-navigation/native": "^5.3.0",
         "@react-navigation/stack": "^5.3.0",
         "add": "^2.0.6",
         "algoliasearch": "^4.1.0",
