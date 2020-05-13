@@ -1,53 +1,60 @@
 package com.gruvee;
 
-import java.util.Arrays;
+import android.app.Application;
+import android.util.Log;
+
+
+// React Native
+import com.facebook.react.PackageList;
+import com.facebook.hermes.reactexecutor.HermesExecutorFactory;
+import com.facebook.react.bridge.JavaScriptExecutorFactory;
+import com.facebook.react.ReactApplication;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
-import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
-import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
-import com.swmansion.reanimated.ReanimatedPackage;
+import com.facebook.soloader.SoLoader;
 
 // Firebase
 import io.invertase.firebase.app.ReactNativeFirebaseAppPackage;
 import io.invertase.firebase.firestore.ReactNativeFirebaseFirestorePackage;
 import io.invertase.firebase.auth.ReactNativeFirebaseAuthPackage;
 
+// Other
+import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
+import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
+import com.swmansion.reanimated.ReanimatedPackage;
+import java.util.Arrays;
 import java.util.List;
 
-public class MainApplication {
+public class MainApplication extends Application implements ReactApplication {
+    private final ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {
+        @Override
+        public boolean getUseDeveloperSupport() {
+            return BuildConfig.DEBUG;
+        }
 
-    @Override
-    protected ReactGateway createReactGateway() {
-        ReactNativeHost host = new NavigationReactNativeHost(this, isDebug(), createAdditionalReactPackages()) {
-            @Override
+        @Override
+        protected List<ReactPackage> getPackages() {
+            @SuppressWarnings("UnnecessaryLocalVariable")
+            List<ReactPackage> packages = new PackageList(this).getPackages();
+            // Packages that cannot be autolinked yet can be added manually here, for example:
+
+            return packages;
+        }
+
+        @Override
             protected String getJSMainModuleName() {
-                return "index";
-            }
-        };
+            return "index";
+        }
+    };
 
-        return new ReactGateway(this, isDebug(), host);
+    @Override
+    public ReactNativeHost getReactNativeHost() {
+        return mReactNativeHost;
     }
 
     @Override
-    public boolean isDebug() {
-        return BuildConfig.DEBUG;
-    }
-
-    protected List<ReactPackage> getPackages() {
-        // Add additional packages you require here
-        // No need to add RnnPackage and MainReactPackage
-        return Arrays.<ReactPackage>asList(
-                new ReactNativeFirebaseAppPackage(),
-                new ReactNativeFirebaseFirestorePackage(),
-                new ReactNativeFirebaseAuthPackage(),
-                new AsyncStoragePackage(),
-                new RNGestureHandlerPackage(),
-                new ReanimatedPackage()
-        );
-    }
-
-    @Override
-    public List<ReactPackage> createAdditionalReactPackages() {
-        return getPackages();
+    public void onCreate() {
+        super.onCreate();
+        SoLoader.init(this, /* native exopackage */ false);
     }
 }

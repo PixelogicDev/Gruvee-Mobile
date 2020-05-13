@@ -13,7 +13,7 @@
 
 import 'react-native-gesture-handler'
 import React, { useEffect } from 'react'
-import { Linking, Platform } from 'react-native'
+import { Button, Linking, Platform } from 'react-native'
 
 // React Navigation
 import { NavigationContainer } from '@react-navigation/native'
@@ -35,6 +35,18 @@ import AsyncStorage from '@react-native-community/async-storage'
 // fr3fou - "i helped build this too AYAYA, follow @fr3fou on github uwu, diana cavendish best girl don't @ me" (04/07/20)
 
 const DEEP_LINK_IN_PROGRESS_FLAG = '@Deep_Link_In_Progress'
+
+// Sign Out Button For Playlist View
+const SignOutButton = signOutAction => {
+    return (
+        <Button
+            title="Sign Out"
+            onPress={() => {
+                signOutAction()
+            }}
+        />
+    )
+}
 
 const App = ({ setInitialUserData, signInUser, signOut, userSignInComplete }) => {
     useEffect(() => {
@@ -92,7 +104,7 @@ const App = ({ setInitialUserData, signInUser, signOut, userSignInComplete }) =>
 
     return (
         <NavigationContainer theme={BASE_THEME}>
-            {userSignInComplete ? SIGNED_IN_NAVIGATOR : AUTH_NAVIGATOR}
+            {userSignInComplete ? SIGNED_IN_NAVIGATOR(SignOutButton(signOut)) : AUTH_NAVIGATOR}
         </NavigationContainer>
     )
 }

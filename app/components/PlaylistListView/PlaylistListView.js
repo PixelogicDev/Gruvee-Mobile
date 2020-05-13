@@ -2,7 +2,7 @@
 // curiousdrive - "We are neighbors on the internet" (04/20/20)
 // MrDemonWolf - "2020 is year of the Contagion Movie monkaS" (03/20/20)
 // isakfk1234 - "incoming code" (04/20/20)
-import React, { useState, useRef } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { RefreshControl, StyleSheet, SafeAreaView, View } from 'react-native'
 import { SwipeListView } from 'react-native-swipe-list-view'
 
@@ -24,6 +24,7 @@ console.ignoredYellowBox = ['Could not find image']
 const styles = StyleSheet.create({
     Container: {
         zIndex: 0,
+        height: '100%',
         backgroundColor: StyleConstants.BASE_BACKGROUND_COLOR,
     },
     // QuantumBrat - "BOIII (this must always be on line 147)" line 147 must! be on line 147..so... find a place for it ;) MiniK" (02/11/20)
@@ -58,27 +59,22 @@ const PlaylistListView = ({ fetchPlaylists, playlists }) => {
     const renderItem = ({ item }) => <SwipeablePlaylistItem playlistData={item} />
     const bottomSheetRef = useRef(null)
 
+    useEffect(() => {
+        console.log('Fetching latest playlists')
+        fetchPlaylists()
+    }, [])
+
     return (
         <>
-            <SafeAreaView style={{ height: '100%' }}>
-                {/* <View style={styles.SignOutButtonContainer}>
-                <Button
-                    title="Sign Out"
-                    onPress={() => {
-                        firebase.auth().signOut()
-                    }}
-                />
-            </View> */}
+            <SafeAreaView style={styles.Container}>
                 <SwipeListView
-                    style={styles.Container}
                     contentContainerStyle={styles.ContentContainer}
                     showsVerticalScrollIndicator={false}
                     data={playlists}
                     keyExtractor={keyExtractor}
                     refreshControl={
                         <RefreshControl
-                            tintColor="white"
-                            colors={['white']}
+                            tintColor={StyleConstants.REFRESH_INDICATOR_COLOR} // iOS only
                             refreshing={isRefreshing}
                             onRefresh={() => {
                                 setIsRefreshing(true)

@@ -41,7 +41,7 @@ export const AUTH_NAVIGATOR = (
         <Stack.Screen name={AUTH_NAV_NAME} component={Auth} options={{ headerShown: false }} />
     </Stack.Navigator>
 )
-export const SIGNED_IN_NAVIGATOR = (
+export const SIGNED_IN_NAVIGATOR = signOutButton => (
     <Stack.Navigator
         screenOptions={{
             headerStyle: { backgroundColor: '#1D1D1D' },
@@ -49,7 +49,13 @@ export const SIGNED_IN_NAVIGATOR = (
             headerTranslucent: true,
         }}
     >
-        <Stack.Screen name={PLAYLIST_NAV_NAME} component={PlaylistListView} />
+        <Stack.Screen
+            name={PLAYLIST_NAV_NAME}
+            component={PlaylistListView}
+            options={{
+                headerRight: () => signOutButton,
+            }}
+        />
     </Stack.Navigator>
 )
 

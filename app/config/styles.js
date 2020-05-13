@@ -83,3 +83,5 @@ export const TOP_BAR_BACKGROUND_COLOR = '#000000'
 export const TOP_BAR_TEXT_COLOR = '#FFFFFF'
 export const TOP_BAR_TEXT_SIZE = 24
 export const TOP_BAR_BACK_BUTTON_COLOR = '#FFFFFF'
+
+export const REFRESH_INDICATOR_COLOR = '#FFFFFF'
