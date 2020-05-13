@@ -3,7 +3,7 @@
 // MrDemonWolf - "2020 is year of the Contagion Movie monkaS" (03/20/20)
 // isakfk1234 - "incoming code" (04/20/20)
 import React, { useEffect, useState, useRef } from 'react'
-import { RefreshControl, StyleSheet, SafeAreaView, View } from 'react-native'
+import { RefreshControl, SafeAreaView, StyleSheet, StatusBar, View } from 'react-native'
 import { SwipeListView } from 'react-native-swipe-list-view'
 
 // Redux
@@ -66,6 +66,7 @@ const PlaylistListView = ({ fetchPlaylists, playlists }) => {
 
     return (
         <>
+            <StatusBar barStyle="light-content" />
             <SafeAreaView style={styles.Container}>
                 <SwipeListView
                     contentContainerStyle={styles.ContentContainer}

@@ -42,7 +42,11 @@ const SignOutButton = signOutAction => {
         <Button
             title="Sign Out"
             onPress={() => {
+                // Redux
                 signOutAction()
+
+                // Firebase
+                firebase.auth().signOut()
             }}
         />
     )

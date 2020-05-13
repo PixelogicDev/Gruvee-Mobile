@@ -6,7 +6,6 @@ import appleAuth, {
     AppleAuthRequestScope,
     AppleAuthCredentialState,
 } from '@invertase/react-native-apple-authentication'
-import * as NavigationConstants from 'Gruvee/config/navigation'
 import { ApplePlatform } from 'Gruvee/config/socials'
 import SocialPlatform from 'Gruvee/lib/SocialPlatform'
 import { CreateNewUserDocument } from 'Gruvee/firestore/userActions'
