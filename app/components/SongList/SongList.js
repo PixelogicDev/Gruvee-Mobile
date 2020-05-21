@@ -6,7 +6,7 @@
 // ohmyshell - "kyle graduated code camp 2/12/2020" (02/12/20)
 
 import React, { useState, useRef } from 'react'
-import { View, StyleSheet } from 'react-native'
+import { RefreshControl, SafeAreaView, StyleSheet, View } from 'react-native'
 import { SwipeListView } from 'react-native-swipe-list-view'
 
 // Redux
@@ -24,6 +24,7 @@ import SwipeableSongItem from './components/SwipeableSongItem'
 // Styles
 const styles = StyleSheet.create({
     Container: {
+        height: '100%',
         backgroundColor: StyleConstants.BASE_BACKGROUND_COLOR,
     },
     ContentContainer: {
@@ -54,21 +55,27 @@ const SongListView = ({ playlistId, songs, deleteSong, fetchSongs }) => {
 
     return (
         <>
-            <SwipeListView
-                style={styles.Container}
-                contentContainerStyle={styles.ContentContainer}
-                showsVerticalScrollIndicator
-                data={songs}
-                keyExtractor={keyExtractor}
-                renderItem={renderItem}
-                refreshing={isRefreshing}
-                onRefresh={() => {
-                    setIsRefreshing(true)
-                    fetchSongs(playlistId).finally(() => {
-                        setIsRefreshing(false)
-                    })
-                }}
-            />
+            <SafeAreaView style={styles.Container}>
+                <SwipeListView
+                    contentContainerStyle={styles.ContentContainer}
+                    showsVerticalScrollIndicator
+                    data={songs}
+                    keyExtractor={keyExtractor}
+                    renderItem={renderItem}
+                    refreshControl={
+                        <RefreshControl
+                            tintColor={StyleConstants.REFRESH_INDICATOR_COLOR} // iOS only
+                            refreshing={isRefreshing}
+                            onRefresh={() => {
+                                setIsRefreshing(true)
+                                fetchSongs().finally(() => {
+                                    setIsRefreshing(false)
+                                })
+                            }}
+                        />
+                    }
+                />
+            </SafeAreaView>
             {/* MADPROPZ poopuhchoo */}
             <View style={styles.ButtonContainer}>
                 <AddItemButton

@@ -17,7 +17,8 @@ import { Button, Linking, Platform } from 'react-native'
 
 // React Navigation
 import { NavigationContainer } from '@react-navigation/native'
-import { AUTH_NAVIGATOR, BASE_THEME, SIGNED_IN_NAVIGATOR } from 'Gruvee/config/navigation'
+import { AUTH_NAVIGATOR, SIGNED_IN_NAVIGATOR } from 'Gruvee/config/navigation/navigators'
+import { BASE_THEME } from 'Gruvee/config/navigation/themes'
 
 // Firebase
 import { firebase } from '@react-native-firebase/auth'

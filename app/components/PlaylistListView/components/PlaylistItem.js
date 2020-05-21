@@ -8,7 +8,7 @@ import { FetchMembers } from 'Gruvee/redux/actions/members/MembersActions'
 import { FetchSongs } from 'Gruvee/redux/actions/songs/SongsActions'
 import { MapMembersFromPlaylist } from 'Gruvee/redux/selectors/MembersSelector'
 import { useNavigation } from '@react-navigation/native'
-import { SONG_LIST_NAV_NAME } from 'Gruvee/config/navigation'
+import { SONG_LIST_NAV_NAME } from 'Gruvee/config/navigation/constants'
 
 import * as StyleConstants from 'Gruvee/config/styles'
 import CardItemDetail from './CardItemDetail'
@@ -40,7 +40,7 @@ const PlaylistItem = ({
     const navigation = useNavigation()
     const imageBackground =
         playlistData.albumArtworkUrl !== '' ? { uri: `${playlistData.albumArtworkUrl}` } : null
-x
+
     return (
         <TouchableOpacity
             onPress={() => {

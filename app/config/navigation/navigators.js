@@ -4,7 +4,6 @@ import React from 'react'
 // eslint-disable-next-line import/no-unresolved
 import { createNativeStackNavigator } from 'react-native-screens/native-stack'
 import { createDrawerNavigator } from '@react-navigation/drawer'
-import * as StyleConstants from '@StyleConstants'
 
 // Components
 import Auth from 'Gruvee/components/Auth'
@@ -14,32 +13,7 @@ import SongList from 'Gruvee/components/SongList'
 import MembersSideMenu from 'Gruvee/components/MembersSideMenu'
 import ShowMembersAction from 'Gruvee/components/common/ShowMembersAction'
 
-// Navigation IDs
-export const STACK_ID = 'navigation.gruvee.stack.id'
-
-export const ROOT_NAV_ID = 'navigation.gruvee.app.id'
-export const ROOT_NAV_NAME = 'navigation.gruvee.app'
-
-export const AUTH_NAV_ID = 'navigation.gruvee.auth.id'
-const AUTH_NAV_NAME = 'Auth'
-
-export const PLAYLIST_NAV_ID = 'navigation.gruvee.playlist.id'
-const PLAYLIST_NAV_NAME = 'Playlists'
-
-export const SONG_LIST_NAV_ID = 'navigation.gruvee.songList.id'
-export const SONG_LIST_NAV_NAME = 'Songs'
-
-export const COMMENTS_LIST_NAV_ID = 'navigation.gruvee.commentsList.id'
-export const COMMENTS_LIST_NAV_NAME = 'navigation.gruvee.commentsList'
-
-export const TOP_BAR_MEMBERS_ACTION_ID = 'navigation.gruvee.showMembersAction.id'
-export const TOP_BAR_MEMBERS_ACTION_NAME = 'navigation.gruvee.showMembersAction'
-
-export const SIDEMENU_ALL_MEMBERS_ID = 'navigation.gruvee.sideMenuAllMembers.id'
-export const SIDEMENU_ALL_MEMBERS_NAME = 'Members'
-
-export const USERNAME_INPUT_VIEW_ID = 'navigation.gruvee.usernameInputView.id'
-export const USERNAME_INPUT_VIEW_NAME = 'navigation.gruvee.usernameInputView'
+import { AUTH_NAV_NAME, PLAYLIST_NAV_NAME, SONG_LIST_NAV_NAME } from './constants'
 
 // Stack Navigators
 const Stack = createNativeStackNavigator()
@@ -90,11 +64,3 @@ export const SIGNED_IN_NAVIGATOR = signOutButton => (
         />
     </Stack.Navigator>
 )
-
-// Themes
-export const BASE_THEME = {
-    dark: true,
-    colors: {
-        background: StyleConstants.BASE_BACKGROUND_COLOR,
-    },
-}
