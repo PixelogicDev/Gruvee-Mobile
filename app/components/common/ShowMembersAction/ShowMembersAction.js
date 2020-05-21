@@ -1,12 +1,13 @@
 import React from 'react'
 import { Image, TouchableOpacity } from 'react-native'
+import { DrawerActions } from '@react-navigation/native'
 import styles from './ShowMembersAction.style'
 
 const membersIcon = require('Gruvee/assets/icons/members/members_icon.png')
 
-const ShowMembersAction = ({ showMembersAction }) => {
+const ShowMembersAction = ({ navigation }) => {
     return (
-        <TouchableOpacity onPress={showMembersAction}>
+        <TouchableOpacity onPress={toggleDrawer(navigation)}>
             <Image
                 accessibilityRole="image"
                 accessibilityLabel="All members icon"
@@ -15,6 +16,11 @@ const ShowMembersAction = ({ showMembersAction }) => {
             />
         </TouchableOpacity>
     )
+}
+
+// Actions
+const toggleDrawer = navigation => () => {
+    navigation.dispatch(DrawerActions.toggleDrawer())
 }
 
 export default ShowMembersAction
