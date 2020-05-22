@@ -51,7 +51,7 @@ const SongItemCommentBar = ({ songCommentCount, songData }) => {
 
 // Actions
 const navigateToCommentsList = (navigation, songData) => () => {
-    navigation.push(COMMENTS_LIST_NAV_NAME, { songId: songData.id })
+    navigation.push(COMMENTS_LIST_NAV_NAME, { songId: songData.id, songName: songData.name })
 }
 
 const mapStateToSongCommentsCount = (state, songId) => {

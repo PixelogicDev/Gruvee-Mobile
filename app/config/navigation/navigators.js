@@ -52,6 +52,7 @@ export const SIGNED_IN_NAVIGATOR = signOutButton => (
             headerStyle: { backgroundColor: '#1D1D1D' },
             headerTitleStyle: { color: 'white' },
             headerTranslucent: true,
+            headerTintColor: 'white',
         }}
     >
         <Stack.Screen
@@ -64,10 +65,18 @@ export const SIGNED_IN_NAVIGATOR = signOutButton => (
         <Stack.Screen
             name={SONG_LIST_NAV_NAME}
             component={MEMBERS_LIST_DRAWER_NAVIGATOR}
-            options={({ navigation }) => ({
+            options={({ navigation, route }) => ({
+                title: route.params.playlistName,
                 headerRight: () => <ShowMembersAction navigation={navigation} />,
             })}
         />
-        <Stack.Screen name={COMMENTS_LIST_NAV_NAME} component={CommentsList} />
+        <Stack.Screen
+            name={COMMENTS_LIST_NAV_NAME}
+            component={CommentsList}
+            // eslint-disable-next-line no-unused-vars
+            options={({ navigation, route }) => ({
+                title: route.params.songName,
+            })}
+        />
     </Stack.Navigator>
 )

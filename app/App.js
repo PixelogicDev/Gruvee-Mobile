@@ -13,7 +13,7 @@
 
 import 'react-native-gesture-handler'
 import React, { useEffect } from 'react'
-import { Button, Linking, Platform } from 'react-native'
+import { Linking, Platform, Text, TouchableOpacity } from 'react-native'
 
 // React Navigation
 import { NavigationContainer } from '@react-navigation/native'
@@ -40,16 +40,14 @@ const DEEP_LINK_IN_PROGRESS_FLAG = '@Deep_Link_In_Progress'
 // Sign Out Button For Playlist View
 const SignOutButton = signOutAction => {
     return (
-        <Button
-            title="Sign Out"
+        <TouchableOpacity
             onPress={() => {
-                // Redux
                 signOutAction()
-
-                // Firebase
                 firebase.auth().signOut()
             }}
-        />
+        >
+            <Text style={{ fontSize: 16, color: 'white' }}>Sign Out</Text>
+        </TouchableOpacity>
     )
 }
 

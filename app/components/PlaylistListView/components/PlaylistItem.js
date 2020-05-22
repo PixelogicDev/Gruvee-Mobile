@@ -87,7 +87,7 @@ const showSongListAction = (
     // Any new members from db? Lets get them now so our members list will be good to go.
     fetchMembers([playlistData])
 
-    navigation.navigate(SONG_LIST_NAV_NAME)
+    navigation.navigate(SONG_LIST_NAV_NAME, { playlistName: playlistData.name })
 }
 
 // Redux Mappers
