@@ -42,6 +42,10 @@
 // -- Pulp Fiction -- //
 // Dragonfleas - "English, motherfucker! Do you speak it?" (03/28/20)
 
+// -- Star Wars: Episode 3 Revenge Of The Sith -- //
+// Scorchius - "Did you ever hear the tragedy of Darth Plagueis The Wise? I thought not. It’s not a story the Jedi would tell you. It’s a Sith legend" (05/08/20)
+// Scorchius - "Darth Plagueis was a Dark Lord of the Sith, so powerful and so wise he could use the Force to influence the midichlorians to create life" (05/13/20)
+
 // -- OTHER MOVIE -- //
 // TheYagich01 - "Famous movie quote!" (03/23/20)
 // fluffypoga - "Do you feel lucky, punk?" (03/31/20)
@@ -53,6 +57,8 @@
 // DR_DinoMight - "An idea is like a virus. Resilient. Highly contagious. & even the smallest seed of an idea can grow. It can grow to define or destroy you. - Inception" (04/28/20)
 // pcopley - "PC Load Letter? What the fuck does that mean?" - Michael Bolton, Office Space (04/29/20)
 // digitaldrummerj - "Mama says, 'Stupid is as stupid does.' Forrest Gump 1994" (05/03/20)
+// AYNSTAYN - "Assumption is the Mother of All Fuck Ups" Under Siege 2 (05/13/20)
+// unrulyhotfixer - "I have come here to chew bubblegum and kick ass. And I am all out of bubblegum." They Live (05/13/20)
 
 // -- SUDOKU -- //
 // OnePocketPimp: |8 _ _ | _ _ _ | _ _ _ |

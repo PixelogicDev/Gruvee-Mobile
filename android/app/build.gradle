@@ -203,11 +203,11 @@ android {
 }
 
 dependencies {
+    implementation project(':react-native-screens')
     implementation project(':react-native-reanimated')
     implementation project(':react-native-gesture-handler')
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation 'com.facebook.react:react-native:+'  // From node_modules
-    implementation project(':react-native-navigation')
     implementation project(path: ":@react-native-firebase_app")
     implementation project(path: ":@react-native-firebase_auth")
     implementation project(':@react-native-firebase_firestore')

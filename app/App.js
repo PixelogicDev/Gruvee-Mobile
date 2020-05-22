@@ -11,11 +11,18 @@
 // dra031cko - "What do i use ?- Alec 2020" (03/10/20)
 // Dragonfleas - "kid im done. i doubt u even have basic knowlege of hacking. i doul boot linux so i can run my scripts u made a big mistake of replying to my comment" (03/26/20)
 
+import 'react-native-gesture-handler'
 import React, { useEffect } from 'react'
-import { Linking, Platform, StatusBar } from 'react-native'
+import { Linking, Platform, Text, TouchableOpacity } from 'react-native'
+
+// React Navigation
+import { NavigationContainer } from '@react-navigation/native'
+import { AUTH_NAVIGATOR, SIGNED_IN_NAVIGATOR } from 'Gruvee/config/navigation/navigators'
+import { BASE_THEME } from 'Gruvee/config/navigation/themes'
 
 // Firebase
 import { firebase } from '@react-native-firebase/auth'
+
 // Redux
 import { SIGN_OUT } from 'Gruvee/redux/actions/ActionsType'
 import { SetInitialUserData, SignInUser } from 'Gruvee/redux/actions/user/UserActions'
@@ -23,15 +30,26 @@ import { connect } from 'react-redux'
 import { UserSignInCompleteSelector } from 'Gruvee/redux/selectors/UserSelector'
 import { HandleSpotifyDeepLink } from 'Gruvee/components/Auth/components/Buttons/actions/SpotifyActions'
 import { HandleAppleDeepLink } from 'Gruvee/components/Auth/components/Buttons/actions/AppleActions'
-
 import AsyncStorage from '@react-native-community/async-storage'
-import Auth from 'Gruvee/components/Auth'
-import PlaylistListView from 'Gruvee/components/PlaylistListView'
 
 // InukApp - "Every day is the day before I start at the gym" (03/09/20)
 // fr3fou - "i helped build this too AYAYA, follow @fr3fou on github uwu, diana cavendish best girl don't @ me" (04/07/20)
 
 const DEEP_LINK_IN_PROGRESS_FLAG = '@Deep_Link_In_Progress'
+
+// Sign Out Button For Playlist View
+const SignOutButton = signOutAction => {
+    return (
+        <TouchableOpacity
+            onPress={() => {
+                signOutAction()
+                firebase.auth().signOut()
+            }}
+        >
+            <Text style={{ fontSize: 16, color: 'white' }}>Sign Out</Text>
+        </TouchableOpacity>
+    )
+}
 
 const App = ({ setInitialUserData, signInUser, signOut, userSignInComplete }) => {
     useEffect(() => {
@@ -88,10 +106,9 @@ const App = ({ setInitialUserData, signInUser, signOut, userSignInComplete }) =>
     }, [])
 
     return (
-        <>
-            <StatusBar barStyle="light-content" />
-            {userSignInComplete ? <PlaylistListView /> : <Auth />}
-        </>
+        <NavigationContainer theme={BASE_THEME}>
+            {userSignInComplete ? SIGNED_IN_NAVIGATOR(SignOutButton(signOut)) : AUTH_NAVIGATOR}
+        </NavigationContainer>
     )
 }
 

@@ -22,8 +22,9 @@ import { AddPlaylist } from 'Gruvee/redux/actions/playlists/PlaylistActions'
 
 import * as StyleConstants from '@StyleConstants'
 
-const screenHeight = Dimensions.get('screen').height
-const navBarHeight = Platform.OS === 'ios' ? 44 : 84
+const windowHeight = Dimensions.get('window').height
+// These hardcoded values suck, but there isn't a solid way I can see to get the proper nav heights
+const screenHeight = Platform.OS === 'ios' ? windowHeight - 94 : windowHeight - 84
 const timeIcon = require('Gruvee/assets/icons/times/times_icon.png')
 
 // Styles
@@ -76,7 +77,7 @@ const AddPlaylistBottomSheet = ({ addPlaylist, currentUser, bottomSheetRef }) =>
     return (
         <BottomSheet
             ref={bottomSheetRef}
-            snapPoints={[screenHeight - navBarHeight, screenHeight / 2 + navBarHeight, 0]}
+            snapPoints={[screenHeight, screenHeight / 2, 0]}
             borderRadius={10}
             initialSnap={2}
             renderContent={() =>
