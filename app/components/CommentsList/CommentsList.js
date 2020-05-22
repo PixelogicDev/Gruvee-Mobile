@@ -1,6 +1,13 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { connect } from 'react-redux'
-import { KeyboardAvoidingView, Platform, SafeAreaView, StyleSheet, View } from 'react-native'
+import {
+    KeyboardAvoidingView,
+    Platform,
+    SafeAreaView,
+    RefreshControl,
+    StyleSheet,
+    View,
+} from 'react-native'
 import { SwipeListView } from 'react-native-swipe-list-view'
 
 // Redux
@@ -32,14 +39,19 @@ const styles = StyleSheet.create({
 const CommentsList = ({
     currentUser,
     currentPlaylistId,
-    songId,
     comments,
     addComment,
     deleteComment,
     fetchComments,
+    route,
 }) => {
     const [isRefreshing, setIsRefreshing] = useState(false)
     const commentsListRef = useRef(null)
+    const { songId } = route.params
+
+    useEffect(() => {
+        fetchComments(songId, currentPlaylistId)
+    }, [])
 
     // Actions
     const renderItem = ({ item }) => (
@@ -62,10 +74,6 @@ const CommentsList = ({
         }
     }
 
-    useEffect(() => {
-        fetchComments(songId, currentPlaylistId)
-    }, [])
-
     return (
         <SafeAreaView style={styles.Container}>
             <KeyboardAvoidingView
@@ -84,13 +92,18 @@ const CommentsList = ({
                     data={comments}
                     keyExtractor={keyExtractor}
                     renderItem={renderItem}
-                    refreshing={isRefreshing}
-                    onRefresh={() => {
-                        setIsRefreshing(true)
-                        fetchComments(songId, currentPlaylistId).finally(() => {
-                            setIsRefreshing(false)
-                        })
-                    }}
+                    refreshControl={
+                        <RefreshControl
+                            tintColor={StyleConstants.REFRESH_INDICATOR_COLOR} // iOS only
+                            refreshing={isRefreshing}
+                            onRefresh={() => {
+                                setIsRefreshing(true)
+                                fetchComments(songId, currentPlaylistId).finally(() => {
+                                    setIsRefreshing(false)
+                                })
+                            }}
+                        />
+                    }
                 />
                 <View style={styles.Separator} />
                 <AddCommentTextInput

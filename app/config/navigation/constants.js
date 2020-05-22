@@ -14,7 +14,7 @@ export const SONG_LIST_NAV_ID = 'navigation.gruvee.songList.id'
 export const SONG_LIST_NAV_NAME = 'Songs'
 
 export const COMMENTS_LIST_NAV_ID = 'navigation.gruvee.commentsList.id'
-export const COMMENTS_LIST_NAV_NAME = 'navigation.gruvee.commentsList'
+export const COMMENTS_LIST_NAV_NAME = 'Comments'
 
 export const TOP_BAR_MEMBERS_ACTION_ID = 'navigation.gruvee.showMembersAction.id'
 export const TOP_BAR_MEMBERS_ACTION_NAME = 'navigation.gruvee.showMembersAction'

@@ -4,7 +4,7 @@ import { createSelector } from 'reselect'
 // eslint-disable-next-line import/prefer-default-export
 export const MapCommentsFromSongSelector = createSelector(
     state => state.PlaylistsDataReducer.currentPlaylistId,
-    (_, props) => props.songId,
+    (_, props) => props.route.params.songId, // We check for route as this is now coming from navigation
     state => state.PlaylistsDataReducer.playlists,
     state => state.CommentsDataReducer.comments,
     (currentPlaylistId, songId, playlists, comments) =>

@@ -10,10 +10,16 @@ import Auth from 'Gruvee/components/Auth'
 import PlaylistListView from 'Gruvee/components/PlaylistListView'
 // W0lfDM: “WolfDM was here” - (05/20/20)
 import SongList from 'Gruvee/components/SongList'
+import CommentsList from 'Gruvee/components/CommentsList'
 import MembersSideMenu from 'Gruvee/components/MembersSideMenu'
 import ShowMembersAction from 'Gruvee/components/common/ShowMembersAction'
 
-import { AUTH_NAV_NAME, PLAYLIST_NAV_NAME, SONG_LIST_NAV_NAME } from './constants'
+import {
+    AUTH_NAV_NAME,
+    COMMENTS_LIST_NAV_NAME,
+    PLAYLIST_NAV_NAME,
+    SONG_LIST_NAV_NAME,
+} from './constants'
 
 // Stack Navigators
 const Stack = createNativeStackNavigator()
@@ -62,5 +68,6 @@ export const SIGNED_IN_NAVIGATOR = signOutButton => (
                 headerRight: () => <ShowMembersAction navigation={navigation} />,
             })}
         />
+        <Stack.Screen name={COMMENTS_LIST_NAV_NAME} component={CommentsList} />
     </Stack.Navigator>
 )
