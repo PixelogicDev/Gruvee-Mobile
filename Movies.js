@@ -59,6 +59,7 @@
 // digitaldrummerj - "Mama says, 'Stupid is as stupid does.' Forrest Gump 1994" (05/03/20)
 // AYNSTAYN - "Assumption is the Mother of All Fuck Ups" Under Siege 2 (05/13/20)
 // unrulyhotfixer - "I have come here to chew bubblegum and kick ass. And I am all out of bubblegum." They Live (05/13/20)
+// unrulyhotfixer - "Your tone is quasi-facetious but you do not realize that Taco Bell was the only restaurant to survive the franchise wars. Now all restaurants are Taco Bell." - Demolition Man (05/22/20)
 
 // -- SUDOKU -- //
 // OnePocketPimp: |8 _ _ | _ _ _ | _ _ _ |
