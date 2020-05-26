@@ -23,6 +23,7 @@
         "algoliasearch": "^4.1.0",
         "axios": "^0.19.2",
         "buffer": "^5.4.3",
+        "lodash": "^4.17.15",
         "react": "16.8.6",
         "react-instantsearch": "^6.4.0",
         "react-instantsearch-native": "^6.4.0",

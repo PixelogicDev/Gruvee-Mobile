@@ -108,3 +108,15 @@ export const GetUserDocument = async uid => {
 
     return { user, playlists: reducedPlaylists }
 }
+
+export const IsUsernamAvailable = async username => {
+    const db = firestore()
+    const usersRef = db.collection('users')
+
+    // Check for username
+    const querySnapshot = await usersRef.where('username', '==', username).get()
+
+    console.log('QuerySnapshot: ', querySnapshot.docs)
+
+    return !querySnapshot.docs.length
+}

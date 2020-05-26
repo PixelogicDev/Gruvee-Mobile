@@ -13,8 +13,10 @@ import SongList from 'Gruvee/components/SongList'
 import CommentsList from 'Gruvee/components/CommentsList'
 import MembersSideMenu from 'Gruvee/components/MembersSideMenu'
 import ShowMembersAction from 'Gruvee/components/common/ShowMembersAction'
+import AddUsername from 'Gruvee/components/Auth/components/Onboarding/AddUsername'
 
 import {
+    ADD_USERNAME_NAME,
     AUTH_NAV_NAME,
     COMMENTS_LIST_NAV_NAME,
     PLAYLIST_NAV_NAME,
@@ -28,6 +30,11 @@ const Stack = createNativeStackNavigator()
 export const AUTH_NAVIGATOR = (
     <Stack.Navigator>
         <Stack.Screen name={AUTH_NAV_NAME} component={Auth} options={{ headerShown: false }} />
+        <Stack.Screen
+            name={ADD_USERNAME_NAME}
+            component={AddUsername}
+            options={{ headerShown: true }}
+        />
     </Stack.Navigator>
 )
 

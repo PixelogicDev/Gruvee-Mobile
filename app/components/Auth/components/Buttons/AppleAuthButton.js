@@ -1,6 +1,7 @@
 // creativenobu - "The forbidden apple auth" (02/16/20)
 import React from 'react'
 import { firebase } from '@react-native-firebase/auth'
+import { useNavigation } from '@react-navigation/native'
 import appleAuth, {
     AppleAuthRequestOperation,
     AppleAuthRequestScope,
@@ -9,31 +10,44 @@ import appleAuth, {
 import { ApplePlatform } from 'Gruvee/config/socials'
 import SocialPlatform from 'Gruvee/lib/SocialPlatform'
 import { CreateNewUserDocument } from 'Gruvee/firestore/userActions'
+import { ADD_USERNAME_NAME } from 'Gruvee/config/navigation/constants'
 import SocialAuthButton from './SocialAuthButton'
 import { CreateDocumentAndSignIn } from './actions/SharedActions'
 import { InitAppleMusicAuthFlow } from './actions/AppleActions'
 
 const AppleAuthButton = () => {
-    const signInWithAppleAction = async () => {
-        try {
-            if (!appleAuth.isSupported) {
-                // TODO: NEEDS A FALLBACK
-                throw new Error('Device is not on iOS 13 or higher.')
-            }
+    const navigation = useNavigation()
 
-            const appleAuthRequestResponse = await appleAuth.performRequest({
-                requestedOperation: AppleAuthRequestOperation.LOGIN,
-                requestedScopes: [AppleAuthRequestScope.EMAIL],
-            })
+    return (
+        <SocialAuthButton
+            platform={ApplePlatform}
+            platformSignInAction={signInWithAppleAction(navigation)}
+        />
+    )
+}
 
-            const { email, nonce, identityToken, user } = appleAuthRequestResponse
-            if (!identityToken) {
-                throw new Error('Apple Auth Sign in failed - no identity token returned')
-            }
+// Actions
+const signInWithAppleAction = navigation => async () => {
+    navigation.push(ADD_USERNAME_NAME)
+    try {
+        if (!appleAuth.isSupported) {
+            // TODO: NEEDS A FALLBACK
+            throw new Error('Device is not on iOS 13 or higher.')
+        }
 
-            const appleCredential = firebase.auth.AppleAuthProvider.credential(identityToken, nonce)
-            // Create new platform Object
-            /* const applePlatform = new SocialPlatform(
+        const appleAuthRequestResponse = await appleAuth.performRequest({
+            requestedOperation: AppleAuthRequestOperation.LOGIN,
+            requestedScopes: [AppleAuthRequestScope.EMAIL],
+        })
+
+        const { email, nonce, identityToken, user } = appleAuthRequestResponse
+        if (!identityToken) {
+            throw new Error('Apple Auth Sign in failed - no identity token returned')
+        }
+
+        const appleCredential = firebase.auth.AppleAuthProvider.credential(identityToken, nonce)
+        // Create new platform Object
+        /* const applePlatform = new SocialPlatform(
                 'apple',
                 user,
                 null,
@@ -45,19 +59,15 @@ const AppleAuthButton = () => {
                 false
             ) */
 
-            // At this point navigate to choose username view
+        // At this point navigate to choose username view
+        navigation.push(ADD_USERNAME_NAME)
 
-            // Once we get sign in information, we should get MusicKit keys/token
-            // CreateDocumentAndSignIn(applePlatform, appleCredential)
-            // InitAppleMusicAuthFlow()
-        } catch (error) {
-            console.warn(error)
-        }
+        // Once we get sign in information, we should get MusicKit keys/token
+        // CreateDocumentAndSignIn(applePlatform, appleCredential)
+        // InitAppleMusicAuthFlow()
+    } catch (error) {
+        console.warn(error)
     }
-
-    return (
-        <SocialAuthButton platform={ApplePlatform} platformSignInAction={signInWithAppleAction} />
-    )
 }
 
 export default AppleAuthButton
