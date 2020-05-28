@@ -4,6 +4,10 @@ import { Dimensions } from 'react-native'
 // Background Color
 export const BASE_BACKGROUND_COLOR = '#2E282A'
 export const BASE_MODAL_BACKGROUND_COLOR = '#1D1D1D'
+export const BASE_BUTTON_BACKGROUND_DARK_COLOR = '#5C5C5C'
+
+// Alphas
+export const ALPHA_40 = '66'
 
 // Border Radius
 export const BASE_BORDER_RADIUS = 11

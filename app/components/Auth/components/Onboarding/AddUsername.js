@@ -1,17 +1,54 @@
+/* eslint-disable camelcase */
 // nfsdarkdevv - "MAPPLES IS A SUPERIOR ♥" (05/26/20)
 // 404_mr_robot - "WATCH MR. ROBOT" (05/26/20)
-import React, { useEffect, useState } from 'react'
-import { debounce } from 'lodash'
-import { SafeAreaView, StyleSheet, Text, TextInput, View } from 'react-native'
-import { BASE_FONT_COLOR, HEADLINE_SIZE_iOS, LARGE_TITLE_SIZE_iOS } from '@StyleConstants'
+import React, { useState } from 'react'
+import useDebounce from 'react-use/lib/useDebounce'
+import { SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import {
+    ALPHA_40,
+    BASE_BUTTON_BACKGROUND_DARK_COLOR,
+    BASE_FONT_COLOR,
+    BUTTON_TEXT_SIZE_iOS,
+    HEADLINE_SIZE_iOS,
+    LARGE_TITLE_SIZE_iOS,
+} from '@StyleConstants'
 import { IsUsernamAvailable } from 'Gruvee/firestore/userActions'
 
 import ValidUsername from './components/ValidUsername'
 
 // Styles
 const styles = StyleSheet.create({
+    ButtonContainer: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        paddingTop: 150,
+    },
+    ButtonText: {
+        fontSize: BUTTON_TEXT_SIZE_iOS,
+        textAlign: 'center',
+    },
+    ButtonTextDisabled: {
+        color: '#9A9A9A',
+    },
+    ButtonTextEnabled: {
+        color: 'white',
+    },
     Container: {
         marginHorizontal: 20,
+    },
+    GetStartedButton: {
+        minHeight: 44,
+        width: '50%',
+        justifyContent: 'center',
+        backgroundColor: BASE_BUTTON_BACKGROUND_DARK_COLOR + ALPHA_40,
+        borderWidth: 1,
+        borderRadius: 5,
+    },
+    GetStartedButtonEnabled: {
+        borderColor: '#C3EF87',
+    },
+    GetStartedDisabled: {
+        borderColor: '#FEAF68',
     },
     Header: {
         color: BASE_FONT_COLOR,
@@ -38,25 +75,26 @@ const styles = StyleSheet.create({
         fontSize: 12,
         paddingLeft: 5,
     },
+    ValidUsernameContainer: {
+        paddingTop: 5,
+    },
 })
 
 const AddUsername = ({ user }) => {
     const [username, setUsername] = useState('')
     const [usernameAvailable, setUsernameAvailable] = useState(null)
+    const [isTyping, setIsTyping] = useState(false)
 
-    useEffect(() => {
-        console.log(username)
-        if (username.length) {
-            ;(async () => {
-                // YaBoiApple
-                //
-                const isAvailable = await isUsernameAvailable(username)
-                setUsernameAvailable(isAvailable)
-            })()
-        } else {
-            setUsernameAvailable(null)
-        }
-    }, [username])
+    // Way to add username that is being searched for
+    const [, cancel] = useDebounce(
+        async () => {
+            const result = await IsUsernamAvailable(username)
+            setUsernameAvailable(result)
+            setIsTyping(false)
+        },
+        450,
+        [username]
+    )
 
     return (
         <SafeAreaView style={styles.Container}>
@@ -68,7 +106,8 @@ const AddUsername = ({ user }) => {
             <View style={styles.InputContainer}>
                 <TextInput
                     // clearButtonMode="always"
-                    onChangeText={setUsername}
+                    onKeyPress={() => setIsTyping(true)}
+                    onChangeText={value => setUsername(value.replace(/\s/g, ''))}
                     placeholder="Enter username"
                     placeholderTextColor={BASE_FONT_COLOR}
                     style={styles.Input}
@@ -76,18 +115,40 @@ const AddUsername = ({ user }) => {
                 />
             </View>
             <ValidUsername
-                containerStyle={{ paddingTop: 5 }}
+                containerStyle={styles.ValidUsernameContainer}
+                isTyping={isTyping}
                 username={username}
                 usernameAvailable={usernameAvailable}
             />
+            <View style={styles.ButtonContainer}>
+                <TouchableOpacity
+                    style={mergeGetButtonStyles(usernameAvailable)}
+                    onPress={getStartedAction(cancel)}
+                    disabled={!usernameAvailable}
+                >
+                    <Text style={mergeGetButtonTextStyles(usernameAvailable)}>
+                        Let's Get Grüvee
+                    </Text>
+                </TouchableOpacity>
+            </View>
         </SafeAreaView>
     )
 }
 
-// Actions
-const isUsernameAvailable = debounce(username => {
-    console.log(`Checking DB for ${username}`)
-    return IsUsernamAvailable(username)
-}, 400)
+const mergeGetButtonStyles = usernameIsAvaiable => {
+    const mergeStyle = usernameIsAvaiable
+        ? styles.GetStartedButtonEnabled
+        : styles.GetStartedDisabled
+    return { ...styles.GetStartedButton, ...mergeStyle }
+}
+
+const mergeGetButtonTextStyles = usernameIsAvaiable => {
+    const mergeStyle = usernameIsAvaiable ? styles.ButtonTextEnabled : styles.ButtonTextDisabled
+    return { ...styles.ButtonText, ...mergeStyle }
+}
+
+const getStartedAction = cancelDebounce => () => {
+    cancelDebounce()
+}
 
 export default AddUsername

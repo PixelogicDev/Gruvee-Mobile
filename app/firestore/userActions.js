@@ -116,7 +116,5 @@ export const IsUsernamAvailable = async username => {
     // Check for username
     const querySnapshot = await usersRef.where('username', '==', username).get()
 
-    console.log('QuerySnapshot: ', querySnapshot.docs)
-
     return !querySnapshot.docs.length
 }
