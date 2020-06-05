@@ -6,7 +6,7 @@ const TagInputItem = ({ isHighlighted, user }) => {
     return (
         <View style={[Styles.Container, isHighlighted ? Styles.Highlighted : {}]}>
             <Text key={user.objectID} style={Styles.Item}>
-                {user.username}
+                {user.displayName}
             </Text>
         </View>
     )

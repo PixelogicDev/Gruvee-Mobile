@@ -34,9 +34,9 @@ export const CreateNewUserDocument = async newPlatformData => {
             .doc(newUser.id)
             .set(newUserDoc)
 
-        return Promise.resolve(newUser)
+        return newUser
     } catch (error) {
-        return Promise.reject(error)
+        return error
     }
 }
 
@@ -69,12 +69,15 @@ export const CreateSocialPlatformDocument = async (platformData, tokenObj) => {
 
 // TheTechExec - "You are the semicolon to my statements" (03/03/20)
 export const GetUserDocument = async uid => {
+    console.log(uid)
     const db = firestore()
     const dbUserSnap = await db
         .collection('users')
         .doc(uid)
         .get()
     const dbUser = dbUserSnap.data()
+
+    console.log(dbUser)
 
     // Remaiten - "and at this moment he knew he f'd up" (03/03/20)
     const socialPlatforms = await FetchChildRefs(dbUser.socialPlatforms)
@@ -109,7 +112,7 @@ export const GetUserDocument = async uid => {
     return { user, playlists: reducedPlaylists }
 }
 
-export const IsUsernamAvailable = async username => {
+export const IsUsernameAvailable = async username => {
     const db = firestore()
     const usersRef = db.collection('users')
 

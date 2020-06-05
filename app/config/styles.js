@@ -37,6 +37,10 @@ export const BUTTON_TEXT_SIZE_iOS = 17
 export const CARD_ITEM_TITLE_SIZE_iOS = 20
 export const CARD_ITEM_DETAIL_SIZE_iOS = 11
 
+// Button Size Base
+export const BASE_BUTTON_HEIGHT = 44
+export const BASE_BUTTON_SPACING = 10
+
 // Add Playlist Button Size
 export const ADD_BUTTON_SIZE = 60
 export const ADD_BUTTON_COMMENT_SIZE = 40

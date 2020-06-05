@@ -1,46 +1,34 @@
-import firestore from '@react-native-firebase/firestore'
 import { firebase } from '@react-native-firebase/auth'
 import { CreateUser, CreateSocialPlatform } from 'Gruvee/service/common/endpoints'
 
 // For Auth methods that are not custom, go ahead and create user document and then sign in
+// Pass in the username as we will be coming from that view
 // eslint-disable-next-line import/prefer-default-export
-export const CreateDocumentAndSignIn = async (platform, credential) => {
-    // Sign in
-    const signInCreds = await firebase.auth().signInWithCredential(credential)
-    console.log(signInCreds)
-
+export const CreateDocumentAndSignIn = async (username, credential, platform) => {
     // Call create platform function
     const createSocialPlatformResp = await CreateSocialPlatform(platform)
     if (createSocialPlatformResp.status !== 200) {
-        console.log('Social Platform was not created')
-        return
+        throw new Error('Social Platform was not created')
     }
 
-    // Get user socialPlatform document reference
-    const socialPlatformRef = await firestore()
-        .collection('social_platforms')
-        .doc(platform.id)
-
-    console.log(socialPlatformRef)
-
     // Create User object
-    const id = signInCreds.user.uid
     const createUserRequest = {
-        id,
+        id: `${platform.platformName}:${platform.id}`,
         email: platform.email,
         socialPlatformPath: `social_platforms/${platform.id}`,
         profileImage: platform.profileImage,
-        username: platform.username,
+        displayName: username,
+        username: username.toLowerCase(),
     }
-
-    console.log(createUserRequest)
 
     // Call service to create user
     const createUserResp = await CreateUser(createUserRequest)
     if (createUserResp.status !== 200) {
-        console.log('User was not created')
-        return
+        throw new Error('User was not created')
     }
+    // DR_DinoMight - "Damn it Android! What have you bust now!" (06/01/20)
+    // Sign in
+    await firebase.auth().signInWithCredential(credential)
 
-    console.log(createUserResp)
+    return createUserResp
 }

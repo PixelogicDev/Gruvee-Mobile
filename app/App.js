@@ -68,7 +68,7 @@ const App = ({ setInitialUserData, signInUser, signOut, userSignInComplete }) =>
                 // Check for providerId else it's a custom provider
                 if (user.providerData.length && user.providerData[0].providerId === 'apple.com') {
                     console.log('Received signIn with Apple')
-                    // await signInUser(user.uid)
+                    await signInUser(`apple:${user.providerData[0].uid}`)
                 } else if (!isInitialAuthMount && user === null) {
                     signOut()
                 } else {
@@ -128,12 +128,6 @@ const handleOpenUrl = setInitialUserData => async event => {
 
             // Create social platform
             await HandleAppleDeepLink(event)
-
-            // TODO: Prompt add username UI
-
-            // TODO: Create firebase user
-
-            // TODO: Sign in
         }
         // After auth, we should always set initial user data and sign via firebase
         setInitialUserData(newUserObj.user)
@@ -153,7 +147,7 @@ const mapStateToProps = state => {
     }
 }
 const mapDispatchToProps = dispatch => ({
-    setInitialUserData: (user, jwt) => dispatch(SetInitialUserData(user, jwt)),
+    setInitialUserData: user => dispatch(SetInitialUserData(user)),
     signInUser: uid => dispatch(SignInUser(uid)),
     signOut: () => dispatch({ type: SIGN_OUT }),
 })

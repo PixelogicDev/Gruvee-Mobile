@@ -5,15 +5,11 @@ import { useNavigation } from '@react-navigation/native'
 import appleAuth, {
     AppleAuthRequestOperation,
     AppleAuthRequestScope,
-    AppleAuthCredentialState,
 } from '@invertase/react-native-apple-authentication'
 import { ApplePlatform } from 'Gruvee/config/socials'
 import SocialPlatform from 'Gruvee/lib/SocialPlatform'
-import { CreateNewUserDocument } from 'Gruvee/firestore/userActions'
 import { ADD_USERNAME_NAME } from 'Gruvee/config/navigation/constants'
 import SocialAuthButton from './SocialAuthButton'
-import { CreateDocumentAndSignIn } from './actions/SharedActions'
-import { InitAppleMusicAuthFlow } from './actions/AppleActions'
 
 const AppleAuthButton = () => {
     const navigation = useNavigation()
@@ -28,7 +24,6 @@ const AppleAuthButton = () => {
 
 // Actions
 const signInWithAppleAction = navigation => async () => {
-    navigation.push(ADD_USERNAME_NAME)
     try {
         if (!appleAuth.isSupported) {
             // TODO: NEEDS A FALLBACK
@@ -47,22 +42,21 @@ const signInWithAppleAction = navigation => async () => {
 
         const appleCredential = firebase.auth.AppleAuthProvider.credential(identityToken, nonce)
         // Create new platform Object
-        /* const applePlatform = new SocialPlatform(
-                'apple',
-                user,
-                null,
-                null,
-                email,
-                null,
-                null,
-                true,
-                false
-            ) */
+        const applePlatform = new SocialPlatform(
+            'apple',
+            user, // This is a string id
+            null,
+            null,
+            email,
+            null,
+            null,
+            true,
+            false
+        )
 
         // At this point navigate to choose username view
-        navigation.push(ADD_USERNAME_NAME)
+        navigation.push(ADD_USERNAME_NAME, { applePlatform, appleCredential })
 
-        // Once we get sign in information, we should get MusicKit keys/token
         // CreateDocumentAndSignIn(applePlatform, appleCredential)
         // InitAppleMusicAuthFlow()
     } catch (error) {

@@ -12,7 +12,8 @@ import {
     HEADLINE_SIZE_iOS,
     LARGE_TITLE_SIZE_iOS,
 } from '@StyleConstants'
-import { IsUsernamAvailable } from 'Gruvee/firestore/userActions'
+import { IsUsernameAvailable } from 'Gruvee/firestore/userActions'
+import { CreateDocumentAndSignIn } from 'Gruvee/components/Auth/components/Buttons/actions/SharedActions'
 
 import ValidUsername from './components/ValidUsername'
 
@@ -80,15 +81,19 @@ const styles = StyleSheet.create({
     },
 })
 
-const AddUsername = ({ user }) => {
+const AddUsername = ({ navigation, route }) => {
     const [username, setUsername] = useState('')
     const [usernameAvailable, setUsernameAvailable] = useState(null)
     const [isTyping, setIsTyping] = useState(false)
 
+    // Route Params
+    const { appleCredential, applePlatform } = route.params
+
     // Way to add username that is being searched for
     const [, cancel] = useDebounce(
         async () => {
-            const result = await IsUsernamAvailable(username)
+            // toLower username value to check for proper username in DB
+            const result = await IsUsernameAvailable(username.toLowerCase())
             setUsernameAvailable(result)
             setIsTyping(false)
         },
@@ -123,11 +128,17 @@ const AddUsername = ({ user }) => {
             <View style={styles.ButtonContainer}>
                 <TouchableOpacity
                     style={mergeGetButtonStyles(usernameAvailable)}
-                    onPress={getStartedAction(cancel)}
+                    onPress={getStartedAction(
+                        username,
+                        appleCredential,
+                        applePlatform,
+                        navigation,
+                        cancel
+                    )}
                     disabled={!usernameAvailable}
                 >
                     <Text style={mergeGetButtonTextStyles(usernameAvailable)}>
-                        Let's Get Grüvee
+                        {"Let's"} Get Grüvee
                     </Text>
                 </TouchableOpacity>
             </View>
@@ -147,8 +158,21 @@ const mergeGetButtonTextStyles = usernameIsAvaiable => {
     return { ...styles.ButtonText, ...mergeStyle }
 }
 
-const getStartedAction = cancelDebounce => () => {
+const getStartedAction = (
+    username,
+    appleCreds,
+    platform,
+    navigation,
+    cancelDebounce
+) => async () => {
     cancelDebounce()
+
+    try {
+        const userDoc = await CreateDocumentAndSignIn(username, appleCreds, platform)
+        console.log(userDoc)
+    } catch (error) {
+        console.log(error)
+    }
 }
 
 export default AddUsername

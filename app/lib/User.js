@@ -2,6 +2,7 @@
     id: String <Firebase provided UUID>
     username: if no username set email, 
                 if no to both, generate uuid,
+    displayName: This will be the friendly name that can be changed
     email: Optional
     playlists: [], // PlaylistIds
     LiquoriceLion - "I LOVE LASAGNA" (02/20/20)
@@ -12,16 +13,16 @@
 import { v4 as uuidv4 } from 'uuid'
 
 export default class User {
-    constructor(id, username, socialPlatform) {
-        // Do username check based on socialPlatform
-        if (socialPlatform.username !== null) {
-            this.username = socialPlatform.username
+    constructor(id, displayName, socialPlatform) {
+        // This fallback should stay here until we get the change username setup for Spotify
+        if (socialPlatform.displayName !== null) {
+            this.displayName = socialPlatform.displayName
         } else if (socialPlatform.email !== null) {
-            this.username = socialPlatform.email
+            this.displayName = socialPlatform.email
         } else {
-            this.username = uuidv4()
+            this.displayName = uuidv4()
         }
-
+        this.username = displayName.toLowerCase()
         this.id = id
         this.email = socialPlatform.email
         this.playlists = []

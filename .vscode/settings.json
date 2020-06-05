@@ -45,5 +45,6 @@
                 }
             }
         }
-    }
+    },
+    "errorLens.enabledDiagnosticLevels": ["error", "info", "hint"]
 }
