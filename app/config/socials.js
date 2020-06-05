@@ -14,7 +14,7 @@ export const ApplePlatform = {
 
 export const SpotifyPlatform = {
     id: 'spotify',
-    color: { primary: '#648F01', secondary: '#FFFFFF' },
+    color: { primary: '#1DB954', secondary: '#FFFFFF' },
     size: { width: 25, height: 25 },
     friendlyName: 'Spotify',
     glyphPath: spotifyIconAsset,

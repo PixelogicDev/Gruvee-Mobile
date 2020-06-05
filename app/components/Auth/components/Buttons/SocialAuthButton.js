@@ -56,7 +56,6 @@ const styles = StyleSheet.create({
         color: platform.color.secondary,
         fontWeight: StyleConstants.SEMIBOLD_WEIGHT,
         fontSize: StyleConstants.BUTTON_TEXT_SIZE_iOS,
-        textAlign: 'center',
         alignSelf: 'center',
         flexGrow: 1,
     }),
@@ -66,6 +65,8 @@ const styles = StyleSheet.create({
         width: 40,
         height: 44,
         borderRadius: StyleConstants.BASE_BORDER_RADIUS,
+        paddingLeft: 5,
+        marginRight: 25,
     },
     ButtonIcon: platform => ({
         width: platform.size.width,
