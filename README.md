@@ -20,76 +20,42 @@
   <span> · </span>
   <a href="#running-grüvee-locally">Running Grüvee Locally</a>
   <span> · </span>
-  <a href="CONTRIBUTING.md#-how-to-contribute">How to Contribute</a>
+  <a href="README-Support/CONTRIBUTING.md#how-to-contribute">How to Contribute</a>
   <span> · </span>
-  <a href="CONTRIBUTING.md#current-contributors">Current Contributors</a>
+  <a href="README-Support/CONTRIBUTING.md#current-contributors">Current Contributors</a>
 
 </h3>
 
 Grüvee is an open source social, collabortive playlist made by the [PixelogicDev Twitch Community](https://twitch.tv/pixelogicdev). This project was entirely made live, on Twitch while receiving help from chat and contributing to Pull Requests here!
 
-If you are interested in becoming a member of the team check out the **[PixelogicDev Twitch](https://twitch.tv/pixelogicdev)**, the **[PixelogicDev Discord](https://discord.gg/ubgX6T8)** and **[contribute](CONTRIBUTING.md)** to this awesome project!
+If you are interested in becoming a member of the team check out the **[PixelogicDev Twitch](https://twitch.tv/pixelogicdev)**, the **[PixelogicDev Discord](https://discord.gg/8NFtvp5)** and **[contribute](README-Support/CONTRIBUTING.md)** to this awesome project!
 
-# MVP Checklist & Timeline For Beta
+# Release Checklist
 
-### Checklist
+This living list of items is something that will constantly be updated as we develop through Grüvee.
 
-#### Authentication
+-   [x] Releae Alpha to community members (iOS/Android)
 
--   [x] Authenicate with Spotify (Phase 1)
--   [ ] Authenticate with Apple Music (Phase 2)
--   [ ] Authenticate with Youtube Music (Phase 3)
+    -   Login with Spotify
+    -   Add Playlist/Songs/Comments/Members
+    -   Delete Playlist/Songs/Comments/Members
 
-#### Playlist Actions
+-   [ ] Release Beta to community members (iOS/Android)
 
--   [x] Create a playlist (Phase 1)
--   [x] Delete a playlist (Phase 1)
--   [x] Add members to a playlist (\*Only able add members when adding a playlist) (Phase 1)
--   [x] Create playlist on specific music provider (Phase 1)
--   [ ] Add/Remove members from a playlist (Phase 2)
+    -   Alpha Work
+    -   Login with Apple Music
+    -   Login with Youtube Music
+    -   Push notification support
+    -   Rename playlists
+    -   Delete members from playlists
+    -   Add members after playlist is made
+    -   Realtime loading
+    -   Cross streaming platform support
 
-#### Song Actions
-
--   [x] Add a song (Phase 1)
--   [x] Remove a song (Phase 1)
--   [ ] Add song on specific music provider (Phase 1 & 2 & 3)
--   [ ] Convert uploaded song link to all supported platforms (Phase 1(COMPLETE) & 2 & 3)
-
-#### Comment Actions
-
--   [x] Add a comment (Phase 1)
--   [x] Remove a comment (Phase 1)
-
-#### Feedback Hub (We can probably utilize Firebase even more)
-
--   [ ] Analytics/Error Logging (Phase 2)
-
-### Notifications
-
--   [ ] Add support for notifications when added to a playlist (Phase 2)
--   [ ] Add support for push notifications when new song is added to a playlist you are a part of (Phase 2)
-
-### Users Portal
-
--   [ ] Create a user page that allows for some basic settings such as: Login/Logout, setting perferred provider, authenticating with other services, etc. (Phase 3)
-
-### Timeline
-
--   [ ] Release Grüvee Beta, Phase 1: Sunday, April 19th 2020 by EOD for iOS and Android
--   [ ] Release Grüvee Beta, Phase 2: Sunday, May 3rd 2020 by EOD for iOS and Android
--   [ ] Release Grüvee Beta, Phase 3: Sunday, May 17th 2020 by EOD for iOS and Android
-
-### Phase Details
-
-The idea of phasing is to allow for an ease of people coming into the app and using it. This will help us fix and major issues off the bat for the next batch of beta users and allows us to put more time into makeing each phase top tier.
-
-```
-Phase #1 - Spotify Phase
-Phase #2 - Apple Music Phase
-Phase #3 - Youtube Music Phase
-```
-
----
+-   [ ] Release Grüvee v1.0 to all (iOS/Android)
+    -   Alpha + Beta Work
+    -   Show when a member of a list has listened to your song
+    -   Add Profile Support
 
 # Getting Started
 
@@ -125,15 +91,13 @@ In order to develop for Grüvee you are going to need to have a few things insta
     - Android Build Tools 28.0.3 (Installable from Studio SDK Manager)
     - Android 9 SDK (Installable from Studio SDK Manager)
 
-## TODO - Add setup for integrating gruveebackend repo
+## Things Left To Document
 
-## TODO - Add setup for running Android emulator
-
--   `emulator -avd Pixel_2_API_29`
-
-## TODO - Add APK build process
-
--   `./gradlew app:assembleRelease`
+-   Add setup for integrating gruveebackend repo
+-   Add setup for running Android emulator
+-   Android startup `emulator -avd Pixel_2_API_29`
+-   Add APK build process
+-   Add Assembly process for APK `./gradlew app:assembleRelease`
 
 # Running Grüvee Locally
 
@@ -143,36 +107,50 @@ Now we are at the GOOD stuff. Time to get Grüvee running locally. Make sure you
 
 We have included an [`.example.env`](/.example.env) that has the properties that are needed for the app to run properly. Start here by making a `.env` in the root of the repo
 
-### `Environment`
+### `ENVIRONMENT`
 
+```
 This property does not need to be changed
+```
 
 ### `SPOTIFY_CLIENTID & SPOTIFY_CLIENTSECRET`
 
+```
 If you would like to have Spotify support you will need to setup a Spotify developers app. To do this follow these steps:
 
-1. Head to [https://developer.spotify.com/](`https://developer.spotify.com/`)
+1. Head to https://developer.spotify.com
 2. Log in with your Spotify account
 3. Select 'Create An App'
 4. Fill out the information. You can honestly put anything here
 5. On the next prompt select 'non-commercial'
 6. Agree to the terms and conditions
 7. Grab the Client ID and the Client Secret
+```
 
 ### `SPOTIFY_REDIRECTURI`
 
+```
 For Spotify auth you will need to add a redirect URI. This is currently set to what we currently use in Grüvee. In your newly created Spotify Dev App, head to the 'Edit Settings' section and add `gruvee://spotify_auth` to the Redirect URIs section.
+```
 
 ### `FIREBASE_DEV_URI`
 
+```
 In order to get the app running you will need to create a Firebase project and set the Dev URI here. Use the following steps:
 
-1. Head to [https://console.firebase.google.com/](https://console.firebase.google.com/)
-2. Select `+ Add Project`
+1. Head to https://console.firebase.google.com
+2. Select '+ Add Project'
 3. Continue through the prompts and then select Create Project
 4. Head to 'Authentication' section and then the 'Sign-in method' section
 5. Scroll down to Authorized domains
-6. You will see a list of domains. Grab the one that that looks like this: `{YourProject-Id}.firebaseapp.com`
+6. You will see a list of domains. Grab the one that that looks like this: {YourProject-Id}.firebaseapp.com
+```
+
+### `ALGOLIA_APP_ID && ALGOLIA_APP_KEY && ALGOLIA_DEV_INDEX_NAME`
+
+```
+This is used for searching for users to add to a playlist. If you find yourself needing this UI/UX please head to the Contributing(README-Support/CONTRIBUTING.md) documentation to file an issue or join the PixelogicDev Discord(https://discord.gg/8NFtvp5) to reach out directly to people actively working on this project.
+```
 
 ## NPM Commands
 
@@ -193,74 +171,11 @@ All the NPM commands and dependencies for this project can be located in the [pa
 
 ## 📱 Grüvee iOS Development
 
-If you are running Grüvee for iOS use the following commands.
-
-> **Please note that the npm command utilizes an iPhone 11 Simulator**.
->
-> If you do not have this installed, you will need install it or go into the [package.json file](/package.json) and replace the `ios-start` script with the following:
->
-> ```js
-> "ios-start": "react-native run-ios --simulator=\"{WhateveriPhoneModelYouAreUsing}\",
-> ```
-
-Once thats complete run the following commands:
-
-1. Install cocoapods:
-
-    ```console
-    $ cd ios/ && pod install
-    ```
-
-2. Run iOS emulator
-
-    Ensure you're in the project's root directory
-
-    ```console
-    $ npm run ios-start
-    ```
+See the [Grüvee iOS Development documentation](README-Support/IOS-SETUP.md) for all information regarding getting setup for Grüvee on iOS!
 
 ## 🤖 Grüvee Android Development
 
-> **Please note that you need to start the emulator from Android Studio first before you run any commands.**
->
-> For this just open up Android Studio and build the project, with an emulator set.
->
-> To note: we have been developing on a Pixel 2 emulator and a Pixel 3 physical device, but feel free to use any device you'd like! At the end of the day it will be better for testing anyways.
-
-### Setup keystore for android signing
-
-Where `$GRUVEE_PROJECT` is the location of your root project.
-
-```bash
-$ cd $GRUVEE_PROJECT/android/app
-$ keytool -genkey -v -keystore debug.keystore -alias androiddebugkey -keyalg RSA -keysize 2048 -validity 10000
-```
-
-Add the keystore password (min 6 characters). Fill the information it requires (name, organization, country, etc), finally add the debug key password (you may use the same password as for the keystore, for development purposes).
-
-Next we open the gradle build config (located at `android/app/build.gradle`) and under `signingConfigs` update the `storePassword` and `keyPassword`. (**Note**: if you changed the store filename (`-keystore`) and alias (`-alias`) you will have to update that in the `build.gradle` file).
-
-```gradle
-signingConfigs {
-    debug {
-        storeFile file('debug.keystore')
-        storePassword '<your-keystore-password-here>'
-        keyAlias 'androiddebugkey'
-        keyPassword '<your-keystore-password-here>'
-    }
-}
-```
-
-### Run the dev server
-
-Run `npm run start` FIRST on one terminal and then `npm run android-start` on another one.
-
-```bash
-$ npm run start # On a different terminal
-$ npm run android-start
-```
-
-Congratulations! You should now see a beautiful Grüvee mobile app displayed and ready to go!
+See the [Grüvee Android Development documentation](README-Support/ANDROID-SETUP.md) for all information regarding getting setup for Grüvee on Android!
 
 # 🤘 Contributing changes
 
