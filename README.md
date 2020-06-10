@@ -1,7 +1,7 @@
 <h1 align="center">Grüvee-Mobile</h1>
-<p align="center">
+<h3 align="center">
   <strong>Let's get Grüvee with a new social, collaborative playlist for iPhone and Android</strong>
-</p>
+</h3>
 
 <p align="center">
     <a href="https://discordapp.com/invite/ubgX6T8">
@@ -15,7 +15,7 @@
     </a>
 </p>
 
-<h3 align="center">
+<!-- <h3 align="center">
  <a href="#getting-started">Getting Started</a>
   <span> · </span>
   <a href="#running-grüvee-locally">Running Grüvee Locally</a>
@@ -24,9 +24,32 @@
   <span> · </span>
   <a href="README-Support/CONTRIBUTING.md#current-contributors">Current Contributors</a>
 
-</h3>
+</h3> -->
 
-Grüvee is an open source social, collabortive playlist made by the [PixelogicDev Twitch Community](https://twitch.tv/pixelogicdev). This project was entirely made live, on Twitch while receiving help from chat and contributing to Pull Requests here!
+## 🎸 What is Grüvee?
+
+Grüvee is an open source, social, collabortive playlist made by the [PixelogicDev Twitch Community](https://twitch.tv/pixelogicdev). This project was entirely made live, on Twitch while receiving help from chat and others contributing via Pull Requests!
+
+## 🤔 Why use it?
+
+Grüvee is being created to make sharing music an easier and more personal experience with others. While at the same time, getting around the plethora of music streaming platforms out there. Grüvee does this by addressing the following concerns:
+
+-   `Different Music Services`: Grüvee will give you the opportunity to collaborate on playlists with people that don't share the same music streaming service as you! Behind the scenes, Grüvee will make sure you are all in sync with your favorite platform.
+-   `Discussions`: Talk about what gets your HYPED about certain songs and save that thread with your friends! Grüvee will keep track of your comments on a per song basis.
+-   `Notifications`: Get notified when people in your Grüvee Playlist do something! It's funny how major providers don't even notify you when people add new songs to your collaborative playlists. Grüvee is here to change that.
+-   `Show Off Your Music Taste`: Music is an expression of ourselves. Grüvee is focused around how to you express your love and passion for music in a way that is fun and inspiring.
+
+## 😲 Still not sold?
+
+Words are hard. Enjoy some videos of ourt current progress!
+
+### `Branch: release-1.0` (Progress as of 06.09.2020)
+
+#ComingSoon
+
+#### iOS
+
+#### Android
 
 If you are interested in becoming a member of the team check out the **[PixelogicDev Twitch](https://twitch.tv/pixelogicdev)**, the **[PixelogicDev Discord](https://discord.gg/8NFtvp5)** and **[contribute](README-Support/CONTRIBUTING.md)** to this awesome project!
 
@@ -34,7 +57,7 @@ If you are interested in becoming a member of the team check out the **[Pixelogi
 
 This living list of items is something that will constantly be updated as we develop through Grüvee.
 
--   [x] Releae Alpha to community members (iOS/Android)
+-   [x] Release Alpha to community members (iOS/Android)
 
     -   Login with Spotify
     -   Add Playlist/Songs/Comments/Members
