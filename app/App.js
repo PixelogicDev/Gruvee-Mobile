@@ -123,14 +123,22 @@ const handleOpenUrl = setInitialUserData => async event => {
             // Gets API token object
             // HumansNotFish - "Team Yaya. Gotta have faith nerds."(02/21/20)
             newUserObj = await HandleSpotifyDeepLink(event)
+
+            // After auth, we should always set initial user data and sign via firebase
+            setInitialUserData(newUserObj.user)
         } else if (event.url.includes('apple_auth')) {
             console.log('Starting apple auth deeplink')
 
-            // Create social platform
-            await HandleAppleDeepLink(event)
+            // Dismiss bottomsheet
+
+            // Create playlist and write to user document
+
+            // Get code and write to user document
+
+            // Add newly created playlist to Apple Music Account
+
+            // await HandleAppleDeepLink(event)
         }
-        // After auth, we should always set initial user data and sign via firebase
-        setInitialUserData(newUserObj.user)
         AsyncStorage.setItem('@Deep_Link_In_Progress', 'false')
     } catch (error) {
         // TODO: Handle Error

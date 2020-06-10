@@ -43,43 +43,45 @@ const deletePlaylist = (playlistId, playlists) => {
 // evjand - "SMOrc ME CODE THUNK SMOrc" (02/13/20)
 export const AddPlaylist = newPlaylist => {
     return async (dispatch, getState) => {
-        const {
-            PlaylistsDataReducer: { statePlaylists },
-            UserDataReducer: { user },
-        } = getState()
+        try {
+            const {
+                PlaylistsDataReducer: { statePlaylists },
+                UserDataReducer: { user },
+            } = getState()
 
-        // Write newly created playlist to firestore and then add to state
-        const playlistDocRef = await CreateNewPlaylistDocument(newPlaylist)
-        dispatch(addPlaylist(newPlaylist, statePlaylists))
+            // Write newly created playlist to firestore and then add to state
+            const playlistDocRef = await CreateNewPlaylistDocument(newPlaylist)
+            dispatch(addPlaylist(newPlaylist, statePlaylists))
 
-        // Set db reference and write path to user doc in DB
-        const userPlaylistDocUpdates = newPlaylist.members.map(memberId =>
-            UpdateUserDocumentWithPlaylist(memberId, playlistDocRef)
-        )
+            // Set db reference and write path to user doc in DB
+            const userPlaylistDocUpdates = newPlaylist.members.map(memberId =>
+                UpdateUserDocumentWithPlaylist(memberId, playlistDocRef)
+            )
 
-        // Dragonfleas - "I'm writing this message from inside the tornado, in my whole life I've never known what it was like to fly, in this moment, I'm glad I haven't." (04/22/20)
-        await Promise.all(userPlaylistDocUpdates)
+            // Dragonfleas - "I'm writing this message from inside the tornado, in my whole life I've never known what it was like to fly, in this moment, I'm glad I haven't." (04/22/20)
+            await Promise.all(userPlaylistDocUpdates)
 
-        // await UpdateUserDocumentWithPlaylist(user.id, playlistDocRef)
-        dispatch(AddPlaylistToUser(newPlaylist.id))
+            // await UpdateUserDocumentWithPlaylist(user.id, playlistDocRef)
+            dispatch(AddPlaylistToUser(newPlaylist.id))
 
-        // Get members from playlists and put in state
-        dispatch(FetchMembers([newPlaylist]))
+            // Get members from playlists and put in state
+            dispatch(FetchMembers([newPlaylist]))
 
-        // Call endpoint to create playlist on social platform
-        // If we needed a refreshed token, it will be passed back here
-        CreateSocialPlaylist(user.preferredSocialPlatform, newPlaylist.name)
-            .then(response => {
-                if (response.status !== 204) {
-                    // Call redux action to update userDoc
-                    dispatch(UpdateUserAPIToken(response.data))
-                } else {
-                    console.log('SocialPlatform was not updated.')
-                }
-            })
-            .catch(error => {
-                console.warn('Error trying to create playlist on platform: ', error)
-            })
+            // Call endpoint to create playlist on social platform
+            // If we needed a refreshed token, it will be passed back here
+            const response = await CreateSocialPlaylist(
+                user.preferredSocialPlatform,
+                newPlaylist.name
+            )
+            if (response.status !== 204) {
+                // Call redux action to update userDoc
+                dispatch(UpdateUserAPIToken(response.data))
+            } else {
+                console.log('SocialPlatform was not updated.')
+            }
+        } catch (error) {
+            console.warn(error)
+        }
     }
 }
 

@@ -1,9 +1,11 @@
 // syszen - "note: nokia 3310 - the most indestructible phone ever, this app will be release on it at 2021" (04/03/20)
 import React, { forwardRef, useState } from 'react'
 import {
+    Alert,
     Dimensions,
     Image,
     Keyboard,
+    Linking,
     Platform,
     StyleSheet,
     Text,
@@ -11,10 +13,12 @@ import {
     TouchableOpacity,
     View,
 } from 'react-native'
+import AsyncStorage from '@react-native-community/async-storage'
 import BottomSheet from 'reanimated-bottom-sheet'
 import AlgoliaSearch from 'Gruvee/components/common/AlgoliaSearch'
 import CreateItemActionButton from 'Gruvee/components/common/CreateItemActionButton'
 import Playlist from 'Gruvee/lib/Playlist'
+import { APPLE_ENDPOINTS } from 'Gruvee/service/endpointConstants'
 
 // Redux
 import { connect } from 'react-redux'
@@ -22,6 +26,7 @@ import { AddPlaylist } from 'Gruvee/redux/actions/playlists/PlaylistActions'
 
 import * as StyleConstants from '@StyleConstants'
 
+const PRESENTED_APPLE_MUSIC_PROMPT = '@Presented_Apple_Music_Prompt'
 const windowHeight = Dimensions.get('window').height
 // These hardcoded values suck, but there isn't a solid way I can see to get the proper nav heights
 const screenHeight = Platform.OS === 'ios' ? windowHeight - 94 : windowHeight - 84
@@ -86,7 +91,7 @@ const AddPlaylistBottomSheet = ({ addPlaylist, currentUser, bottomSheetRef }) =>
                     currentUser,
                     setPlaylistNameText,
                     playlistNameText,
-                    runPlaylistAction,
+                    addPlaylistAction,
                     bottomSheetRef,
                     selectedUsers,
                     setSelectedUser
@@ -105,7 +110,8 @@ const generateSheetContent = (
     addPlaylistAction,
     bottomSheetRef,
     selectedUsers,
-    setSelectedUser
+    setSelectedUser,
+    navigation
 ) => (
     <View style={styles.InputContainer}>
         <TouchableOpacity
@@ -172,29 +178,73 @@ const dismissBottomSheet = (bottomSheetRef, setPlaylistNameText, setSelectedUser
     // If keyboard is open, dismiss it
     Keyboard.dismiss()
 }
-const runPlaylistAction = async (
+
+const openAppleAuth = () => {
+    if (Linking.canOpenURL(APPLE_ENDPOINTS.authorizeAppleUser)) {
+        console.log('Opening Apple Music Auth endpoint')
+        Linking.openURL(APPLE_ENDPOINTS.authorizeAppleUser)
+    } else {
+        console.warn(`${APPLE_ENDPOINTS.authorizeAppleUser} is not a valid URI`)
+    }
+}
+
+const presentAppleAuthPrompt = () => {
+    Alert.alert(
+        'Apple Music',
+        'Let Grüvee manage your playlists by conencting your Apple Music account!',
+        [
+            {
+                text: "Let's Go!",
+                onPress: () => openAppleAuth(),
+            },
+            {
+                text: 'Cancel',
+                onPress: () => console.log('Cancel Pressed'),
+                style: 'cancel',
+            },
+        ],
+        { cancelable: true }
+    )
+
+    // Mark that the alert was presented to not show again
+    AsyncStorage.setItem(PRESENTED_APPLE_MUSIC_PROMPT, 'true')
+}
+
+const addPlaylistAction = async (
     addPlaylist,
     currentUser,
     members,
     playlistName,
     setPlaylistNameText,
     bottomSheetRef,
-    setSelectedUser
+    setSelectedUser,
+    navigation
 ) => {
     try {
-        // Create playlist object
-        const playlist = new Playlist(playlistName, members, currentUser)
+        // Check to see if currentUser has Apple as preferredService Provider
+        if (currentUser.preferredSocialPlatform.platformName === 'apple') {
+            // Check to see if we have opted to auth with Apple Music
+            const value = await AsyncStorage.getItem(PRESENTED_APPLE_MUSIC_PROMPT)
 
-        if (!playlistName) {
-            // TODO: Stop this and show some UI to add name
-            console.log('PlaylistNameValue is empty')
-            return
+            // if (value === null || value === 'false') {
+            // We need to present alert
+            presentAppleAuthPrompt(navigation)
+            // }
+        } else {
+            // Create playlist object
+            const playlist = new Playlist(playlistName, members, currentUser)
+
+            if (!playlistName) {
+                // TODO: Stop this and show some UI to add name
+                console.log('PlaylistNameValue is empty')
+                return
+            }
+
+            dismissBottomSheet(bottomSheetRef, setPlaylistNameText, setSelectedUser)
+
+            // Run action to create playlists
+            await addPlaylist(playlist)
         }
-
-        dismissBottomSheet(bottomSheetRef, setPlaylistNameText, setSelectedUser)
-
-        // Run action to create playlists
-        await addPlaylist(playlist)
 
         // TODO: We will probably want to add some sort of loading indicator to our button
     } catch (error) {

@@ -7,6 +7,7 @@ import { createDrawerNavigator } from '@react-navigation/drawer'
 
 // Components
 import Auth from 'Gruvee/components/Auth'
+import AppleMusicAuth from 'Gruvee/components/AppleMusicAuth'
 import PlaylistListView from 'Gruvee/components/PlaylistListView'
 // W0lfDM: “WolfDM was here” - (05/20/20)
 import SongList from 'Gruvee/components/SongList'
@@ -17,6 +18,7 @@ import AddUsername from 'Gruvee/components/Auth/components/Onboarding/AddUsernam
 
 import {
     ADD_USERNAME_NAME,
+    APPLE_MUSIC_AUTH_WEBVIEW_NAME,
     AUTH_NAV_NAME,
     COMMENTS_LIST_NAV_NAME,
     PLAYLIST_NAV_NAME,
@@ -84,6 +86,11 @@ export const SIGNED_IN_NAVIGATOR = signOutButton => (
             options={({ navigation, route }) => ({
                 title: route.params.songName,
             })}
+        />
+        <Stack.Screen
+            name={APPLE_MUSIC_AUTH_WEBVIEW_NAME}
+            component={AppleMusicAuth}
+            options={{ headerLeft: () => null }}
         />
     </Stack.Navigator>
 )

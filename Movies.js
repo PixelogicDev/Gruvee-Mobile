@@ -60,6 +60,10 @@
 // AYNSTAYN - "Assumption is the Mother of All Fuck Ups" Under Siege 2 (05/13/20)
 // unrulyhotfixer - "I have come here to chew bubblegum and kick ass. And I am all out of bubblegum." They Live (05/13/20)
 // unrulyhotfixer - "Your tone is quasi-facetious but you do not realize that Taco Bell was the only restaurant to survive the franchise wars. Now all restaurants are Taco Bell." - Demolition Man (05/22/20)
+// jackconceprio - "F is for friends who do stuff together U is for you and me N is for anywhere and any time at all" (06/09/20)
+// ForTheWyn - "Don't touch that please, your primitive intellect wouldn't understand alloys and compositions and things with...molecular structures" - Evil Dead III: Army Of Darkness (06/09/20)
+// ForTheWyn - "Maybe. Just maybe my boys can protect the book. Yeah, and maybe I'm a Chinese jet pilot." - Evil Dead III: Army Of Darkness (06/09/20)
+// DR_DinoMight - "Ted, while I agree that, in time, our band will be most triumphant. The truth is, Wyld Stallyns will never be a super band until we have Eddie Van Halen on guitar." - Bill and Ted’s Excellent Adventure (06/09/20)
 
 // -- SUDOKU -- //
 // OnePocketPimp: |8 _ _ | _ _ _ | _ _ _ |
