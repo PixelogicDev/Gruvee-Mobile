@@ -79,6 +79,7 @@ const App = ({ setInitialUserData, signInUser, signOut, userSignInComplete }) =>
 
             isInitialAuthMount = false
         })
+        const { currentUser } = firebase.auth()
 
         // Deep Link Handler
         if (Platform.OS === 'android') {
@@ -90,13 +91,13 @@ const App = ({ setInitialUserData, signInUser, signOut, userSignInComplete }) =>
                     // First time running this
                     Linking.getInitialURL().then(url => {
                         if (url !== null) {
-                            handleOpenUrl(setInitialUserData)({ url })
+                            handleOpenUrl(currentUser)
                         }
                     })
                 }
             })
         } else {
-            Linking.addEventListener('url', handleOpenUrl(setInitialUserData))
+            Linking.addEventListener('url', handleOpenUrl(currentUser, setInitialUserData))
         }
 
         return () => {
@@ -113,7 +114,7 @@ const App = ({ setInitialUserData, signInUser, signOut, userSignInComplete }) =>
 }
 
 // Helpers
-const handleOpenUrl = setInitialUserData => async event => {
+const handleOpenUrl = (currentUser, setInitialUserData) => async event => {
     try {
         let newUserObj = {}
         AsyncStorage.setItem('@Deep_Link_In_Progress', 'true')
@@ -129,15 +130,15 @@ const handleOpenUrl = setInitialUserData => async event => {
         } else if (event.url.includes('apple_auth')) {
             console.log('Starting apple auth deeplink')
 
-            // Dismiss bottomsheet
-
-            // Create playlist and write to user document
-
             // Get code and write to user document
+            if (currentUser && currentUser.providerData.length) {
+                const userId = `apple:${currentUser.providerData[0].uid}`
+                await HandleAppleDeepLink(userId, event)
+            } else {
+                console.log(`Probaly an issue: current user is: ${currentUser}`)
+            }
 
             // Add newly created playlist to Apple Music Account
-
-            // await HandleAppleDeepLink(event)
         }
         AsyncStorage.setItem('@Deep_Link_In_Progress', 'false')
     } catch (error) {

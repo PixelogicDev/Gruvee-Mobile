@@ -2,7 +2,6 @@
 // sillyonly - "SOOOO YOU THOUGHT YOU CAN RUN?" (03/02/20)
 // ywnklme - "!!! CHECK OUT SVELTE NATIVE TODAY !!!" (03/03/20)
 import firestore from '@react-native-firebase/firestore'
-import SocialPlatform from 'Gruvee/lib/SocialPlatform'
 import User from 'Gruvee/lib/User'
 import { FetchChildRefs } from './helpers'
 
@@ -37,33 +36,6 @@ export const CreateNewUserDocument = async newPlatformData => {
         return newUser
     } catch (error) {
         return error
-    }
-}
-
-export const CreateSocialPlatformDocument = async (platformData, tokenObj) => {
-    // Create socialPlatform Object
-    const newSocialPlatform = new SocialPlatform(
-        'spotify',
-        platformData.id,
-        platformData.display_name,
-        platformData.images.length ? platformData.images[0] : null,
-        platformData.email,
-        tokenObj.access_token,
-        tokenObj.refresh_token,
-        true, // TODO: Figure approach to this
-        platformData.product === 'premium'
-    )
-
-    // Write to DB
-    try {
-        firestore()
-            .collection('social_platforms')
-            .doc(newSocialPlatform.id)
-            .set(newSocialPlatform)
-
-        return Promise.resolve(newSocialPlatform)
-    } catch (error) {
-        return Promise.reject(error)
     }
 }
 

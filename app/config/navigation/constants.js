@@ -8,7 +8,7 @@ export const AUTH_NAV_ID = 'navigation.gruvee.auth.id'
 export const AUTH_NAV_NAME = 'Auth'
 
 export const ADD_USERNAME = 'navigation.gruvee.addUsername.id'
-export const ADD_USERNAME_NAME = 'AddUsername'
+export const ADD_USERNAME_NAME = 'Choose Username'
 
 export const PLAYLIST_NAV_ID = 'navigation.gruvee.playlist.id'
 export const PLAYLIST_NAV_NAME = 'Playlists'

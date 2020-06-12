@@ -110,8 +110,7 @@ const generateSheetContent = (
     addPlaylistAction,
     bottomSheetRef,
     selectedUsers,
-    setSelectedUser,
-    navigation
+    setSelectedUser
 ) => (
     <View style={styles.InputContainer}>
         <TouchableOpacity
@@ -179,27 +178,29 @@ const dismissBottomSheet = (bottomSheetRef, setPlaylistNameText, setSelectedUser
     Keyboard.dismiss()
 }
 
-const openAppleAuth = () => {
+const openAppleAuth = (bottomSheetRef, setPlaylistNameText, setSelectedUser) => {
     if (Linking.canOpenURL(APPLE_ENDPOINTS.authorizeAppleUser)) {
         console.log('Opening Apple Music Auth endpoint')
         Linking.openURL(APPLE_ENDPOINTS.authorizeAppleUser)
+        dismissBottomSheet(bottomSheetRef, setPlaylistNameText, setSelectedUser)
     } else {
         console.warn(`${APPLE_ENDPOINTS.authorizeAppleUser} is not a valid URI`)
     }
 }
 
-const presentAppleAuthPrompt = () => {
+const presentAppleAuthPrompt = (bottomSheetRef, setPlaylistNameText, setSelectedUser) => {
     Alert.alert(
-        'Apple Music',
-        'Let Grüvee manage your playlists by conencting your Apple Music account!',
+        'Sign in with Apple Music',
+        'Let Grüvee manage your playlists by linking your Apple Music account!',
         [
             {
                 text: "Let's Go!",
-                onPress: () => openAppleAuth(),
+                onPress: () => openAppleAuth(bottomSheetRef, setPlaylistNameText, setSelectedUser),
             },
             {
-                text: 'Cancel',
-                onPress: () => console.log('Cancel Pressed'),
+                text: 'Not Now',
+                onPress: () =>
+                    dismissBottomSheet(bottomSheetRef, setPlaylistNameText, setSelectedUser),
                 style: 'cancel',
             },
         ],
@@ -217,36 +218,36 @@ const addPlaylistAction = async (
     playlistName,
     setPlaylistNameText,
     bottomSheetRef,
-    setSelectedUser,
-    navigation
+    setSelectedUser
 ) => {
     try {
+        if (!playlistName) {
+            // TODO: Stop this and show some UI to add name
+            console.log('PlaylistNameValue is empty')
+            return
+        }
+
+        // Create playlist object
+        const playlist = new Playlist(playlistName, members, currentUser)
+
         // Check to see if currentUser has Apple as preferredService Provider
         if (currentUser.preferredSocialPlatform.platformName === 'apple') {
             // Check to see if we have opted to auth with Apple Music
             const value = await AsyncStorage.getItem(PRESENTED_APPLE_MUSIC_PROMPT)
-
-            // if (value === null || value === 'false') {
-            // We need to present alert
-            presentAppleAuthPrompt(navigation)
-            // }
-        } else {
-            // Create playlist object
-            const playlist = new Playlist(playlistName, members, currentUser)
-
-            if (!playlistName) {
-                // TODO: Stop this and show some UI to add name
-                console.log('PlaylistNameValue is empty')
-                return
+            if (value === null || value === 'false') {
+                // We need to present alert
+                presentAppleAuthPrompt(bottomSheetRef, setPlaylistNameText, setSelectedUser)
+            } else {
+                dismissBottomSheet(bottomSheetRef, setPlaylistNameText, setSelectedUser)
             }
-
+        } else {
+            // If other service, we just dismiss and move on
             dismissBottomSheet(bottomSheetRef, setPlaylistNameText, setSelectedUser)
-
-            // Run action to create playlists
-            await addPlaylist(playlist)
         }
 
         // TODO: We will probably want to add some sort of loading indicator to our button
+        // Run action to create playlists
+        await addPlaylist(playlist)
     } catch (error) {
         console.warn(error)
     }

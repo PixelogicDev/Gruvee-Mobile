@@ -92,10 +92,12 @@ const AddUsername = ({ navigation, route }) => {
     // Way to add username that is being searched for
     const [, cancel] = useDebounce(
         async () => {
-            // toLower username value to check for proper username in DB
-            const result = await IsUsernameAvailable(username.toLowerCase())
-            setUsernameAvailable(result)
-            setIsTyping(false)
+            if (username.length) {
+                // toLower username value to check for proper username in DB
+                const result = await IsUsernameAvailable(username.toLowerCase())
+                setUsernameAvailable(result)
+                setIsTyping(false)
+            }
         },
         450,
         [username]
@@ -127,7 +129,7 @@ const AddUsername = ({ navigation, route }) => {
             />
             <View style={styles.ButtonContainer}>
                 <TouchableOpacity
-                    style={mergeGetButtonStyles(usernameAvailable)}
+                    style={mergeGetButtonStyles(usernameAvailable, isTyping, username)}
                     onPress={getStartedAction(
                         username,
                         appleCredential,
@@ -135,9 +137,9 @@ const AddUsername = ({ navigation, route }) => {
                         navigation,
                         cancel
                     )}
-                    disabled={!usernameAvailable}
+                    disabled={!usernameAvailable || isTyping || !username.length}
                 >
-                    <Text style={mergeGetButtonTextStyles(usernameAvailable)}>
+                    <Text style={mergeGetButtonTextStyles(usernameAvailable, isTyping, username)}>
                         {"Let's"} Get Grüvee
                     </Text>
                 </TouchableOpacity>
@@ -146,15 +148,19 @@ const AddUsername = ({ navigation, route }) => {
     )
 }
 
-const mergeGetButtonStyles = usernameIsAvaiable => {
-    const mergeStyle = usernameIsAvaiable
-        ? styles.GetStartedButtonEnabled
-        : styles.GetStartedDisabled
+const mergeGetButtonStyles = (usernameIsAvaiable, isTyping, username) => {
+    const mergeStyle =
+        !isTyping && username.length && usernameIsAvaiable
+            ? styles.GetStartedButtonEnabled
+            : styles.GetStartedDisabled
     return { ...styles.GetStartedButton, ...mergeStyle }
 }
 
-const mergeGetButtonTextStyles = usernameIsAvaiable => {
-    const mergeStyle = usernameIsAvaiable ? styles.ButtonTextEnabled : styles.ButtonTextDisabled
+const mergeGetButtonTextStyles = (usernameIsAvaiable, isTyping, username) => {
+    const mergeStyle =
+        !isTyping && username.length && usernameIsAvaiable
+            ? styles.ButtonTextEnabled
+            : styles.ButtonTextDisabled
     return { ...styles.ButtonText, ...mergeStyle }
 }
 
