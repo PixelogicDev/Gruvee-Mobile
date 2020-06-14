@@ -47,10 +47,10 @@ const styles = StyleSheet.create({
 const Auth = () => {
     return (
         <View style={styles.Container}>
-            <Text style={styles.SectionTitle}>Welcome to Grüvee Beta!</Text>
+            <Text style={styles.SectionTitle}>Welcome to Grüvee Alpha!</Text>
             <View style={styles.TextContainer}>
                 <Text style={styles.SectionDetail}>
-                    Thanks for taking part in Grüvee Beta for iOS and Android!
+                    Thanks for taking part in Grüvee Alpha for iOS and Android!
                 </Text>
                 <Text style={styles.SectionDetail}>
                     It's pretty simple, to get started all you need to do is press the "Login With
