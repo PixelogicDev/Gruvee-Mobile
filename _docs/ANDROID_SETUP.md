@@ -6,11 +6,11 @@
 >
 > To note: we have been developing on a Pixel 2 emulator and a Pixel 3 physical device, but feel free to use any device you'd like! At the end of the day it will be better for testing anyways.
 
-### Grüvee Backend Setup
+## Grüvee Backend Setup
 
 Before getting started, make sure you [Grüvee Backend](https://github.com/PixelogicDev/Gruvee-Backend) setup! This backend is a serverless approach that utilizes Firebase Functions to run any off client logic. All these functions will help you run certain pieces of logic if needed.
 
-### Setup keystore for android signing
+## Setup keystore for android signing
 
 Where `$GRUVEE_PROJECT` is the location of your root project.
 
@@ -34,7 +34,7 @@ signingConfigs {
 }
 ```
 
-### Run the dev server
+## Run the dev server
 
 Run `npm run start` FIRST on one terminal and then `npm run android-start` on another one.
 
@@ -43,4 +43,4 @@ $ npm run start # On a different terminal
 $ npm run android-start
 ```
 
-Congratulations! You should now see a beautiful Grüvee mobile app on Android displayed and ready to go! If you find a better way to get started developing for iOS or run into any snags, make sure to go checkout [how to contribute](./CONTRIBUTING.md) to help out the project!
+Congratulations! You should now see a beautiful Grüvee mobile app on Android displayed and ready to go! If you find a better way to get started developing for iOS or run into any snags, make sure to go checkout [how to contribute](../CONTRIBUTING.md) to help out the project!
