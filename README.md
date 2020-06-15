@@ -1,6 +1,6 @@
 <h1 align="center">Grüvee</h1>
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-8-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-9-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 <h3 align="center">
   <strong>Let's get Grüvee with a new social, collaborative playlist for iPhone and Android</strong>
@@ -117,6 +117,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
   </tr>
   <tr>
     <td align="center"><a href="https://maxemiliang.me"><img src="https://avatars0.githubusercontent.com/u/7084690?v=4" width="100px;" alt=""/><br /><sub><b>Maxemilian Grönblom</b></sub></a><br /><a href="https://github.com/PixelogicDev/Gruvee-Mobile/commits?author=maxemiliang" title="Code">💻</a></td>
+    <td align="center"><a href="https://dynamicdonkey.github.io/"><img src="https://avatars0.githubusercontent.com/u/34009754?v=4" width="100px;" alt=""/><br /><sub><b>Jared Kozel</b></sub></a><br /><a href="https://github.com/PixelogicDev/Gruvee-Mobile/commits?author=DynamicDonkey" title="Documentation">📖</a></td>
   </tr>
 </table>
 
