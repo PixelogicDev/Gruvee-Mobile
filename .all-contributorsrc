@@ -60,6 +60,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "miugel",
+      "name": "Miguel Nicolas",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/32444146?v=4",
+      "profile": "http://miguelnicolas.dev",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
