@@ -1,4 +1,5 @@
 <h1 align="center">Grüvee</h1>
+
 <h3 align="center">
   <strong>Let's get Grüvee with a new social, collaborative playlist for iPhone and Android</strong>
 </h3>
@@ -12,6 +13,9 @@
     </a>
     <a href="CONTRIBUTING.md#-how-to-contribute">
         <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs welcome!" />
+    </a>
+    <a href="#contributors-">
+        <img src="https://img.shields.io/badge/all_contributors-13-orange.svg?style=square" alt="PRs welcome!" />
     </a>
 </p>
 
@@ -47,7 +51,7 @@ If you are interested in becoming a member of the team check out the **[Pixelogi
 ---
 
 <h3 align="center">
- <a href="_docs/">Getting Started</a>
+ <a href="docs/">Getting Started</a>
   <span> · </span>
   <a href="CONTRIBUTING.md#how-to-contribute">How to Contribute</a>
   <span> · </span>
@@ -94,3 +98,33 @@ This living list of items is something that will constantly be updated as we dev
 -   Add APK build process
 -   Add Assembly process for APK `./gradlew app:assembleRelease`
 -->
+
+## Contributors ✨
+
+Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tr>
+    <td align="center"><a href="https://github.com/adilanchian"><img src="https://avatars0.githubusercontent.com/u/13204620?v=4" width="100px;" alt=""/><br /><sub><b>Alec Dilanchian</b></sub></a><br /><a href="https://github.com/PixelogicDev/Gruvee-Mobile/commits?author=adilanchian" title="Code">💻</a> <a href="https://github.com/PixelogicDev/Gruvee-Mobile/commits?author=adilanchian" title="Tests">⚠️</a> <a href="https://github.com/PixelogicDev/Gruvee-Mobile/commits?author=adilanchian" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://github.com/isabellabrookes"><img src="https://avatars1.githubusercontent.com/u/12928252?v=4" width="100px;" alt=""/><br /><sub><b>Isabella Brookes</b></sub></a><br /><a href="https://github.com/PixelogicDev/Gruvee-Mobile/pulls?q=is%3Apr+reviewed-by%3Aisabellabrookes" title="Reviewed Pull Requests">👀</a> <a href="#maintenance-isabellabrookes" title="Maintenance">🚧</a> <a href="https://github.com/PixelogicDev/Gruvee-Mobile/commits?author=isabellabrookes" title="Documentation">📖</a> </td>
+    <td align="center"><a href="https://deloughry.co.uk"><img src="https://avatars2.githubusercontent.com/u/1541665?v=4" width="100px;" alt=""/><br /><sub><b>Matthew Peck-Deloughry</b></sub></a><br /><a href="https://github.com/PixelogicDev/Gruvee-Mobile/commits?author=DR-DinoMight" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://github.com/tjengland"><img src="https://avatars0.githubusercontent.com/u/40497468?v=4" width="100px;" alt=""/><br /><sub><b>Tanner England</b></sub></a><br /><a href="https://github.com/PixelogicDev/Gruvee-Mobile/commits?author=tjengland" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/BastianInuk"><img src="https://avatars3.githubusercontent.com/u/7114643?v=4" width="100px;" alt=""/><br /><sub><b>Bastian Inuk Christensen</b></sub></a><br /><a href="https://github.com/PixelogicDev/Gruvee-Mobile/commits?author=BastianInuk" title="Code">💻</a></td>
+    <td align="center"><a href="http://creativenobu.github.io"><img src="https://avatars0.githubusercontent.com/u/3767728?v=4" width="100px;" alt=""/><br /><sub><b>Arnold Chand</b></sub></a><br /><a href="https://github.com/PixelogicDev/Gruvee-Mobile/commits?author=creativenobu" title="Code">💻</a></td>
+    <td align="center"><a href="http://miguelnicolas.dev"><img src="https://avatars3.githubusercontent.com/u/32444146?v=4" width="100px;" alt=""/><br /><sub><b>Miguel Nicolas</b></sub></a><br /><a href="https://github.com/PixelogicDev/Gruvee-Mobile/commits?author=miugel" title="Documentation">📖</a></td>
+  </tr>
+  <tr>
+    <td align="center"><a href="https://maxemiliang.me"><img src="https://avatars0.githubusercontent.com/u/7084690?v=4" width="100px;" alt=""/><br /><sub><b>Maxemilian Grönblom</b></sub></a><br /><a href="https://github.com/PixelogicDev/Gruvee-Mobile/commits?author=maxemiliang" title="Code">💻</a></td>
+    <td align="center"><a href="https://dynamicdonkey.github.io/"><img src="https://avatars0.githubusercontent.com/u/34009754?v=4" width="100px;" alt=""/><br /><sub><b>Jared Kozel</b></sub></a><br /><a href="https://github.com/PixelogicDev/Gruvee-Mobile/commits?author=DynamicDonkey" title="Documentation">📖</a></td>
+  </tr>
+</table>
+
+<!-- markdownlint-enable -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
