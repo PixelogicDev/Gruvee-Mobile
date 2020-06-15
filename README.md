@@ -1,6 +1,6 @@
 <h1 align="center">Grüvee</h1>
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-7-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-8-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 <h3 align="center">
   <strong>Let's get Grüvee with a new social, collaborative playlist for iPhone and Android</strong>
@@ -114,6 +114,9 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://github.com/BastianInuk"><img src="https://avatars3.githubusercontent.com/u/7114643?v=4" width="100px;" alt=""/><br /><sub><b>Bastian Inuk Christensen</b></sub></a><br /><a href="https://github.com/PixelogicDev/Gruvee-Mobile/commits?author=BastianInuk" title="Code">💻</a></td>
     <td align="center"><a href="http://creativenobu.github.io"><img src="https://avatars0.githubusercontent.com/u/3767728?v=4" width="100px;" alt=""/><br /><sub><b>Arnold Chand</b></sub></a><br /><a href="https://github.com/PixelogicDev/Gruvee-Mobile/commits?author=creativenobu" title="Code">💻</a></td>
     <td align="center"><a href="http://miguelnicolas.dev"><img src="https://avatars3.githubusercontent.com/u/32444146?v=4" width="100px;" alt=""/><br /><sub><b>Miguel Nicolas</b></sub></a><br /><a href="https://github.com/PixelogicDev/Gruvee-Mobile/commits?author=miugel" title="Documentation">📖</a></td>
+  </tr>
+  <tr>
+    <td align="center"><a href="https://maxemiliang.me"><img src="https://avatars0.githubusercontent.com/u/7084690?v=4" width="100px;" alt=""/><br /><sub><b>Maxemilian Grönblom</b></sub></a><br /><a href="https://github.com/PixelogicDev/Gruvee-Mobile/commits?author=maxemiliang" title="Code">💻</a></td>
   </tr>
 </table>
 
