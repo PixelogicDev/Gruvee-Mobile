@@ -1,6 +1,6 @@
 <h1 align="center">Grüvee</h1>
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-4-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 <h3 align="center">
   <strong>Let's get Grüvee with a new social, collaborative playlist for iPhone and Android</strong>
@@ -110,6 +110,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://github.com/adilanchian"><img src="https://avatars0.githubusercontent.com/u/13204620?v=4" width="100px;" alt=""/><br /><sub><b>Alec Dilanchian</b></sub></a><br /><a href="https://github.com/PixelogicDev/Gruvee-Mobile/commits?author=adilanchian" title="Tests">⚠️</a> <a href="https://github.com/PixelogicDev/Gruvee-Mobile/commits?author=adilanchian" title="Code">💻</a> <a href="https://github.com/PixelogicDev/Gruvee-Mobile/commits?author=adilanchian" title="Documentation">📖</a></td>
     <td align="center"><a href="https://github.com/isabellabrookes"><img src="https://avatars1.githubusercontent.com/u/12928252?v=4" width="100px;" alt=""/><br /><sub><b>Isabella Brookes</b></sub></a><br /><a href="https://github.com/PixelogicDev/Gruvee-Mobile/commits?author=isabellabrookes" title="Documentation">📖</a></td>
     <td align="center"><a href="https://deloughry.co.uk"><img src="https://avatars2.githubusercontent.com/u/1541665?v=4" width="100px;" alt=""/><br /><sub><b>Matthew Peck-Deloughry</b></sub></a><br /><a href="https://github.com/PixelogicDev/Gruvee-Mobile/commits?author=DR-DinoMight" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://github.com/tjengland"><img src="https://avatars0.githubusercontent.com/u/40497468?v=4" width="100px;" alt=""/><br /><sub><b>Tanner England</b></sub></a><br /><a href="https://github.com/PixelogicDev/Gruvee-Mobile/commits?author=tjengland" title="Code">💻</a></td>
   </tr>
 </table>
 
