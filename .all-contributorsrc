@@ -17,6 +17,16 @@
       ]
     },
     {
+      "login": "isabellabrookes",
+      "name": "Isabella Brookes",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/12928252?v=4",
+      "profile": "https://github.com/isabellabrookes",
+
+      "contributions": [
+        "doc"
+      ]
+    },
+     {
       "login": "DR-DinoMight",
       "name": "Matthew Peck-Deloughry",
       "avatar_url": "https://avatars2.githubusercontent.com/u/1541665?v=4",
@@ -24,7 +34,7 @@
       "contributions": [
         "doc"
       ]
-    }
+    },
   ],
   "contributorsPerLine": 7,
   "projectName": "Gruvee-Mobile",
