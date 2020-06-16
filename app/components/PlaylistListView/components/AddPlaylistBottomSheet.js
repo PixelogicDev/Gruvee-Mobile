@@ -27,6 +27,7 @@ import { AddPlaylist } from 'Gruvee/redux/actions/playlists/PlaylistActions'
 import * as StyleConstants from '@StyleConstants'
 
 const PRESENTED_APPLE_MUSIC_PROMPT = '@Presented_Apple_Music_Prompt'
+const APPLE_MUSIC_PLAYLIST_TITLE = '@Apple_Music_Playlist_Title'
 const windowHeight = Dimensions.get('window').height
 // These hardcoded values suck, but there isn't a solid way I can see to get the proper nav heights
 const screenHeight = Platform.OS === 'ios' ? windowHeight - 94 : windowHeight - 84
@@ -178,24 +179,38 @@ const dismissBottomSheet = (bottomSheetRef, setPlaylistNameText, setSelectedUser
     Keyboard.dismiss()
 }
 
-const openAppleAuth = (bottomSheetRef, setPlaylistNameText, setSelectedUser) => {
+const openAppleAuth = (bottomSheetRef, setPlaylistNameText, playlistName, setSelectedUser) => {
     if (Linking.canOpenURL(APPLE_ENDPOINTS.authorizeAppleUser)) {
-        console.log('Opening Apple Music Auth endpoint')
         Linking.openURL(APPLE_ENDPOINTS.authorizeAppleUser)
+
+        // We save the playlist name here so we can use it after deeplink
+        AsyncStorage.setItem(APPLE_MUSIC_PLAYLIST_TITLE, playlistName)
+
         dismissBottomSheet(bottomSheetRef, setPlaylistNameText, setSelectedUser)
     } else {
         console.warn(`${APPLE_ENDPOINTS.authorizeAppleUser} is not a valid URI`)
     }
 }
 
-const presentAppleAuthPrompt = (bottomSheetRef, setPlaylistNameText, setSelectedUser) => {
+const presentAppleAuthPrompt = (
+    bottomSheetRef,
+    setPlaylistNameText,
+    playlistName,
+    setSelectedUser
+) => {
     Alert.alert(
         'Sign in with Apple Music',
         'Let Grüvee manage your playlists by linking your Apple Music account!',
         [
             {
                 text: "Let's Go!",
-                onPress: () => openAppleAuth(bottomSheetRef, setPlaylistNameText, setSelectedUser),
+                onPress: () =>
+                    openAppleAuth(
+                        bottomSheetRef,
+                        setPlaylistNameText,
+                        playlistName,
+                        setSelectedUser
+                    ),
             },
             {
                 text: 'Not Now',
@@ -236,7 +251,12 @@ const addPlaylistAction = async (
             const value = await AsyncStorage.getItem(PRESENTED_APPLE_MUSIC_PROMPT)
             if (value === null || value === 'false') {
                 // We need to present alert
-                presentAppleAuthPrompt(bottomSheetRef, setPlaylistNameText, setSelectedUser)
+                presentAppleAuthPrompt(
+                    bottomSheetRef,
+                    setPlaylistNameText,
+                    playlistName,
+                    setSelectedUser
+                )
             } else {
                 dismissBottomSheet(bottomSheetRef, setPlaylistNameText, setSelectedUser)
             }

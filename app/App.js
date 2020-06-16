@@ -34,8 +34,8 @@ import AsyncStorage from '@react-native-community/async-storage'
 
 // InukApp - "Every day is the day before I start at the gym" (03/09/20)
 // fr3fou - "i helped build this too AYAYA, follow @fr3fou on github uwu, diana cavendish best girl don't @ me" (04/07/20)
-
 const DEEP_LINK_IN_PROGRESS_FLAG = '@Deep_Link_In_Progress'
+const APPLE_MUSIC_PLAYLIST_TITLE = '@Apple_Music_Playlist_Title'
 
 // Sign Out Button For Playlist View
 const SignOutButton = signOutAction => {
@@ -61,7 +61,6 @@ const App = ({ setInitialUserData, signInUser, signOut, userSignInComplete }) =>
         */
         let isInitialAuthMount = true
         const unscribeEvent = firebase.auth().onAuthStateChanged(async user => {
-            console.log(user)
             if (user !== null && !isInitialAuthMount) {
                 console.log('User sign in detected!')
 
@@ -86,12 +85,11 @@ const App = ({ setInitialUserData, signInUser, signOut, userSignInComplete }) =>
             // Android instaniates multiple activites with deep links
             // To combat insane calls to this handler, set a flag here to stop it if it's already working
             AsyncStorage.getItem(DEEP_LINK_IN_PROGRESS_FLAG).then(value => {
-                console.log('GOT DEEPLINKFLAG: ', value)
                 if (value === null || value === 'false') {
                     // First time running this
                     Linking.getInitialURL().then(url => {
                         if (url !== null) {
-                            handleOpenUrl(currentUser)
+                            handleOpenUrl(currentUser, setInitialUserData)
                         }
                     })
                 }
@@ -128,18 +126,22 @@ const handleOpenUrl = (currentUser, setInitialUserData) => async event => {
             // After auth, we should always set initial user data and sign via firebase
             setInitialUserData(newUserObj.user)
         } else if (event.url.includes('apple_auth')) {
-            console.log('Starting apple auth deeplink')
-
+            // Currently, this deeplink is only being called when coming from Apple Music authentication when creating playlist
             // Get code and write to user document
             if (currentUser && currentUser.providerData.length) {
+                // Generate the document id for a Apple user in Firebase
                 const userId = `apple:${currentUser.providerData[0].uid}`
-                await HandleAppleDeepLink(userId, event)
-            } else {
-                console.log(`Probaly an issue: current user is: ${currentUser}`)
-            }
 
-            // Add newly created playlist to Apple Music Account
+                // This is slightly janky, but for now it will do.
+                const playlistTitle = await AsyncStorage.getItem(APPLE_MUSIC_PLAYLIST_TITLE)
+
+                // Will need to pass is playlist name here
+                await HandleAppleDeepLink(userId, event, playlistTitle)
+            } else {
+                console.log(`Probably an issue: current user is: ${currentUser}`)
+            }
         }
+
         AsyncStorage.setItem('@Deep_Link_In_Progress', 'false')
     } catch (error) {
         // TODO: Handle Error

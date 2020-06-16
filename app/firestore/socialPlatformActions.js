@@ -38,4 +38,8 @@ export const UpdateSocialPlatform = async (uid, data) => {
 
     // Data should be in {key: value}
     await dbSocialPlatformSnap.update(data)
+
+    // Get updated platform
+    const updatedPlatform = await dbSocialPlatformSnap.get({ source: 'server' })
+    return updatedPlatform
 }

@@ -54,6 +54,7 @@ export const AddPlaylist = newPlaylist => {
             dispatch(addPlaylist(newPlaylist, statePlaylists))
 
             // Set db reference and write path to user doc in DB
+            // TODO: Eventually we will need some sort of approval view
             const userPlaylistDocUpdates = newPlaylist.members.map(memberId =>
                 UpdateUserDocumentWithPlaylist(memberId, playlistDocRef)
             )
@@ -61,23 +62,26 @@ export const AddPlaylist = newPlaylist => {
             // Dragonfleas - "I'm writing this message from inside the tornado, in my whole life I've never known what it was like to fly, in this moment, I'm glad I haven't." (04/22/20)
             await Promise.all(userPlaylistDocUpdates)
 
-            // await UpdateUserDocumentWithPlaylist(user.id, playlistDocRef)
             dispatch(AddPlaylistToUser(newPlaylist.id))
 
             // Get members from playlists and put in state
             dispatch(FetchMembers([newPlaylist]))
 
-            // Call endpoint to create playlist on social platform
-            // If we needed a refreshed token, it will be passed back here
-            const response = await CreateSocialPlaylist(
-                user.preferredSocialPlatform,
-                newPlaylist.name
-            )
-            if (response.status !== 204) {
-                // Call redux action to update userDoc
-                dispatch(UpdateUserAPIToken(response.data))
+            // If the social platform does not have APIToken, we shouldn't attempt this
+            if (user.preferredSocialPlatform.apiToken.token.length) {
+                // If a refreshed token is needed, it will be passed back here
+                const response = await CreateSocialPlaylist(
+                    user.preferredSocialPlatform,
+                    newPlaylist.name
+                )
+                if (response.status !== 204) {
+                    // Call redux action to update userDoc
+                    dispatch(UpdateUserAPIToken(response.data))
+                } else {
+                    console.log('SocialPlatform was not updated.')
+                }
             } else {
-                console.log('SocialPlatform was not updated.')
+                console.log('Social Platform does not have an APIToken')
             }
         } catch (error) {
             console.warn(error)
