@@ -75,8 +75,10 @@ export const AddPlaylist = newPlaylist => {
                     newPlaylist.name
                 )
                 if (response.status !== 204) {
+                    // If coming from a token refresh we need to specify that in the Dispatch
+                    const isRefresh = true
                     // Call redux action to update userDoc
-                    dispatch(UpdateUserAPIToken(response.data))
+                    dispatch(UpdateUserAPIToken(response.data, isRefresh))
                 } else {
                     console.log('SocialPlatform was not updated.')
                 }

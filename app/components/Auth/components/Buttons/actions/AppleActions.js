@@ -14,7 +14,7 @@ export const InitAppleMusicAuthFlow = () => {
 }
 
 // OnePocketPimp - "Alec discovered Apple APIs are a pain in the ass" (05/06/20)
-export const HandleAppleDeepLink = async (userId, event, playlistTitle) => {
+export const HandleAppleDeepLink = async (userId, event, playlistTitle, updateUserAPIToken) => {
     // Get code
     const code = event.url.substring(event.url.indexOf('?') + 1, event.url.length)
 
@@ -31,6 +31,11 @@ export const HandleAppleDeepLink = async (userId, event, playlistTitle) => {
     // Write to user document
     const updatedPlatform = await UpdateSocialPlatform(userId, socialAPIToken)
     const platformData = updatedPlatform.data()
+
+    // Since we are just updating teh APIToken, we pass false in for refreshing the token
+    const isRefresh = false
+    // Call dispatch to set new token in State
+    updateUserAPIToken(platformData, isRefresh)
 
     // Create social playlist
     await CreateSocialPlaylist(platformData, playlistTitle)

@@ -19,10 +19,10 @@ const deletePlaylistFromUser = playlistId => {
     }
 }
 
-const updatesUserAPIToken = tokenData => {
+const updatesUserAPIToken = (tokenData, isRefresh) => {
     return {
         type: UPDATE_USER_API_TOKEN,
-        data: tokenData,
+        data: { tokenData, isRefresh },
     }
 }
 
@@ -39,8 +39,8 @@ export const DeletePlaylistFromUser = playlistId => {
     }
 }
 
-export const UpdateUserAPIToken = tokenData => {
+export const UpdateUserAPIToken = (tokenData, isRefresh) => {
     return dispatch => {
-        dispatch(updatesUserAPIToken(tokenData))
+        dispatch(updatesUserAPIToken(tokenData, isRefresh))
     }
 }

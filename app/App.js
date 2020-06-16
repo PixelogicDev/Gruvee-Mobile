@@ -26,6 +26,7 @@ import { firebase } from '@react-native-firebase/auth'
 // Redux
 import { SIGN_OUT } from 'Gruvee/redux/actions/ActionsType'
 import { SetInitialUserData, SignInUser } from 'Gruvee/redux/actions/user/UserActions'
+import { UpdateUserAPIToken } from 'Gruvee/redux/actions/user/SharedUserActions'
 import { connect } from 'react-redux'
 import { UserSignInCompleteSelector } from 'Gruvee/redux/selectors/UserSelector'
 import { HandleSpotifyDeepLink } from 'Gruvee/components/Auth/components/Buttons/actions/SpotifyActions'
@@ -51,7 +52,13 @@ const SignOutButton = signOutAction => {
     )
 }
 
-const App = ({ setInitialUserData, signInUser, signOut, userSignInComplete }) => {
+const App = ({
+    setInitialUserData,
+    signInUser,
+    signOut,
+    userSignInComplete,
+    updateUserAPIToken,
+}) => {
     useEffect(() => {
         /*
             Firebase states that: "This method gets invoked in the UI thread on changes 
@@ -89,13 +96,16 @@ const App = ({ setInitialUserData, signInUser, signOut, userSignInComplete }) =>
                     // First time running this
                     Linking.getInitialURL().then(url => {
                         if (url !== null) {
-                            handleOpenUrl(currentUser, setInitialUserData)
+                            handleOpenUrl(currentUser, setInitialUserData, updateUserAPIToken)
                         }
                     })
                 }
             })
         } else {
-            Linking.addEventListener('url', handleOpenUrl(currentUser, setInitialUserData))
+            Linking.addEventListener(
+                'url',
+                handleOpenUrl(currentUser, setInitialUserData, updateUserAPIToken)
+            )
         }
 
         return () => {
@@ -112,7 +122,7 @@ const App = ({ setInitialUserData, signInUser, signOut, userSignInComplete }) =>
 }
 
 // Helpers
-const handleOpenUrl = (currentUser, setInitialUserData) => async event => {
+const handleOpenUrl = (currentUser, setInitialUserData, updateUserAPIToken) => async event => {
     try {
         let newUserObj = {}
         AsyncStorage.setItem('@Deep_Link_In_Progress', 'true')
@@ -136,7 +146,7 @@ const handleOpenUrl = (currentUser, setInitialUserData) => async event => {
                 const playlistTitle = await AsyncStorage.getItem(APPLE_MUSIC_PLAYLIST_TITLE)
 
                 // Will need to pass is playlist name here
-                await HandleAppleDeepLink(userId, event, playlistTitle)
+                await HandleAppleDeepLink(userId, event, playlistTitle, updateUserAPIToken)
             } else {
                 console.log(`Probably an issue: current user is: ${currentUser}`)
             }
@@ -161,6 +171,8 @@ const mapDispatchToProps = dispatch => ({
     setInitialUserData: user => dispatch(SetInitialUserData(user)),
     signInUser: uid => dispatch(SignInUser(uid)),
     signOut: () => dispatch({ type: SIGN_OUT }),
+    updateUserAPIToken: (apiTokenObj, isRefresh) =>
+        dispatch(UpdateUserAPIToken(apiTokenObj, isRefresh)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(App)

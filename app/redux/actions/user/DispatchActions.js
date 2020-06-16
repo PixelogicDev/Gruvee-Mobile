@@ -25,7 +25,7 @@ export const SignInUser = user => {
     return user
 }
 
-export const UpdateUserAPIToken = (stateUser, tokenData) => {
+export const UpdateUserAPIToken = (stateUser, tokenData, isRefresh) => {
     const platformIndex = stateUser.socialPlatforms.findIndex(
         platform => platform.platformName === tokenData.platformName
     )
@@ -38,12 +38,22 @@ export const UpdateUserAPIToken = (stateUser, tokenData) => {
     }
 
     const updatedUser = { ...stateUser }
+    let updatedPlatform = {}
 
-    // We found the socialPlatform
-    const updatedPlatform = {
-        ...updatedUser.socialPlatforms[platformIndex],
-        apiToken: { ...tokenData.refreshToken },
+    if (isRefresh) {
+        console.log('Is refresh token update')
+        updatedPlatform = {
+            ...updatedUser.socialPlatforms[platformIndex],
+            apiToken: { ...tokenData.refreshToken },
+        }
+    } else {
+        console.log('Is apiToken update')
+        updatedPlatform = {
+            ...updatedUser.socialPlatforms[platformIndex],
+            apiToken: { ...tokenData.apiToken },
+        }
     }
+    // We found the socialPlatform
     updatedUser.socialPlatforms.splice(platformIndex, 1, updatedPlatform)
 
     // We need to check for preferredPlatform

@@ -46,7 +46,7 @@ export default (state = initialState, action) => {
         case UPDATE_USER_API_TOKEN:
             return {
                 ...state,
-                user: UpdateUserAPIToken(state.user, action.data),
+                user: UpdateUserAPIToken(state.user, action.data.tokenData, action.data.isRefresh),
             }
         default:
             return state
