@@ -24,10 +24,12 @@ import { APPLE_ENDPOINTS } from 'Gruvee/service/endpointConstants'
 import { connect } from 'react-redux'
 import { AddPlaylist } from 'Gruvee/redux/actions/playlists/PlaylistActions'
 
+import {
+    APPLE_MUSIC_PLAYLIST_TITLE,
+    PRESENTED_APPLE_MUSIC_PROMPT,
+} from 'Gruvee/config/asyncStorageKeys'
 import * as StyleConstants from '@StyleConstants'
 
-const PRESENTED_APPLE_MUSIC_PROMPT = '@Presented_Apple_Music_Prompt'
-const APPLE_MUSIC_PLAYLIST_TITLE = '@Apple_Music_Playlist_Title'
 const windowHeight = Dimensions.get('window').height
 // These hardcoded values suck, but there isn't a solid way I can see to get the proper nav heights
 const screenHeight = Platform.OS === 'ios' ? windowHeight - 94 : windowHeight - 84

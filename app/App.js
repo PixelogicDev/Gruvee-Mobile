@@ -31,19 +31,28 @@ import { connect } from 'react-redux'
 import { UserSignInCompleteSelector } from 'Gruvee/redux/selectors/UserSelector'
 import { HandleSpotifyDeepLink } from 'Gruvee/components/Auth/components/Buttons/actions/SpotifyActions'
 import { HandleAppleDeepLink } from 'Gruvee/components/Auth/components/Buttons/actions/AppleActions'
+import {
+    APPLE_MUSIC_PLAYLIST_TITLE,
+    ClearAllKeyData,
+    DEEP_LINK_IN_PROGRESS_FLAG,
+} from 'Gruvee/config/asyncStorageKeys'
 import AsyncStorage from '@react-native-community/async-storage'
 
 // InukApp - "Every day is the day before I start at the gym" (03/09/20)
 // fr3fou - "i helped build this too AYAYA, follow @fr3fou on github uwu, diana cavendish best girl don't @ me" (04/07/20)
-const DEEP_LINK_IN_PROGRESS_FLAG = '@Deep_Link_In_Progress'
-const APPLE_MUSIC_PLAYLIST_TITLE = '@Apple_Music_Playlist_Title'
 
 // Sign Out Button For Playlist View
 const SignOutButton = signOutAction => {
     return (
         <TouchableOpacity
             onPress={() => {
+                // Will clear redux state
                 signOutAction()
+
+                // Will clear asynStorage
+                ClearAllKeyData()
+
+                // Will actually sign person out of Firebase
                 firebase.auth().signOut()
             }}
         >
