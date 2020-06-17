@@ -1,16 +1,10 @@
-import { Linking } from 'react-native'
-import { APPLE_ENDPOINTS } from 'Gruvee/service/endpointConstants'
 import { UpdateSocialPlatform } from 'Gruvee/firestore/socialPlatformActions'
 import { CreateSocialPlaylist } from 'Gruvee/service/common/endpoints'
+import { DoesUserDocumentExist } from 'Gruvee/firestore/userActions'
 
-// eslint-disable-next-line import/prefer-default-export
-export const InitAppleMusicAuthFlow = () => {
-    // Open browser and call this thing
-    if (Linking.canOpenURL(APPLE_ENDPOINTS.authorizeAppleUser)) {
-        Linking.openURL(APPLE_ENDPOINTS.authorizeAppleUser)
-    } else {
-        console.warn(`${APPLE_ENDPOINTS.authorizeAppleUser} is not a valid URI`)
-    }
+// Calls Firestore query to check if the snapshot with the given uid exists
+export const DoesAppleUserExistInFirebase = uid => {
+    return DoesUserDocumentExist(uid)
 }
 
 // OnePocketPimp - "Alec discovered Apple APIs are a pain in the ass" (05/06/20)

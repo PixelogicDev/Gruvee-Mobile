@@ -9,6 +9,7 @@ import appleAuth, {
 import { ApplePlatform } from 'Gruvee/config/socials'
 import SocialPlatform from 'Gruvee/lib/SocialPlatform'
 import { ADD_USERNAME_NAME } from 'Gruvee/config/navigation/constants'
+import { DoesAppleUserExistInFirebase } from './actions/AppleActions'
 import SocialAuthButton from './SocialAuthButton'
 
 const AppleAuthButton = () => {
@@ -40,25 +41,30 @@ const signInWithAppleAction = navigation => async () => {
             throw new Error('Apple Auth Sign in failed - no identity token returned')
         }
 
+        // Get apple credentials and check to see if this apple user already created an account
         const appleCredential = firebase.auth.AppleAuthProvider.credential(identityToken, nonce)
-        // Create new platform Object
-        const applePlatform = new SocialPlatform(
-            'apple',
-            user, // This is a string id
-            null,
-            null,
-            email,
-            null,
-            null,
-            true,
-            false
-        )
+        const uid = `apple:${user}`
+        const doesDocumentExist = await DoesAppleUserExistInFirebase(uid)
 
-        // At this point navigate to choose username view
-        navigation.push(ADD_USERNAME_NAME, { applePlatform, appleCredential })
+        if (doesDocumentExist) {
+            await firebase.auth().signInWithCredential(appleCredential)
+        } else {
+            // Create new platform Object
+            const applePlatform = new SocialPlatform(
+                'apple',
+                user, // This is a string id
+                null,
+                null,
+                email,
+                null,
+                null,
+                true,
+                false
+            )
 
-        // CreateDocumentAndSignIn(applePlatform, appleCredential)
-        // InitAppleMusicAuthFlow()
+            // At this point navigate to choose username view
+            navigation.push(ADD_USERNAME_NAME, { applePlatform, appleCredential })
+        }
     } catch (error) {
         console.warn(error)
     }
