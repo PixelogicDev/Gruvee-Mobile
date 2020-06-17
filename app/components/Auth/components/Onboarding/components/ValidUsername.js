@@ -21,8 +21,13 @@ const ValidUsername = ({ containerStyle, isTyping, username, usernameAvailable }
     const getTextContent = () => {
         const availableMessage = `👍 ${username} is available!`
         const unavailableMessage = `☹️ ${username} has already been snagged.`
+        const usernameLengthMessage = `📏 Your username must be at least 3 characters.`
 
         if (username.length && !isTyping) {
+            if (username.length < 3) {
+                return usernameLengthMessage
+            }
+
             return usernameAvailable ? availableMessage : unavailableMessage
         }
 
