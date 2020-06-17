@@ -24,7 +24,7 @@ const ConnectedInfiniteHitsList = ({
                 }}
             >
                 <Image source={profileImage} style={Styles.HitItemImage} />
-                <Text style={Styles.HitItemUsername}>{item.username}</Text>
+                <Text style={Styles.HitItemUsername}>{item.displayName}</Text>
                 <View style={Styles.HitItemAddButton}>
                     <Image source={plusIcon ?? null} style={Styles.HitItemPlusIcon} />
                 </View>

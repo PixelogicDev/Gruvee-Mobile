@@ -18,7 +18,7 @@ const MembersSideMenu = ({ members, currentPlaylistId }) => {
     // Actions
     const renderItem = ({ item }) => (
         <Text style={styles.Item} numberOfLines={1}>
-            {item.username}
+            {item.displayName}
         </Text>
     )
 
