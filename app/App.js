@@ -94,7 +94,6 @@ const App = ({
 
             isInitialAuthMount = false
         })
-        const { currentUser } = firebase.auth()
 
         // Deep Link Handler
         if (Platform.OS === 'android') {
@@ -105,16 +104,13 @@ const App = ({
                     // First time running this
                     Linking.getInitialURL().then(url => {
                         if (url !== null) {
-                            handleOpenUrl(currentUser, setInitialUserData, updateUserAPIToken)
+                            handleOpenUrl(setInitialUserData, updateUserAPIToken)
                         }
                     })
                 }
             })
         } else {
-            Linking.addEventListener(
-                'url',
-                handleOpenUrl(currentUser, setInitialUserData, updateUserAPIToken)
-            )
+            Linking.addEventListener('url', handleOpenUrl(setInitialUserData, updateUserAPIToken))
         }
 
         return () => {
@@ -131,8 +127,9 @@ const App = ({
 }
 
 // Helpers
-const handleOpenUrl = (currentUser, setInitialUserData, updateUserAPIToken) => async event => {
+const handleOpenUrl = (setInitialUserData, updateUserAPIToken) => async event => {
     try {
+        const { currentUser } = firebase.auth()
         let newUserObj = {}
         AsyncStorage.setItem('@Deep_Link_In_Progress', 'true')
 
