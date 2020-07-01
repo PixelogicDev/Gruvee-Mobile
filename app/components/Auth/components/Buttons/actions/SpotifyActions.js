@@ -55,10 +55,13 @@ export const InitAuthorizationCodeFlow = async () => {
     }
 }
 
-export const HandleSpotifyDeepLink = async event => {
+// sillyonly: JOIN our SWIFT CREED (06/30/20)
+// sillyonly: i have behaved myself for a long time (06/30/20)
+// oxygen0211: Here lies my last piece of trust in people taking software crafstmanship seriously (06/30/20)
+export const HandleSpotifyDeepLink = async url => {
     try {
         // Wait on this token before continuing
-        const tokenObj = await HandleSpotifyAuth(event.url)
+        const tokenObj = await HandleSpotifyAuth(url)
 
         // Authorize Spotify User and bring back user doc from db if it exists
         const userResponse = await authorizeSpotifyUser(

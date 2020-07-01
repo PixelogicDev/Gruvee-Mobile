@@ -68,6 +68,11 @@ const App = ({
     userSignInComplete,
     updateUserAPIToken,
 }) => {
+    const onOpenUrlHandler = Platform.select({
+        ios: handleOpenUrliOS,
+        android: handleOpenUrlAndroid,
+    })
+
     useEffect(() => {
         /*
             Firebase states that: "This method gets invoked in the UI thread on changes 
@@ -104,13 +109,16 @@ const App = ({
                     // First time running this
                     Linking.getInitialURL().then(url => {
                         if (url !== null) {
-                            handleOpenUrl(setInitialUserData, updateUserAPIToken)
+                            onOpenUrlHandler(url, setInitialUserData, updateUserAPIToken)
                         }
                     })
                 }
             })
         } else {
-            Linking.addEventListener('url', handleOpenUrl(setInitialUserData, updateUserAPIToken))
+            Linking.addEventListener(
+                'url',
+                onOpenUrlHandler(setInitialUserData, updateUserAPIToken)
+            )
         }
 
         return () => {
@@ -127,42 +135,51 @@ const App = ({
 }
 
 // Helpers
-const handleOpenUrl = (setInitialUserData, updateUserAPIToken) => async event => {
-    try {
-        const { currentUser } = firebase.auth()
-        let newUserObj = {}
-        AsyncStorage.setItem('@Deep_Link_In_Progress', 'true')
+const handleOpenUrl = async (url, setInitialUserData, updateUserAPIToken) => {
+    const { currentUser } = firebase.auth()
+    let newUserObj = {}
 
-        // Check to see what platform this is coming from
-        if (event.url.includes('spotify_auth')) {
-            // Gets API token object
-            // HumansNotFish - "Team Yaya. Gotta have faith nerds."(02/21/20)
-            newUserObj = await HandleSpotifyDeepLink(event)
+    // Check to see what platform this is coming from
+    if (url.includes('spotify_auth')) {
+        // Gets API token object
+        // HumansNotFish - "Team Yaya. Gotta have faith nerds."(02/21/20)
+        newUserObj = await HandleSpotifyDeepLink(url)
 
-            // After auth, we should always set initial user data and sign via firebase
-            setInitialUserData(newUserObj.user)
-        } else if (event.url.includes('apple_auth')) {
-            // Currently, this deeplink is only being called when coming from Apple Music authentication when creating playlist
-            // Get code and write to user document
-            if (currentUser && currentUser.providerData.length) {
-                // Generate the document id for a Apple user in Firebase
-                const userId = `apple:${currentUser.providerData[0].uid}`
+        // After auth, we should always set initial user data and sign via firebase
+        setInitialUserData(newUserObj.user)
+    } else if (url.includes('apple_auth')) {
+        // Currently, this deeplink is only being called when coming from Apple Music authentication when creating playlist
+        // Get code and write to user document
+        if (currentUser && currentUser.providerData.length) {
+            // Generate the document id for a Apple user in Firebase
+            const userId = `apple:${currentUser.providerData[0].uid}`
 
-                // This is slightly janky, but for now it will do.
-                const playlistTitle = await AsyncStorage.getItem(APPLE_MUSIC_PLAYLIST_TITLE)
+            // This is slightly janky, but for now it will do.
+            const playlistTitle = await AsyncStorage.getItem(APPLE_MUSIC_PLAYLIST_TITLE)
 
-                // Will need to pass is playlist name here
-                await HandleAppleDeepLink(userId, event, playlistTitle, updateUserAPIToken)
-            } else {
-                console.log(`Probably an issue: current user is: ${currentUser}`)
-            }
+            // Will need to pass is playlist name here
+            await HandleAppleDeepLink(userId, url, playlistTitle, updateUserAPIToken)
+        } else {
+            console.log(`Probably an issue: current user is: ${currentUser}`)
         }
+    }
+}
 
-        AsyncStorage.setItem('@Deep_Link_In_Progress', 'false')
+const handleOpenUrlAndroid = async (url, setInitialUserData, updateUserAPIToken) => {
+    try {
+        AsyncStorage.setItem(DEEP_LINK_IN_PROGRESS_FLAG, 'true')
+        await handleOpenUrl(url, setInitialUserData, updateUserAPIToken)
     } catch (error) {
-        // TODO: Handle Error
-        console.warn(error)
-        AsyncStorage.setItem('@Deep_Link_In_Progress', 'false')
+        console.warn('[HandleOpenUrlAndroid] ', error)
+        AsyncStorage.setItem(DEEP_LINK_IN_PROGRESS_FLAG, 'false')
+    }
+}
+
+const handleOpenUrliOS = (setInitialUserData, updateUserAPIToken) => async event => {
+    try {
+        await handleOpenUrl(event.url, setInitialUserData, updateUserAPIToken)
+    } catch (error) {
+        console.warn('[HandleOpenUrliOS] ', error)
     }
 }
 

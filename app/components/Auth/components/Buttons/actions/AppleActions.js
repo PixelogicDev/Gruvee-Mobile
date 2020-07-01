@@ -8,9 +8,9 @@ export const DoesAppleUserExistInFirebase = uid => {
 }
 
 // OnePocketPimp - "Alec discovered Apple APIs are a pain in the ass" (05/06/20)
-export const HandleAppleDeepLink = async (userId, event, playlistTitle, updateUserAPIToken) => {
+export const HandleAppleDeepLink = async (userId, url, playlistTitle, updateUserAPIToken) => {
     // Get code
-    const code = event.url.substring(event.url.indexOf('?') + 1, event.url.length)
+    const code = url.substring(url.indexOf('?') + 1, url.length)
 
     // Create firebase object
     const socialAPIToken = {
