@@ -13,7 +13,13 @@
 
 ## Prerequisites
 
-In order to develop for Grüvee you are going to need to have a few things installed on your machine:
+In order to develop for Grüvee you are going to need to switch to `release-1.0` branch:
+
+```bash
+$ git checkout release-1.0
+```
+
+and have a few things installed on your machine:
 
 1. **Javascript**
 
@@ -35,8 +41,6 @@ In order to develop for Grüvee you are going to need to have a few things insta
 # Running Grüvee Locally
 
 Now we are at the GOOD stuff. Time to get Grüvee running locally. Make sure you have the [prerequisites](#prerequisites) installed. Open up **two instances** of your favorite terminal/command prompt and navigate to the root directory of the Grüvee repository for both of them. One is going to run your React Native bundle server and the other will start the Grüvee iOS or Android app.
-
-At the time of writing, if you run into any issues try switching to `release-1.0` branch
 
 ## 🌲 Environment Variables
 

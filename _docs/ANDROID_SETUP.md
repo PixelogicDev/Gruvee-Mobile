@@ -1,5 +1,11 @@
 # Grüvee Android Development Setup
 
+## Notes
+
+> **You need to start the emulator from Android Studio first before you run any commands.**
+
+> We have been developing on a Pixel 2 emulator and a Pixel 3 physical device, but feel free to use any device you'd like! At the end of the day it will be better for testing anyways.
+
 ## Prerequisites
 
 ### 🔥 Firebase
@@ -18,18 +24,19 @@ In Firebase console you need to create new application, get and add `google-serv
 6. You can skip third and fourth step
 7. Add downloaded `google-services.json` to your `$GRUVEE_PROJECT/android/app` directory where `$GRUVEE_PROJECT` is the location of your root project.
 
-> Note: On **Windows 10** if it still sometimes says that it cannot find `google-services.json` file, restart the emulator and re-run `npm start` and `npm run android-start` commands.
+#### Notes
 
-> **Please note that you need to start the emulator from Android Studio first before you run any commands.**
->
-> For this just open up Android Studio and build the project, with an emulator set.
->
-> To note: we have been developing on a Pixel 2 emulator and a Pixel 3 physical device, but feel free to use any device you'd like! At the end of the day it will be better for testing anyways.
+> On **Windows 10** if it still sometimes says that it cannot find `google-services.json` file, restart the android emulator and re-run `npm start` and `npm run android-start` commands.
 
-## Start Android Emulator
+## Starting Android Emulator
 
-1. After opening project in Android Studio for the first time you should see an event in `Event Log`. Open the `Event Log` and click `Configure` to automatically configure android project with `AndroidManifest.xml` files
-2. You can follow this guide https://developer.android.com/studio/run/managing-avds to setup new virtual device
+There is a nice post that guides you through [How to Set Up an Android Emulator using Command Line](https://medium.com/@vsburnett/how-to-set-up-an-android-emulator-in-windows-10-e0a3284b5f94) which might be helpful
+
+1. First you need to setup new android virtual device (AVD). You can follow [this guide](https://developer.android.com/studio/run/managing-avds#createavd).
+    - On **Windows 10** if there is no option to open AVD Manager, there should be an event in `Event Log` (right-left corner). Open the `Event Log` and click `Configure` to automatically configure android project with `AndroidManifest.xml` files
+2. After setting up new AVD you can run it in few ways:
+    - Inside Android Studio - `Tools > AVD Manager > Actions > Launch this AVD in the emulator`
+    - [From command line](https://developer.android.com/studio/run/emulator-commandline)
 
 ## Grüvee Backend Setup
 
@@ -68,13 +75,15 @@ $ npm run start # On a different terminal
 $ npm run android-start
 ```
 
-> **Note**: Upon running `android-start` command on **Windows 10**, if you run into error:
+### Notes
+
+> On **Windows 10** upon running `android-start` command , if you run into error:
 >
 > ```bash
 > '.' is not recognized as an internal or external command
 > ```
 >
-> you may need to change `android-start` script by removing `./` in front of `gradlew` in both places:
+> you need to change `android-start` script by removing `./` in front of `gradlew` in both places:
 >
 > ```bash
 > "android-start": "cd ./android && gradlew app:assembleDebug && gradlew installDebug && npm run android --clearCache"
