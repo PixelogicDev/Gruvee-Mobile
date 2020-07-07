@@ -10,6 +10,7 @@
 // WinterLoreGames - "Array starts at 1, change my mind." (01/22/20)
 // dra031cko - "What do i use ?- Alec 2020" (03/10/20)
 // Dragonfleas - "kid im done. i doubt u even have basic knowlege of hacking. i doul boot linux so i can run my scripts u made a big mistake of replying to my comment" (03/26/20)
+// sillyonly: monthly active users he says.. we aiming for daily active users here (07/01/20)
 
 import 'react-native-gesture-handler'
 import React, { useEffect } from 'react'
