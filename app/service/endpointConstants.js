@@ -24,5 +24,7 @@ export const COMMON_ENDPOINTS = {
     createSocialPlatform: `${baseHostName}/createSocialPlatform`,
     createSocialPlaylist: `${baseHostName}/createSocialPlaylist`,
     createUser: `${baseHostName}/createUser`,
+    doesUserDocExist: `${baseHostName}/doesUserDocExist`,
     getCustomFirebaseToken: `${baseHostName}/generateCustomToken`,
+    isUsernameAvailable: `${baseHostName}/usernameAvailable`,
 }

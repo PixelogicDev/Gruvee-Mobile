@@ -44,11 +44,11 @@ const signInWithAppleAction = navigation => async () => {
         // Get apple credentials and check to see if this apple user already created an account
         const appleCredential = firebase.auth.AppleAuthProvider.credential(identityToken, nonce)
         const uid = `apple:${user}`
+
+        // Check if user doc already exists for current uid
         const doesDocumentExist = await DoesAppleUserExistInFirebase(uid)
 
-        if (doesDocumentExist) {
-            await firebase.auth().signInWithCredential(appleCredential)
-        } else {
+        if (!doesDocumentExist.data.result) {
             // Create new platform Object
             const applePlatform = new SocialPlatform(
                 'apple',
@@ -64,6 +64,10 @@ const signInWithAppleAction = navigation => async () => {
 
             // At this point navigate to choose username view
             navigation.push(ADD_USERNAME_NAME, { applePlatform, appleCredential })
+        } else {
+            console.log('Found user doc signing in...')
+            // Sign in with Credentials so user can start making queries to Firebase
+            await firebase.auth().signInWithCredential(appleCredential)
         }
     } catch (error) {
         console.warn(error)

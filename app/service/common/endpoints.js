@@ -52,6 +52,7 @@ export const CreateUser = createUserReq => {
     return axios(options)
 }
 
+// GET: Get media date for specific service
 export const GetMediaData = metadata => {
     if (metadata === null) {
         console.log('SongLink returned null')
@@ -87,6 +88,38 @@ export const GetMediaData = metadata => {
         url: providerUrl,
         headers,
         data: metadata,
+    }
+
+    return axios(options)
+}
+
+// POST: Get whether user with given UID already has a doc in Firebase
+export const GetDoesUserDocExist = uid => {
+    const headers = {
+        'User-Type': 'gruvee-mobile',
+    }
+
+    const options = {
+        method: 'POST',
+        url: COMMON_ENDPOINTS.doesUserDocExist,
+        headers,
+        data: { uid },
+    }
+
+    return axios(options)
+}
+
+// POST: Get whether the given username is available or not
+export const GetIsUsernameAvailable = username => {
+    const headers = {
+        'User-Type': 'gruvee-mobile',
+    }
+
+    const options = {
+        method: 'POST',
+        url: COMMON_ENDPOINTS.isUsernameAvailable,
+        headers,
+        data: { username },
     }
 
     return axios(options)

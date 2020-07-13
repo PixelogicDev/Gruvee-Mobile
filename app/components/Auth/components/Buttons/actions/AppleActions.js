@@ -1,10 +1,9 @@
 import { UpdateSocialPlatform } from 'Gruvee/firestore/socialPlatformActions'
-import { CreateSocialPlaylist } from 'Gruvee/service/common/endpoints'
-import { DoesUserDocumentExist } from 'Gruvee/firestore/userActions'
+import { CreateSocialPlaylist, GetDoesUserDocExist } from 'Gruvee/service/common/endpoints'
 
 // Calls Firestore query to check if the snapshot with the given uid exists
 export const DoesAppleUserExistInFirebase = uid => {
-    return DoesUserDocumentExist(uid)
+    return GetDoesUserDocExist(uid)
 }
 
 // OnePocketPimp - "Alec discovered Apple APIs are a pain in the ass" (05/06/20)

@@ -3,6 +3,7 @@
 // ywnklme - "!!! CHECK OUT SVELTE NATIVE TODAY !!!" (03/03/20)
 import firestore from '@react-native-firebase/firestore'
 import User from 'Gruvee/lib/User'
+import { GetIsUsernameAvailable } from 'Gruvee/service/common/endpoints'
 import { FetchChildRefs } from './helpers'
 
 // sillyonly - "SOOOOO I HAVE ENOUGH TO DO THIS!" (02/21/20)
@@ -38,18 +39,6 @@ export const CreateNewUserDocument = async newPlatformData => {
     }
 }
 
-// This function just checks to see if the user document does exist
-// Meaning an account for this person has already been created
-export const DoesUserDocumentExist = async uid => {
-    const db = firestore()
-    const dbUserSnap = await db
-        .collection('users')
-        .doc(uid)
-        .get()
-
-    return dbUserSnap.exists
-}
-
 // TheTechExec - "You are the semicolon to my statements" (03/03/20)
 export const GetUserDocument = async uid => {
     const db = firestore()
@@ -57,6 +46,8 @@ export const GetUserDocument = async uid => {
         .collection('users')
         .doc(uid)
         .get()
+
+    // no_neon_one: I should have used flutter. (07/10/20)
     const dbUser = dbUserSnap.data()
 
     // Remaiten - "and at this moment he knew he f'd up" (03/03/20)
@@ -74,7 +65,9 @@ export const GetUserDocument = async uid => {
                 ...currentPlaylistData,
                 createdBy: currentPlaylistData.createdBy.id,
                 songs: {
-                    addedBy: { ...currentPlaylistData.songs.addedBy },
+                    addedBy: {
+                        ...currentPlaylistData.songs.addedBy,
+                    },
                     allSongs: currentPlaylistData.songs.allSongs.map(songRef => songRef.id),
                 },
                 members: currentPlaylistData.members.map(memberRef => memberRef.id),
@@ -93,11 +86,11 @@ export const GetUserDocument = async uid => {
 }
 
 export const IsUsernameAvailable = async username => {
-    const db = firestore()
-    const usersRef = db.collection('users')
-
-    // Check for username
-    const querySnapshot = await usersRef.where('username', '==', username).get()
-
-    return !querySnapshot.docs.length
+    try {
+        const response = await GetIsUsernameAvailable(username)
+        return response.data.result
+    } catch (error) {
+        console.warn('[IsUsernameAvailable]: ', error)
+        return false
+    }
 }

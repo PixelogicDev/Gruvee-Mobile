@@ -64,6 +64,7 @@
 // ForTheWyn - "Don't touch that please, your primitive intellect wouldn't understand alloys and compositions and things with...molecular structures" - Evil Dead III: Army Of Darkness (06/09/20)
 // ForTheWyn - "Maybe. Just maybe my boys can protect the book. Yeah, and maybe I'm a Chinese jet pilot." - Evil Dead III: Army Of Darkness (06/09/20)
 // DR_DinoMight - "Ted, while I agree that, in time, our band will be most triumphant. The truth is, Wyld Stallyns will never be a super band until we have Eddie Van Halen on guitar." - Bill and Ted’s Excellent Adventure (06/09/20)
+// Moov_ - "So, yeah, I'm a kid. And I'm also a goofball, and a wingnut, and a knucklehead McSpazatron! But most of all, I'm... I'm I'm a Goofy Goober!" SpongeBob Squarepants Movie (07/08/20)
 
 // -- SUDOKU -- //
 // OnePocketPimp: |8 _ _ | _ _ _ | _ _ _ |

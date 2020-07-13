@@ -32,20 +32,25 @@ const signingInUser = value => {
 // Thunks
 export const SignInUser = userId => {
     return async dispatch => {
-        // If we are reaching here, we are "signed in"
-        // We then need to get data for user from Firestore
-        const data = await GetUserDocument(userId)
+        try {
+            // If we are reaching here, we are "signed in"
+            // We then need to get data for user from Firestore
+            const data = await GetUserDocument(userId)
 
-        // After we are signed in, lets hydrate the playlists state
-        dispatch(HydratePlaylists(data.playlists))
+            // After we are signed in, lets hydrate the playlists state
+            dispatch(HydratePlaylists(data.playlists))
 
-        // Pass in playlists to fetch members for each
-        dispatch(FetchMembers(data.playlists))
+            // Pass in playlists to fetch members for each
+            dispatch(FetchMembers(data.playlists))
 
-        // Finally, sign in user with latest data
-        dispatch(signInUser(data.user))
+            // Finally, sign in user with latest data
+            dispatch(signInUser(data.user))
 
-        return data.user
+            // return data.user
+        } catch (error) {
+            console.warn('[SignInUserAction] ', error)
+            // return null
+        }
     }
 }
 
