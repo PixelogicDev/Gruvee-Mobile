@@ -1,4 +1,4 @@
-import { ENVIRONMENT, FIREBASE_DEV_URI, FIREBASE_PROD_URI } from 'react-native-dotenv'
+import { ENVIRONMENT, FIREBASE_DEV_URI, FIREBASE_PROD_URI } from '@env'
 
 const baseHostName = ENVIRONMENT === 'PROD' ? FIREBASE_PROD_URI : FIREBASE_DEV_URI
 const spotifyApiHostname = 'https://api.spotify.com'

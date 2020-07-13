@@ -66,7 +66,7 @@ If you would like to have Spotify support you will need to setup a Spotify devel
 
 For Spotify auth you will need to add a redirect URI. This is currently set to what we currently use in Grüvee. In your newly created Spotify Dev App, head to the `Edit Settings` section and add `gruvee://spotify_auth` to the Redirect URIs section.
 
-### `FIREBASE_DEV_URI && FIREBASE_PROD_URI`
+### `FIREBASE_DEV_URI`
 
 In order to get the app running you will need to create a Firebase project and set the Dev URI here. Use the following steps:
 
@@ -77,9 +77,16 @@ In order to get the app running you will need to create a Firebase project and s
 5. Scroll down to Authorized domains
 6. You will see a list of domains. Grab the one that that looks like this: `{YourProject-Id}.firebaseapp.com`
 
-### `ALGOLIA_APP_ID && ALGOLIA_APP_KEY && ALGOLIA_DEV_INDEX_NAME && ALGOLIA_PROD_INDEX_NAME`
+### `ALGOLIA_APP_ID && ALGOLIA_APP_KEY && ALGOLIA_DEV_INDEX_NAME`
 
 This is used for searching for users to add to a playlist. If you find yourself needing this UI/UX please head to the [Contributing documentation](../CONTRIBUTING.md) for help filing an issue or join the [PixelogicDev Discord](https://discord.gg/8NFtvp5) to reach out directly to people actively working on this project.
+
+### Notes
+
+> * Import `.env` using `@env` module name ([example](/app/config/creds.js))
+> * If updating your `.env` variables doesn't seem to change anything try to clear the cache by either:
+>   * `npm start -- --reset-cache`
+>   * `rm -rf node_modules/.cache/babel-loader/*` ([babel-plugin-dotenv-import documentation](https://github.com/tusbar/babel-plugin-dotenv-import#caveats))
 
 ## NPM Commands
 

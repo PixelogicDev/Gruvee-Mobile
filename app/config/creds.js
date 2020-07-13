@@ -7,7 +7,7 @@ import {
     SPOTIFY_CLIENTID,
     SPOTIFY_CLIENTSECRET,
     SPOTIFY_REDIRECTURI,
-} from 'react-native-dotenv'
+} from '@env'
 
 export default {
     Spotify: {

@@ -1,7 +1,6 @@
 {
     "presets": [
-        "module:metro-react-native-babel-preset",
-        "module:react-native-dotenv"
+        "module:metro-react-native-babel-preset"
     ],
     "plugins": [
         [
@@ -13,6 +12,12 @@
                     "@NavigationConstants": "./app/config/navigation.js",
                     "Gruvee": "./app"
                 }
+            }
+        ],
+        [
+            "dotenv-import",
+            {
+                "allowUndefined": true
             }
         ]
     ]
