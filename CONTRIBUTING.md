@@ -32,7 +32,7 @@ Leave a brief description of your changes, any images/videos of what your new co
 <table>
   <tr>
     <td align="center"><a href="https://github.com/adilanchian"><img src="https://avatars0.githubusercontent.com/u/13204620?v=4" width="100px;" alt=""/><br /><sub><b>Alec Dilanchian</b></sub></a><br /><a href="https://github.com/PixelogicDev/Gruvee-Mobile/commits?author=adilanchian" title="Code">💻</a> <a href="https://github.com/PixelogicDev/Gruvee-Mobile/commits?author=adilanchian" title="Tests">⚠️</a> <a href="https://github.com/PixelogicDev/Gruvee-Mobile/commits?author=adilanchian" title="Documentation">📖</a></td>
-    <td align="center"><a href="https://github.com/isabellabrookes"><img src="https://avatars1.githubusercontent.com/u/12928252?v=4" width="100px;" alt=""/><br /><sub><b>Isabella Brookes</b></sub></a><br /><a href="https://github.com/PixelogicDev/Gruvee-Mobile/pulls?q=is%3Apr+reviewed-by%3Aisabellabrookes" title="Reviewed Pull Requests">👀</a> <a href="#maintenance-isabellabrookes" title="Maintenance">🚧</a> <a href="https://github.com/PixelogicDev/Gruvee-Mobile/commits?author=isabellabrookes" title="Documentation">📖</a> </td>
+    <td align="center"><a href="https://github.com/isabellabrookes"><img src="https://avatars1.githubusercontent.com/u/12928252?v=4" width="100px;" alt=""/><br /><sub><b>Isabella Brookes</b></sub></a><br /><a href="https://github.com/PixelogicDev/Gruvee-Mobile/pulls?q=is%3Apr+reviewed-by%3Aisabellabrookes" title="Reviewed Pull Requests">👀</a> <a href="#maintenance-isabellabrookes" title="Maintenance">🚧</a> <a href="https://github.com/PixelogicDev/Gruvee-Mobile/commits?author=isabellabrookes" title="Documentation">📖</a></td>
     <td align="center"><a href="https://deloughry.co.uk"><img src="https://avatars2.githubusercontent.com/u/1541665?v=4" width="100px;" alt=""/><br /><sub><b>Matthew Peck-Deloughry</b></sub></a><br /><a href="https://github.com/PixelogicDev/Gruvee-Mobile/commits?author=DR-DinoMight" title="Documentation">📖</a></td>
     <td align="center"><a href="https://github.com/tjengland"><img src="https://avatars0.githubusercontent.com/u/40497468?v=4" width="100px;" alt=""/><br /><sub><b>Tanner England</b></sub></a><br /><a href="https://github.com/PixelogicDev/Gruvee-Mobile/commits?author=tjengland" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/BastianInuk"><img src="https://avatars3.githubusercontent.com/u/7114643?v=4" width="100px;" alt=""/><br /><sub><b>Bastian Inuk Christensen</b></sub></a><br /><a href="https://github.com/PixelogicDev/Gruvee-Mobile/commits?author=BastianInuk" title="Code">💻</a></td>
@@ -42,10 +42,10 @@ Leave a brief description of your changes, any images/videos of what your new co
   <tr>
     <td align="center"><a href="https://maxemiliang.me"><img src="https://avatars0.githubusercontent.com/u/7084690?v=4" width="100px;" alt=""/><br /><sub><b>Maxemilian Grönblom</b></sub></a><br /><a href="https://github.com/PixelogicDev/Gruvee-Mobile/commits?author=maxemiliang" title="Code">💻</a></td>
     <td align="center"><a href="https://dynamicdonkey.github.io/"><img src="https://avatars0.githubusercontent.com/u/34009754?v=4" width="100px;" alt=""/><br /><sub><b>Jared Kozel</b></sub></a><br /><a href="https://github.com/PixelogicDev/Gruvee-Mobile/commits?author=DynamicDonkey" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://edburtnieks.me"><img src="https://avatars0.githubusercontent.com/u/47947787?v=4" width="100px;" alt=""/><br /><sub><b>Edgar Burtnieks</b></sub></a><br /><a href="https://github.com/PixelogicDev/Gruvee-Mobile/commits?author=edburtnieks" title="Code">💻</a> <a href="https://github.com/PixelogicDev/Gruvee-Mobile/commits?author=edburtnieks" title="Documentation">📖</a></td>
   </tr>
 </table>
 
 <!-- markdownlint-enable -->
 <!-- prettier-ignore-end -->
-
 <!-- ALL-CONTRIBUTORS-LIST:END -->
