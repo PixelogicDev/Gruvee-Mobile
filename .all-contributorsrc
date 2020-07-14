@@ -1,0 +1,101 @@
+{
+  "files": [
+    "README.md",
+    "CONTRIBUTING.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "adilanchian",
+      "name": "Alec Dilanchian",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/13204620?v=4",
+      "profile": "https://github.com/adilanchian",
+      "contributions": [
+        "code",
+        "test",
+        "doc"
+      ]
+    },
+    {
+      "login": "isabellabrookes",
+      "name": "Isabella Brookes",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/12928252?v=4",
+      "profile": "https://github.com/isabellabrookes",
+      "contributions": [
+        "review",
+        "maintenance",
+        "doc"
+      ]
+    },
+    {
+      "login": "DR-DinoMight",
+      "name": "Matthew Peck-Deloughry",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/1541665?v=4",
+      "profile": "https://deloughry.co.uk",
+      "contributions": [
+        "doc"
+      ]
+    },
+    {
+      "login": "tjengland",
+      "name": "Tanner England",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/40497468?v=4",
+      "profile": "https://github.com/tjengland",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "BastianInuk",
+      "name": "Bastian Inuk Christensen",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/7114643?v=4",
+      "profile": "https://github.com/BastianInuk",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "creativenobu",
+      "name": "Arnold Chand",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/3767728?v=4",
+      "profile": "http://creativenobu.github.io",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "miugel",
+      "name": "Miguel Nicolas",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/32444146?v=4",
+      "profile": "http://miguelnicolas.dev",
+      "contributions": [
+        "doc"
+      ]
+    },
+    {
+      "login": "maxemiliang",
+      "name": "Maxemilian Grönblom",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/7084690?v=4",
+      "profile": "https://maxemiliang.me",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "DynamicDonkey",
+      "name": "Jared Kozel",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/34009754?v=4",
+      "profile": "https://dynamicdonkey.github.io/",
+      "contributions": [
+        "doc"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "Gruvee-Mobile",
+  "projectOwner": "PixelogicDev",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}
