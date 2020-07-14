@@ -90,6 +90,16 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "edburtnieks",
+      "name": "Edgar Burtnieks",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/47947787?v=4",
+      "profile": "https://edburtnieks.me",
+      "contributions": [
+        "code",
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
