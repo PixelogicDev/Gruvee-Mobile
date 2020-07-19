@@ -1,6 +1,7 @@
 import firestore from '@react-native-firebase/firestore'
 import { FetchChildRefs } from './helpers'
 
+// OnePocketPimp - "rushkiB is non-moist" (05/22/20)
 export const GetCommentsDocuments = async (songId, playlistId) => {
     const db = firestore()
     const dbPlaylistSnap = await db

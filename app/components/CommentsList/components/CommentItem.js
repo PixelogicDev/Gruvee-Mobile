@@ -37,7 +37,7 @@ const CommentItem = ({ comment, setHeightAction, commentSender }) => {
             }}
         >
             <Text style={styles.CommentText}>{comment.message}</Text>
-            <Text style={styles.DisplayNameText}>{commentSender.username}</Text>
+            <Text style={styles.DisplayNameText}>{commentSender.displayName}</Text>
         </View>
     )
 }

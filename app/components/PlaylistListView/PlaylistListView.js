@@ -2,10 +2,9 @@
 // curiousdrive - "We are neighbors on the internet" (04/20/20)
 // MrDemonWolf - "2020 is year of the Contagion Movie monkaS" (03/20/20)
 // isakfk1234 - "incoming code" (04/20/20)
-import React, { useState, useRef } from 'react'
-import { Button, View, StyleSheet } from 'react-native'
+import React, { useEffect, useState, useRef } from 'react'
+import { RefreshControl, SafeAreaView, StyleSheet, StatusBar, View } from 'react-native'
 import { SwipeListView } from 'react-native-swipe-list-view'
-import { firebase } from '@react-native-firebase/auth'
 
 // Redux
 import { connect } from 'react-redux'
@@ -25,11 +24,13 @@ console.ignoredYellowBox = ['Could not find image']
 const styles = StyleSheet.create({
     Container: {
         zIndex: 0,
+        height: '100%',
         backgroundColor: StyleConstants.BASE_BACKGROUND_COLOR,
     },
     // QuantumBrat - "BOIII (this must always be on line 147)" line 147 must! be on line 147..so... find a place for it ;) MiniK" (02/11/20)
     ContentContainer: {
         padding: StyleConstants.TABLE_CONTAINER_CONTENT_SPACING,
+        // marginTop: 150, // Depends if this is rendered on iOS or not because of largeTitle
         paddingBottom: StyleConstants.TABLE_CONTAINER_BOTTOM_PADDING,
     },
     ButtonContainer: {
@@ -58,31 +59,35 @@ const PlaylistListView = ({ fetchPlaylists, playlists }) => {
     const renderItem = ({ item }) => <SwipeablePlaylistItem playlistData={item} />
     const bottomSheetRef = useRef(null)
 
+    useEffect(() => {
+        console.log('Fetching latest playlists')
+        fetchPlaylists()
+    }, [])
+
     return (
         <>
-            <View style={styles.SignOutButtonContainer}>
-                <Button
-                    title="Sign Out"
-                    onPress={() => {
-                        firebase.auth().signOut()
-                    }}
+            <StatusBar barStyle="light-content" />
+            <SafeAreaView style={styles.Container}>
+                <SwipeListView
+                    contentContainerStyle={styles.ContentContainer}
+                    showsVerticalScrollIndicator={false}
+                    data={playlists}
+                    keyExtractor={keyExtractor}
+                    refreshControl={
+                        <RefreshControl
+                            tintColor={StyleConstants.REFRESH_INDICATOR_COLOR} // iOS only
+                            refreshing={isRefreshing}
+                            onRefresh={() => {
+                                setIsRefreshing(true)
+                                fetchPlaylists().finally(() => {
+                                    setIsRefreshing(false)
+                                })
+                            }}
+                        />
+                    }
+                    renderItem={renderItem}
                 />
-            </View>
-            <SwipeListView
-                style={styles.Container}
-                contentContainerStyle={styles.ContentContainer}
-                showsVerticalScrollIndicator={false}
-                data={playlists}
-                keyExtractor={keyExtractor}
-                renderItem={renderItem}
-                refreshing={isRefreshing}
-                onRefresh={() => {
-                    setIsRefreshing(true)
-                    fetchPlaylists().finally(() => {
-                        setIsRefreshing(false)
-                    })
-                }}
-            />
+            </SafeAreaView>
             {/* MADPROPZ poopuhchoo */}
             <View style={styles.ButtonContainer}>
                 <AddItemButton

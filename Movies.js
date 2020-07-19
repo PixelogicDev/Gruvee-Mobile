@@ -1,4 +1,5 @@
 // -- BEE MOVIE -- //
+// robertwestbury - "According to all known laws of aviation, there is no way a bee should be able to fly. Its wings are too small to get its fat little body off" (04/26/20)
 // TheDkbay - "According to all known laws of aviation, there is no way a bee should be able to fly. Its wings are too small to get its fat little body off" (03/04/20)
 // pheonix_d123 - "the ground. The bee, of course, flies anyway because bees don't care what humans think is impossible. Yellow, black. Yellow, black. Yellow,"(03/04/20)
 // giusdp - "black. Yellow, black. Ooh, black and yellow! Let's shake it up a little. Barry! Breakfast is ready! Ooming! Hang on a second. Hello? Barry?" (03/04/20)
@@ -41,6 +42,10 @@
 // -- Pulp Fiction -- //
 // Dragonfleas - "English, motherfucker! Do you speak it?" (03/28/20)
 
+// -- Star Wars: Episode 3 Revenge Of The Sith -- //
+// Scorchius - "Did you ever hear the tragedy of Darth Plagueis The Wise? I thought not. It’s not a story the Jedi would tell you. It’s a Sith legend" (05/08/20)
+// Scorchius - "Darth Plagueis was a Dark Lord of the Sith, so powerful and so wise he could use the Force to influence the midichlorians to create life" (05/13/20)
+
 // -- OTHER MOVIE -- //
 // TheYagich01 - "Famous movie quote!" (03/23/20)
 // fluffypoga - "Do you feel lucky, punk?" (03/31/20)
@@ -48,6 +53,18 @@
 // youugotssponged - "I'm gonna make him an offer he can't refuse - The Godfather" (04/11/20)
 // MoonTory - "Wingardium Leviosa" (04/20/20)
 // TheYagich01 - "They're eating her! And then they're going to eat me! OH MY GOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOD" (04/20/20)
+// jackconceprio - "you are a marine now Improvise, Adapt and Overcome" (04/28/20)
+// DR_DinoMight - "An idea is like a virus. Resilient. Highly contagious. & even the smallest seed of an idea can grow. It can grow to define or destroy you. - Inception" (04/28/20)
+// pcopley - "PC Load Letter? What the fuck does that mean?" - Michael Bolton, Office Space (04/29/20)
+// digitaldrummerj - "Mama says, 'Stupid is as stupid does.' Forrest Gump 1994" (05/03/20)
+// AYNSTAYN - "Assumption is the Mother of All Fuck Ups" Under Siege 2 (05/13/20)
+// unrulyhotfixer - "I have come here to chew bubblegum and kick ass. And I am all out of bubblegum." They Live (05/13/20)
+// unrulyhotfixer - "Your tone is quasi-facetious but you do not realize that Taco Bell was the only restaurant to survive the franchise wars. Now all restaurants are Taco Bell." - Demolition Man (05/22/20)
+// jackconceprio - "F is for friends who do stuff together U is for you and me N is for anywhere and any time at all" (06/09/20)
+// ForTheWyn - "Don't touch that please, your primitive intellect wouldn't understand alloys and compositions and things with...molecular structures" - Evil Dead III: Army Of Darkness (06/09/20)
+// ForTheWyn - "Maybe. Just maybe my boys can protect the book. Yeah, and maybe I'm a Chinese jet pilot." - Evil Dead III: Army Of Darkness (06/09/20)
+// DR_DinoMight - "Ted, while I agree that, in time, our band will be most triumphant. The truth is, Wyld Stallyns will never be a super band until we have Eddie Van Halen on guitar." - Bill and Ted’s Excellent Adventure (06/09/20)
+// Moov_ - "So, yeah, I'm a kid. And I'm also a goofball, and a wingnut, and a knucklehead McSpazatron! But most of all, I'm... I'm I'm a Goofy Goober!" SpongeBob Squarepants Movie (07/08/20)
 
 // -- SUDOKU -- //
 // OnePocketPimp: |8 _ _ | _ _ _ | _ _ _ |

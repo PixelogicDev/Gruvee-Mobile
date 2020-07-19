@@ -14,7 +14,6 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		7E8ED14C3637A87BAB4FA7B2 /* libPods-Gruvee.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A3DE2F016CD01340E832BDC8 /* libPods-Gruvee.a */; };
 		9F162BE74A9F71344C4740EC /* libPods-GruveeTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1872D23B5151E9B8E388B696 /* libPods-GruveeTests.a */; };
-		DD7CA6BA23F8890300BD5BCC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DD7CA6B923F8890300BD5BCC /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,7 +44,8 @@
 		A3DE2F016CD01340E832BDC8 /* libPods-Gruvee.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Gruvee.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA1483E53F5EAD426D7D1FED /* Pods-GruveeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GruveeTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GruveeTests/Pods-GruveeTests.debug.xcconfig"; sourceTree = "<group>"; };
 		DD484B4123F9C7C100DFBA03 /* GruveeDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = GruveeDebug.entitlements; path = Gruvee/GruveeDebug.entitlements; sourceTree = "<group>"; };
-		DD7CA6B923F8890300BD5BCC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		DD6AFDC92456811400B31808 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		DD6AFDCB2456811400B31808 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		DD964AC923F89A620090C8D0 /* Gruvee.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = Gruvee.entitlements; path = Gruvee/Gruvee.entitlements; sourceTree = "<group>"; };
 		E181BEFC33E0F41E4BAB3297 /* Pods-Gruvee.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gruvee.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Gruvee/Pods-Gruvee.debug.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
@@ -97,6 +97,7 @@
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
+				DD6AFDC72456811400B31808 /* Firebase */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
@@ -126,7 +127,6 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
-				DD7CA6B923F8890300BD5BCC /* GoogleService-Info.plist */,
 				13B07FAE1A68108700A75B9A /* Gruvee */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* GruveeTests */,
@@ -157,6 +157,32 @@
 				3A6389C43D7BC7DC02BCDD8C /* Pods-GruveeTests.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		DD6AFDC72456811400B31808 /* Firebase */ = {
+			isa = PBXGroup;
+			children = (
+				DD6AFDC82456811400B31808 /* Prod */,
+				DD6AFDCA2456811400B31808 /* Dev */,
+			);
+			name = Firebase;
+			path = Gruvee/Firebase;
+			sourceTree = "<group>";
+		};
+		DD6AFDC82456811400B31808 /* Prod */ = {
+			isa = PBXGroup;
+			children = (
+				DD6AFDC92456811400B31808 /* GoogleService-Info.plist */,
+			);
+			path = Prod;
+			sourceTree = "<group>";
+		};
+		DD6AFDCA2456811400B31808 /* Dev */ = {
+			isa = PBXGroup;
+			children = (
+				DD6AFDCB2456811400B31808 /* GoogleService-Info.plist */,
+			);
+			path = Dev;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -191,6 +217,7 @@
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
+				DD6AFDCD245681B900B31808 /* Setup Firebase Environment GoogleService-Info.plist */,
 				2BAB4A65C0C6A62EBB80C271 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
@@ -256,7 +283,6 @@
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
-				DD7CA6BA23F8890300BD5BCC /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -282,21 +308,17 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Gruvee/Pods-Gruvee-resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-Gruvee/Pods-Gruvee-resources.sh",
 				"${PODS_CONFIGURATION_BUILD_DIR}/gRPC-C++/gRPCCertificates-Cpp.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/gRPCCertificates-Cpp.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Gruvee/Pods-Gruvee-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Gruvee/Pods-Gruvee-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		676D0872A24D29D34AFB7D90 /* [CP] Check Pods Manifest.lock */ = {
@@ -342,6 +364,24 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
+		};
+		DD6AFDCD245681B900B31808 /* Setup Firebase Environment GoogleService-Info.plist */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Setup Firebase Environment GoogleService-Info.plist";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Name of the resource we're selectively copying\nGOOGLESERVICE_INFO_PLIST=GoogleService-Info.plist\n\n# Get references to dev and prod versions of the GoogleService-Info.plist\n# NOTE: These should only live on the file system and should NOT be part of the target (since we'll be adding them to the target manually)\nGOOGLESERVICE_INFO_DEV=${PROJECT_DIR}/${TARGET_NAME}/Firebase/Dev/${GOOGLESERVICE_INFO_PLIST}\nGOOGLESERVICE_INFO_PROD=${PROJECT_DIR}/${TARGET_NAME}/Firebase/Prod/${GOOGLESERVICE_INFO_PLIST}\n\n# Make sure the dev version of GoogleService-Info.plist exists\necho \"Looking for ${GOOGLESERVICE_INFO_PLIST} in ${GOOGLESERVICE_INFO_DEV}\"\nif [ ! -f $GOOGLESERVICE_INFO_DEV ]\nthen\n    echo \"No Development GoogleService-Info.plist found. Please ensure it's in the proper directory.\"\n    exit 1\nfi\n\n# Make sure the prod version of GoogleService-Info.plist exists\necho \"Looking for ${GOOGLESERVICE_INFO_PLIST} in ${GOOGLESERVICE_INFO_PROD}\"\nif [ ! -f $GOOGLESERVICE_INFO_PROD ]\nthen\n    echo \"No Production GoogleService-Info.plist found. Please ensure it's in the proper directory.\"\n    exit 1\nfi\n\n# Get a reference to the destination location for the GoogleService-Info.plist\nPLIST_DESTINATION=${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app\necho \"Will copy ${GOOGLESERVICE_INFO_PLIST} to final destination: ${PLIST_DESTINATION}\"\n\n# Copy over the prod GoogleService-Info.plist for Release builds\nif [ \"${CONFIGURATION}\" == \"Release\" ]\nthen\n    echo \"Using ${GOOGLESERVICE_INFO_PROD}\"\n    cp \"${GOOGLESERVICE_INFO_PROD}\" \"${PLIST_DESTINATION}\"\nelse\n    echo \"Using ${GOOGLESERVICE_INFO_DEV}\"\n    cp \"${GOOGLESERVICE_INFO_DEV}\" \"${PLIST_DESTINATION}\"\nfi\n";
 		};
 		FD10A7F022414F080027D42C /* Start Packager */ = {
 			isa = PBXShellScriptBuildPhase;

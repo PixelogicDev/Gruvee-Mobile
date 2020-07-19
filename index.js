@@ -9,71 +9,11 @@
  * @format
  */
 
-import { Navigation } from 'react-native-navigation'
-import ReduxProvider from 'Gruvee/components/ReduxProvider'
-import SongList from 'Gruvee/components/SongList'
-import CommentsList from 'Gruvee/components/CommentsList'
-import ShowMembersAction from 'Gruvee/components/common/ShowMembersAction'
-import MembersSideMenu from 'Gruvee/components/MembersSideMenu'
-import * as NavigationConstants from 'Gruvee/config/navigation'
+import { AppRegistry } from 'react-native'
 import App from 'Gruvee/App'
+import ReduxProvider from 'Gruvee/components/ReduxProvider'
+import { enableScreens } from 'react-native-screens'
+import { name as appName } from './app.json'
 
-// Register navigation components
-Navigation.registerComponent(NavigationConstants.ROOT_NAV_NAME, () => ReduxProvider(App))
-Navigation.registerComponent(NavigationConstants.SONG_LIST_NAV_NAME, () => ReduxProvider(SongList))
-Navigation.registerComponent(NavigationConstants.COMMENTS_LIST_NAV_NAME, () =>
-    ReduxProvider(CommentsList)
-)
-
-// TopBar components
-Navigation.registerComponent(NavigationConstants.TOP_BAR_MEMBERS_ACTION_NAME, () =>
-    ReduxProvider(ShowMembersAction)
-)
-
-// SideMenu components
-Navigation.registerComponent(NavigationConstants.SIDEMENU_ALL_MEMBERS_NAME, () =>
-    ReduxProvider(MembersSideMenu)
-)
-
-Navigation.events().registerAppLaunchedListener(() => {
-    Navigation.setRoot({
-        root: {
-            sideMenu: {
-                center: {
-                    stack: {
-                        id: NavigationConstants.STACK_ID,
-                        children: [
-                            {
-                                component: {
-                                    id: NavigationConstants.ROOT_NAV_ID,
-                                    name: NavigationConstants.ROOT_NAV_NAME,
-                                    options: {
-                                        topBar: {
-                                            visible: false,
-                                        },
-                                    },
-                                },
-                            },
-                        ],
-                    },
-                },
-                right: {
-                    component: {
-                        name: NavigationConstants.SIDEMENU_ALL_MEMBERS_NAME,
-                    },
-                },
-                options: {
-                    sideMenu: {
-                        // -- MAD PROPZ thoasty -- //
-                        openGestureMode: 'bezel',
-                        right: {
-                            width: 200,
-                            shouldStretchDrawer: false,
-                            enabled: false,
-                        },
-                    },
-                },
-            },
-        },
-    })
-})
+enableScreens()
+AppRegistry.registerComponent(appName, () => ReduxProvider(App))

@@ -30,33 +30,49 @@ const signingInUser = value => {
 }
 
 // Thunks
+/**
+ * Redux Thunk that goes through the sign in process given the user's Id
+ * @param {string} userId Id of user to sign in
+ */
 export const SignInUser = userId => {
     return async dispatch => {
-        // If we are reaching here, we are "signed in"
-        // We then need to get data for user from Firestore
-        const data = await GetUserDocument(userId)
+        try {
+            // If we are reaching here, we are "signed in"
+            // We then need to get data for user from Firestore
+            const data = await GetUserDocument(userId)
 
-        // After we are signed in, lets hydrate the playlists state
-        dispatch(HydratePlaylists(data.playlists))
+            // After we are signed in, lets hydrate the playlists state
+            dispatch(HydratePlaylists(data.playlists))
 
-        // Pass in playlists to fetch members for each
-        dispatch(FetchMembers(data.playlists))
+            // Pass in playlists to fetch members for each
+            dispatch(FetchMembers(data.playlists))
 
-        // Finally, sign in user with latest data
-        dispatch(signInUser(data.user))
+            // Finally, sign in user with latest data
+            dispatch(signInUser(data.user))
 
-        return data.user
+            // return data.user
+        } catch (error) {
+            console.warn('[SignInUserAction] ', error)
+        }
     }
 }
 
 // chevywood_ - "chevywood_ was here! Keep it up dude!" (02/21/20)
 // syszen - "and syszen was here too" (02/21/20)
+/**
+ * Redux Thunk that sets the user document data in Redux
+ * @param {object} user The User object to be set
+ */
 export const SetInitialUserData = user => {
     return async dispatch => {
         dispatch(setInitialUserData(user))
     }
 }
 
+/**
+ * Redux Thunk that sets "signingInUser" flag in UserDataReducer
+ * @param {boolean} value
+ */
 export const SigningInUser = value => {
     return dispatch => {
         dispatch(signingInUser(value))

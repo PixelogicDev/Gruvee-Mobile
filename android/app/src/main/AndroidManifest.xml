@@ -28,6 +28,9 @@
             <!-- Accepts URIs that begin with "gruvee://spotify_auth” -->
             <data android:scheme="gruvee"
                   android:host="spotify_auth" />
+            <!-- Accepts URIs that begin with "gruvee://apple_auth” -->
+            <data android:scheme="gruvee"
+                  android:host="apple_auth" />
         </intent-filter>
       </activity>
       <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />

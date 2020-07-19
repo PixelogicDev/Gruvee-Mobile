@@ -1,17 +1,34 @@
 // creativenobu - "The forbidden apple auth" (02/16/20)
 import React from 'react'
+import { firebase } from '@react-native-firebase/auth'
+import { useNavigation } from '@react-navigation/native'
 import appleAuth, {
     AppleAuthRequestOperation,
     AppleAuthRequestScope,
-    AppleAuthCredentialState,
 } from '@invertase/react-native-apple-authentication'
 import { ApplePlatform } from 'Gruvee/config/socials'
+import SocialPlatform from 'Gruvee/lib/SocialPlatform'
+import { ADD_USERNAME_NAME } from 'Gruvee/config/navigation/constants'
+import { DoesAppleUserExistInFirebase } from './actions/AppleActions'
 import SocialAuthButton from './SocialAuthButton'
 
 const AppleAuthButton = () => {
-    const signInWithAppleAction = async () => {
+    const navigation = useNavigation()
+
+    return (
+        <SocialAuthButton
+            platform={ApplePlatform}
+            platformSignInAction={signInWithAppleAction(navigation)}
+        />
+    )
+}
+
+// Actions
+const signInWithAppleAction = navigation => async () => {
+    try {
         if (!appleAuth.isSupported) {
-            return Promise.reject(new Error('Device is not on iOS 13 or higher.'))
+            // TODO: NEEDS A FALLBACK
+            throw new Error('Device is not on iOS 13 or higher.')
         }
 
         const appleAuthRequestResponse = await appleAuth.performRequest({
@@ -19,26 +36,42 @@ const AppleAuthButton = () => {
             requestedScopes: [AppleAuthRequestScope.EMAIL],
         })
 
-        // Get current authentication state for user
-        const credentialState = await appleAuth.getCredentialStateForUser(
-            // User === UserId from Firebase
-            appleAuthRequestResponse.user
-        )
-
-        console.log(credentialState)
-
-        // Use credentialState response to ensure the user is authenticated
-        if (credentialState === AppleAuthCredentialState.AUTHORIZED) {
-            // We are authenicated, let move onto the creation of our user document in our DB
-            return Promise.resolve(appleAuthRequestResponse.user)
+        const { email, nonce, identityToken, user } = appleAuthRequestResponse
+        if (!identityToken) {
+            throw new Error('Apple Auth Sign in failed - no identity token returned')
         }
 
-        return Promise.reject(new Error(credentialState))
-    }
+        // Get apple credentials and check to see if this apple user already created an account
+        const appleCredential = firebase.auth.AppleAuthProvider.credential(identityToken, nonce)
+        const uid = `apple:${user}`
 
-    return (
-        <SocialAuthButton platform={ApplePlatform} platformSignInAction={signInWithAppleAction} />
-    )
+        // Check if user doc already exists for current uid
+        const doesDocumentExist = await DoesAppleUserExistInFirebase(uid)
+
+        if (!doesDocumentExist.data.result) {
+            // Create new platform Object
+            const applePlatform = new SocialPlatform(
+                'apple',
+                user, // This is a string id
+                null,
+                null,
+                email,
+                null,
+                null,
+                true,
+                false
+            )
+
+            // At this point navigate to choose username view
+            navigation.push(ADD_USERNAME_NAME, { applePlatform, appleCredential })
+        } else {
+            console.log('Found user doc signing in...')
+            // Sign in with Credentials so user can start making queries to Firebase
+            await firebase.auth().signInWithCredential(appleCredential)
+        }
+    } catch (error) {
+        console.warn(error)
+    }
 }
 
 export default AppleAuthButton

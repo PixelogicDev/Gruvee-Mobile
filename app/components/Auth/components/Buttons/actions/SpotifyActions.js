@@ -5,7 +5,7 @@
 // Isakfk1234 - "incoming code" (03/13/20)
 // Firestore
 import { SPOTIFY_ENDPOINTS } from 'Gruvee/service/endpointConstants'
-import { AuthorizeUser, GetApiToken } from 'Gruvee/service/spotify/endpoints'
+import { authorizeSpotifyUser, GetApiToken } from 'Gruvee/service/spotify/endpoints'
 import { Linking } from 'react-native'
 import Creds from 'Gruvee/config/creds'
 import { firebase } from '@react-native-firebase/auth'
@@ -55,13 +55,16 @@ export const InitAuthorizationCodeFlow = async () => {
     }
 }
 
-export const HandleSpotifyDeepLink = async event => {
+// sillyonly: JOIN our SWIFT CREED (06/30/20)
+// sillyonly: i have behaved myself for a long time (06/30/20)
+// oxygen0211: Here lies my last piece of trust in people taking software crafstmanship seriously (06/30/20)
+export const HandleSpotifyDeepLink = async url => {
     try {
         // Wait on this token before continuing
-        const tokenObj = await HandleSpotifyAuth(event.url)
+        const tokenObj = await HandleSpotifyAuth(url)
 
         // Authorize Spotify User and bring back user doc from db if it exists
-        const userResponse = await AuthorizeUser(
+        const userResponse = await authorizeSpotifyUser(
             tokenObj.data.access_token,
             tokenObj.data.expires_in,
             tokenObj.data.refresh_token

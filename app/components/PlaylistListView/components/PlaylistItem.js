@@ -7,10 +7,10 @@ import { SetCurrentPlaylistId } from 'Gruvee/redux/actions/playlists/PlaylistAct
 import { FetchMembers } from 'Gruvee/redux/actions/members/MembersActions'
 import { FetchSongs } from 'Gruvee/redux/actions/songs/SongsActions'
 import { MapMembersFromPlaylist } from 'Gruvee/redux/selectors/MembersSelector'
+import { useNavigation } from '@react-navigation/native'
+import { SONG_LIST_NAV_NAME } from 'Gruvee/config/navigation/constants'
 
-import { Navigation } from 'react-native-navigation'
 import * as StyleConstants from 'Gruvee/config/styles'
-import * as NavigationConstants from 'Gruvee/config/navigation'
 import CardItemDetail from './CardItemDetail'
 
 const defaultPlaylistBackgroundAsset = require('Gruvee/assets/defaults/playlist_image/default_item_bg_image.png')
@@ -37,8 +37,10 @@ const PlaylistItem = ({
     playlistMembers,
     setCurrentPlaylistId,
 }) => {
+    const navigation = useNavigation()
     const imageBackground =
         playlistData.albumArtworkUrl !== '' ? { uri: `${playlistData.albumArtworkUrl}` } : null
+
     return (
         <TouchableOpacity
             onPress={() => {
@@ -47,7 +49,8 @@ const PlaylistItem = ({
                     fetchMembers,
                     playlistData,
                     playlistMembers,
-                    setCurrentPlaylistId
+                    setCurrentPlaylistId,
+                    navigation
                 )
             }}
         >
@@ -66,24 +69,14 @@ const PlaylistItem = ({
     )
 }
 
-// Actions
-const showMembersAction = () => {
-    Navigation.mergeOptions(NavigationConstants.STACK_ID, {
-        sideMenu: {
-            right: {
-                visible: true,
-            },
-        },
-    })
-}
-
 // sillyonly - "YOU THOUGHT YOU WILL RUN AWAY!" (02/14/20)
 const showSongListAction = (
     fetchSongs,
     fetchMembers,
     playlistData,
     playlistMembers,
-    setCurrentPlaylistId
+    setCurrentPlaylistId,
+    navigation
 ) => {
     // Call redux action to set playlistId in our state
     setCurrentPlaylistId(playlistData.id)
@@ -94,53 +87,7 @@ const showSongListAction = (
     // Any new members from db? Lets get them now so our members list will be good to go.
     fetchMembers([playlistData])
 
-    Navigation.push(NavigationConstants.STACK_ID, {
-        component: {
-            name: NavigationConstants.SONG_LIST_NAV_NAME,
-            passProps: {
-                playlistId: playlistData.id,
-            },
-            options: {
-                topBar: {
-                    visible: true,
-                    barStyle: 'default',
-                    backButton: {
-                        color: StyleConstants.TOP_BAR_BACK_BUTTON_COLOR,
-                    },
-                    rightButtons: [
-                        {
-                            id: NavigationConstants.TOP_BAR_MEMBERS_ACTION_ID,
-                            component: {
-                                name: NavigationConstants.TOP_BAR_MEMBERS_ACTION_NAME,
-                                passProps: {
-                                    members: playlistMembers,
-                                    showMembersAction: () => {
-                                        showMembersAction()
-                                    },
-                                },
-                            },
-                        },
-                    ],
-                    background: {
-                        color: StyleConstants.TOP_BAR_BACKGROUND_COLOR,
-                        blur: false,
-                    },
-                    title: {
-                        text: playlistData.name,
-                        fontSize: StyleConstants.TOP_BAR_TEXT_SIZE,
-                        color: StyleConstants.TOP_BAR_TEXT_COLOR,
-                        // iOS Only
-                        fontWeight: 'medium',
-                    },
-                },
-                sideMenu: {
-                    right: {
-                        enabled: true,
-                    },
-                },
-            },
-        },
-    })
+    navigation.navigate(SONG_LIST_NAV_NAME, { playlistName: playlistData.name })
 }
 
 // Redux Mappers

@@ -6,6 +6,7 @@ export const FetchChildRefs = async refs => {
     const data = await Promise.all(
         refs.map(async ref => {
             const snapshot = await db.doc(ref.path).get()
+            console.log(snapshot.data())
             return snapshot.data()
         })
     )

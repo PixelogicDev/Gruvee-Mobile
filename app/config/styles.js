@@ -4,6 +4,10 @@ import { Dimensions } from 'react-native'
 // Background Color
 export const BASE_BACKGROUND_COLOR = '#2E282A'
 export const BASE_MODAL_BACKGROUND_COLOR = '#1D1D1D'
+export const BASE_BUTTON_BACKGROUND_DARK_COLOR = '#5C5C5C'
+
+// Alphas
+export const ALPHA_40 = '66'
 
 // Border Radius
 export const BASE_BORDER_RADIUS = 11
@@ -27,11 +31,15 @@ export const LARGE_TITLE_SIZE_iOS = 34
 export const MEDIUM_TITLE_SIZE_iOS = 26
 export const MODAL_HEADER_SIZE_iOS = 24
 export const HEADLINE_SIZE_iOS = 17
-export const BUTTON_TEXT_SIZE_iOS = 17
+export const BUTTON_TEXT_SIZE_iOS = 19
 
 // Font Size | Card Item - iOS
 export const CARD_ITEM_TITLE_SIZE_iOS = 20
 export const CARD_ITEM_DETAIL_SIZE_iOS = 11
+
+// Button Size Base
+export const BASE_BUTTON_HEIGHT = 44
+export const BASE_BUTTON_SPACING = 10
 
 // Add Playlist Button Size
 export const ADD_BUTTON_SIZE = 60
@@ -49,7 +57,7 @@ export const ADD_SONG_MODAL_HEIGHT_ANDROID = 325
 
 // Table Container Content Spacing
 export const TABLE_CONTAINER_CONTENT_SPACING = 20
-export const TABLE_CONTAINER_BOTTOM_PADDING = 100
+export const TABLE_CONTAINER_BOTTOM_PADDING = 125
 
 // Song List Item Detail
 export const SONG_LIST_ITEM_BACKGROUND_COLOR = '#1B1819'
@@ -83,3 +91,5 @@ export const TOP_BAR_BACKGROUND_COLOR = '#000000'
 export const TOP_BAR_TEXT_COLOR = '#FFFFFF'
 export const TOP_BAR_TEXT_SIZE = 24
 export const TOP_BAR_BACK_BUTTON_COLOR = '#FFFFFF'
+
+export const REFRESH_INDICATOR_COLOR = '#FFFFFF'

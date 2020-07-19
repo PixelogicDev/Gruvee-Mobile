@@ -4,67 +4,9 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import { Text, Image, TouchableOpacity, StyleSheet } from 'react-native'
-import { Navigation } from 'react-native-navigation'
+import { useNavigation } from '@react-navigation/native'
+import { COMMENTS_LIST_NAV_NAME } from 'Gruvee/config/navigation/constants'
 import * as StyleConstants from 'Gruvee/config/styles'
-import * as NavigationConstants from 'Gruvee/config/navigation'
-
-const rightChevronAsset = require('Gruvee/assets/icons/right_chevron/right_chevron.png')
-
-// Actions
-const navigateToCommentsListAction = songData => {
-    Navigation.push(NavigationConstants.STACK_ID, {
-        component: {
-            name: NavigationConstants.COMMENTS_LIST_NAV_NAME,
-            passProps: {
-                songId: songData.id,
-                comments: songData.comments,
-            },
-            options: {
-                topBar: {
-                    visible: true,
-                    barStyle: 'default',
-                    backButton: {
-                        showTitle: false,
-                        color: StyleConstants.TOP_BAR_BACK_BUTTON_COLOR,
-                    },
-                    background: {
-                        color: StyleConstants.TOP_BAR_BACKGROUND_COLOR,
-                        blur: false,
-                    },
-                    title: {
-                        text: songData.name,
-                        fontSize: StyleConstants.TOP_BAR_TEXT_SIZE,
-                        color: StyleConstants.TOP_BAR_TEXT_COLOR,
-                        // iOS Only
-                        fontWeight: 'medium',
-                    },
-                },
-            },
-        },
-    })
-}
-
-const SongItemCommentBar = ({ songCommentCount, songData }) => {
-    return (
-        <TouchableOpacity
-            style={styles.Container}
-            onPress={() => {
-                navigateToCommentsListAction(songData)
-            }}
-        >
-            <Text style={styles.Text}>{songCommentCount} Comments</Text>
-            <Image style={styles.Image} source={rightChevronAsset ?? null} />
-        </TouchableOpacity>
-    )
-}
-
-// Helpers
-const mapStateToSongCommentsCount = (state, songId) => {
-    const { currentPlaylistId } = state.PlaylistsDataReducer
-    const playlist = state.PlaylistsDataReducer.playlists.byId[currentPlaylistId]
-
-    return playlist.comments[songId] ? playlist.comments[songId].length : 0
-}
 
 // Styles
 const styles = StyleSheet.create({
@@ -88,6 +30,36 @@ const styles = StyleSheet.create({
         marginRight: 15,
     },
 })
+
+const rightChevronAsset = require('Gruvee/assets/icons/right_chevron/right_chevron.png')
+
+const SongItemCommentBar = ({ songCommentCount, songData }) => {
+    const navigation = useNavigation()
+
+    return (
+        <TouchableOpacity
+            style={styles.Container}
+            onPress={navigateToCommentsList(navigation, songData)}
+        >
+            <Text style={styles.Text}>{songCommentCount} Comments</Text>
+            <Image style={styles.Image} source={rightChevronAsset ?? null} />
+        </TouchableOpacity>
+    )
+}
+
+// Helpers
+
+// Actions
+const navigateToCommentsList = (navigation, songData) => () => {
+    navigation.push(COMMENTS_LIST_NAV_NAME, { songId: songData.id, songName: songData.name })
+}
+
+const mapStateToSongCommentsCount = (state, songId) => {
+    const { currentPlaylistId } = state.PlaylistsDataReducer
+    const playlist = state.PlaylistsDataReducer.playlists.byId[currentPlaylistId]
+
+    return playlist.comments[songId] ? playlist.comments[songId].length : 0
+}
 
 // Redux Mappers
 const mapStateToProps = (state, props) => {

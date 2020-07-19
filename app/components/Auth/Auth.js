@@ -5,20 +5,31 @@
 // dra031cko - "android > ios" (02/19/20)
 // sillyonly - "SOOOOOO what happens when silly have 1800?!" (02/19/20)
 import React, { memo } from 'react'
-import { StyleSheet, Text, View } from 'react-native'
-import * as StyleConstants from '@StyleConstants'
+import { Platform, StyleSheet, Text, View } from 'react-native'
+import {
+    BASE_BACKGROUND_COLOR,
+    BASE_BUTTON_HEIGHT,
+    BASE_BUTTON_SPACING,
+    BASE_FONT_COLOR,
+    // eslint-disable-next-line camelcase
+    HEADLINE_SIZE_iOS,
+    // eslint-disable-next-line camelcase
+    MEDIUM_TITLE_SIZE_iOS,
+    SEMIBOLD_WEIGHT,
+} from '@StyleConstants'
 import Buttons from './components/Buttons'
+
+const platformFriendlyName = Platform.select({ ios: 'iOS', android: 'Android' })
 
 // Styles
 const styles = StyleSheet.create({
-    ButtonContainer: {
-        display: 'flex',
+    ButtonContainer: numItems => ({
         justifyContent: 'space-between',
         alignItems: 'center',
-        height: 'auto',
-    },
+        // This gives us the proper height and spacing we want for our auth buttons
+        height: BASE_BUTTON_HEIGHT * numItems + BASE_BUTTON_SPACING * (numItems - 1),
+    }),
     Container: {
-        display: 'flex',
         justifyContent: 'space-between',
         height: '100%',
         width: '100%',
@@ -26,17 +37,17 @@ const styles = StyleSheet.create({
         paddingBottom: 25,
         paddingLeft: 25,
         paddingRight: 25,
-        backgroundColor: StyleConstants.BASE_BACKGROUND_COLOR,
+        backgroundColor: BASE_BACKGROUND_COLOR,
     },
     SectionTitle: {
-        fontSize: StyleConstants.MEDIUM_TITLE_SIZE_iOS,
-        color: StyleConstants.BASE_FONT_COLOR,
+        fontSize: MEDIUM_TITLE_SIZE_iOS,
+        color: BASE_FONT_COLOR,
     },
     SectionDetail: {
         marginTop: 25,
-        fontSize: StyleConstants.HEADLINE_SIZE_iOS,
-        fontWeight: StyleConstants.SEMIBOLD_WEIGHT,
-        color: StyleConstants.BASE_FONT_COLOR,
+        fontSize: HEADLINE_SIZE_iOS,
+        fontWeight: SEMIBOLD_WEIGHT,
+        color: BASE_FONT_COLOR,
     },
     TextContainer: {
         justifyContent: 'center',
@@ -50,18 +61,17 @@ const Auth = () => {
             <Text style={styles.SectionTitle}>Welcome to Grüvee Alpha!</Text>
             <View style={styles.TextContainer}>
                 <Text style={styles.SectionDetail}>
-                    Thanks for taking part in Grüvee Alpha for iOS and Android!
+                    Thanks for taking part in Grüvee Alpha for {platformFriendlyName}!
                 </Text>
                 <Text style={styles.SectionDetail}>
-                    It's pretty simple, to get started all you need to do is press the "Login With
-                    Spotify" button.
+                    {"It's"} pretty simple, to get started select one of the providers below.
                 </Text>
                 <Text style={styles.SectionDetail}>
                     This will give you all the fanciness Grüvee has to offer. Please reach out on
                     the Discord for any feedback and or questions!
                 </Text>
             </View>
-            <View style={styles.ButtonContainer}>{Buttons}</View>
+            <View style={styles.ButtonContainer(Buttons.length)}>{Buttons}</View>
         </View>
     )
 }

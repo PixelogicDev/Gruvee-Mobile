@@ -12,7 +12,7 @@ import SwipeAction from 'Gruvee/components/common/SwipeAction'
 import * as StyleConstants from 'Gruvee/config/styles'
 import PlaylistItem from './PlaylistItem'
 
-const SwipeablePlaylistItem = ({ playlistData, deletePlaylist }) => {
+const SwipeablePlaylistItem = ({ deletePlaylist, playlistData }) => {
     const [isDeleting, setIsDeleting] = useState(false)
     const onConfirmDelete = () => setIsDeleting(true)
     const confirmDeletePlaylistAction = () => comfirmDeleteAlert(playlistData, onConfirmDelete)

@@ -36,33 +36,15 @@ export const GetApiToken = code => {
 }
 
 // POST: Authorize Spotify User
-export const AuthorizeUser = (token, expiresIn, refreshToken) => {
+export const authorizeSpotifyUser = (token, expiresIn, refreshToken) => {
     const options = {
         method: 'POST',
-        url: COMMON_ENDPOINTS.authorizeUser,
+        url: COMMON_ENDPOINTS.authorizeSpotifyUser,
         data: {
             token,
             expiresIn,
             refreshToken,
         },
-    }
-
-    // This already returns a promise
-    return axios(options)
-}
-
-// KociQQ: Comment - "Found on StackOverflow, don't trust this code" (02/25/20)
-// GET: Get Custom Firebase Token
-export const GetCustomFirebaseToken = async uid => {
-    const headers = {
-        'User-Type': 'gruvee-mobile',
-    }
-
-    const options = {
-        method: 'POST',
-        url: COMMON_ENDPOINTS.getCustomFirebaseToken,
-        headers,
-        data: { uid },
     }
 
     // This already returns a promise
