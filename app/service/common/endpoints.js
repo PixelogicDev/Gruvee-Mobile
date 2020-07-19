@@ -1,8 +1,12 @@
 import axios from 'axios'
 import { COMMON_ENDPOINTS, SPOTIFY_ENDPOINTS } from 'Gruvee/service/endpointConstants'
 
-// POST: Create Playlist On Preferred Social Platform
-// eslint-disable-next-line import/prefer-default-export
+/**
+ * POST: Create Playlist On Preferred Social Platform
+ * @param {object} socialPlatform SocialPlatform of signed in user
+ * @param {string} playlistName Playlist name of playlist to be created
+ * @returns {Promise<any>} AxiosPromise with call data
+ */
 export const CreateSocialPlaylist = (socialPlatform, playlistName) => {
     const headers = {
         'User-Type': 'gruvee-mobile',
@@ -19,7 +23,11 @@ export const CreateSocialPlaylist = (socialPlatform, playlistName) => {
     return axios(options)
 }
 
-// POST: Create Social Platform and store in DB
+/**
+ * POST: Create Social Platform and store in DB
+ * @param {object} socialPlatform SocialPlatform of signed in user
+ * @returns {Promise<any>} AxiosPromise with call data
+ */
 export const CreateSocialPlatform = socialPlatform => {
     const headers = {
         'User-Type': 'gruvee-mobile',
@@ -36,7 +44,11 @@ export const CreateSocialPlatform = socialPlatform => {
     return axios(options)
 }
 
-// POST: Create User and store in DB
+/**
+ * POST: Create User and store in DB
+ * @param {object} createUserReq User object that will be stored in Firestore
+ * @returns {Promise<any>} AxiosPromise with call data
+ */
 export const CreateUser = createUserReq => {
     const headers = {
         'User-Type': 'gruvee-mobile',
@@ -52,7 +64,31 @@ export const CreateUser = createUserReq => {
     return axios(options)
 }
 
-// GET: Get media date for specific service
+/**
+ * POST: Create Provider User and store in DB
+ * @param {object} createProviderUserRequest Includes FirebaseProviderUID and PlatformProviderUID
+ * @returns {Promise<any>} AxiosPromise with call data
+ */
+export const CreateProviderUser = createProviderUserRequest => {
+    const headers = {
+        'User-Type': 'gruvee-mobile',
+    }
+
+    const options = {
+        method: 'POST',
+        url: COMMON_ENDPOINTS.createProviderUser,
+        headers,
+        data: createProviderUserRequest,
+    }
+
+    return axios(options)
+}
+
+/**
+ * GET: Get media date for specific service
+ * @param {object} metadata Object that includes song information
+ * @returns {Promise<any>} AxiosPromise with call data
+ */
 export const GetMediaData = metadata => {
     if (metadata === null) {
         console.log('SongLink returned null')
@@ -93,7 +129,11 @@ export const GetMediaData = metadata => {
     return axios(options)
 }
 
-// POST: Get whether user with given UID already has a doc in Firebase
+/**
+ * POST: Get whether user with given UID already has a doc in Firebase
+ * @param {string} uid User's ID
+ * @returns {Promise<any>} AxiosPromise with call data
+ */
 export const GetDoesUserDocExist = uid => {
     const headers = {
         'User-Type': 'gruvee-mobile',
@@ -109,7 +149,11 @@ export const GetDoesUserDocExist = uid => {
     return axios(options)
 }
 
-// POST: Get whether the given username is available or not
+/**
+ * POST: Get whether the given username is available or not
+ * @param {string} username Desired username
+ * @returns {Promise<any>} AxiosPromise with call data
+ */
 export const GetIsUsernameAvailable = username => {
     const headers = {
         'User-Type': 'gruvee-mobile',
@@ -126,7 +170,11 @@ export const GetIsUsernameAvailable = username => {
 }
 
 // KociQQ: Comment - "Found on StackOverflow, don't trust this code" (02/25/20)
-// GET: Get Custom Firebase Token
+/**
+ * GET: Get Custom Firebase Token
+ * @param {string} uid User's Id
+ * @returns {Promise<any>} AxiosPromise with call data
+ */
 export const GetCustomFirebaseToken = async uid => {
     const headers = {
         'User-Type': 'gruvee-mobile',

@@ -7,6 +7,12 @@ import { GetIsUsernameAvailable } from 'Gruvee/service/common/endpoints'
 import { FetchChildRefs } from './helpers'
 
 // sillyonly - "SOOOOO I HAVE ENOUGH TO DO THIS!" (02/21/20)
+/**
+ * Creates User document in Firestore
+ * @param {object} newPlatformData SocialPlatform data that is associated with the user
+ * @returns {object} Newly created user document
+ * @returns {error} Error if fails
+ */
 export const CreateNewUserDocument = async newPlatformData => {
     try {
         // Create new User object here
@@ -40,6 +46,11 @@ export const CreateNewUserDocument = async newPlatformData => {
 }
 
 // TheTechExec - "You are the semicolon to my statements" (03/03/20)
+/**
+ * Gets User Document from Firestore
+ * @param {string} uid UserId of the Firestore document
+ * @returns {Promise<object>} User data and playlist data
+ */
 export const GetUserDocument = async uid => {
     const db = firestore()
     const dbUserSnap = await db
@@ -58,6 +69,7 @@ export const GetUserDocument = async uid => {
 
     // Get Playlist Data
     const playlistsData = await FetchChildRefs(dbUser.playlists)
+
     const reducedPlaylists = playlistsData.reduce((state, currentPlaylistData) => {
         return [
             ...state,
@@ -85,6 +97,12 @@ export const GetUserDocument = async uid => {
     return { user, playlists: reducedPlaylists }
 }
 
+/**
+ * Calls Firebase Function to check and see if desired username is already taken
+ * @param {string} username Desired username
+ * @returns {Promise<boolean>} True if username is available
+ * @returns {Promise<boolean>} False if username is not available
+ */
 export const IsUsernameAvailable = async username => {
     try {
         const response = await GetIsUsernameAvailable(username)

@@ -13,7 +13,12 @@ import {
     LARGE_TITLE_SIZE_iOS,
 } from '@StyleConstants'
 import { IsUsernameAvailable } from 'Gruvee/firestore/userActions'
-import { CreateDocumentAndSignIn } from 'Gruvee/components/Auth/components/Buttons/actions/SharedActions'
+import {
+    CreateDocumentAndSignInRequest,
+    CreateProviderUserRequest,
+} from 'Gruvee/components/Auth/components/Buttons/actions/SharedActions'
+import { connect } from 'react-redux'
+import { UserSignInCompleteSelector } from 'Gruvee/redux/selectors/UserSelector'
 
 import ValidUsername from './components/ValidUsername'
 
@@ -83,7 +88,7 @@ const styles = StyleSheet.create({
 
 const USERNAME_MIN_LEN = 3
 
-const AddUsername = ({ navigation, route }) => {
+const AddUsername = ({ navigation, route, userSignInComplete }) => {
     const [username, setUsername] = useState('')
     const [usernameAvailable, setUsernameAvailable] = useState(null)
     const [isTyping, setIsTyping] = useState(false)
@@ -142,7 +147,8 @@ const AddUsername = ({ navigation, route }) => {
                         appleCredential,
                         applePlatform,
                         navigation,
-                        cancel
+                        cancel,
+                        userSignInComplete
                     )}
                     disabled={!isEnabled(usernameAvailable, isTyping, username)}
                 >
@@ -179,16 +185,36 @@ const getStartedAction = (
     appleCreds,
     platform,
     navigation,
-    cancelDebounce
+    cancelDebounce,
+    userSignInComplete
 ) => async () => {
     cancelDebounce()
 
     try {
-        const userDoc = await CreateDocumentAndSignIn(username, appleCreds, platform)
-        console.log(userDoc)
+        const user = await CreateDocumentAndSignInRequest(username, appleCreds, platform)
+
+        // For Apple add document to provider_users
+        if (platform.platformName === 'apple') {
+            console.log('Writing Apple user to provider_users collection')
+
+            await CreateProviderUserRequest(user.uid, `${platform.platformName}:${platform.id}`)
+
+            // In case user wasn't signed in because the process above was taking too long, reload user
+            if (!userSignInComplete) {
+                console.log('User sign in did not complete, reloading user.')
+                user.reload()
+            }
+        }
     } catch (error) {
         console.log(error)
     }
 }
 
-export default AddUsername
+// Redux Mappers
+const mapStateToProps = state => {
+    return {
+        userSignInComplete: UserSignInCompleteSelector(state),
+    }
+}
+
+export default connect(mapStateToProps, null)(AddUsername)
