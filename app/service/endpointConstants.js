@@ -9,6 +9,7 @@ const spotifyAccountsHostname = 'https://accounts.spotify.com'
  */
 export const APPLE_ENDPOINTS = {
     authorizeAppleUser: `${baseHostName}/authorizeWithApple`,
+    getAppleMedia: `${baseHostName}/getAppleMusicMedia`,
 }
 
 /**

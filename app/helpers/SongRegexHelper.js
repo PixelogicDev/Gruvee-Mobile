@@ -3,21 +3,24 @@ const spotifyUriRegex = new RegExp(/^(spotify:)/)
 const youtubeLinkRegex = new RegExp(/^^(https:\/\/www.youtube.com\/|https:\/\/youtube.com\/)/)
 const youtubeShortLinkRegex = new RegExp(/^(https:\/\/youtu.be\/)/)
 const youtubeMusicLinkRegex = new RegExp(/^(https:\/\/music.youtube.com\/)/)
-const appleMusicLinkRegex = new RegExp(/^(https:\/\/[a-z]+.music.apple.com\/)/)
+const appleMusicLinkRegex = new RegExp(/^(https:\/\/music.apple.com\/)/)
 
 // OnePocketPimp - "For entertainment while coding: https://www.twitch.tv/pixelogicdev/clip/BluePoorPterodactylGivePLZ" (04/13/20)
+// OnePocketPimp: The Pocket Hate Count is currently at 3 (07/23/20)
 // eslint-disable-next-line import/prefer-default-export
 export const ParseMediaLink = mediaLink => {
     console.log('Parsing song link...')
 
+    const trimmedMediaLink = mediaLink.trim()
+
     // WildDogHD - "The quick brown fox jumps over the lazy dog" (04/13/20)
-    if (spotifyLinkRegex.test(mediaLink)) {
+    if (spotifyLinkRegex.test(trimmedMediaLink)) {
         // https://play.spotify.com/user/spotifydiscover/playlist/0vL3R9wDeAwmXTTuRATa14
         // http://spoti.fi/2fcACbx ---> Should probably test this out
-        console.log(`Is valid spotify link: ${mediaLink}`)
+        console.log(`Is valid spotify link: ${trimmedMediaLink}`)
 
         // Get id from uri
-        const linkSplit = mediaLink.split('/') // Would split to see if it's a track/playlist/etc
+        const linkSplit = trimmedMediaLink.split('/') // Would split to see if it's a track/playlist/etc
         const mediaType = linkSplit[linkSplit.length - 2] // Would get the type of link it is (track, playlist, etc)
         const idSplit = linkSplit[linkSplit.length - 1].split('?') // Would split to get id
         const mediaId = idSplit[0] // Would get us the id
@@ -25,25 +28,25 @@ export const ParseMediaLink = mediaLink => {
         return { provider: 'spotify', mediaId, mediaType }
     }
 
-    if (spotifyUriRegex.test(mediaLink)) {
-        console.log(`Is valid spotify uri: ${mediaLink}`)
+    if (spotifyUriRegex.test(trimmedMediaLink)) {
+        console.log(`Is valid spotify uri: ${trimmedMediaLink}`)
 
-        const uriSplit = mediaLink.split(':')
+        const uriSplit = trimmedMediaLink.split(':')
         const mediaType = uriSplit[1]
         const mediaId = uriSplit[uriSplit.length - 1]
 
         return { provider: 'spotify', mediaId, mediaType }
     }
 
-    if (youtubeLinkRegex.test(mediaLink) || youtubeMusicLinkRegex.test(mediaLink)) {
-        console.log(`Is valid Youtube Video link: ${mediaLink}`)
+    if (youtubeLinkRegex.test(trimmedMediaLink) || youtubeMusicLinkRegex.test(trimmedMediaLink)) {
+        console.log(`Is valid Youtube Video link: ${trimmedMediaLink}`)
         // If we land here, this is a video we want to use the video list api
         // https://www.youtube.com/watch?v=7QoSF6JrZXw If it's this we need to use Videos API
         // https://www.youtube.com/playlist?list=PL_fXgW9VVKrxap-itp9szun8Eua-ET7t2 If it's this we need to use playlist API
         // https://music.youtube.com/watch?v=jjwilAja7Lc&feature=share
 
         // Match params
-        const paramsMatch = mediaLink.match(/\/\w+\?(.*)/)
+        const paramsMatch = trimmedMediaLink.match(/\/\w+\?(.*)/)
         if (paramsMatch === null) {
             return null
         }
@@ -80,26 +83,44 @@ export const ParseMediaLink = mediaLink => {
         return mediaId === null ? null : { provider: 'youtube', mediaId, mediaType }
     }
 
-    if (youtubeShortLinkRegex.test(mediaLink)) {
+    if (youtubeShortLinkRegex.test(trimmedMediaLink)) {
         // GET https://www.googleapis.com/youtube/v3/videos
         // https://youtu.be/O59JNz7rdIU
-        console.log(`Is valid youtube partial link: ${mediaLink}`)
-        const splitLink = mediaLink.split('/')
+        console.log(`Is valid youtube partial link: ${trimmedMediaLink}`)
+        const splitLink = trimmedMediaLink.split('/')
         const mediaId = splitLink[splitLink.length - 1]
 
         return { provider: 'youtube', mediaId, mediaType: 'video' }
     }
 
-    if (appleMusicLinkRegex.test(mediaLink)) {
-        // https://geo.music.apple.com/us/album/pray-4-love/1504192331?mt=1&app=music
-        console.log(`Is valid Apple Music uri: ${mediaLink}`)
-        const linkSplit = mediaLink.split('/')
-        const mediaType = linkSplit[linkSplit.length - 3]
+    if (appleMusicLinkRegex.test(trimmedMediaLink)) {
+        // https://music.apple.com/us/album/willow/1499204812 --> Album
+        // https://music.apple.com/us/album/autumnus/1025181777?i=1025181779 --> Song
+        // https://music.apple.com/us/playlist/gr%C3%BCvee-metal-lads/pl.u-r2yB14xCR1Xzv5J --> Playlist
+        console.log(`Is valid Apple Music uri: ${trimmedMediaLink}`)
+        const linkSplit = trimmedMediaLink.split('/')
+        let mediaType = linkSplit[linkSplit.length - 3]
+        const storefront = linkSplit[linkSplit.length - 4]
         const idSplit = linkSplit[linkSplit.length - 1]
         const querySplit = idSplit.split('?')
-        const mediaId = querySplit[0]
+        let mediaId = querySplit[0]
 
-        return { provider: 'apple', mediaId, mediaType }
+        // Apple Music does some weird stuff with their song urls that has the album and song ids
+        // this check will handle that scenario
+        if (mediaType === 'album') {
+            // If query split has a length of 2 check for i value (song)
+            if (querySplit.length === 2) {
+                // Get value of i
+                const splitTrackId = querySplit[1].split('=')
+                if (splitTrackId.length) {
+                    // eslint-disable-next-line prefer-destructuring
+                    mediaId = splitTrackId[1]
+                    mediaType = 'track'
+                }
+            }
+        }
+
+        return { provider: 'apple', mediaId, mediaType, storefront }
     }
 
     return null

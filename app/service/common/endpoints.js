@@ -1,5 +1,9 @@
 import axios from 'axios'
-import { COMMON_ENDPOINTS, SPOTIFY_ENDPOINTS } from 'Gruvee/service/endpointConstants'
+import {
+    COMMON_ENDPOINTS,
+    SPOTIFY_ENDPOINTS,
+    APPLE_ENDPOINTS,
+} from 'Gruvee/service/endpointConstants'
 
 /**
  * POST: Create Playlist On Preferred Social Platform
@@ -108,7 +112,7 @@ export const GetMediaData = metadata => {
             console.log('Calling Youtube')
             break
         case 'apple':
-            providerUrl = ''
+            providerUrl = APPLE_ENDPOINTS.getAppleMedia
             console.log('Calling Apple')
             break
         default:

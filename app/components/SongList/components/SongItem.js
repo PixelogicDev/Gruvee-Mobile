@@ -13,38 +13,42 @@ const styles = StyleSheet.create({
 })
 
 const SongItem = ({ songData, currentUser }) => {
-    // Actions
-    const openSongDeepLinkAction = platformDeepLink => {
-        Linking.canOpenURL(platformDeepLink)
-            .then(isSupported => {
-                if (!isSupported) {
-                    Alert.alert('Song is not supported 😶')
-                    return
-                }
-
-                Linking.openURL(platformDeepLink).catch(() => {
-                    Alert.alert('Unable to open song 👎')
-                })
-            })
-            .catch(() => {
-                Alert.alert('Invalid song 😐')
-            })
-    }
-
     return (
         <View style={styles.Container}>
             <TouchableOpacity
                 onPress={() => {
                     openSongDeepLinkAction(
-                        songData.externalUrls[currentUser.preferredSocialPlatform.platformName]
+                        songData,
+                        currentUser.preferredSocialPlatform.platformName
                     )
                 }}
             >
-                <SongItemDetail songData={songData} />
+                <SongItemDetail
+                    songData={songData}
+                    platform={currentUser.preferredSocialPlatform.platformName}
+                />
             </TouchableOpacity>
             <SongItemCommentBar songData={songData} />
         </View>
     )
+}
+
+// Helpers
+const openSongDeepLinkAction = async (songData, platform) => {
+    try {
+        const songUrl = songData[platform].url
+        const canOpenDeeplink = await Linking.canOpenURL(songUrl)
+
+        if (!canOpenDeeplink) {
+            Alert.alert("Song link isn't supported 😶")
+            return
+        }
+
+        Linking.openURL(songUrl)
+    } catch (error) {
+        console.warn(error)
+        Alert.alert('Unable to open song 👎')
+    }
 }
 
 // Redux Mappers
