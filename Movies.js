@@ -65,6 +65,8 @@
 // ForTheWyn - "Maybe. Just maybe my boys can protect the book. Yeah, and maybe I'm a Chinese jet pilot." - Evil Dead III: Army Of Darkness (06/09/20)
 // DR_DinoMight - "Ted, while I agree that, in time, our band will be most triumphant. The truth is, Wyld Stallyns will never be a super band until we have Eddie Van Halen on guitar." - Bill and Ted’s Excellent Adventure (06/09/20)
 // Moov_ - "So, yeah, I'm a kid. And I'm also a goofball, and a wingnut, and a knucklehead McSpazatron! But most of all, I'm... I'm I'm a Goofy Goober!" SpongeBob Squarepants Movie (07/08/20)
+// Artandor - "It's not who I am underneath, but what I do, that defines me" Batman: Begins (07/28/20)
+// wrobirson - Why do I keep doing the same thing and expecting a different result? Isn't that the definition of insanity? Castlevania (Netflix version) (07/31/20)
 
 // -- SUDOKU -- //
 // OnePocketPimp: |8 _ _ | _ _ _ | _ _ _ |
