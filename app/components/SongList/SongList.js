@@ -43,15 +43,15 @@ const styles = StyleSheet.create({
     },
 })
 
-const SongListView = ({ playlistId, songs, deleteSong, fetchSongs }) => {
+const SongListView = ({ songs, deleteSong, fetchSongs }) => {
     const [isRefreshing, setIsRefreshing] = useState(false)
     const bottomSheetRef = useRef(null)
     const keyExtractor = item => `${item.id}`
 
     // dra031cko - "WUBBA LUBBA DUB DUB" (02/01/20)
-    const renderItem = ({ item }) => (
-        <SwipeableSongItem song={item} deleteSongById={() => deleteSong(playlistId, item.id)} />
-    )
+    const renderItem = ({ item }) => {
+        return <SwipeableSongItem song={item} deleteSongById={() => deleteSong(item.id)} />
+    }
 
     return (
         <>
@@ -102,14 +102,16 @@ const expandBottomSheet = bottomSheetRef => () => {
 // Redux Mappers
 const mapStateToProps = (state, props) => {
     // Should get songIds from playlist and map accordingly
-    return { songs: MapSongsFromPlaylistSelector(state, props) }
+    return {
+        playlistId: state.PlaylistsDataReducer.currentPlaylistId,
+        songs: MapSongsFromPlaylistSelector(state, props),
+    }
 }
 const mapDispatchToProps = dispatch => ({
     addSong: (playlistId, song, comment) => dispatch(AddSong(playlistId, song, comment)),
-    deleteSong: (playlistId, songId) =>
-        // The false flag is for isDeletingPlaylist
-        dispatch(DeleteSong(playlistId, songId, false)),
-    fetchSongs: playlistId => dispatch(FetchSongs(playlistId)),
+    // The false flag is for isDeletingPlaylist
+    deleteSong: songId => dispatch(DeleteSong(songId, false)),
+    fetchSongs: () => dispatch(FetchSongs()),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(SongListView)

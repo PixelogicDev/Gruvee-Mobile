@@ -69,7 +69,9 @@ const getAlbumArtwork = (songData, platform) => {
         case 'apple':
             return { uri: songData.apple.images.url.replace('{w}', '160').replace('{h}', '160') }
         case 'spotify':
-            return songData.spotify.images.length ? { uri: songData.spotify.images[0].url } : null
+            return songData.spotify.images && songData.spotify.images.length
+                ? { uri: songData.spotify.images[0].url }
+                : null
         case 'youtube':
             console.log('Youtube not supported yet!')
             break

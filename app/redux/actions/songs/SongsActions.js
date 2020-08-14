@@ -53,14 +53,22 @@ export const AddSong = (user, playlistId, song, comment) => {
 
 // InukApp - "I bet if Swift had better Android support, Alec would've chosen to code in Swift." (02/09/20)
 // rushkiB - "Why didn't i choose typescript" (04/21/20)
-export const FetchSongs = playlistId => {
+export const FetchSongs = () => {
     // poopuhchoo - "YASSSS" (01/30/20)
-    return async dispatch => {
-        // Get up to date playlist info (Since we read the songIds from the Playlist Doc)
-        dispatch(FetchPlaylists())
+    return async (dispatch, getState) => {
+        try {
+            // Get up to date playlist info (Since we read the songIds from the Playlist Doc)
+            dispatch(FetchPlaylists())
 
-        // Fetch songs
-        const songsData = await GetSongsDocuments(playlistId)
-        dispatch(fetchSongs(songsData))
+            const {
+                PlaylistsDataReducer: { currentPlaylistId },
+            } = getState()
+
+            // Fetch songs
+            const songsData = await GetSongsDocuments(currentPlaylistId)
+            dispatch(fetchSongs(songsData))
+        } catch (error) {
+            console.warn('[FetchSongs]: ', error)
+        }
     }
 }

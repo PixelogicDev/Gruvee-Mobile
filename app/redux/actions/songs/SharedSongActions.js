@@ -15,27 +15,31 @@ const deleteSong = songId => {
 
 // Thunks
 // eslint-disable-next-line import/prefer-default-export
-export const DeleteSong = (playlistId, songId, isDeletingPlaylist) => {
+export const DeleteSong = (songId, isDeletingPlaylist) => {
     return async (dispatch, getState) => {
-        const {
-            UserDataReducer: { user },
-            PlaylistsDataReducer: { playlists },
-        } = getState()
+        try {
+            const {
+                UserDataReducer: { user },
+                PlaylistsDataReducer: { playlists, currentPlaylistId },
+            } = getState()
 
-        if (!isDeletingPlaylist) {
-            RemoveSongFromPlaylist(playlistId, user.id, songId)
-        }
+            if (!isDeletingPlaylist) {
+                RemoveSongFromPlaylist(currentPlaylistId, user.id, songId)
+            }
 
-        // If we are deleting our song, we should dispatch a comment delete as well (in CommentsDataReducer)
-        const comments = playlists.byId[playlistId].comments[songId]
-        dispatch(BulkCommentsDelete(comments, playlistId, songId))
+            // If we are deleting our song, we should dispatch a comment delete as well (in CommentsDataReducer)
+            const comments = playlists.byId[currentPlaylistId].comments[songId]
+            dispatch(BulkCommentsDelete(comments, currentPlaylistId, songId))
 
-        // Here we will need to also remove all the comments associated with it (in playlist)
-        dispatch(DeletePlaylistSong(songId, playlistId, user.id))
+            // Here we will need to also remove all the comments associated with it (in playlist)
+            dispatch(DeletePlaylistSong(songId, currentPlaylistId, user.id))
 
-        // Check to see if we should delete the song from our state
-        if (!isSharedSong(playlists, playlistId, songId)) {
-            dispatch(deleteSong(songId))
+            // Check to see if we should delete the song from our state
+            if (!isSharedSong(playlists, currentPlaylistId, songId)) {
+                dispatch(deleteSong(songId))
+            }
+        } catch (error) {
+            console.warn('[SharedSongActions]: ', error)
         }
     }
 }

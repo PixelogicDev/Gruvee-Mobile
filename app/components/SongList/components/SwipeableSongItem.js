@@ -70,6 +70,7 @@ const renderSwipeActionComponent = (song, confirmDeleteSongAction) => {
 // Redux Mappers
 const mapStateToProps = (state, props) => {
     return {
+        // TODO: We should move this to the parent... SongList
         didUserAddSong: DidUserAddSongSelector(state, props),
     }
 }
