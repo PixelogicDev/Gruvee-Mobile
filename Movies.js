@@ -41,6 +41,7 @@
 
 // -- Pulp Fiction -- //
 // Dragonfleas - "English, motherfucker! Do you speak it?" (03/28/20)
+// rcoold: You now what they call a Quarter Pounder with Cheese in France? A Royale. (08/18/20)
 
 // -- Star Wars: Episode 3 Revenge Of The Sith -- //
 // Scorchius - "Did you ever hear the tragedy of Darth Plagueis The Wise? I thought not. It’s not a story the Jedi would tell you. It’s a Sith legend" (05/08/20)

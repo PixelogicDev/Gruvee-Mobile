@@ -67,7 +67,9 @@ const SongItemDetail = ({ songData, platform }) => {
 const getAlbumArtwork = (songData, platform) => {
     switch (platform) {
         case 'apple':
-            return { uri: songData.apple.images.url.replace('{w}', '160').replace('{h}', '160') }
+            return songData.apple.images
+                ? { uri: songData.apple.images.url.replace('{w}', '160').replace('{h}', '160') }
+                : null
         case 'spotify':
             return songData.spotify.images && songData.spotify.images.length
                 ? { uri: songData.spotify.images[0].url }
