@@ -10,7 +10,7 @@
     <a href="https://github.com/pixelogicdev/gruvee">
         <img alt="GitHub issues" src="https://img.shields.io/github/issues/pixelogicdev/gruvee-mobile">
     </a>
-    <a href="CONTRIBUTING.md#-how-to-contribute">
+    <a href=".github/CONTRIBUTING.md#-how-to-contribute">
         <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs welcome!" />
     </a>
     <a href="#contributors-">
@@ -45,18 +45,18 @@ Words are hard. Enjoy some videos of our current progress!
 
 #### Android
 
-If you are interested in becoming a member of the team check out the **[PixelogicDev Twitch](https://twitch.tv/pixelogicdev)**, the **[PixelogicDev Discord](https://discord.gg/8NFtvp5)** and **[contribute](CONTRIBUTING.md)** to this awesome project!
+If you are interested in becoming a member of the team check out the **[PixelogicDev Twitch](https://twitch.tv/pixelogicdev)**, the **[PixelogicDev Discord](https://discord.gg/8NFtvp5)** and **[contribute](.github/CONTRIBUTING.md)** to this awesome project!
 
 ---
 
 <h3 align="center">
- <a href="_docs/">Getting Started</a>
+ <a href=".github/docs/">Getting Started</a>
   <span> · </span>
-  <a href="CONTRIBUTING.md#how-to-contribute">How to Contribute</a>
+  <a href=".github/CONTRIBUTING.md#how-to-contribute">How to Contribute</a>
   <span> · </span>
-  <a href="CONTRIBUTING.md#-current-contributors">Current Contributors</a>
+  <a href=".github/CONTRIBUTING.md#-current-contributors">Current Contributors</a>
   <span> · </span>
-  <a href="CODE_OF_CONDUCT.md">Code of Conduct</a>
+  <a href=".github/CODE_OF_CONDUCT.md">Code of Conduct</a>
 </h3>
 
 ---
@@ -124,6 +124,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 
 <!-- markdownlint-enable -->
 <!-- prettier-ignore-end -->
+
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!

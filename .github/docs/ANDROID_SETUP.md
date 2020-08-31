@@ -89,4 +89,4 @@ $ npm run android-start
 > "android-start": "cd ./android && gradlew app:assembleDebug && gradlew installDebug && npm run android --clearCache"
 > ```
 
-Congratulations! You should now see a beautiful Grüvee mobile app on Android displayed and ready to go! If you find a better way to get started developing for iOS or run into any snags, make sure to go checkout [how to contribute](../CONTRIBUTING.md) to help out the project!
+Congratulations! You should now see a beautiful Grüvee mobile app on Android displayed and ready to go! If you find a better way to get started developing for iOS or run into any snags, make sure to go checkout [how to contribute](/.github/CONTRIBUTING.md) to help out the project!

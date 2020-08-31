@@ -13,7 +13,13 @@
 
 ## Prerequisites
 
-In order to develop for Grüvee you are going to need to have a few things installed on your machine:
+In order to develop for Grüvee you are going to need to switch to `release-1.0` branch:
+
+```bash
+$ git checkout release-1.0
+```
+
+and have a few things installed on your machine:
 
 1. **Javascript**
 
@@ -74,6 +80,13 @@ In order to get the app running you will need to create a Firebase project and s
 ### `ALGOLIA_APP_ID && ALGOLIA_APP_KEY && ALGOLIA_DEV_INDEX_NAME`
 
 This is used for searching for users to add to a playlist. If you find yourself needing this UI/UX please head to the [Contributing documentation](../CONTRIBUTING.md) for help filing an issue or join the [PixelogicDev Discord](https://discord.gg/8NFtvp5) to reach out directly to people actively working on this project.
+
+### Notes
+
+> -   Import `.env` using `@env` module name ([example](/app/config/creds.js))
+> -   If updating your `.env` variables doesn't seem to change anything try to clear the cache by either:
+>     -   `npm start -- --reset-cache`
+>     -   `rm -rf node_modules/.cache/babel-loader/*` ([babel-plugin-dotenv-import documentation](https://github.com/tusbar/babel-plugin-dotenv-import#caveats))
 
 ## NPM Commands
 
