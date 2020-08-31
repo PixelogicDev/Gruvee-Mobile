@@ -7,7 +7,7 @@
 | IDE          | [Visual Studio Code](https://code.visualstudio.com/)                                       | You can use your preferred IDE but this is the one we like 🙃  |
 | Frontend     | [React Native 0.60](<[LinkToReactNative0.60](https://www.npmjs.com/package/react-native)>) | Utilising Javascript to develop this cross platform mobile app |
 | Backend      | [Firebase (Repo)](https://github.com/PixelogicDev/gruveebackend)                           | Serverless Functions in Firebase using GoLang                  |
-| Design :art: | [Sketch](https://www.sketch.com/)                                                          | The design files can be found [here](/Design)                  |
+| Design :art: | [Sketch](https://www.sketch.com/)                                                          | The design files can be found [here](../../Design)             |
 
 > ALL of these sections are open for contributions and are highly encouraged!
 
@@ -38,7 +38,7 @@ Now we are at the GOOD stuff. Time to get Grüvee running locally. Make sure you
 
 ## 🌲 Environment Variables
 
-We have included an [`.example.env`](/.example.env) that has the properties that are needed for the app to run properly. Start here by copying it and renaming it to `.env` in the root of the repo
+We have included an [`.example.env`](../../.example.env) that has the properties that are needed for the app to run properly. Start here by copying it and renaming it to `.env` in the root of the repo
 
 ### `ENVIRONMENT`
 
@@ -77,11 +77,11 @@ This is used for searching for users to add to a playlist. If you find yourself 
 
 ## NPM Commands
 
-All the NPM commands and dependencies for this project can be located in the [package.json file](/package.json), but we only need two to get started.
+All the NPM commands and dependencies for this project can be located in the [package.json file](../../package.json), but we only need two to get started.
 
 1. This npm command will download all the React Native package
 
-    (this is only needed when cloned for the first time or if new npm packages are introduced to the [package.json file](/package.json))
+    (this is only needed when cloned for the first time or if new npm packages are introduced to the [package.json file](../../package.json))
 
     ```command
     $ npm install

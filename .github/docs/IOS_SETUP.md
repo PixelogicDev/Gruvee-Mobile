@@ -10,7 +10,7 @@ If you are running Grüvee for iOS use the following commands.
 
 > **Please note that the npm command utilizes an iPhone 11 Simulator**.
 >
-> If you do not have this installed, you will need install it or go into the [package.json file](../package.json) and replace the `ios-start` script with the following:
+> If you do not have this installed, you will need install it or go into the [package.json file](../../package.json) and replace the `ios-start` script with the following:
 >
 > ```json
 > "ios-start": "react-native run-ios --simulator=\"{WhateveriPhoneModelYouAreUsing}\",
