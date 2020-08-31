@@ -12,6 +12,7 @@
 #import <React/RCTLinkingManager.h>
 #import <React/RCTRootView.h>
 #import <Firebase.h>
+#import <React/RCTLog.h>
 
 @implementation AppDelegate
 
@@ -34,6 +35,8 @@
   if ([FIRApp defaultApp] == nil) {
     [FIRApp configure];
   }
+  
+  RCTSetLogThreshold(RCTLogLevelInfo - 1);
 
   return YES;
 }
