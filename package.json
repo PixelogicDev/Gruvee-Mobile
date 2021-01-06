@@ -17,7 +17,7 @@
         "@react-native-firebase/firestore": "6.3.4",
         "add": "^2.0.6",
         "algoliasearch": "^4.1.0",
-        "axios": "^0.19.2",
+        "axios": "^0.21.1",
         "buffer": "^5.4.3",
         "react": "16.8.6",
         "react-instantsearch": "^6.4.0",
