@@ -22,7 +22,7 @@
         "react": "16.8.6",
         "react-instantsearch": "^6.4.0",
         "react-instantsearch-native": "^6.4.0",
-        "react-native": "0.60.4",
+        "react-native": "0.62.3",
         "react-native-dotenv": "^0.2.0",
         "react-native-gesture-handler": "^1.6.1",
         "react-native-navigation": "^3.1.2",
